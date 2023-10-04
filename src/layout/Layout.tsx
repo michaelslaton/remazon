@@ -8,7 +8,6 @@ const Layout: React.FC = () => {
   return (
     <>
       <Outlet/>
-      Some stuff
     </>
   );
 };
