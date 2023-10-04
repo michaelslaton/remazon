@@ -1,0 +1,14 @@
+:root {
+  --background-color: black;
+  --font-color: white;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+
+img {
+  border-style: none;
+}
