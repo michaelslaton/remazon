@@ -1,6 +1,7 @@
 :root {
-  --background-color: black;
-  --font-color: white;
+  --background-color: #000000;
+  --font-color: #ffffff;
+  --remazon-prime: orange;
 }
 
 body {
@@ -11,4 +12,15 @@ body {
 
 img {
   border-style: none;
+}
+
+.main-screen {
+  box-sizing:border-box;
+  position: relative;
+  min-height: 100vh;
+  margin-left: 3rem;
+  transition: margin-left 70ms ease-in-out;
+}
+.main-screen.active {
+  margin-left: 10rem;
 }
