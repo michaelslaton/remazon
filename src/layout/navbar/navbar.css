@@ -1,0 +1,14 @@
+.navbar__wrapper {
+  box-sizing:border-box;
+  position: absolute;
+  width: 3rem;
+  min-height: 100vh;
+  left: 0;
+  top: 0;
+  /* background-color: var(--remazon-prime); */
+  border-right: .2rem solid var(--remazon-prime);
+  transition: width 70ms ease-in-out;
+}
+.navbar__wrapper.active {
+  width: 10rem;
+}

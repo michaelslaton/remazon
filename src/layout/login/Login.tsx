@@ -15,26 +15,26 @@ const Login: React.FC = () => {
 
     if (type === "in") {
       signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
-      .then((response) => {
-        console.log(response.user.uid);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error(error.code);
-        console.error(error.message);
-      });
+        .then((response) => {
+          console.log(response.user.uid);
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error(error.code);
+          console.error(error.message);
+        });
+
     } else if (type === "up"){
       createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
-      .then((response) => {
-        console.log(response.user.uid);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error(error.code);
-        console.error(error.message);
-      });
+        .then((response) => {
+          console.log(response.user.uid);
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error(error.code);
+          console.error(error.message);
+        });
     };
-
   };
 
   return (
