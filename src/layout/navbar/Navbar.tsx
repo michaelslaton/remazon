@@ -1,15 +1,14 @@
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { navToggle } from "../../redux/slices/controls";
 import "./navbar.css";
 
-type NavbarProps = {
-  active: boolean;
-  setActive: Function;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ active, setActive }) => {
+const Navbar: React.FC = () => {
+  const navActive = useAppSelector((state)=> state.navControl.navOpen)
+  const dispatch = useAppDispatch();
 
   return (
-    <div className={`navbar__wrapper ${ active ? "active" : ""}`}>
-      <button onClick={()=>setActive(!active)}>O</button>
+    <div className={`navbar__wrapper ${ navActive ? "active" : ""}`}>
+      <button onClick={()=>dispatch(navToggle())}>O</button>
     </div>
   );
 };
