@@ -1,5 +1,6 @@
 :root {
-  --background-color: #000000;
+  --background-color: #141414;
+  --nav-background-color: #000000;
   --font-color: #ffffff;
   --remazon-prime: orange;
 }
@@ -15,12 +16,12 @@ img {
 }
 
 .main-screen {
-  box-sizing:border-box;
+  box-sizing: border-box;
   position: relative;
   min-height: 100vh;
-  margin-left: 3rem;
+  margin-left: 4rem;
   transition: margin-left 70ms ease-in-out;
 }
 .main-screen.active {
-  margin-left: 10rem;
+  margin-left: 11rem;
 }

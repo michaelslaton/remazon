@@ -1,5 +1,6 @@
 .navbar__wrapper {
   box-sizing:border-box;
+  background-color: var(--nav-background-color);
   position: absolute;
   width: 3rem;
   min-height: 100vh;

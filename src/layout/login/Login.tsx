@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import "./login.css";
 
 const Login: React.FC = () => {
   const auth = getAuth();
@@ -40,13 +41,27 @@ const Login: React.FC = () => {
   return (
     <>
       <form>
-        Email: <input type="text" ref={emailRef}/>
-        Password: <input type="text" ref={passwordRef}/>
-        <button type="submit" onClick={(e) => submitHandler(e, "in")}>Sign In</button>
-        <button type="submit" onClick={(e) => submitHandler(e, "up")}>Sign Up</button>
+        <label htmlFor="email">
+          Email: 
+          <input type="email" ref={emailRef}/>
+        </label>
+        <label htmlFor="password">
+          Password: 
+          <input type="password" ref={passwordRef}/>
+        </label>
+        <button
+          type="submit"
+          onClick={(e) => submitHandler(e, "in")}>
+          Sign In
+        </button>
+        <button
+          type="submit"
+          onClick={(e) => submitHandler(e, "up")}>
+          Sign Up
+        </button>
       </form>
     </>
-  )
-}
+  );
+};
 
 export default Login;
