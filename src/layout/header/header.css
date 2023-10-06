@@ -1,0 +1,5 @@
+.header__title {
+  color: var(--remazon-prime);
+  text-transform: uppercase;
+  margin: 0;
+}

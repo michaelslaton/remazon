@@ -1,17 +1,19 @@
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "./navbar/navbar";
+import Navbar from "./navbar/Navbar";
+import Header from "./header/Header";
 import "./layout.css";
+import { useAppSelector } from "../redux/hooks";
 
 
 
 const Layout: React.FC = () => {
-  const [ navActive, setNavActive ] = useState(false);
+  const navActive = useAppSelector((state)=> state.navControl.navOpen)
 
   return (
     <>
-      <Navbar active={navActive} setActive={setNavActive}/>
+      <Navbar/>
       <div className={`main-screen ${ navActive ? "active" : ""}`}>
+        <Header/>
         <Outlet/>
       </div>
     </>
