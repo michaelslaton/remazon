@@ -1,6 +1,7 @@
 import Employee from "./employee";
 
 type Project = {
+  id: number;
   name: string;
   host: number;
   attending?: Employee[];

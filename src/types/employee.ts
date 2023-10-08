@@ -1,4 +1,5 @@
 type Employee = {
+  id: number;
   name: string;
   birthday?: Date;
   rank: number;
