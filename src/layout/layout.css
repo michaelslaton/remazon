@@ -2,7 +2,8 @@
   --background-color: #141414;
   --nav-background-color: #000000;
   --font-color: #ffffff;
-  --remazon-prime: orange;
+  --remazon-prime: #ffa500;
+  --border-radius: 5px;
 }
 
 body {
@@ -15,11 +16,19 @@ img {
   border-style: none;
 }
 
+.divider {
+  background-color: var(--remazon-prime);
+  margin: .2rem auto .6rem;
+  width: 99%;
+  height: .2rem;
+}
+
 .main-screen {
   box-sizing: border-box;
   position: relative;
   min-height: 100vh;
   margin-left: 4rem;
+  margin-right: 1rem;
   transition: margin-left 70ms ease-in-out;
 }
 .main-screen.active {
