@@ -1,6 +1,6 @@
-import Employee from "../types/employee";
+import EmployeeType from "../types/employeeType";
 
-const employeeData: Employee[] = [
+const employeeData: EmployeeType[] = [
   {
     id: 0,
     name: "Rembo",

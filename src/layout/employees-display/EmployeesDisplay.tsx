@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setEmployees } from "../../redux/slices/employeesSlice";
 import { getEmployees } from "../../utils/api/api";
-import "./employees.css";
+import Employee from "./employee/Employee";
+import "./employeesDisplay.css";
 
-const Employees: React.FC = () => {
+const EmployeesDisplay: React.FC = () => {
   const employees = useAppSelector((state) => state.employeesControl.employees);
   const dispatch = useAppDispatch();
 
@@ -16,12 +17,12 @@ const Employees: React.FC = () => {
   },[employees]);
 
   return (
-    <>
-      {employees.map((employee)=>(
-        <div key={employee.id}>{employee.name}</div>
-      ))}
-    </>
+      <div className="employees-display__wrapper">
+        {employees.map((employee)=>(
+          <Employee key={employee.id} data={employee}/>
+        ))}
+      </div>
   );
 };
 
-export default Employees;
+export default EmployeesDisplay;
