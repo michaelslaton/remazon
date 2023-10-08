@@ -1,8 +1,6 @@
 import { getAuth, signOut } from "firebase/auth";
 import "./homePage.css";
 
-
-
 const HomePage: React.FC = () => {
   const auth = getAuth();
 

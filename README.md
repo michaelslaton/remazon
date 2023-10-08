@@ -8,3 +8,5 @@ Employee / Business management full-stack web-application for Remazon Prime.
 * TypeScript  
 * React  
   - React-Router  
+* Redux  
+  - Redux-Persist  
