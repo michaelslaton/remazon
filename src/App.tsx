@@ -4,9 +4,11 @@ import firebaseConfig from "./utils/firebase/firebase";
 import Layout from "./layout/Layout";
 import HomePage from "./layout/home-page/HomePage";
 import Login from "./layout/login/Login";
-import Employees from "./layout/employees/Employees";
-import Projects from "./layout/projects/Projects";
+import EmployeesDisplay from "./layout/employees-display/EmployeesDisplay";
+import ProjectsDisplay from "./layout/projects-display/ProjectsDisplay";
 import Error404 from "./utils/errors/Error404";
+import CreateEmployee from "./layout/employees-display/employee/CreateEmployee";
+import CreateProject from "./layout/projects-display/project/CreateProject";
 // import AuthRoute from "./utils/firebase/AuthRoute";
 
 initializeApp(firebaseConfig);
@@ -26,11 +28,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/employees",
-        element: <Employees/>,
+        element: <EmployeesDisplay/>,
+      },
+      {
+        path: "/employees/create",
+        // element: <AuthRoute><CreateEmployee/></AuthRoute>,
+        element: <CreateEmployee/>,
       },
       {
         path: "/projects",
-        element: <Projects/>,
+        element: <ProjectsDisplay/>,
+      },
+      {
+        path: "/projects/create",
+        // element: <AuthRoute><CreateProject/></AuthRoute>,
+        element: <CreateProject/>,
       },
       {
         path: "*",

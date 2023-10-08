@@ -1,0 +1,17 @@
+.collapse-button__wrapper {
+  width: 100%;
+  text-align: end;
+  margin: .5rem 0;
+}
+
+.collapse-button {
+	position: relative;
+  background-color: var(--background-color);
+  border: .1rem solid var(--remazon-prime);
+  border-radius: var(--border-radius);
+  margin-right: .2rem;
+  padding: .1rem .5rem;
+  font-size: 1.4rem;
+  color: var(--remazon-prime);
+  cursor: pointer;
+}

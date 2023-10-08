@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Project from "../../types/project";
+import ProjectType from "../../types/projectType";
 
 type InitialState = {
-    projects: Project[];
+    projects: ProjectType[];
 };
 
 const initialState: InitialState = {
@@ -16,14 +16,10 @@ const projectsSlice = createSlice({
     setProjects: (state,action) => {
       state.projects = action.payload;
     },
-    addProject: (state,action) => {
-      state.projects = [...state.projects, action.payload];
-    },
   },
 });
 
 export default projectsSlice.reducer;
 export const {
   setProjects,
-  addProject
 } = projectsSlice.actions;
