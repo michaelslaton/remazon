@@ -4,8 +4,10 @@ import firebaseConfig from "./utils/firebase/firebase";
 import Layout from "./layout/Layout";
 import HomePage from "./layout/home-page/HomePage";
 import Login from "./layout/login/Login";
+import Employees from "./layout/employees/Employees";
+import Projects from "./layout/projects/Projects";
 import Error404 from "./utils/errors/Error404";
-import AuthRoute from "./utils/firebase/AuthRoute";
+// import AuthRoute from "./utils/firebase/AuthRoute";
 
 initializeApp(firebaseConfig);
 
@@ -16,11 +18,19 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <AuthRoute><HomePage/></AuthRoute>,
+        element: <HomePage/>,
       },
       {
         path: "/login",
         element: <Login/>,
+      },
+      {
+        path: "/employees",
+        element: <Employees/>,
+      },
+      {
+        path: "/projects",
+        element: <Projects/>,
       },
       {
         path: "*",
