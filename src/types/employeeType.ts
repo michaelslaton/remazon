@@ -1,4 +1,4 @@
-type Employee = {
+type EmployeeType = {
   id: number;
   name: string;
   birthday?: Date;
@@ -6,4 +6,4 @@ type Employee = {
   description: string;
 };
 
-export default Employee;
+export default EmployeeType;

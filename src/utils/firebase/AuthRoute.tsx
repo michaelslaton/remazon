@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { Auth, getAuth, onAuthStateChanged } from "firebase/auth";
 
 type AuthProps = {
   children: JSX.Element;
@@ -8,8 +8,8 @@ type AuthProps = {
 
 const AuthRoute: React.FC<AuthProps> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const auth = getAuth();
+  const navigate: NavigateFunction = useNavigate();
+  const auth: Auth = getAuth();
 
   useEffect(()=>{
     onAuthStateChanged(auth, (user)=>{

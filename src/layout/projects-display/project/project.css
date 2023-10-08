@@ -1,0 +1,20 @@
+.project__wrapper {
+  display: inline-block;
+  border: .15rem solid var(--remazon-prime);
+  margin-right: .5rem;
+  padding: .3rem;
+  border-radius: var(--border-radius);
+  width: 20rem;
+}
+
+li > article {
+  margin: 0 .5em;
+}
+
+.project__wrapper > h2 {
+  margin: 0;
+}
+.project__info {
+  all: unset;
+  list-style: none;
+}
