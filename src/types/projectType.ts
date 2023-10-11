@@ -9,4 +9,11 @@ type ProjectType = {
   description: string;
 };
 
+export type ProjectPostType = {
+  name: string;
+  host: number;
+  type: string;
+  description: string;
+};
+
 export default ProjectType;

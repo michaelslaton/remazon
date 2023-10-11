@@ -8,7 +8,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
     key: "root",
     storage,
-    blacklist: [ "navControl" ],
+    blacklist: [ "navControl", "projectsControl" ],
 };
 
 const reducer = combineReducers({
