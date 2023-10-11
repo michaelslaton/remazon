@@ -6,4 +6,11 @@ type EmployeeType = {
   description: string;
 };
 
+export type EmployeePostType = {
+  name: string;
+  birthday?: Date;
+  rank: number;
+  description: string;
+};
+
 export default EmployeeType;
