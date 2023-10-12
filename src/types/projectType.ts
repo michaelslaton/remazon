@@ -7,6 +7,7 @@ type ProjectType = {
   attending?: EmployeeType[];
   type: string;
   description: string;
+  status: boolean;
 };
 
 export type ProjectPostType = {

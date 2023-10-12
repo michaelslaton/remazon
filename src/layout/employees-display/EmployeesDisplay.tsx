@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchEmployees } from "../../redux/slices/employeesSlice";
 import Employee from "./employee/Employee";
@@ -8,6 +9,7 @@ const EmployeesDisplay: React.FC = () => {
   const employees = useAppSelector((state) => state.employeesControl.employees);
   const loading = useAppSelector((state) => state.employeesControl.loading);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(()=>{
     dispatch(fetchEmployees());
@@ -18,6 +20,7 @@ const EmployeesDisplay: React.FC = () => {
         { loading ? <p>Loading...</p>
         :
         <>
+          <button onClick={()=> navigate("/employees/create")}> Create</button>
           {employees.map((employee)=>(
             <Employee key={employee.id} data={employee}/>
           ))}
