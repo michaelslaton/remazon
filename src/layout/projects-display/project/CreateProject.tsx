@@ -1,11 +1,11 @@
 import { useRef } from "react";
-// import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-// import { ProjectPostType } from "../../../types/projectType";
+import { useAppDispatch } from "../../../redux/hooks";
+import { ProjectPostType } from "../../../types/projectType";
+import { createProject } from "../../../redux/slices/projectsSlice";
 import "./project.css";
 
 const CreateProject: React.FC = () => {
-  // const projects = useAppSelector((state)=> state.projectsControl.projects);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const nameRef = useRef<HTMLInputElement>(null);
   const hostRef = useRef<HTMLSelectElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
@@ -13,17 +13,17 @@ const CreateProject: React.FC = () => {
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
+    const newProject: ProjectPostType = {
+      name: nameRef.current!.value,
+      host: Number(hostRef.current!.value),
+      type:typeRef.current!.value,
+      description: descriptionRef.current!.value,
+    };
 
-
-    // const data: ProjectPostType = {
-    //   name: nameRef.current!.value,
-    //   host: Number(hostRef.current!.value),
-    //   type: typeRef.current!.value,
-    //   description: descriptionRef.current!.value,
-    // };
+    dispatch(createProject(newProject));
 
     return
-  }
+  };
 
   return (
     <>

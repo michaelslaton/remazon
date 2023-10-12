@@ -1,14 +1,14 @@
 type EmployeeType = {
   id: number;
   name: string;
-  birthday?: Date;
+  birthday?: Date | null;
   rank: number;
   description: string;
+  status: boolean;
 };
 
 export type EmployeePostType = {
   name: string;
-  birthday?: Date;
   rank: number;
   description: string;
 };
