@@ -1,4 +1,5 @@
 import EmployeeType from "../../../types/employeeType";
+import { useNavigate } from "react-router-dom";
 import "./employee.css";
 
 type EmployeeProps = {
@@ -6,6 +7,7 @@ type EmployeeProps = {
 }
 
 const Employee: React.FC<EmployeeProps> = ({ data }) => {
+  const navigate = useNavigate();
 
   return (
     <div className="employee__wrapper">
@@ -18,6 +20,7 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
           </article>
         </li>
       </ul>
+      <button onClick={()=> navigate(`/employees/edit/${data.id}`)}>Edit</button>
     </div>
   );
 };

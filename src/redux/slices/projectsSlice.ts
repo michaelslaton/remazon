@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ProjectType from "../../types/projectType";
+import { ProjectPostType } from "../../types/projectType";
 
 type InitialState = {
   loading: boolean;
@@ -13,9 +14,23 @@ const initialState: InitialState = {
   error: '',
 };
 
-export const fetchProjects = createAsyncThunk("projects/fetch", async ()=>{
-  const response = await fetch("http://localhost:5001/remazon/projects", {
+const projectsUrl: URL= new URL("http://localhost:5001/remazon/projects");
+
+export const fetchProjects = createAsyncThunk("projects/fetch", async (_thunkApi)=>{
+  const response = await fetch(projectsUrl, {
     method: "GET",
+  })
+  const data = response.json();
+  return data;
+});
+
+export const createProject = createAsyncThunk("projects/create", async (project: ProjectPostType, _thunkApi)=> {
+  const response = await fetch(projectsUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(project)
   })
   const data = response.json();
   return data;
@@ -35,15 +50,30 @@ const projectsSlice = createSlice({
       state.loading = false;
       state.projects = action.payload.data;
       state.error = '';
-    })
+    });
     builder.addCase(fetchProjects.pending, (state)=>{
       state.loading = true;
-    })
+    });
     builder.addCase(fetchProjects.rejected, (state, action)=>{
       state.loading = false;
       state.projects = [];
       state.error = action.error.message;
-    })
+    });
+
+    // fetchProjects ------------------------------------------------------------->
+    builder.addCase(createProject.fulfilled, (state)=>{
+      state.loading = false;
+      fetchProjects();
+      state.error = '';
+    });
+    builder.addCase(createProject.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(createProject.rejected, (state, action)=>{
+      state.loading = false;
+      state.projects = [...state.projects];
+      state.error = action.error.message;
+    });
   }
 });
 
