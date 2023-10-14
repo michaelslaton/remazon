@@ -37,7 +37,7 @@ export const createEmployee = createAsyncThunk("employees/create", async (employ
   return data;
 });
 
-export const editEmployee = createAsyncThunk("employees/edit", async (employee: number, _thunkApi)=> {
+export const editEmployee = createAsyncThunk("employees/edit", async (employee: EmployeeType, _thunkApi)=> {
   const response = await fetch(employeesUrl, {
     method: "PUT",
     headers: {
