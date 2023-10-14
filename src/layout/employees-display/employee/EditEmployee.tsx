@@ -1,21 +1,21 @@
 import { useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import EmployeeType from "../../../types/employeeType";
 import { editEmployee } from "../../../redux/slices/employeesSlice";
+import EmployeeType from "../../../types/employeeType";
 import "./employee.css";
 
 const EditEmployee: React.FC = () => {
   const { id } = useParams();
-  const employees = useAppSelector((state)=> state.employeesControl.employees)
-  const dispatch = useAppDispatch();
   const nameRef = useRef<HTMLInputElement>(null);
   const rankRef = useRef<HTMLSelectElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const statusRef = useRef<HTMLInputElement>(null);
-
+  
+  const dispatch = useAppDispatch();
+  const employees = useAppSelector((state)=> state.employeesControl.employees)
   const selectedEmployee = employees.find((dude)=> dude.id === Number(id));
-
+  
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -29,7 +29,7 @@ const EditEmployee: React.FC = () => {
       status: statusRef.current!.checked,
     }
 
-    console.log(updatedEmployee)
+    dispatch(editEmployee(updatedEmployee));
 
     return
   };
