@@ -3,6 +3,7 @@ import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } fro
 import navControlReducer from "./slices/controlsSlice";
 import employeesReducer from "./slices/employeesSlice";
 import projectsReducer from "./slices/projectsSlice";
+import ranksReducer from "./slices/ranksSlice";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
@@ -15,6 +16,7 @@ const reducer = combineReducers({
     navControl: navControlReducer,
     employeesControl: employeesReducer,
     projectsControl: projectsReducer,
+    ranksControl: ranksReducer,
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
 

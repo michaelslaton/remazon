@@ -17,7 +17,7 @@ const employeesUrl: URL = new URL("http://localhost:5001/remazon/employees");
 
 // Api Calls --------------------------------------------------------------------------------->
 
-export const fetchEmployees = createAsyncThunk("employees/fetch", async (_thunkApi)=>{
+export const fetchEmployeesThunk = createAsyncThunk("employees/fetch", async (_thunkApi)=>{
   const response = await fetch(employeesUrl, {
     method: "GET",
   })
@@ -25,7 +25,7 @@ export const fetchEmployees = createAsyncThunk("employees/fetch", async (_thunkA
   return data;
 });
 
-export const createEmployee = createAsyncThunk("employees/create", async (employee: EmployeePostType, _thunkApi)=> {
+export const createEmployeeThunk = createAsyncThunk("employees/create", async (employee: EmployeePostType, _thunkApi)=> {
   const response = await fetch(employeesUrl, {
     method: "POST",
     headers: {
@@ -37,7 +37,7 @@ export const createEmployee = createAsyncThunk("employees/create", async (employ
   return data;
 });
 
-export const editEmployee = createAsyncThunk("employees/edit", async (employee: EmployeeType, _thunkApi)=> {
+export const editEmployeeThunk = createAsyncThunk("employees/edit", async (employee: EmployeeType, _thunkApi)=> {
   const response = await fetch(employeesUrl, {
     method: "PUT",
     headers: {
@@ -61,45 +61,45 @@ const employeesSlice = createSlice({
   },
   extraReducers: (builder) => {
     // fetchEmployees ------------------------------------------------------------->
-    builder.addCase(fetchEmployees.fulfilled, (state, action)=>{
+    builder.addCase(fetchEmployeesThunk.fulfilled, (state, action)=>{
       state.loading = false;
       state.employees = action.payload.data;
       state.error = '';
     });
-    builder.addCase(fetchEmployees.pending, (state)=>{
+    builder.addCase(fetchEmployeesThunk.pending, (state)=>{
       state.loading = true;
     });
-    builder.addCase(fetchEmployees.rejected, (state, action)=>{
+    builder.addCase(fetchEmployeesThunk.rejected, (state, action)=>{
       state.loading = false;
       state.employees = [...state.employees];
       state.error = action.error.message;
     });
 
     // createEmployee ------------------------------------------------------------->
-    builder.addCase(createEmployee.fulfilled, (state)=>{
+    builder.addCase(createEmployeeThunk.fulfilled, (state)=>{
       state.loading = false;
-      fetchEmployees();
+      fetchEmployeesThunk();
       state.error = '';
     });
-    builder.addCase(createEmployee.pending, (state)=>{
+    builder.addCase(createEmployeeThunk.pending, (state)=>{
       state.loading = true;
     });
-    builder.addCase(createEmployee.rejected, (state, action)=>{
+    builder.addCase(createEmployeeThunk.rejected, (state, action)=>{
       state.loading = false;
       state.employees = [...state.employees];
       state.error = action.error.message;
     });
 
     // editEmployee ---------------------------------------------------------------->
-    builder.addCase(editEmployee.fulfilled, (state)=>{
+    builder.addCase(editEmployeeThunk.fulfilled, (state)=>{
       state.loading = false;
-      fetchEmployees();
+      fetchEmployeesThunk();
       state.error = '';
     });
-    builder.addCase(editEmployee.pending, (state)=>{
+    builder.addCase(editEmployeeThunk.pending, (state)=>{
       state.loading = true;
     });
-    builder.addCase(editEmployee.rejected, (state, action)=>{
+    builder.addCase(editEmployeeThunk.rejected, (state, action)=>{
       state.loading = false;
       state.employees = [...state.employees];
       state.error = action.error.message;

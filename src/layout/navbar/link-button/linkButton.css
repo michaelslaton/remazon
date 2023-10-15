@@ -17,4 +17,5 @@
 }
 .link-button:hover {
   border-color: var(--remazon-prime);
+  color: #ffffff;
 }

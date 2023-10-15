@@ -1,15 +1,21 @@
+import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./utils/firebase/firebase";
 import Layout from "./layout/Layout";
 import HomePage from "./layout/home-page/HomePage";
-import Login from "./layout/login/Login";
+import Login from "./layout/authentication/Login";
+import SignUp from "./layout/authentication/SignUp";
 import EmployeesDisplay from "./layout/employees-display/EmployeesDisplay";
-import ProjectsDisplay from "./layout/projects-display/ProjectsDisplay";
-import Error404 from "./utils/errors/Error404";
 import CreateEmployee from "./layout/employees-display/employee/CreateEmployee";
-import CreateProject from "./layout/projects-display/project/CreateProject";
 import EditEmployee from "./layout/employees-display/employee/EditEmployee";
+import ProjectsDisplay from "./layout/projects-display/ProjectsDisplay";
+import CreateProject from "./layout/projects-display/project/CreateProject";
+import EditProject from "./layout/projects-display/project/EditProject";
+import Error404 from "./utils/errors/Error404";
+import Ranks from "./layout/ranks/Ranks";
+import { useAppSelector, useAppDispatch } from "./redux/hooks";
+import { fetchRanksThunk } from "./redux/slices/ranksSlice";
 // import AuthRoute from "./utils/firebase/AuthRoute";
 
 initializeApp(firebaseConfig);
@@ -28,17 +34,23 @@ const router = createBrowserRouter([
         element: <Login/>,
       },
       {
+        path: "/signup",
+        element: <SignUp/>,
+      },
+      {
+        path: "/ranks",
+        element: <Ranks/>
+      },
+      {
         path: "/employees",
         element: <EmployeesDisplay/>,
       },
       {
         path: "/employees/create",
-        // element: <AuthRoute><CreateEmployee/></AuthRoute>,
         element: <CreateEmployee/>,
       },
       {
-        path: "/employees/edit/:id",
-        // element: <AuthRoute><CreateEmployee/></AuthRoute>,
+        path: "/employees/edit/:paramId",
         element: <EditEmployee/>,
       },
       {
@@ -47,8 +59,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/projects/create",
-        // element: <AuthRoute><CreateProject/></AuthRoute>,
         element: <CreateProject/>,
+      },
+      {
+        path: "/projects/edit/:paramId",
+        element: <EditProject/>
       },
       {
         path: "*",
@@ -59,6 +74,13 @@ const router = createBrowserRouter([
 ]);
 
 const App: React.FC = () => {
+  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
+  const dispatch = useAppDispatch();
+
+  useEffect(()=>{
+    if(ranks.length === 0) dispatch(fetchRanksThunk());
+  },[])
+
   return (
     <>
       <RouterProvider router={router}/>

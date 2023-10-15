@@ -6,7 +6,7 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      Some stuff <button onClick={()=> signOut(auth)}>Sign Out</button>
+      Some stuff <button className="button" onClick={()=> signOut(auth)}>Sign Out</button>
     </>
   );
 };
