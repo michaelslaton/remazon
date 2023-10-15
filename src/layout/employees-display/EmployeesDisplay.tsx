@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchEmployeesThunk } from "../../redux/slices/employeesSlice";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
@@ -11,7 +11,7 @@ const EmployeesDisplay: React.FC = () => {
   const ranks = useAppSelector((state)=> state.ranksControl.ranks);
   const loading = useAppSelector((state) => state.employeesControl.loading);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
   useEffect(()=>{
     dispatch(fetchEmployeesThunk());
