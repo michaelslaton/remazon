@@ -1,5 +1,5 @@
 import ProjectType from "../../../types/projectType";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import "./project.css";
 
 type ProjectProps = {
@@ -7,7 +7,7 @@ type ProjectProps = {
 };
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
   return (
     <div className="project__wrapper">

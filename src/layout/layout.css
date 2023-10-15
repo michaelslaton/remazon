@@ -35,6 +35,8 @@ img {
   border-radius: 50%;
   margin: 0 .5rem;
   width: .7rem;
+  position: absolute;
+  right: 0;
 }
 .status-dot.active {
   background-color: #00b400;

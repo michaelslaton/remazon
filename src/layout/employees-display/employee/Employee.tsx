@@ -1,5 +1,5 @@
 import EmployeeType from "../../../types/employeeType";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
 import "./employee.css";
 
@@ -8,7 +8,7 @@ type EmployeeProps = {
 }
 
 const Employee: React.FC<EmployeeProps> = ({ data }) => {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
   const ranks = useAppSelector((state)=> state.ranksControl.ranks);
   const currentEmployeesRank = ranks.find((rank)=> rank.id === data.rank);
 

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
 import Project from "./project/Project";
@@ -10,7 +10,7 @@ const Projects: React.FC = () => {
   const projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
   const loading = useAppSelector((state) => state.projectsControl.loading);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
   useEffect(()=>{
     dispatch(fetchProjectsThunk());
