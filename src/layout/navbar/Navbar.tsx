@@ -27,6 +27,11 @@ const navData: LinkButtonData[] = [
   },
   {
     id: 3,
+    name: "Ranks",
+    url: "/ranks",
+  },
+  {
+    id: 4,
     name: "Log In",
     url: "/login",
   },

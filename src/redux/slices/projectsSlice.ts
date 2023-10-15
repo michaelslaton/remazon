@@ -11,12 +11,12 @@ type InitialState = {
 const initialState: InitialState = {
   loading: false,
   projects: [],
-  error: '',
+  error: "",
 };
 
 const projectsUrl: URL= new URL("http://localhost:5001/remazon/projects");
 
-export const fetchProjects = createAsyncThunk("projects/fetch", async (_thunkApi)=>{
+export const fetchProjectsThunk = createAsyncThunk("projects/fetch", async (_thunkApi)=>{
   const response = await fetch(projectsUrl, {
     method: "GET",
   })
@@ -24,9 +24,21 @@ export const fetchProjects = createAsyncThunk("projects/fetch", async (_thunkApi
   return data;
 });
 
-export const createProject = createAsyncThunk("projects/create", async (project: ProjectPostType, _thunkApi)=> {
+export const createProjectThunk = createAsyncThunk("projects/create", async (project: ProjectPostType, _thunkApi)=> {
   const response = await fetch(projectsUrl, {
     method: "POST",
+    headers: {
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(project)
+  })
+  const data = response.json();
+  return data;
+});
+
+export const editProjectThunk = createAsyncThunk("projects/edit", async (project: ProjectType, _thunkApi)=> {
+  const response = await fetch(projectsUrl, {
+    method: "PUT",
     headers: {
       "Content-Type":"application/json"
     },
@@ -46,30 +58,30 @@ const projectsSlice = createSlice({
   },
   extraReducers: (builder) => {
     // fetchProjects ------------------------------------------------------------->
-    builder.addCase(fetchProjects.fulfilled, (state, action)=>{
+    builder.addCase(fetchProjectsThunk.fulfilled, (state, action)=>{
       state.loading = false;
       state.projects = action.payload.data;
-      state.error = '';
+      state.error = "";
     });
-    builder.addCase(fetchProjects.pending, (state)=>{
+    builder.addCase(fetchProjectsThunk.pending, (state)=>{
       state.loading = true;
     });
-    builder.addCase(fetchProjects.rejected, (state, action)=>{
+    builder.addCase(fetchProjectsThunk.rejected, (state, action)=>{
       state.loading = false;
       state.projects = [];
       state.error = action.error.message;
     });
 
     // fetchProjects ------------------------------------------------------------->
-    builder.addCase(createProject.fulfilled, (state)=>{
+    builder.addCase(createProjectThunk.fulfilled, (state)=>{
       state.loading = false;
-      fetchProjects();
-      state.error = '';
+      fetchProjectsThunk();
+      state.error = "";
     });
-    builder.addCase(createProject.pending, (state)=>{
+    builder.addCase(createProjectThunk.pending, (state)=>{
       state.loading = true;
     });
-    builder.addCase(createProject.rejected, (state, action)=>{
+    builder.addCase(createProjectThunk.rejected, (state, action)=>{
       state.loading = false;
       state.projects = [...state.projects];
       state.error = action.error.message;
