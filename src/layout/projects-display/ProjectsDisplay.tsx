@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchProjects } from "../../redux/slices/projectsSlice";
+import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
 import Project from "./project/Project";
 import "./projectsDisplay.css";
 import ProjectType from "../../types/projectType";
@@ -13,7 +13,7 @@ const Projects: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    dispatch(fetchProjects());
+    dispatch(fetchProjectsThunk());
   },[]);
 
   if(loading) return <>Loading...</>;
@@ -22,7 +22,7 @@ const Projects: React.FC = () => {
         {loading ? <p>Loading...</p>
         :
         <>
-          <button onClick={()=> navigate("/projects/create")}> Create</button>
+          <button className="button" onClick={()=> navigate("/projects/create")}> Create</button>
           {projects.map((project)=>(
             <Project key={project.id} data={project}/>
           ))}

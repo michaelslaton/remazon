@@ -15,3 +15,6 @@
   color: var(--remazon-prime);
   cursor: pointer;
 }
+.collapse-button:hover {
+  color: #ffffff;
+}

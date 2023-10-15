@@ -1,11 +1,12 @@
 import { useRef } from "react";
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { EmployeePostType } from "../../../types/employeeType";
-import { createEmployee } from "../../../redux/slices/employeesSlice";
+import { createEmployeeThunk } from "../../../redux/slices/employeesSlice";
 import "./employee.css";
 
 const CreateEmployee: React.FC = () => {
   const dispatch = useAppDispatch();
+  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
   const nameRef = useRef<HTMLInputElement>(null);
   const rankRef = useRef<HTMLSelectElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
@@ -17,12 +18,13 @@ const CreateEmployee: React.FC = () => {
       rank: Number(rankRef.current!.value),
       description: descriptionRef.current!.value,
     };
-    dispatch(createEmployee(newEmployee));
+    dispatch(createEmployeeThunk(newEmployee));
     return
   };
 
   return (
     <>
+      <h2 className="title">Create Employee</h2>
       <form>
         <label>
           Name:
@@ -32,7 +34,7 @@ const CreateEmployee: React.FC = () => {
         <label>
           Rank:
           <select id="rank" name="rank" ref={rankRef}>
-            <option value="4">Eh ??</option>
+            {ranks.map(((rank)=> rank.id !== 1 ? <option key={rank.id} value={rank.rank}>{rank.name}</option> : "" ))}
           </select>
         </label>
 

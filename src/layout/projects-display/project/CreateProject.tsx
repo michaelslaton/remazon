@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { ProjectPostType } from "../../../types/projectType";
-import { createProject } from "../../../redux/slices/projectsSlice";
+import { createProjectThunk } from "../../../redux/slices/projectsSlice";
 import "./project.css";
 
 const CreateProject: React.FC = () => {
@@ -20,13 +20,14 @@ const CreateProject: React.FC = () => {
       description: descriptionRef.current!.value,
     };
 
-    dispatch(createProject(newProject));
+    dispatch(createProjectThunk(newProject));
 
     return
   };
 
   return (
     <>
+      <h2 className="title">Create Project</h2>
       <form>
         <label>
           Name:
