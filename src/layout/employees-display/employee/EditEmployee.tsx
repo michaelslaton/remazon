@@ -1,41 +1,44 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { editEmployee } from "../../../redux/slices/employeesSlice";
+import { editEmployeeThunk } from "../../../redux/slices/employeesSlice";
+import { fetchRanksThunk } from "../../../redux/slices/ranksSlice";
 import EmployeeType from "../../../types/employeeType";
 import "./employee.css";
 
 const EditEmployee: React.FC = () => {
-  const { id } = useParams();
   const nameRef = useRef<HTMLInputElement>(null);
+  const statusRef = useRef<HTMLInputElement>(null);  
   const rankRef = useRef<HTMLSelectElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const statusRef = useRef<HTMLInputElement>(null);
-  
+  const { paramId } = useParams();
   const dispatch = useAppDispatch();
-  const employees = useAppSelector((state)=> state.employeesControl.employees)
-  const selectedEmployee = employees.find((dude)=> dude.id === Number(id));
+  const employees = useAppSelector((state)=> state.employeesControl.employees);
+  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
+  const selectedEmployee = employees.find((dude)=> dude.id === Number(paramId));
+
+  useEffect(()=>{
+    if(ranks.length === 0) dispatch(fetchRanksThunk());
+  },[])
   
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
-
     const updatedEmployee: EmployeeType = {
-      id: Number(id),
+      id: Number(paramId),
       name: nameRef.current!.value,
       rank: Number(rankRef.current!.value),
       birthday: null,
       description: descriptionRef.current!.value,
       status: statusRef.current!.checked,
-    }
-
-    dispatch(editEmployee(updatedEmployee));
-
-    return
+    };
+    dispatch(editEmployeeThunk(updatedEmployee));
+    return;
   };
 
   return (
     <>
+      <h2 className="title">Edit {selectedEmployee!.name}</h2>
       <form>
         <label>
           Name:
@@ -45,9 +48,9 @@ const EditEmployee: React.FC = () => {
         <label>
           Rank:
           <select id="rank" name="rank" ref={rankRef} defaultValue={selectedEmployee?.rank}>
-            <option value="3">wrong</option>
-            <option value="1">Right!</option>
-            <option value="2">wrong</option>
+            {ranks.map(((rank)=>(
+              <option key={rank.id} value={rank.rank}>{rank.name}</option>
+            )))}
           </select>
         </label>
 
@@ -60,7 +63,7 @@ const EditEmployee: React.FC = () => {
           Active:
           <input type="checkbox" defaultChecked={selectedEmployee?.status} ref={statusRef}/>
         </label>
-        <button type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
+        <button className="button" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
       </form>
     </>
   );
