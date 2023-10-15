@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import "./loginSignup.css";
 
 const Login: React.FC = () => {
   const auth = getAuth();
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -23,6 +23,8 @@ const Login: React.FC = () => {
         console.error(error.code);
         console.error(error.message);
       });
+
+      console.log(auth.currentUser?.uid)
   };
 
   return (

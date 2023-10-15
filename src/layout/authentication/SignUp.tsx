@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import "./loginSignup.css";
 
 
 const SignUp: React.FC = () => {
   const auth = getAuth();
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -38,6 +38,7 @@ const SignUp: React.FC = () => {
           <input type="password" ref={passwordRef}/>
         </label>
         <button
+          className="button"
           type="submit"
           onClick={(e) => submitHandler(e)}>
           Sign Up
