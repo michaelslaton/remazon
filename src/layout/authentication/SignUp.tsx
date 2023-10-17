@@ -12,8 +12,8 @@ const SignUp: React.FC = () => {
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    const enteredEmail = emailRef.current!.value;
-    const enteredPassword = passwordRef.current!.value;
+    const enteredEmail: string = emailRef.current!.value;
+    const enteredPassword: string = passwordRef.current!.value;
     createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
       .then((response) => {
         console.log(response.user.uid);

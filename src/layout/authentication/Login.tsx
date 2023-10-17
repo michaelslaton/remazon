@@ -11,8 +11,8 @@ const Login: React.FC = () => {
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    const enteredEmail = emailRef.current!.value;
-    const enteredPassword = passwordRef.current!.value;
+    const enteredEmail: string = emailRef.current!.value;
+    const enteredPassword: string = passwordRef.current!.value;
 
     signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
       .then((response) => {
