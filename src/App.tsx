@@ -16,6 +16,7 @@ import Error404 from "./utils/errors/Error404";
 import Ranks from "./layout/ranks/Ranks";
 import { useAppSelector, useAppDispatch } from "./redux/hooks";
 import { fetchRanksThunk } from "./redux/slices/ranksSlice";
+import Rank from "./types/rankType";
 // import AuthRoute from "./utils/firebase/AuthRoute";
 
 initializeApp(firebaseConfig);
@@ -74,7 +75,7 @@ const router = createBrowserRouter([
 ]);
 
 const App: React.FC = () => {
-  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
+  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
   const dispatch = useAppDispatch();
 
   useEffect(()=>{

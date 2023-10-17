@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import "./ranks.css";
+import Rank from "../../types/rankType";
 
 const Ranks: React.FC = () => {
-  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
+  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
   const dispatch = useAppDispatch();
 
   useEffect(()=>{
