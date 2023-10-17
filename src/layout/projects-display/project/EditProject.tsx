@@ -35,10 +35,13 @@ const EditProject: React.FC = () => {
     <>
       <h2 className="title">Edit {selectedProject!.name}</h2>
       <form>
+        
         <label>
           Name:
           <input
             type="text"
+            id="name"
+            name="name"
             ref={nameRef}
             defaultValue={selectedProject?.name}/>
         </label>
@@ -60,6 +63,8 @@ const EditProject: React.FC = () => {
           Type:
           <input
             type="text"
+            id="type"
+            name="type"
             ref={typeRef}
             defaultValue={selectedProject?.type}/>
         </label>
@@ -77,8 +82,10 @@ const EditProject: React.FC = () => {
           Active:
           <input
             type="checkbox"
-            defaultChecked={selectedProject?.status}
-            ref={statusRef}/>
+            id="status"
+            name="status"
+            ref={statusRef}
+            defaultChecked={selectedProject?.status}/>
         </label>
 
         <button className="button" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>

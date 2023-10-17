@@ -10,6 +10,7 @@ type EmployeeType = {
 export type EmployeePostType = {
   name: string;
   rank: number;
+  birthday?: Date | null;
   description: string;
 };
 

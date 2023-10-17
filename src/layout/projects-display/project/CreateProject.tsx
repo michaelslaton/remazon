@@ -29,26 +29,44 @@ const CreateProject: React.FC = () => {
     <>
       <h2 className="title">Create Project</h2>
       <form>
+
         <label>
           Name:
-          <input type="text" ref={nameRef}/>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            ref={nameRef}/>
         </label>
+
         <label>
           Host:
-          <select id="host" name="host" ref={hostRef}>
+          <select
+            id="host"
+            name="host"
+            ref={hostRef}>
             <option value="0">Eh ??</option>
           </select>
         </label>
+
         <label>
           Type:
-          <select id="type" name="type" ref={typeRef}>
+          <select
+            id="type"
+            name="type"
+            ref={typeRef}>
             <option value="string">Eh ??</option>
           </select>
         </label>
+
         <label>
           Description:
-          <textarea id="description" name="description" ref={descriptionRef}/>
+          <textarea
+            id="description"
+            name="description"
+            ref={descriptionRef}/>
         </label>
+
         <button type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
       </form>
     </>
