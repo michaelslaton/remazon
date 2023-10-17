@@ -3,7 +3,7 @@ import { navToggle } from "../../../redux/slices/controlsSlice";
 import "./collapseButton.css";
 
 const CollapseButton: React.FC = () => {
-  const navActive = useAppSelector((state)=> state.navControl.navOpen);
+  const navActive: boolean = useAppSelector((state)=> state.navControl.navOpen);
   const dispatch = useAppDispatch();
 
   return (

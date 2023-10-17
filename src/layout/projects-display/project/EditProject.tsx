@@ -6,14 +6,14 @@ import ProjectType from "../../../types/projectType";
 import "./project.css";
 
 const EditProject: React.FC = () => {
-  const { paramId } = useParams();
+  const { paramId } = useParams<string>();
   const nameRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const statusRef = useRef<HTMLInputElement>(null);
   const hostRef = useRef<HTMLSelectElement>(null);
   const typeRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
-  const projects = useAppSelector((state)=> state.projectsControl.projects)
+  const projects: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects)
   const selectedProject = projects.find((project)=> project.id === Number(paramId));  
 
   const submitHandler: Function = (e: React.FormEvent): void => {
