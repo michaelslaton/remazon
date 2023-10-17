@@ -38,7 +38,7 @@ const navData: LinkButtonData[] = [
 ];
 
 const Navbar: React.FC = () => {
-  const navActive = useAppSelector((state)=> state.navControl.navOpen);
+  const navActive: boolean = useAppSelector((state)=> state.navControl.navOpen);
 
   return (
     <div className={`navbar__wrapper ${ navActive ? "active" : ""}`}>

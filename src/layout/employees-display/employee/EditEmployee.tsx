@@ -5,17 +5,18 @@ import { editEmployeeThunk } from "../../../redux/slices/employeesSlice";
 import { fetchRanksThunk } from "../../../redux/slices/ranksSlice";
 import EmployeeType from "../../../types/employeeType";
 import "./employee.css";
+import Rank from "../../../types/rankType";
 
 const EditEmployee: React.FC = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const statusRef = useRef<HTMLInputElement>(null);  
   const rankRef = useRef<HTMLSelectElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const { paramId } = useParams();
+  const { paramId } = useParams<string>();
   const dispatch = useAppDispatch();
-  const employees = useAppSelector((state)=> state.employeesControl.employees);
-  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
-  const selectedEmployee = employees.find((dude)=> dude.id === Number(paramId));
+  const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
+  const selectedEmployee: EmployeeType | undefined = employees.find((dude)=> dude.id === Number(paramId));
 
   useEffect(()=>{
     if(ranks.length === 0) dispatch(fetchRanksThunk());
