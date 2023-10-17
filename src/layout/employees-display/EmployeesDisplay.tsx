@@ -5,11 +5,13 @@ import { fetchEmployeesThunk } from "../../redux/slices/employeesSlice";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import Employee from "./employee/Employee";
 import "./employeesDisplay.css";
+import Rank from "../../types/rankType";
+import EmployeeType from "../../types/employeeType";
 
 const EmployeesDisplay: React.FC = () => {
-  const employees = useAppSelector((state) => state.employeesControl.employees);
-  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
-  const loading = useAppSelector((state) => state.employeesControl.loading);
+  const employees: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
+  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
+  const loading: boolean = useAppSelector((state) => state.employeesControl.loading);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
 

@@ -8,7 +8,7 @@ import ProjectType from "../../types/projectType";
 
 const Projects: React.FC = () => {
   const projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
-  const loading = useAppSelector((state) => state.projectsControl.loading);
+  const loading: boolean = useAppSelector((state) => state.projectsControl.loading);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
 
