@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchEmployeesThunk } from "../../redux/slices/employeesSlice";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import Employee from "./employee/Employee";
-import "./employeesDisplay.css";
 import Rank from "../../types/rankType";
 import EmployeeType from "../../types/employeeType";
+import "./employees.css";
 
 const EmployeesDisplay: React.FC = () => {
   const employees: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);

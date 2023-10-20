@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { EmployeePostType } from "../../../types/employeeType";
 import { createEmployeeThunk } from "../../../redux/slices/employeesSlice";
-import "./employee.css";
+import "../employees.css";
 
 const CreateEmployee: React.FC = () => {
   const dispatch = useAppDispatch();
