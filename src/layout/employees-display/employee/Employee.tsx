@@ -2,7 +2,7 @@ import EmployeeType from "../../../types/employeeType";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
 import Rank from "../../../types/rankType";
-import "./employee.css";
+import "../employees.css";
 
 type EmployeeProps = {
   data: EmployeeType;

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { ProjectPostType } from "../../../types/projectType";
 import { createProjectThunk } from "../../../redux/slices/projectsSlice";
-import "./project.css";
+import "../projects.css";
 
 const CreateProject: React.FC = () => {
   const dispatch = useAppDispatch();

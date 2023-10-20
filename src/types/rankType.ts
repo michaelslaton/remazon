@@ -1,4 +1,4 @@
-type Rank = {
+type RankType = {
   id: number;
   name: string;
   rank: number;
@@ -11,4 +11,4 @@ export type RankPostType = {
   description: string;
 }
 
-export default Rank;
+export default RankType;

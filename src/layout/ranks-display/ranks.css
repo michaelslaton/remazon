@@ -1,0 +1,9 @@
+.rank {
+  display: block;
+  border: .15rem solid var(--remazon-prime);
+  margin-right: .5rem;
+  padding: .3rem;
+  border-radius: var(--border-radius);
+  min-width: 10rem;
+  position: relative;
+}

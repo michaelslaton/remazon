@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editEmployeeThunk } from "../../../redux/slices/employeesSlice";
 import { fetchRanksThunk } from "../../../redux/slices/ranksSlice";
 import EmployeeType from "../../../types/employeeType";
-import "./employee.css";
 import Rank from "../../../types/rankType";
+import "../employees.css";
 
 const EditEmployee: React.FC = () => {
   const nameRef = useRef<HTMLInputElement>(null);

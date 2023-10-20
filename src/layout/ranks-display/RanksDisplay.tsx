@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
+import Rank from "./rank/Rank";
+import RankType from "../../types/rankType";
 import "./ranks.css";
-import Rank from "../../types/rankType";
 
-const Ranks: React.FC = () => {
-  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
+const RanksDisplay: React.FC = () => {
+  const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const dispatch = useAppDispatch();
 
   useEffect(()=>{
@@ -15,13 +16,11 @@ const Ranks: React.FC = () => {
   return (
     <>
       <h2 className="title">Ranks</h2>
-      {ranks.map((rank)=>(
-        <div key={rank.id}>
-          {rank.name}
-        </div>
+      {ranks.sort((a,b)=> a.id - b.id).map((rank)=>(
+        <Rank key={rank.id} rankData={rank}/>
       ))}
     </>
   );
 };
 
-export default Ranks;
+export default RanksDisplay;
