@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editProjectThunk } from "../../../redux/slices/projectsSlice";
 import ProjectType from "../../../types/projectType";
-import "./project.css";
+import "../projects.css";
 
 const EditProject: React.FC = () => {
   const { paramId } = useParams<string>();

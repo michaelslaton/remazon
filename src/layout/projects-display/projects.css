@@ -1,10 +1,14 @@
+.projects-display__wrapper {
+  border-radius: var(--border-radius);
+}
+
 .project__wrapper {
   display: inline-block;
   border: .15rem solid var(--remazon-prime);
   margin-right: .5rem;
   padding: .3rem;
   border-radius: var(--border-radius);
-  width: 20rem;
+  min-width: 20rem;
   position: relative;
 }
 

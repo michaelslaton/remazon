@@ -1,6 +1,6 @@
 import ProjectType from "../../../types/projectType";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import "./project.css";
+import "../projects.css";
 
 type ProjectProps = {
   data: ProjectType;
