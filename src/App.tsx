@@ -13,7 +13,7 @@ import ProjectsDisplay from "./layout/projects-display/ProjectsDisplay";
 import CreateProject from "./layout/projects-display/project/CreateProject";
 import EditProject from "./layout/projects-display/project/EditProject";
 import Error404 from "./utils/errors/Error404";
-import Ranks from "./layout/ranks/Ranks";
+import RanksDisplay from "./layout/ranks-display/RanksDisplay";
 import { useAppSelector, useAppDispatch } from "./redux/hooks";
 import { fetchRanksThunk } from "./redux/slices/ranksSlice";
 import Rank from "./types/rankType";
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/ranks",
-        element: <Ranks/>
+        element: <RanksDisplay/>
       },
       {
         path: "/employees",
