@@ -7,9 +7,16 @@ type RankProps = {
 
 const Rank: React.FC<RankProps> = ({ rankData }) => {
 
+  const editButtonHandler = (): void => {
+
+    return
+  }
+
   return (
     <div className="rank">
-      {rankData.name}
+      <h2 className="rank__title">{rankData.name}</h2>
+      {rankData.description}
+      <button className="button" onClick={()=> editButtonHandler()}>Edit</button>
     </div>
   );
 };
