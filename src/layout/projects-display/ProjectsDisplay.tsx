@@ -3,7 +3,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
 import Project from "./project/Project";
-import "./projectsDisplay.css";
+import "./projects.css";
 import ProjectType from "../../types/projectType";
 
 const Projects: React.FC = () => {

@@ -7,3 +7,7 @@
   min-width: 10rem;
   position: relative;
 }
+
+.rank__title {
+  margin: 0;
+}

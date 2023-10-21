@@ -13,7 +13,11 @@ const LinkButton: React.FC<LinkButtonProps> = ({data}) => {
 
   return (
     <button className={`link-button ${ navActive ? "active" : "" }`} onClick={()=> navigate(data.url)}>
-      {data.name}
+      { navActive ?
+        data.name
+        :
+        data.name.slice(0,1)
+      }
     </button>
   );
 };
