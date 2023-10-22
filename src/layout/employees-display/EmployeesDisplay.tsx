@@ -3,34 +3,37 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchEmployeesThunk } from "../../redux/slices/employeesSlice";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
+import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Employee from "./employee/Employee";
-import Rank from "../../types/rankType";
 import EmployeeType from "../../types/employeeType";
 import "./employees.css";
 
 const EmployeesDisplay: React.FC = () => {
   const employees: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
-  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
-  const loading: boolean = useAppSelector((state) => state.employeesControl.loading);
+  const loading1: boolean = useAppSelector((state) => state.employeesControl.loading);
+  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
 
   useEffect(()=>{
     dispatch(fetchEmployeesThunk());
-    if(ranks.length === 0) dispatch(fetchRanksThunk());
+    if (ranks.length === 0) dispatch(fetchRanksThunk());
   },[]);
+
+  if (loading1 || ranks.length === 0) return (
+    <p>Loading...</p>
+  )
+  console.log(1)
 
   return (
       <div className="employees-display__wrapper">
-        { loading ? <p>Loading...</p>
-        :
         <>
-          <button className="button" onClick={()=> navigate("/employees/create")}> Create</button>
+          <button className="button" onClick={()=> navigate("/employees/create")}><FontAwesomeIcon icon={faPlus}/></button>
           {employees.map((employee)=>(
             <Employee key={employee.id} data={employee}/>
           ))}
         </>
-        }
       </div>
   );
 };

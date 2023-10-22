@@ -25,18 +25,17 @@ export const fetchUserThunk = createAsyncThunk("users/fetch", async (uid: string
   return data;
 });
 
-export const createUserThunk = createAsyncThunk("users/create", async (user: UserPostType, _thunkApi)=> {
+export const createUserThunk = createAsyncThunk("users/create", async (newUser: UserPostType, _thunkApi)=> {
   const response = await fetch(usersUrl, {
     method: "POST",
     headers: {
       "Content-Type":"application/json"
     },
-    body:JSON.stringify(user)
+    body:JSON.stringify(newUser)
   })
   const data = response.json();
   return data;
 });
-
 // -------------------------------------------------------------------------------------------->
 
 const userSlice = createSlice({
@@ -58,6 +57,21 @@ const userSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchUserThunk.rejected, (state, action)=>{
+      state.loading = false;
+      state.currentUser = {} as UserType;
+      state.error = action.error.message;
+    });
+
+    // createUser ------------------------------------------------------------->
+    builder.addCase(createUserThunk.fulfilled, (state, action)=>{
+      state.loading = false;
+      state.currentUser = action.payload.data;
+      state.error = '';
+    });
+    builder.addCase(createUserThunk.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(createUserThunk.rejected, (state, action)=>{
       state.loading = false;
       state.currentUser = {} as UserType;
       state.error = action.error.message;

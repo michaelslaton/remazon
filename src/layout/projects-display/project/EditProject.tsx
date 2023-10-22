@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editProjectThunk } from "../../../redux/slices/projectsSlice";
 import ProjectType from "../../../types/projectType";
@@ -12,6 +12,7 @@ const EditProject: React.FC = () => {
   const statusRef = useRef<HTMLInputElement>(null);
   const hostRef = useRef<HTMLSelectElement>(null);
   const typeRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const projects: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects)
   const selectedProject = projects.find((project)=> project.id === Number(paramId));  
@@ -28,6 +29,7 @@ const EditProject: React.FC = () => {
       status: statusRef.current!.checked,
     };
     dispatch(editProjectThunk(updatedProject));
+    navigate(-1);
     return;
   };
 
