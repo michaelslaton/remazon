@@ -3,8 +3,10 @@ import { useAppDispatch } from "../../../redux/hooks";
 import { ProjectPostType } from "../../../types/projectType";
 import { createProjectThunk } from "../../../redux/slices/projectsSlice";
 import "../projects.css";
+import { useNavigate } from "react-router-dom";
 
 const CreateProject: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const nameRef = useRef<HTMLInputElement>(null);
   const hostRef = useRef<HTMLSelectElement>(null);
@@ -21,7 +23,7 @@ const CreateProject: React.FC = () => {
     };
 
     dispatch(createProjectThunk(newProject));
-
+    navigate(-1);
     return
   };
 

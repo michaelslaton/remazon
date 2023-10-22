@@ -3,8 +3,10 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { EmployeePostType } from "../../../types/employeeType";
 import { createEmployeeThunk } from "../../../redux/slices/employeesSlice";
 import "../employees.css";
+import { useNavigate } from "react-router-dom";
 
 const CreateEmployee: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const ranks = useAppSelector((state)=> state.ranksControl.ranks);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -24,6 +26,7 @@ const CreateEmployee: React.FC = () => {
       description: descriptionRef.current!.value,
     };
     dispatch(createEmployeeThunk(newEmployee));
+    navigate(-1);
     return;
   };
 

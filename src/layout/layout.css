@@ -64,5 +64,5 @@ img {
   transition: margin-left 70ms ease-in-out;
 }
 .main-screen.active {
-  margin-left: 11rem;
+  margin-left: 12rem;
 }

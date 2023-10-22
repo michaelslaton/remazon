@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ProjectType from "../../types/projectType";
-import { ProjectPostType } from "../../types/projectType";
+import ProjectType, { ProjectPostType } from "../../types/projectType";
 
 type InitialState = {
   loading: boolean;
@@ -16,6 +15,8 @@ const initialState: InitialState = {
 
 const projectsUrl: URL= new URL("http://localhost:5001/remazon/projects");
 
+// Api Calls --------------------------------------------------------------------------------->
+
 export const fetchProjectsThunk = createAsyncThunk("projects/fetch", async (_thunkApi)=>{
   const response = await fetch(projectsUrl, {
     method: "GET",
@@ -24,72 +25,81 @@ export const fetchProjectsThunk = createAsyncThunk("projects/fetch", async (_thu
   return data;
 });
 
-export const createProjectThunk = createAsyncThunk("projects/create", async (project: ProjectPostType, _thunkApi)=> {
+export const createProjectThunk = createAsyncThunk("projects/create", async (newProject: ProjectPostType, _thunkApi)=> {
   const response = await fetch(projectsUrl, {
     method: "POST",
     headers: {
       "Content-Type":"application/json"
     },
-    body:JSON.stringify(project)
+    body:JSON.stringify(newProject)
   })
   const data = response.json();
   return data;
 });
 
-export const editProjectThunk = createAsyncThunk("projects/edit", async (project: ProjectType, _thunkApi)=> {
+export const editProjectThunk = createAsyncThunk("projects/edit", async (updatedProject: ProjectType, _thunkApi)=> {
   const response = await fetch(projectsUrl, {
     method: "PUT",
     headers: {
       "Content-Type":"application/json"
     },
-    body:JSON.stringify(project)
+    body:JSON.stringify(updatedProject)
   })
   const data = response.json();
   return data;
 });
+// -------------------------------------------------------------------------------------------->
 
 const projectsSlice = createSlice({
   name: "projects",
   initialState,
-  reducers: {
-    setProjects: (state,action) => {
-      state.projects = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     // fetchProjects ------------------------------------------------------------->
     builder.addCase(fetchProjectsThunk.fulfilled, (state, action)=>{
-      state.loading = false;
       state.projects = action.payload.data;
       state.error = "";
+      state.loading = false;
     });
     builder.addCase(fetchProjectsThunk.pending, (state)=>{
       state.loading = true;
     });
     builder.addCase(fetchProjectsThunk.rejected, (state, action)=>{
-      state.loading = false;
-      state.projects = [];
+      state.projects = [...state.projects];
       state.error = action.error.message;
+      state.loading = false;
     });
 
-    // fetchProjects ------------------------------------------------------------->
+    // createProject ------------------------------------------------------------->
     builder.addCase(createProjectThunk.fulfilled, (state)=>{
-      state.loading = false;
       fetchProjectsThunk();
       state.error = "";
+      state.loading = false;
     });
     builder.addCase(createProjectThunk.pending, (state)=>{
       state.loading = true;
     });
     builder.addCase(createProjectThunk.rejected, (state, action)=>{
-      state.loading = false;
       state.projects = [...state.projects];
       state.error = action.error.message;
+      state.loading = false;
+    });
+
+    // editEmployee ---------------------------------------------------------------->
+    builder.addCase(editProjectThunk.fulfilled, (state)=>{
+      state.error = '';
+      fetchProjectsThunk();
+      state.loading = false;
+    });
+    builder.addCase(editProjectThunk.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(editProjectThunk.rejected, (state, action)=>{
+      state.projects = [...state.projects];
+      state.error = action.error.message;
+      state.loading = false;
     });
   }
 });
 
 export default projectsSlice.reducer;
-export const {
-  setProjects,
-} = projectsSlice.actions;

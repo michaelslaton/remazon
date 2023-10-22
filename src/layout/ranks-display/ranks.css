@@ -1,5 +1,6 @@
 .rank {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   border: .15rem solid var(--remazon-prime);
   margin-right: .5rem;
   padding: .3rem;
