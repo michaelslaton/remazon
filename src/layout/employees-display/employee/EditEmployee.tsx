@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editEmployeeThunk } from "../../../redux/slices/employeesSlice";
 import { fetchRanksThunk } from "../../../redux/slices/ranksSlice";
@@ -14,6 +14,7 @@ const EditEmployee: React.FC = () => {
   const bdayRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const { paramId } = useParams<string>();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
@@ -47,6 +48,7 @@ const EditEmployee: React.FC = () => {
       status: statusRef.current!.checked,
     };
     dispatch(editEmployeeThunk(updatedEmployee));
+    navigate(-1);
     return;
   };
 

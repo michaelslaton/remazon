@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./utils/firebase/firebase";
@@ -14,9 +13,6 @@ import CreateProject from "./layout/projects-display/project/CreateProject";
 import EditProject from "./layout/projects-display/project/EditProject";
 import Error404 from "./utils/errors/Error404";
 import RanksDisplay from "./layout/ranks-display/RanksDisplay";
-import { useAppSelector, useAppDispatch } from "./redux/hooks";
-import { fetchRanksThunk } from "./redux/slices/ranksSlice";
-import Rank from "./types/rankType";
 // import AuthRoute from "./utils/firebase/AuthRoute";
 
 initializeApp(firebaseConfig);
@@ -75,12 +71,6 @@ const router = createBrowserRouter([
 ]);
 
 const App: React.FC = () => {
-  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
-  const dispatch = useAppDispatch();
-
-  useEffect(()=>{
-    if(ranks.length === 0) dispatch(fetchRanksThunk());
-  },[])
 
   return (
     <>

@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
+import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Project from "./project/Project";
-import "./projects.css";
 import ProjectType from "../../types/projectType";
+import "./projects.css";
 
 const Projects: React.FC = () => {
   const projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
@@ -22,7 +24,7 @@ const Projects: React.FC = () => {
         {loading ? <p>Loading...</p>
         :
         <>
-          <button className="button" onClick={()=> navigate("/projects/create")}> Create</button>
+          <button className="button" onClick={()=> navigate("/projects/create")}><FontAwesomeIcon icon={faPlus}/></button>
           {projects.map((project)=>(
             <Project key={project.id} data={project}/>
           ))}
