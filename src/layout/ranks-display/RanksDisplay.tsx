@@ -7,16 +7,20 @@ import "./ranks.css";
 
 const RanksDisplay: React.FC = () => {
   const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
+  // const loading: boolean = useAppSelector((state)=> state.ranksControl.loading);
   const dispatch = useAppDispatch();
+  
+  const nonMutRanks = [...ranks];
+  const sortedRanks = nonMutRanks.sort((a,b)=> a.id - b.id);
 
   useEffect(()=>{
-    if(ranks.length === 0) dispatch(fetchRanksThunk());
+    dispatch(fetchRanksThunk());
   },[]);
 
   return (
     <>
       <h2 className="title">Ranks</h2>
-      {ranks.sort((a,b)=> a.id - b.id).map((rank)=>(
+      {sortedRanks.map((rank)=>(
         <Rank key={rank.id} rankData={rank}/>
       ))}
     </>

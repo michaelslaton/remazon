@@ -1,6 +1,8 @@
 import EmployeeType from "../../../types/employeeType";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
+import { faEdit } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Rank from "../../../types/rankType";
 import "../employees.css";
 
@@ -11,11 +13,11 @@ type EmployeeProps = {
 const months: string[] = [ `January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December` ];
 
 const Employee: React.FC<EmployeeProps> = ({ data }) => {
-  const navigate: NavigateFunction = useNavigate();
   const ranks = useAppSelector((state)=> state.ranksControl.ranks);
   const currentEmployeesRank: Rank | undefined = ranks.find((rank)=> rank.id === data.rank);
+  const navigate: NavigateFunction = useNavigate();
+  
   let birthday: Date | null = null;
-
   if(data.birthday) birthday = new Date(data.birthday);
 
   return (
@@ -33,7 +35,7 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
           </article>
         </li>
       </ul>
-      <button className="button" onClick={()=> navigate(`/employees/edit/${data.id}`)}>Edit</button>
+      <button className="button" onClick={()=> navigate(`/employees/edit/${data.id}`)}><FontAwesomeIcon icon={faEdit}/></button>
     </div>
   );
 };
