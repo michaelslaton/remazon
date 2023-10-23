@@ -1,10 +1,13 @@
 import { useRef } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hooks";
+import { fetchUserThunk } from "../../redux/slices/usersSlice";
 import "./loginSignup.css";
 
 const Login: React.FC = () => {
   const auth = getAuth();
+  const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -15,16 +18,14 @@ const Login: React.FC = () => {
     const enteredPassword: string = passwordRef.current!.value;
 
     signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
-      .then((response) => {
-        console.log(response.user.uid);
+      .then(() => {
+        dispatch(fetchUserThunk(auth.currentUser!.uid));
         navigate("/");
       })
       .catch((error) => {
         console.error(error.code);
         console.error(error.message);
       });
-
-      console.log(auth.currentUser?.uid)
   };
 
   return (
