@@ -2,13 +2,13 @@ type RankType = {
   id: number;
   name: string;
   rank: number;
-  description: string;
+  color: string;
 };
 
 export type RankPostType = {
   name: string;
   rank: number;
-  description: string;
+  color: string;
 }
 
 export default RankType;

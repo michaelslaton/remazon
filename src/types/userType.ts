@@ -3,6 +3,7 @@ type UserType = {
   name: string;
   uid: string;
   employeeNumber: number | null;
+  admin: boolean;
 };
 
 export type UserPostType = {
