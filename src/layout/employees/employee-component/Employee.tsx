@@ -24,7 +24,11 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
     <div className="employee__wrapper">
       <h2 className="title">{data.name}<div className={`status-dot ${data.status ? "active" : ""}`}/></h2>
       <ul className="employee__info">
-        <li>Rank: {currentEmployeesRank!.name}</li>
+        <li>Rank: 
+          <div className="employee__rank" style={{color: currentEmployeesRank?.color}}>
+            {currentEmployeesRank!.name}
+          </div>
+        </li>
         { birthday ?
           <li>Birthday: {birthday.getDate()} - {months[birthday.getMonth()]}</li>
           : 
@@ -35,7 +39,9 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
           </article>
         </li>
       </ul>
-      <button className="button" onClick={()=> navigate(`/employees/edit/${data.id}`)}><FontAwesomeIcon icon={faEdit}/></button>
+      <button className="button" onClick={()=> navigate(`/employees/edit/${data.id}`)}>
+        <FontAwesomeIcon icon={faEdit}/>
+      </button>
     </div>
   );
 };
