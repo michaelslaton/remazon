@@ -5,15 +5,15 @@ import Layout from "./layout/Layout";
 import HomePage from "./layout/home-page/HomePage";
 import Login from "./layout/authentication/Login";
 import SignUp from "./layout/authentication/SignUp";
-import EmployeesDisplay from "./layout/employees-display/EmployeesDisplay";
-import CreateEmployee from "./layout/employees-display/employee/CreateEmployee";
-import EditEmployee from "./layout/employees-display/employee/EditEmployee";
-import ProjectsDisplay from "./layout/projects-display/ProjectsDisplay";
-import CreateProject from "./layout/projects-display/project/CreateProject";
-import EditProject from "./layout/projects-display/project/EditProject";
+import EmployeesDisplay from "./layout/employees/EmployeesDisplay";
+import CreateEmployee from "./layout/employees/employee-component/CreateEmployee";
+import EditEmployee from "./layout/employees/employee-component/EditEmployee";
+import ProjectsDisplay from "./layout/projects/ProjectsDisplay";
+import CreateProject from "./layout/projects/project-component/CreateProject";
+import EditProject from "./layout/projects/project-component/EditProject";
 import Error404 from "./utils/errors/Error404";
-import RanksDisplay from "./layout/ranks-display/RanksDisplay";
-// import AuthRoute from "./utils/firebase/AuthRoute";
+import RanksDisplay from "./layout/ranks/RanksDisplay";
+import AuthRoute from "./utils/firebase/AuthRoute";
 
 initializeApp(firebaseConfig);
 
@@ -44,11 +44,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/employees/create",
-        element: <CreateEmployee/>,
+        element: <AuthRoute><CreateEmployee/></AuthRoute>,
       },
       {
         path: "/employees/edit/:paramId",
-        element: <EditEmployee/>,
+        element: <AuthRoute><EditEmployee/></AuthRoute>,
       },
       {
         path: "/projects",
@@ -56,11 +56,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/projects/create",
-        element: <CreateProject/>,
+        element: <AuthRoute><CreateProject/></AuthRoute>,
       },
       {
         path: "/projects/edit/:paramId",
-        element: <EditProject/>
+        element: <AuthRoute><EditProject/></AuthRoute>,
       },
       {
         path: "*",
