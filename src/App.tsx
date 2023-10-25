@@ -1,6 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { initializeApp } from "firebase/app";
-import firebaseConfig from "./utils/firebase/firebase";
 import Layout from "./layout/Layout";
 import HomePage from "./layout/home-page/HomePage";
 import Login from "./layout/authentication/Login";
@@ -13,6 +11,8 @@ import CreateProject from "./layout/projects/project-component/CreateProject";
 import EditProject from "./layout/projects/project-component/EditProject";
 import Error404 from "./utils/errors/Error404";
 import RanksDisplay from "./layout/ranks/RanksDisplay";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "./utils/firebase/firebase";
 import AuthRoute from "./utils/firebase/AuthRoute";
 
 initializeApp(firebaseConfig);

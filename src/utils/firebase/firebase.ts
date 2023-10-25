@@ -1,7 +1,3 @@
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCkzzxlUCCbiXnqgUT5OS0dwYHeryXtsPs",
   authDomain: "remazon-prime.firebaseapp.com",
