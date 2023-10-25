@@ -3,6 +3,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../projects.css";
+import { useAppSelector } from "../../../redux/hooks";
 
 type ProjectProps = {
   data: ProjectType;
@@ -10,6 +11,7 @@ type ProjectProps = {
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
   const navigate: NavigateFunction = useNavigate();
+  const currentUser = useAppSelector((state)=> state.userControl.currentUser);
 
   return (
     <div className="project__wrapper">
@@ -22,7 +24,11 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
           </article>
         </li>
       </ul>
-      <button className="button" onClick={()=> navigate(`/projects/edit/${data.id}`)}><FontAwesomeIcon icon={faEdit}/></button>
+      { currentUser?.admin &&
+        <button className="button" onClick={()=> navigate(`/projects/edit/${data.id}`)}>
+          <FontAwesomeIcon icon={faEdit}/>
+        </button>
+      }
     </div>
   );
 };
