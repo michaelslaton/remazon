@@ -1,7 +1,7 @@
 type EmployeeType = {
   id: number;
   name: string;
-  employeeAssigned: number | null;
+  userAssigned: number | null;
   birthday?: Date | null;
   rank: number;
   description: string;

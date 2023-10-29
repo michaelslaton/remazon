@@ -24,7 +24,6 @@ const SignUp: React.FC = () => {
       const newUser: UserPostType = {
         name: nameRef.current!.value,
         uid: auth.currentUser!.uid,
-        employeeNumber: null,
       }      
       dispatch(createUserThunk(newUser));
       navigate("/");

@@ -12,6 +12,7 @@ import EditProject from "./layout/projects/project-component/EditProject";
 import Error404 from "./utils/errors/Error404";
 import RanksDisplay from "./layout/ranks/RanksDisplay";
 import { initializeApp } from "firebase/app";
+import AdminAccessRoute from "./utils/admin-access-route/AdminAccessRoute";
 import firebaseConfig from "./utils/firebase/firebase";
 import AuthRoute from "./utils/firebase/AuthRoute";
 
@@ -36,7 +37,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/ranks",
-        element: <RanksDisplay/>
+        element:  
+          <AdminAccessRoute>
+            <RanksDisplay/>
+          </AdminAccessRoute>
       },
       {
         path: "/employees",
@@ -44,11 +48,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/employees/create",
-        element: <AuthRoute><CreateEmployee/></AuthRoute>,
+        element: 
+          <AdminAccessRoute>
+            <CreateEmployee/>
+          </AdminAccessRoute>,
       },
       {
         path: "/employees/edit/:paramId",
-        element: <AuthRoute><EditEmployee/></AuthRoute>,
+        element: 
+          <AdminAccessRoute>
+            <EditEmployee/>
+          </AdminAccessRoute>,
       },
       {
         path: "/projects",
@@ -56,11 +66,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/projects/create",
-        element: <AuthRoute><CreateProject/></AuthRoute>,
+        element: 
+          <AuthRoute>
+            <CreateProject/>
+          </AuthRoute>,
       },
       {
         path: "/projects/edit/:paramId",
-        element: <AuthRoute><EditProject/></AuthRoute>,
+        element: 
+          <AuthRoute>
+            <EditProject/>
+          </AuthRoute>,
       },
       {
         path: "*",
