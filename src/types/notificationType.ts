@@ -1,4 +1,4 @@
-type ApplicationType = {
+type NotificationType = {
   id: number;
   type: string;
   user: number;
@@ -6,11 +6,11 @@ type ApplicationType = {
   message: string | null;
 };
 
-export type ApplicationPostType = {
+export type NotificationPostType = {
   type: string;
   user: number;
   requestedEmployee: number;
   message?: string;
 };
 
-export default ApplicationType;
+export default NotificationType;

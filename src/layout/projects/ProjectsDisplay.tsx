@@ -6,13 +6,13 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Project from "./project-component/Project";
 import ProjectType from "../../types/projectType";
-import UserType from "../../types/userType";
+import EmployeeType from "../../types/employeeType";
 import "./projects.css";
 
 const Projects: React.FC = () => {
   const projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
   const loading: boolean = useAppSelector((state) => state.projectsControl.loading);
-  const currentUser: UserType | null = useAppSelector((state)=> state.userControl.currentUser);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
 
@@ -25,7 +25,7 @@ const Projects: React.FC = () => {
   return (
     <div className="projects-display__wrapper">
       <h2 className="title">Projects</h2>
-      { currentUser?.admin &&
+      { currentEmployee?.admin &&
         <button className="button" onClick={()=> navigate("/projects/create")}><FontAwesomeIcon icon={faPlus}/></button>
       }
       {projects.map((project)=>(
