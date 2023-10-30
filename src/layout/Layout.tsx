@@ -7,7 +7,7 @@ import { useAppSelector } from "../redux/hooks";
 
 
 const Layout: React.FC = () => {
-  const navActive: boolean = useAppSelector((state)=> state.navControl.navOpen);
+  const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
 
   return (
     <>

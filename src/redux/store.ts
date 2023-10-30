@@ -1,24 +1,26 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import navControlReducer from "./slices/controlsSlice";
+import mainControlReducer from "./slices/controlsSlice";
 import employeesReducer from "./slices/employeesSlice";
 import projectsReducer from "./slices/projectsSlice";
 import ranksReducer from "./slices/ranksSlice";
 import userReducer from "./slices/usersSlice";
+import applicationsReducer from "./slices/applicationsSlice";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
     key: "root",
     storage,
-    blacklist: [ "navControl", "ranksControl", "projectsControl" ],
+    blacklist: [ "mainControl", "ranksControl", "projectsControl" ],
 };
 
 const reducer = combineReducers({
-    navControl: navControlReducer,
+    mainControl: mainControlReducer,
     employeesControl: employeesReducer,
     projectsControl: projectsReducer,
     ranksControl: ranksReducer,
     userControl: userReducer,
+    applicationsControl: applicationsReducer,
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
 

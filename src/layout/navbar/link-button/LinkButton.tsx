@@ -9,7 +9,7 @@ type LinkButtonProps = {
 };
 
 const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
-  const navActive: boolean = useAppSelector((state)=> state.navControl.navOpen);
+  const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
   const navigate: NavigateFunction = useNavigate();
 
   return (
