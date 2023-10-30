@@ -2,9 +2,9 @@ import { useRef } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
-import { UserPostType } from "../../types/userType";
+import { EmployeePostType } from "../../types/employeeType";
+import { createEmployeeThunk } from "../../redux/slices/employeesSlice";
 import "./loginSignup.css";
-import { createUserThunk } from "../../redux/slices/usersSlice";
 
 
 const SignUp: React.FC = () => {
@@ -14,18 +14,25 @@ const SignUp: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const bdayRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
+    let employeeBirthday: Date | null = null;
+    if(bdayRef.current!.value) employeeBirthday = new Date(bdayRef.current!.value);
+
     const enteredEmail: string = emailRef.current!.value;
     const enteredPassword: string = passwordRef.current!.value;
     createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
     .then(() => {      
-      const newUser: UserPostType = {
+      const newEmployee: EmployeePostType = {
         name: nameRef.current!.value,
+        birthday: employeeBirthday,
         uid: auth.currentUser!.uid,
+        description: descriptionRef.current!.value,
       }      
-      dispatch(createUserThunk(newUser));
+      dispatch(createEmployeeThunk(newEmployee));
       navigate("/");
     })
     .catch((error) => {
@@ -56,6 +63,23 @@ const SignUp: React.FC = () => {
         <label htmlFor="password">
           Password: 
           <input type="password" ref={passwordRef}/>
+        </label>
+
+        <label>
+          Birthday:
+          <input
+            type="date"
+            id="birthday"
+            name="birthday"
+            ref={bdayRef}/>
+        </label>
+
+        <label>
+          Description:
+          <textarea
+            id="description"
+            name="description"
+            ref={descriptionRef}/>
         </label>
 
         <button

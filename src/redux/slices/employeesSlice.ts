@@ -4,12 +4,14 @@ import EmployeeType, { EmployeePostType } from "../../types/employeeType";
 type InitialState = {
   loading: boolean;
   employees: EmployeeType[];
+  currentEmployee: EmployeeType | null;
   error: any,
 };
 
 const initialState: InitialState = {
   loading: false,
   employees: [],
+  currentEmployee: null,
   error: '',
 };
 
@@ -17,7 +19,15 @@ const employeesUrl: URL = new URL("http://localhost:5001/remazon/employees");
 
 // Api Calls --------------------------------------------------------------------------------->
 
-export const fetchEmployeesThunk = createAsyncThunk("employees/fetch", async (_thunkApi)=>{
+export const fetchCurrentEmployeeThunk = createAsyncThunk("users/fetch", async (uid: string, _thunkApi)=>{
+  const response = await fetch(`${employeesUrl}/${uid}`, {
+    method: "GET",
+  })
+  const data = response.json();
+  return data;
+});
+
+export const fetchEmployeesListThunk = createAsyncThunk("employees/fetch", async (_thunkApi)=>{
   const response = await fetch(employeesUrl, {
     method: "GET",
   })
@@ -48,27 +58,45 @@ export const editEmployeeThunk = createAsyncThunk("employees/edit", async (updat
   const data = response.json();
   return data;
 });
+
 // -------------------------------------------------------------------------------------------->
 
 const employeesSlice = createSlice({
   name: "employees",
   initialState,
   reducers: {
-    setEmployees: (state,action) => {
+    setEmployeesList: (state,action) => {
       state.employees = action.payload;
+    },
+    clearCurrentEmployee: (state) => {
+      state.currentEmployee = null;
     },
   },
   extraReducers: (builder) => {
+    // fetchUser ------------------------------------------------------------->
+    builder.addCase(fetchCurrentEmployeeThunk.fulfilled, (state, action)=>{
+      state.loading = false;
+      state.currentEmployee = action.payload.data;
+      state.error = '';
+    });
+    builder.addCase(fetchCurrentEmployeeThunk.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(fetchCurrentEmployeeThunk.rejected, (state, action)=>{
+      state.loading = false;
+      state.currentEmployee = {} as EmployeeType;
+      state.error = action.error.message;
+    });
     // fetchEmployees ------------------------------------------------------------->
-    builder.addCase(fetchEmployeesThunk.fulfilled, (state, action)=>{
+    builder.addCase(fetchEmployeesListThunk.fulfilled, (state, action)=>{
       state.employees = action.payload.data;
       state.error = '';
       state.loading = false;
     });
-    builder.addCase(fetchEmployeesThunk.pending, (state)=>{
+    builder.addCase(fetchEmployeesListThunk.pending, (state)=>{
       state.loading = true;
     });
-    builder.addCase(fetchEmployeesThunk.rejected, (state, action)=>{
+    builder.addCase(fetchEmployeesListThunk.rejected, (state, action)=>{
       state.employees = [...state.employees];
       state.error = action.error.message;
       state.loading = false;
@@ -76,7 +104,7 @@ const employeesSlice = createSlice({
 
     // createEmployee ------------------------------------------------------------->
     builder.addCase(createEmployeeThunk.fulfilled, (state)=>{
-      fetchEmployeesThunk();
+      fetchEmployeesListThunk();
       state.error = '';
       state.loading = false;
     });
@@ -91,7 +119,7 @@ const employeesSlice = createSlice({
 
     // editEmployee ---------------------------------------------------------------->
     builder.addCase(editEmployeeThunk.fulfilled, (state)=>{
-      fetchEmployeesThunk();
+      fetchEmployeesListThunk();
       state.error = '';
       state.loading = false;
     });
@@ -108,5 +136,6 @@ const employeesSlice = createSlice({
 
 export default employeesSlice.reducer;
 export const {
-  setEmployees,
+  setEmployeesList,
+  clearCurrentEmployee,
 } = employeesSlice.actions;
