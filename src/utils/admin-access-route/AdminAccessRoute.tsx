@@ -18,6 +18,9 @@ const AdminAccessRoute: React.FC<AuthProps> = ({ children }) => {
     else console.log("Admin access.")
   },[]);
 
+  
+  if(!currentUser?.admin) return <></>;
+
   return (
     <>
       {children}

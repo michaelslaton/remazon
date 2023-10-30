@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../redux/hooks";
 import CollapseButton from "./collapse-button/CollapseButton";
 import LinkButton from "./link-button/LinkButton";
-import { faHouse, faProjectDiagram, faUsers, faRankingStar, faSignIn } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faProjectDiagram, faUsers, faRankingStar, faSignIn, faNewspaper } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import "./navbar.css";
 
@@ -39,6 +39,12 @@ const navData: LinkButtonData[] = [
   },
   {
     id: 4,
+    name: "Applications",
+    url: "/applications",
+    icon: faNewspaper,
+  },
+  {
+    id: 5,
     name: "Log In",
     url: "/login",
     icon: faSignIn,
@@ -46,7 +52,7 @@ const navData: LinkButtonData[] = [
 ];
 
 const Navbar: React.FC = () => {
-  const navActive: boolean = useAppSelector((state)=> state.navControl.navOpen);
+  const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
 
   return (
     <div className={`navbar__wrapper ${ navActive ? "active" : ""}`}>
