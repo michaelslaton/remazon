@@ -1,0 +1,37 @@
+.applications-display__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-sizing: border-box;
+  width: 100%;
+  padding: .5rem;
+}
+
+.applications__list {
+  border: .2rem solid var(--remazon-prime);
+  border-radius: var(--border-radius);
+  margin: 0 .2rem;
+}
+
+.applications__list-item {
+  cursor: pointer;
+  border: .2rem solid var(--remazon-prime);
+  border-radius: var(--border-radius);
+  margin: .5rem;
+  padding: .5rem;
+  text-align: center;
+  color: var(--remazon-prime);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+.applications__list-item.active {
+  border-color: rgb(0, 255, 0);
+  background-color: green;
+  color: white;
+}
+
+.applications__selected-application {
+  border: .2rem solid var(--remazon-prime);
+  border-radius: var(--border-radius);
+  margin: 0 .2rem;
+  padding: .5rem;
+}

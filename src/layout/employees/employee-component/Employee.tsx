@@ -31,6 +31,9 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
             {currentEmployeesRank!.name}
           </div>
         </li>
+        <li>
+          Status: { data.userAssigned ? "Claimed" : "Available" }
+        </li>
         { birthday ?
           <li>Birthday: {birthday.getDate()} - {months[birthday.getMonth()]}</li>
           : 

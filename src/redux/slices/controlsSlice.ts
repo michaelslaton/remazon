@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type InitialState = {
-    navOpen: boolean;
+  navOpen: boolean;
 }
 
 const initialState: InitialState = {
   navOpen: false,
 }
 
-const navControl = createSlice({
-  name: "navControl",
+const mainControl = createSlice({
+  name: "mainControl",
   initialState,
   reducers: {
     navToggle: (state) => {
@@ -18,5 +18,5 @@ const navControl = createSlice({
   },
 });
 
-export default navControl.reducer;
-export const { navToggle } = navControl.actions;
+export default mainControl.reducer;
+export const { navToggle } = mainControl.actions;

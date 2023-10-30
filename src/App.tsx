@@ -9,12 +9,13 @@ import EditEmployee from "./layout/employees/employee-component/EditEmployee";
 import ProjectsDisplay from "./layout/projects/ProjectsDisplay";
 import CreateProject from "./layout/projects/project-component/CreateProject";
 import EditProject from "./layout/projects/project-component/EditProject";
-import Error404 from "./utils/errors/Error404";
 import RanksDisplay from "./layout/ranks/RanksDisplay";
-import { initializeApp } from "firebase/app";
+import ApplicationsDisplay from "./layout/applications/ApplicationsDisplay";
+import Error404 from "./utils/errors/Error404";
 import AdminAccessRoute from "./utils/admin-access-route/AdminAccessRoute";
 import firebaseConfig from "./utils/firebase/firebase";
 import AuthRoute from "./utils/firebase/AuthRoute";
+import { initializeApp } from "firebase/app";
 
 initializeApp(firebaseConfig);
 
@@ -77,6 +78,13 @@ const router = createBrowserRouter([
           <AuthRoute>
             <EditProject/>
           </AuthRoute>,
+      },
+      {
+        path: "/applications",
+        element: 
+          <AdminAccessRoute>
+            <ApplicationsDisplay/>
+          </AdminAccessRoute>
       },
       {
         path: "*",
