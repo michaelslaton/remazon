@@ -4,13 +4,12 @@ import HomePage from "./layout/home-page/HomePage";
 import Login from "./layout/authentication/Login";
 import SignUp from "./layout/authentication/SignUp";
 import EmployeesDisplay from "./layout/employees/EmployeesDisplay";
-import CreateEmployee from "./layout/employees/employee-component/CreateEmployee";
 import EditEmployee from "./layout/employees/employee-component/EditEmployee";
 import ProjectsDisplay from "./layout/projects/ProjectsDisplay";
 import CreateProject from "./layout/projects/project-component/CreateProject";
 import EditProject from "./layout/projects/project-component/EditProject";
 import RanksDisplay from "./layout/ranks/RanksDisplay";
-import ApplicationsDisplay from "./layout/applications/ApplicationsDisplay";
+import NotificationsDisplay from "./layout/notifications/NotificationsDisplay";
 import Error404 from "./utils/errors/Error404";
 import AdminAccessRoute from "./utils/admin-access-route/AdminAccessRoute";
 import firebaseConfig from "./utils/firebase/firebase";
@@ -48,13 +47,6 @@ const router = createBrowserRouter([
         element: <EmployeesDisplay/>,
       },
       {
-        path: "/employees/create",
-        element: 
-          <AdminAccessRoute>
-            <CreateEmployee/>
-          </AdminAccessRoute>,
-      },
-      {
         path: "/employees/edit/:paramId",
         element: 
           <AdminAccessRoute>
@@ -83,7 +75,7 @@ const router = createBrowserRouter([
         path: "/applications",
         element: 
           <AdminAccessRoute>
-            <ApplicationsDisplay/>
+            <NotificationsDisplay/>
           </AdminAccessRoute>
       },
       {

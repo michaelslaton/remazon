@@ -1,17 +1,17 @@
 
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import ApplicationType from "../../../types/applicationType";
+import { useAppSelector } from "../../../redux/hooks";
+import NotificationType from "../../../types/notificationType";
 import EmployeeType from "../../../types/employeeType";
-import "../applications.css";
+import "../notifications.css";
 
-type ApplicationProps = {
-  data: ApplicationType | null;
+type NotificationProps = {
+  data: NotificationType | null;
 };
 
-const Application: React.FC<ApplicationProps> = ({ data = null }) => {
+const Notification: React.FC<NotificationProps> = ({ data = null }) => {
   const selectedEmployee: EmployeeType | undefined = useAppSelector((state)=> state.employeesControl.employees).find((employee)=> employee.id === data?.requestedEmployee);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   useEffect(()=>{
   },[]);
@@ -30,4 +30,4 @@ const Application: React.FC<ApplicationProps> = ({ data = null }) => {
   );
 };
 
-export default Application;
+export default Notification;

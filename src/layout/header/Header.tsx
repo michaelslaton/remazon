@@ -1,19 +1,19 @@
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { clearCurrentEmployee } from "../../redux/slices/employeesSlice";
+import EmployeeType from "../../types/employeeType";
 import "./header.css";
-import UserType from "../../types/userType";
-import { clearUser } from "../../redux/slices/usersSlice";
 
 const Header: React.FC = () => {
   const auth = getAuth();
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
-  const currentUser: UserType | null = useAppSelector((state)=> state.userControl.currentUser);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
 
   const handleSignout = () => {
     signOut(auth);
-    dispatch(clearUser());
+    dispatch(clearCurrentEmployee());
     navigate(0);
   };
 
@@ -21,7 +21,7 @@ const Header: React.FC = () => {
     <>
       <div className="header__content">
         <h1 className="header__title">Remazon Prime</h1>
-        { auth.currentUser?.uid || currentUser?.uid ?
+        { auth.currentUser?.uid || currentEmployee?.uid ?
           <button className="button" onClick={()=> handleSignout()}>
           Sign Out
           </button>

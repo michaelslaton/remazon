@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
-import { fetchUserThunk } from "../../redux/slices/usersSlice";
+import { fetchCurrentEmployeeThunk } from "../../redux/slices/employeesSlice";
 import "./loginSignup.css";
 
 const Login: React.FC = () => {
@@ -19,7 +19,7 @@ const Login: React.FC = () => {
 
     signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
       .then(() => {
-        dispatch(fetchUserThunk(auth.currentUser!.uid));
+        dispatch(fetchCurrentEmployeeThunk(auth.currentUser!.uid));
         navigate("/");
       })
       .catch((error) => {
