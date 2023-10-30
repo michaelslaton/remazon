@@ -8,10 +8,10 @@ type AuthProps = {
 
 const AdminAccessRoute: React.FC<AuthProps> = ({ children }) => {
   const navigate: NavigateFunction = useNavigate();
-  const currentUser = useAppSelector((state)=> state.userControl.currentUser);
+  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
 
   useEffect(()=>{
-    if(!currentUser?.admin) {
+    if(!currentEmployee?.admin) {
       console.error("Admin access only.");
       navigate("/");
     }
@@ -19,7 +19,7 @@ const AdminAccessRoute: React.FC<AuthProps> = ({ children }) => {
   },[]);
 
   
-  if(!currentUser?.admin) return <></>;
+  if(!currentEmployee?.admin) return <></>;
 
   return (
     <>

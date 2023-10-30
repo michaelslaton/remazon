@@ -11,7 +11,7 @@ type ProjectProps = {
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
   const navigate: NavigateFunction = useNavigate();
-  const currentUser = useAppSelector((state)=> state.userControl.currentUser);
+  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
 
   return (
     <div className="project__wrapper">
@@ -24,7 +24,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
           </article>
         </li>
       </ul>
-      { currentUser?.admin &&
+      { currentEmployee?.admin &&
         <button className="button" onClick={()=> navigate(`/projects/edit/${data.id}`)}>
           <FontAwesomeIcon icon={faEdit}/>
         </button>

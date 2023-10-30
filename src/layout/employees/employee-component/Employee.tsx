@@ -4,7 +4,6 @@ import { useAppSelector } from "../../../redux/hooks";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Rank from "../../../types/rankType";
-import UserType from "../../../types/userType";
 import "../employees.css";
 
 type EmployeeProps = {
@@ -15,7 +14,7 @@ const months: string[] = [ `January`, `February`, `March`, `April`, `May`, `June
 
 const Employee: React.FC<EmployeeProps> = ({ data }) => {
   const ranks = useAppSelector((state)=> state.ranksControl.ranks);
-  const currentUser: UserType | null = useAppSelector((state)=> state.userControl.currentUser);
+  const currentUser: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const currentEmployeesRank: Rank | undefined = ranks.find((rank)=> rank.id === data.rank);
   const navigate: NavigateFunction = useNavigate();
   
@@ -30,9 +29,6 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
           <div className="employee__rank" style={{color: currentEmployeesRank?.color}}>
             {currentEmployeesRank!.name}
           </div>
-        </li>
-        <li>
-          Status: { data.userAssigned ? "Claimed" : "Available" }
         </li>
         { birthday ?
           <li>Birthday: {birthday.getDate()} - {months[birthday.getMonth()]}</li>

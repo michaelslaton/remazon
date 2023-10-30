@@ -4,14 +4,13 @@ import mainControlReducer from "./slices/controlsSlice";
 import employeesReducer from "./slices/employeesSlice";
 import projectsReducer from "./slices/projectsSlice";
 import ranksReducer from "./slices/ranksSlice";
-import userReducer from "./slices/usersSlice";
-import applicationsReducer from "./slices/applicationsSlice";
+import notificationsReducer from "./slices/notificationsSlice";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
     key: "root",
     storage,
-    blacklist: [ "mainControl", "ranksControl", "projectsControl" ],
+    whitelist: [ "employeesControl" ],
 };
 
 const reducer = combineReducers({
@@ -19,8 +18,7 @@ const reducer = combineReducers({
     employeesControl: employeesReducer,
     projectsControl: projectsReducer,
     ranksControl: ranksReducer,
-    userControl: userReducer,
-    applicationsControl: applicationsReducer,
+    notificationsControl: notificationsReducer,
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
 
