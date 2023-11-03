@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 type InitialState = {
   navOpen: boolean;
-}
+};
 
 const initialState: InitialState = {
   navOpen: false,
-}
+};
 
 const mainControl = createSlice({
   name: "mainControl",
