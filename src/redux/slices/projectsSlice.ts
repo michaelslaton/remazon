@@ -20,7 +20,7 @@ const projectsUrl: URL= new URL("http://localhost:5001/remazon/projects");
 export const fetchProjectsThunk = createAsyncThunk("projects/fetch", async (_thunkApi)=>{
   const response = await fetch(projectsUrl, {
     method: "GET",
-  })
+  });
   const data = response.json();
   return data;
 });
@@ -32,7 +32,7 @@ export const createProjectThunk = createAsyncThunk("projects/create", async (new
       "Content-Type":"application/json"
     },
     body:JSON.stringify(newProject)
-  })
+  });
   const data = response.json();
   return data;
 });
@@ -44,7 +44,7 @@ export const editProjectThunk = createAsyncThunk("projects/edit", async (updated
       "Content-Type":"application/json"
     },
     body:JSON.stringify(updatedProject)
-  })
+  });
   const data = response.json();
   return data;
 });
