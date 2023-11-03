@@ -4,7 +4,7 @@ import { useAppSelector } from "../../redux/hooks";
 
 type AuthProps = {
   children: JSX.Element;
-}
+};
 
 const AdminAccessRoute: React.FC<AuthProps> = ({ children }) => {
   const navigate: NavigateFunction = useNavigate();

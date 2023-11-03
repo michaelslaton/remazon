@@ -5,13 +5,13 @@ type InitialState = {
   loading: boolean,
   notifications: NotificationType[];
   error: any,
-}
+};
 
 const initialState: InitialState = {
   loading: false,
   notifications: [],
   error: "",
-}
+};
 
 const notificationsUrl: URL= new URL("http://localhost:5001/remazon/notifications");
 
@@ -20,7 +20,7 @@ const notificationsUrl: URL= new URL("http://localhost:5001/remazon/notification
 export const fetchNotificationsThunk = createAsyncThunk("notifications/fetch", async (_thunkApi)=>{
   const response = await fetch(notificationsUrl, {
     method: "GET",
-  })
+  });
   const data = response.json();
   return data;
 });

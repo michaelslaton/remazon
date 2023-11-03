@@ -10,7 +10,7 @@ export type LinkButtonData = {
   name: string;
   url: string;
   icon: IconDefinition;
-}
+};
 
 const navData: LinkButtonData[] = [
   {
