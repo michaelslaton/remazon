@@ -22,7 +22,7 @@ const employeesUrl: URL = new URL("http://localhost:5001/remazon/employees");
 export const fetchCurrentEmployeeThunk = createAsyncThunk("users/fetch", async (uid: string, _thunkApi)=>{
   const response = await fetch(`${employeesUrl}/${uid}`, {
     method: "GET",
-  })
+  });
   const data = response.json();
   return data;
 });
@@ -30,7 +30,7 @@ export const fetchCurrentEmployeeThunk = createAsyncThunk("users/fetch", async (
 export const fetchEmployeesListThunk = createAsyncThunk("employees/fetch", async (_thunkApi)=>{
   const response = await fetch(employeesUrl, {
     method: "GET",
-  })
+  });
   const data = response.json();
   return data;
 });
@@ -42,7 +42,7 @@ export const createEmployeeThunk = createAsyncThunk("employees/create", async (n
       "Content-Type":"application/json"
     },
     body:JSON.stringify(newEmployee)
-  })
+  });
   const data = response.json();
   return data;
 });
@@ -54,7 +54,7 @@ export const editEmployeeThunk = createAsyncThunk("employees/edit", async (updat
       "Content-Type":"application/json"
     },
     body:JSON.stringify(updatedEmployee)
-  })
+  });
   const data = response.json();
   return data;
 });

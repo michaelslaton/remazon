@@ -4,7 +4,7 @@ import { Auth, getAuth, onAuthStateChanged } from "firebase/auth";
 
 type AuthProps = {
   children: JSX.Element;
-}
+};
 
 const AuthRoute: React.FC<AuthProps> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(false);

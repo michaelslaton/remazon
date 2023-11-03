@@ -8,7 +8,7 @@ import "../ranks.css";
 
 type RankProps = {
   rankData: RankType;
-}
+};
 
 const Rank: React.FC<RankProps> = ({ rankData }) => {
   const [editMode, setEditMode] = useState<boolean>(false);

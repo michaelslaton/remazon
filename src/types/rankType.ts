@@ -9,6 +9,6 @@ export type RankPostType = {
   name: string;
   rank: number;
   color: string;
-}
+};
 
 export default RankType;

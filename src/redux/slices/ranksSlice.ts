@@ -20,7 +20,7 @@ const ranksUrl: URL= new URL("http://localhost:5001/remazon/ranks");
 export const fetchRanksThunk = createAsyncThunk("ranks/fetch", async (_thunkApi)=>{
   const response = await fetch(ranksUrl, {
     method: "GET",
-  })
+  });
   const data = response.json();
   return data;
 });
@@ -32,7 +32,7 @@ export const createRankThunk = createAsyncThunk("ranks/create", async (newRank: 
       "Content-Type":"application/json"
     },
     body:JSON.stringify(newRank)
-  })
+  });
   const data = response.json();
   return data;
 });
@@ -44,10 +44,11 @@ export const editRankThunk = createAsyncThunk("ranks/edit", async (updatedRank: 
       "Content-Type":"application/json"
     },
     body:JSON.stringify(updatedRank)
-  })
+  });
   const data = response.json();
   return data;
 });
+
 // -------------------------------------------------------------------------------------------->
 
 const ranksslice = createSlice({

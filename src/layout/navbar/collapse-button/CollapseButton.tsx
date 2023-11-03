@@ -10,7 +10,7 @@ const CollapseButton: React.FC = () => {
     <div className="collapse-button__wrapper">
       <button className="collapse-button" onClick={()=>dispatch(navToggle())}>{navActive ? "<-" : "->"}</button>
     </div>
-  )
-}
+  );
+};
 
 export default CollapseButton;
