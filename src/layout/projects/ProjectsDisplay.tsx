@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
+import { fetchEmployeesListThunk } from "../../redux/slices/employeesSlice";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Project from "./project-component/Project";
@@ -11,16 +12,19 @@ import "./projects.css";
 
 const Projects: React.FC = () => {
   const projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
-  const loading: boolean = useAppSelector((state) => state.projectsControl.loading);
+  const employees: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
+  const loadingProjects: boolean = useAppSelector((state) => state.projectsControl.loading);
+  const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
 
   useEffect(()=>{
     dispatch(fetchProjectsThunk());
+    if (employees.length < 1) dispatch(fetchEmployeesListThunk);
   },[]);
 
-  if(loading) return <>Loading...</>;
+  if(loadingProjects || loadingEmployees) return <>Loading...</>;
 
   return (
     <div className="projects-display__wrapper">
