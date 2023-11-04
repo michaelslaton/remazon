@@ -40,12 +40,13 @@ const EditEmployee: React.FC = () => {
       employeeBirthday = new Date(`${newBirthday[1]}-${newBirthday[2]}-${newBirthday[0]}`);
     };
     const updatedEmployee: EmployeeType = {
-      id: Number(paramId),
+      ...selectedEmployee!,
       name: nameRef.current!.value,
-      rank: Number(rankRef.current!.value),
       birthday: employeeBirthday,
+      rank: Number(rankRef.current!.value),
       description: descriptionRef.current!.value,
       status: statusRef.current!.checked,
+      admin: selectedEmployee!.admin
     };
     dispatch(editEmployeeThunk(updatedEmployee));
     navigate(-1);
