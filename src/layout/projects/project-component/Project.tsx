@@ -2,8 +2,8 @@ import ProjectType from "../../../types/projectType";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../projects.css";
 import { useAppSelector } from "../../../redux/hooks";
+import "../projects.css";
 
 type ProjectProps = {
   data: ProjectType;

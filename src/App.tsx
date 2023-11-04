@@ -72,7 +72,7 @@ const router = createBrowserRouter([
           </AuthRoute>,
       },
       {
-        path: "/applications",
+        path: "/notifications",
         element: 
           <AdminAccessRoute>
             <NotificationsDisplay/>

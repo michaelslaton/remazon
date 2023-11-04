@@ -39,8 +39,8 @@ const navData: LinkButtonData[] = [
   },
   {
     id: 4,
-    name: "Applications",
-    url: "/applications",
+    name: "Notifications",
+    url: "/notifications",
     icon: faNewspaper,
   },
   {
