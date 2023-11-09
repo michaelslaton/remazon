@@ -6,7 +6,7 @@
   display: inline-block;
   border: .15rem solid var(--remazon-prime);
   margin-right: .5rem;
-  padding: .3rem;
+  padding: .5rem;
   border-radius: var(--border-radius);
   min-width: 20rem;
   position: relative;
@@ -19,11 +19,34 @@ li > article {
 .employee__wrapper > h2 {
   margin: 0;
 }
+
 .employee__info {
   all: unset;
   list-style: none;
 }
+
 .employee__rank {
   display: inline;
   margin-left: .2em;
+}
+
+.employee__edit-form > label {
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.employee__edit-form > label > input, textarea, select {
+  margin-top: .2rem;
+}
+
+.employee__edit-button_wrapper {
+  position: absolute;
+  right: .5em;
+  bottom: .5em;
+}
+
+button.employee__edit-control {
+  display: inline;
+  margin-top: .5em;
+  margin-right: .5em;
 }

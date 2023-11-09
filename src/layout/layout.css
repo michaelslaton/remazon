@@ -19,6 +19,7 @@ img {
 .title {
   color: var(--remazon-prime);
   font-size: 1.5rem;
+  margin: 0;
 }
 
 .divider {
@@ -53,6 +54,17 @@ img {
 }
 .button:hover {
   color: #ffffff;
+}
+
+input, textarea, select {
+  display: block;
+  background: var(--nav-button-active-bg);
+  padding: 0.4em .5em;
+  outline-style: none;
+  box-shadow: none;
+  border: .11rem solid var(--remazon-prime);
+  border-radius: var(--border-radius);
+  color: var(--remazon-prime);
 }
 
 .main-screen {
