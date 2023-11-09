@@ -3,7 +3,8 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Rank from "../../../types/rankType";
+import RankType from "../../../types/rankType";
+import { ReactNode } from "react";
 import "../employees.css";
 
 type EmployeeProps = {
@@ -14,15 +15,26 @@ const months: string[] = [ `January`, `February`, `March`, `April`, `May`, `June
 
 const Employee: React.FC<EmployeeProps> = ({ data }) => {
   const ranks = useAppSelector((state)=> state.ranksControl.ranks);
-  const currentUser: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const currentEmployeesRank: Rank | undefined = ranks.find((rank)=> rank.id === data.rank);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
+  const currentEmployeesRank: RankType | undefined = ranks.find((rank)=> rank.id === data.rank);
   const navigate: NavigateFunction = useNavigate();
   
   let birthday: Date | null = null;
-  if(data.birthday) birthday = new Date(data.birthday);
+  if(data.birthday) birthday = new Date(data.birthday); 
+
+  // editButtonRender checks all the conditions to see if access is permitted to edit an employee.
+  // An Admin may always edit, otherwise employees can only edit their own employee profile if an admin has not locked it.
+  const editButtonRender = (): ReactNode | null => {
+    if ( data.locked && !currentEmployee?.admin ) return;
+    else if (currentEmployee?.admin || currentEmployee?.uid === data.uid) return (
+      <button className="button" onClick={()=> navigate(`/employees/edit/${data.id}`)}>
+        <FontAwesomeIcon icon={faEdit}/>
+      </button>
+    );
+  };
 
   return (
-    <div className="employee__wrapper">
+    <div className="employee__wrapper" style={{borderColor: currentEmployeesRank?.color}}>
       <h2 className="title">{data.name}<div className={`status-dot ${data.status ? "active" : ""}`}/></h2>
       <ul className="employee__info">
         <li>Rank: 
@@ -40,11 +52,9 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
           </article>
         </li>
       </ul>
-      { currentUser?.admin &&
-        <button className="button" onClick={()=> navigate(`/employees/edit/${data.id}`)}>
-          <FontAwesomeIcon icon={faEdit}/>
-        </button>
-      }
+      <div className="employee__edit-button_wrapper">
+        {editButtonRender()}
+      </div>
     </div>
   );
 };

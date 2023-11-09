@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../redux/hooks";
 import CollapseButton from "./collapse-button/CollapseButton";
 import LinkButton from "./link-button/LinkButton";
-import { faHouse, faProjectDiagram, faUsers, faRankingStar, faSignIn, faNewspaper } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faProjectDiagram, faUsers, faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import "./navbar.css";
 
@@ -14,45 +14,28 @@ export type LinkButtonData = {
 
 const navData: LinkButtonData[] = [
   {
-    id: 0,
+    id: 1,
     name: "Home",
     url: "/",
     icon: faHouse,
   },
   {
-    id: 1,
+    id: 2,
     name: "Employees",
     url: "/employees",
     icon: faUsers,
   },
   {
-    id: 2,
+    id: 3,
     name: "Projects",
     url: "/projects",
     icon: faProjectDiagram,
-  },
-  {
-    id: 3,
-    name: "Ranks",
-    url: "/ranks",
-    icon: faRankingStar,
-  },
-  {
-    id: 4,
-    name: "Notifications",
-    url: "/notifications",
-    icon: faNewspaper,
-  },
-  {
-    id: 5,
-    name: "Log In",
-    url: "/login",
-    icon: faSignIn,
   },
 ];
 
 const Navbar: React.FC = () => {
   const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
+  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
 
   return (
     <div className={`navbar__wrapper ${ navActive ? "active" : ""}`}>
@@ -60,6 +43,14 @@ const Navbar: React.FC = () => {
       {navData.map((data)=>(
         <LinkButton key={data.id} data={data}/>
       ))}
+      { currentEmployee?.admin &&
+        <LinkButton data={{
+          id: 4,
+          name: "Ranks",
+          url: "/ranks",
+          icon: faRankingStar,
+        }}/>
+      }
     </div>
   );
 };

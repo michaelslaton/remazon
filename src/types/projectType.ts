@@ -8,6 +8,7 @@ type ProjectType = {
   attending?: EmployeeType[];
   type: string;
   description: string;
+  locked: boolean;
   status: boolean;
 };
 

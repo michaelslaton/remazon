@@ -12,6 +12,20 @@
   position: relative;
 }
 
+.projects__header {
+  display: flex;
+}
+
+.projects-title {
+  margin-right: .5em !important;
+  margin-bottom: 1rem;
+  color: blue;
+}
+
+.create-project-button {
+  align-self: start;
+}
+
 li > article {
   margin: 0 .5em;
 }
@@ -19,7 +33,29 @@ li > article {
 .project__wrapper > h2 {
   margin: 0;
 }
+
 .project__info {
   all: unset;
   list-style: none;
+}
+
+.project__edit-form > label {
+  display: block;
+  margin-bottom: .5rem !important;
+}
+
+.project__edit-form > label > input, textarea, select {
+  margin-top: .2rem;
+}
+
+.project__edit-button_wrapper {
+  position: absolute;
+  right: .5em;
+  bottom: .5em;
+}
+
+button.project__edit-control {
+  display: inline;
+  margin-top: .5em;
+  margin-right: .5em;
 }

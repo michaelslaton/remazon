@@ -17,6 +17,7 @@ const EditEmployee: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
   const selectedEmployee: EmployeeType | undefined = employees.find((dude)=> dude.id === Number(paramId));
   
@@ -52,11 +53,13 @@ const EditEmployee: React.FC = () => {
     navigate(-1);
     return;
   };
+  
+  if(!currentEmployee?.uid) navigate("/");
 
   return (
     <>
       <h2 className="title">Edit {selectedEmployee!.name}</h2>
-      <form>
+      <form className="employee__edit-form">
         
         <label>
           Name:
@@ -68,18 +71,20 @@ const EditEmployee: React.FC = () => {
             defaultValue={selectedEmployee?.name}/>
         </label>
 
-        <label>
-          Rank:
-          <select
-            id="rank"
-            name="rank"
-            ref={rankRef}
-            defaultValue={selectedEmployee?.rank}>
-            {ranks.map(((rank)=>(
-              <option key={rank.id} value={rank.rank}>{rank.name}</option>
-            )))}
-          </select>
-        </label>
+        { currentEmployee!.admin &&
+          <label>
+            Rank:
+            <select
+              id="rank"
+              name="rank"
+              ref={rankRef}
+              defaultValue={selectedEmployee?.rank}>
+              {ranks.map(((rank)=>(
+                <option key={rank.id} value={rank.rank}>{rank.name}</option>
+              )))}
+            </select>
+          </label>
+        }
 
         <label>
           Birthday:
@@ -107,8 +112,8 @@ const EditEmployee: React.FC = () => {
             ref={statusRef}
             defaultChecked={selectedEmployee?.status}/>
         </label>
-
-        <button className="button" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
+          <button className="button employee__edit-control" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
+          <button className="button employee__edit-control" onClick={()=> navigate("/employees")}>Cancel</button>
       </form>
     </>
   );

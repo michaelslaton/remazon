@@ -1,4 +1,4 @@
-import "./error404.css";
+import "./errors.css";
 
 const Error404: React.FC = () => {
 
