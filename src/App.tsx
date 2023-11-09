@@ -1,20 +1,20 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./layout/Layout";
-import HomePage from "./layout/home-page/HomePage";
-import Login from "./layout/authentication/Login";
-import SignUp from "./layout/authentication/SignUp";
-import EmployeesDisplay from "./layout/employees/EmployeesDisplay";
-import EditEmployee from "./layout/employees/employee-component/EditEmployee";
-import ProjectsDisplay from "./layout/projects/ProjectsDisplay";
-import CreateProject from "./layout/projects/project-component/CreateProject";
-import EditProject from "./layout/projects/project-component/EditProject";
-import RanksDisplay from "./layout/ranks/RanksDisplay";
-import NotificationsDisplay from "./layout/notifications/NotificationsDisplay";
-import Error404 from "./utils/errors/Error404";
 import AdminAccessRoute from "./utils/admin-access-route/AdminAccessRoute";
-import firebaseConfig from "./utils/firebase/firebase";
 import AuthRoute from "./utils/firebase/AuthRoute";
+import CreateProject from "./layout/projects/project-component/CreateProject";
+import EditEmployee from "./layout/employees/employee-component/EditEmployee";
+import EditProject from "./layout/projects/project-component/EditProject";
+import EmployeesDisplay from "./layout/employees/EmployeesDisplay";
+import Error404 from "./utils/errors/Error404";
+import firebaseConfig from "./utils/firebase/firebase";
+import HomePage from "./layout/home-page/HomePage";
+import Layout from "./layout/Layout";
+import NotificationsDisplay from "./layout/notifications/NotificationsDisplay";
+import ProjectsDisplay from "./layout/projects/ProjectsDisplay";
+import RanksDisplay from "./layout/ranks/RanksDisplay";
+import SignUp from "./layout/authentication/SignUp";
 import { initializeApp } from "firebase/app";
+import RouteError from "./utils/errors/RouteError";
 
 initializeApp(firebaseConfig);
 
@@ -26,10 +26,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage/>,
-      },
-      {
-        path: "/login",
-        element: <Login/>,
+        errorElement: <RouteError/>,
       },
       {
         path: "/signup",
@@ -40,18 +37,21 @@ const router = createBrowserRouter([
         element:  
           <AdminAccessRoute>
             <RanksDisplay/>
-          </AdminAccessRoute>
+          </AdminAccessRoute>,
+        errorElement: <RouteError/>,
       },
       {
         path: "/employees",
         element: <EmployeesDisplay/>,
+        errorElement: <RouteError/>,
       },
       {
         path: "/employees/edit/:paramId",
-        element: 
-          <AdminAccessRoute>
+        element:
+          <AuthRoute>
             <EditEmployee/>
-          </AdminAccessRoute>,
+          </AuthRoute>,
+        errorElement: <RouteError/>,
       },
       {
         path: "/projects",
@@ -63,6 +63,7 @@ const router = createBrowserRouter([
           <AuthRoute>
             <CreateProject/>
           </AuthRoute>,
+        errorElement: <RouteError/>,
       },
       {
         path: "/projects/edit/:paramId",
@@ -70,13 +71,12 @@ const router = createBrowserRouter([
           <AuthRoute>
             <EditProject/>
           </AuthRoute>,
+        errorElement: <RouteError/>,
       },
       {
         path: "/notifications",
-        element: 
-          <AdminAccessRoute>
-            <NotificationsDisplay/>
-          </AdminAccessRoute>
+        element: <NotificationsDisplay/>,
+        errorElement: <RouteError/>,
       },
       {
         path: "*",

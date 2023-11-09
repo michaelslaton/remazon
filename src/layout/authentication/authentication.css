@@ -1,0 +1,33 @@
+.signup > label {
+  display: block;
+}
+
+.login-form {
+  display: flex;
+  margin-right: 1rem;
+}
+
+.login-form > label {
+  margin-right: .5rem;
+}
+
+.login-button { 
+  display: inline;
+  margin-right: .5rem;
+}
+
+.authentication__employee-name {
+  display: inline;
+  margin-left: .3em;
+  margin-right: .5em;
+}
+
+.signout-button {
+  margin-left: .4em;
+}
+
+.signup-control {
+  display: inline;
+  margin-top: .5em;
+  margin-right: .5em;
+}

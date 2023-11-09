@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { ProjectPostType } from "../../../types/projectType";
 import { createProjectThunk } from "../../../redux/slices/projectsSlice";
 import "../projects.css";
@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 const CreateProject: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const nameRef = useRef<HTMLInputElement>(null);
-  const hostRef = useRef<HTMLSelectElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
@@ -17,7 +17,7 @@ const CreateProject: React.FC = () => {
     e.preventDefault();
     const newProject: ProjectPostType = {
       name: nameRef.current!.value,
-      host: Number(hostRef.current!.value),
+      host: currentEmployee!.id,
       type:typeRef.current!.value,
       description: descriptionRef.current!.value,
     };
@@ -30,7 +30,7 @@ const CreateProject: React.FC = () => {
   return (
     <>
       <h2 className="title">Create Project</h2>
-      <form>
+      <form className="project__edit-form">
 
         <label>
           Name:
@@ -39,16 +39,6 @@ const CreateProject: React.FC = () => {
             id="name"
             name="name"
             ref={nameRef}/>
-        </label>
-
-        <label>
-          Host:
-          <select
-            id="host"
-            name="host"
-            ref={hostRef}>
-            <option value="0">Eh ??</option>
-          </select>
         </label>
 
         <label>
@@ -69,7 +59,8 @@ const CreateProject: React.FC = () => {
             ref={descriptionRef}/>
         </label>
 
-        <button type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
+        <button className="button project__edit-control" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
+          <button className="button project__edit-control" onClick={()=> navigate("/projects")}>Cancel</button>
       </form>
     </>
   );
