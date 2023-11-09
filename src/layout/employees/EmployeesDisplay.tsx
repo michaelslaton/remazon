@@ -17,7 +17,7 @@ const EmployeesDisplay: React.FC = () => {
     if (ranks.length === 0) dispatch(fetchRanksThunk());
   },[]);
 
-  if (loading1 || ranks.length === 0) return (
+  if (loading1 || ranks.length < 1) return (
     <p>Loading...</p>
   );
 

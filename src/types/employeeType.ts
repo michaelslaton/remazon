@@ -5,6 +5,7 @@ type EmployeeType = {
   rank: number;
   description: string;
   status: boolean;
+  locked: boolean;
   uid: string;
   admin: boolean;
 };

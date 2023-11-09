@@ -15,15 +15,16 @@ const EditProject: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const projects: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects)
-  const selectedProject = projects.find((project)=> project.id === Number(paramId));  
+  const selectedProject: ProjectType | undefined = projects.find((project)=> project.id === Number(paramId));  
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
 
     const updatedProject: ProjectType = {
+      ...selectedProject!,
       id: Number(paramId),
       name: nameRef.current!.value,
-      host: Number(hostRef.current!.value),
+      host: hostRef.current!.value,
       type: typeRef.current!.value,
       description: descriptionRef.current!.value,
       status: statusRef.current!.checked,
@@ -36,7 +37,7 @@ const EditProject: React.FC = () => {
   return (
     <>
       <h2 className="title">Edit {selectedProject!.name}</h2>
-      <form>
+      <form className="project__edit-form">
         
         <label>
           Name:
@@ -90,7 +91,8 @@ const EditProject: React.FC = () => {
             defaultChecked={selectedProject?.status}/>
         </label>
 
-        <button className="button" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
+        <button className="button project__edit-control" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
+        <button className="button project__edit-control" onClick={()=> navigate("/projects")}>Cancel</button>
       </form>
     </>
   );

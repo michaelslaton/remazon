@@ -4,7 +4,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { EmployeePostType } from "../../types/employeeType";
 import { createEmployeeThunk } from "../../redux/slices/employeesSlice";
-import "./loginSignup.css";
+import "./authentication.css";
 
 
 const SignUp: React.FC = () => {
@@ -44,7 +44,7 @@ const SignUp: React.FC = () => {
   return (
     <>
       <h2 className="title">Sign Up</h2>
-      <form>
+      <form className="signup">
 
         <label htmlFor="name">
           Name:
@@ -83,11 +83,12 @@ const SignUp: React.FC = () => {
         </label>
 
         <button
-          className="button"
+          className="button signup-control"
           type="submit"
           onClick={(e) => submitHandler(e)}>
             Sign Up
         </button>
+        <button className="button signup-control" onClick={()=> navigate("/")}>Cancel</button>
 
       </form>
     </>
