@@ -33,15 +33,36 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
 
   return (
     <div className="project__wrapper">
-      <h2 className="title">{data.name}<div className={`status-dot ${data.status ? "active" : ""}`}/></h2>
+      <h2 className="title project-title">{data.name}<div className={`status-dot ${data.status ? "active" : ""}`}/></h2>
       <ul className="project__info">
-        <li>Host: <div style={{display: "inline", color: currentHostsRank?.color}}>{data.host}</div></li>
-        <li>Type: {data.type}</li>
-        <li>Description:
-          <article>
+
+        <li>
+          <div className="project-data__key">
+            Host:
+          </div> 
+          <div className="project-data__value" style={{display: "inline", color: currentHostsRank?.color}}>
+            {data.host}
+          </div>
+        </li>
+
+        <li>
+          <div className="project-data__key">
+            Type:
+          </div>
+          <div className="project-data__value">
+            {data.type}
+          </div>
+        </li>
+
+        <li>
+          <div className="project-data__key">
+            Description:
+          </div>
+          <article className="project-data__description">
             {data.description}
           </article>
         </li>
+
       </ul>
       <div className="project__edit-button_wrapper">
         {editButtonRender()}
