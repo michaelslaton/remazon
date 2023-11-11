@@ -13,7 +13,7 @@ const initialState: InitialState = {
   error: "",
 };
 
-const ranksUrl: URL= new URL("http://localhost:5001/remazon/ranks");
+const ranksUrl: URL= new URL("http://localhost:5000/remazon/ranks");
 
 // Api Calls --------------------------------------------------------------------------------->
 

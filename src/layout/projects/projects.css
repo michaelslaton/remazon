@@ -16,14 +16,19 @@
   display: flex;
 }
 
-.projects-title {
+.projects-display-title {
   margin-right: .5em !important;
   margin-bottom: 1rem;
   color: blue;
 }
 
+.project-title {
+  text-transform: uppercase;
+  font-size: 2rem !important;
+}
+
 .create-project-button {
-  align-self: start;
+  margin-top: .5rem;
 }
 
 li > article {
@@ -58,4 +63,17 @@ button.project__edit-control {
   display: inline;
   margin-top: .5em;
   margin-right: .5em;
+}
+
+.project-data__key, .project-data__value {
+  display: inline;
+}
+
+.project-data__key {
+  color: var(--remazon-prime);
+  font-size: 1.1em;
+}
+
+.project-data__value {
+  margin-left: .3em;
 }

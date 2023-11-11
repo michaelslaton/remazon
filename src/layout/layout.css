@@ -64,7 +64,7 @@ input, textarea, select {
   box-shadow: none;
   border: .11rem solid var(--remazon-prime);
   border-radius: var(--border-radius);
-  color: var(--remazon-prime);
+  color: white;
 }
 
 .main-screen {

@@ -14,10 +14,10 @@ type EmployeeProps = {
 const months: string[] = [ `January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December` ];
 
 const Employee: React.FC<EmployeeProps> = ({ data }) => {
-  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
+  const navigate: NavigateFunction = useNavigate();
+  const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const currentEmployeesRank: RankType | undefined = ranks.find((rank)=> rank.id === data.rank);
-  const navigate: NavigateFunction = useNavigate();
   
   let birthday: Date | null = null;
   if(data.birthday) birthday = new Date(data.birthday); 

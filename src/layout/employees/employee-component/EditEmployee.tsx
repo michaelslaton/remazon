@@ -1,29 +1,24 @@
-import { useRef, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useParams, useNavigate, NavigateFunction } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editEmployeeThunk } from "../../../redux/slices/employeesSlice";
-import { fetchRanksThunk } from "../../../redux/slices/ranksSlice";
 import EmployeeType from "../../../types/employeeType";
 import Rank from "../../../types/rankType";
 import "../employees.css";
 
 const EditEmployee: React.FC = () => {
+  const { paramId } = useParams<string>();
+  const navigate: NavigateFunction = useNavigate();
+  const dispatch = useAppDispatch();
   const nameRef = useRef<HTMLInputElement>(null);
   const statusRef = useRef<HTMLInputElement>(null);  
   const rankRef = useRef<HTMLSelectElement>(null);
   const bdayRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const { paramId } = useParams<string>();
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
   const selectedEmployee: EmployeeType | undefined = employees.find((dude)=> dude.id === Number(paramId));
-  
-  useEffect(()=>{
-    if(ranks.length === 0) dispatch(fetchRanksThunk());
-  },[]);
 
   // Birthday formatting ------------------------------------------------------ >
   let employeeBirthday: Date | null = null;
