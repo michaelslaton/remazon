@@ -13,7 +13,7 @@ const initialState: InitialState = {
   error: "",
 };
 
-const notificationsUrl: URL= new URL("http://localhost:5001/remazon/notifications");
+const notificationsUrl: URL= new URL("http://localhost:5000/remazon/notifications");
 
 // Api Calls --------------------------------------------------------------------------------->
 

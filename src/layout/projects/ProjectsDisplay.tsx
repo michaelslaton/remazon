@@ -10,16 +10,17 @@ import ProjectType from "../../types/projectType";
 import EmployeeType from "../../types/employeeType";
 import "./projects.css";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
+import RankType from "../../types/rankType";
 
 const Projects: React.FC = () => {
+  const navigate: NavigateFunction = useNavigate();
+  const dispatch = useAppDispatch();
   const projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
   const employees: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
   const loadingProjects: boolean = useAppSelector((state) => state.projectsControl.loading);
   const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const ranks = useAppSelector((state)=> state.ranksControl.ranks);
-  const dispatch = useAppDispatch();
-  const navigate: NavigateFunction = useNavigate();
+  const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
 
   useEffect(()=>{
     dispatch(fetchProjectsThunk());
@@ -32,14 +33,14 @@ const Projects: React.FC = () => {
   return (
     <div className="projects-display__wrapper">
       <div className="projects__header">
-        <h2 className="title projects-title">Projects</h2>
-        { currentEmployee?.uid && currentEmployee.rank < 5 &&
-          <button className="button create-project-button" onClick={()=> navigate("/projects/create")}><FontAwesomeIcon icon={faPlus}/></button>
-        }
+        <h2 className="title projects-display-title">Projects</h2>
       </div>
       {projects.map((project)=>(
         <Project key={project.id} data={project}/>
       ))}
+      { currentEmployee?.uid && currentEmployee.rank < 5 &&
+          <button className="button create-project-button" onClick={()=> navigate("/projects/create")}><FontAwesomeIcon icon={faPlus}/></button>
+        }
     </div>
   );
 };
