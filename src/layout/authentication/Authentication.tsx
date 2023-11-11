@@ -3,12 +3,13 @@ import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchCurrentEmployeeThunk } from "../../redux/slices/employeesSlice";
 import { clearCurrentEmployee } from "../../redux/slices/employeesSlice";
+import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignIn, faX, faNewspaper } from "@fortawesome/free-solid-svg-icons";
+import { faSignIn, faX, faNewspaper, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import RankType from "../../types/rankType";
+import EmployeeType from "../../types/employeeType";
 import "./authentication.css";
-import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 
 const Authentication: React.FC = () => {
   const [ controls, setControls ] = useState<string>("login signup");
@@ -16,7 +17,7 @@ const Authentication: React.FC = () => {
   const ranks = useAppSelector((state)=> state.ranksControl.ranks);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
-  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const currentEmployeesRank: RankType | undefined = ranks.find((rank)=> rank.id === currentEmployee?.rank);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -25,7 +26,7 @@ const Authentication: React.FC = () => {
     if(ranks.length < 1) dispatch(fetchRanksThunk());
   },[])
 
-  const loginHandler = (e: React.FormEvent) => {
+  const loginHandler = (e: React.FormEvent): void => {
     e.preventDefault();
     const enteredEmail: string = emailRef.current!.value;
     const enteredPassword: string = passwordRef.current!.value;
@@ -48,13 +49,16 @@ const Authentication: React.FC = () => {
     dispatch(clearCurrentEmployee());
   };
 
+  // Show if the employee is signed in --------------------------------------------------------------------------------------------------------->
   if(auth.currentUser || currentEmployee) return (
-    <>
+    <div className="logged-in-wrapper">
       Signed in as <div className="authentication__employee-name" style={{color: currentEmployeesRank?.color}}>{currentEmployee?.name}</div>
       <button className="button" onClick={()=> navigate("/notifications")}><FontAwesomeIcon icon={faNewspaper}/></button>
-      <button className="button signout-button" onClick={()=> logoutHandler()}>Sign Out</button>
-    </>
+      <button className="button signout-button" onClick={()=> logoutHandler()}><FontAwesomeIcon icon={faSignOut}/></button>
+    </div>
   );
+
+  // Show if the employee wants to sign in ------------------------------------------------------------------------------------------------------>
   else if(controls === "login") return (
     <>
       <form className="login-form">
@@ -76,6 +80,8 @@ const Authentication: React.FC = () => {
       </form>
     </>
   );
+
+  // Default view to show sign in or sign up ----------------------------------------------------------------------------------------------------->
   else if (controls === "login signup") return (
     <>
       <button

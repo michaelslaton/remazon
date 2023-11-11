@@ -2,6 +2,12 @@
   display: block;
 }
 
+.logged-in-wrapper {
+  display: flex;
+  font-size: 1.5rem;
+  margin-right: .5rem;
+}
+
 .login-form {
   display: flex;
   margin-right: 1rem;

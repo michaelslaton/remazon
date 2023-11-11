@@ -9,13 +9,13 @@ import EmployeeType from "../../types/employeeType";
 
 const NotificationsDisplay: React.FC = () => {
   const [ selectedNotification, setSelectedApplication ] = useState<NotificationType | null>(null);
+  const dispatch = useAppDispatch();
   const notificationsList: NotificationType[] = useAppSelector((state)=> state.notificationsControl.notifications);
   const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
-  const dispatch = useAppDispatch();
 
   useEffect(()=>{
     dispatch(fetchNotificationsThunk());
-    if(!employeesList.length) dispatch(fetchEmployeesListThunk());
+    if(employeesList.length < 1) dispatch(fetchEmployeesListThunk());
   },[]);
 
   if(!notificationsList.length) return <>"Loading..."</>

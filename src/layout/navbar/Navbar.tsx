@@ -3,6 +3,7 @@ import CollapseButton from "./collapse-button/CollapseButton";
 import LinkButton from "./link-button/LinkButton";
 import { faHouse, faProjectDiagram, faUsers, faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import EmployeeType from "../../types/employeeType";
 import "./navbar.css";
 
 export type LinkButtonData = {
@@ -35,7 +36,7 @@ const navData: LinkButtonData[] = [
 
 const Navbar: React.FC = () => {
   const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
-  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
 
   return (
     <div className={`navbar__wrapper ${ navActive ? "active" : ""}`}>

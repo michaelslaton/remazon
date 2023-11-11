@@ -24,12 +24,12 @@ const RanksDisplay: React.FC = () => {
   return (
     <>
       <h2 className="title">Ranks</h2>
-      { currentEmployee?.admin &&
-        <button className="button" onClick={()=> console.log("bam")}><FontAwesomeIcon icon={faPlus}/></button>
-      }
       {sortedRanks.map((rank)=>(
         <Rank key={rank.id} rankData={rank}/>
       ))}
+      { currentEmployee?.admin &&
+        <button className="button" onClick={()=> console.log("bam")}><FontAwesomeIcon icon={faPlus}/></button>
+      }
     </>
   );
 };
