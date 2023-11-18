@@ -15,7 +15,7 @@ const AdminAccessRoute: React.FC<AuthProps> = ({ children }) => {
       console.error("Admin access only.");
       navigate("/");
     }
-    else console.log("Admin access.")
+    else console.log("Admin access.");
   },[]);
 
   

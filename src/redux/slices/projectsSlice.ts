@@ -63,7 +63,12 @@ export const deleteProjectThunk = createAsyncThunk("projects/delete", async (id:
 const projectsSlice = createSlice({
   name: "projects",
   initialState,
-  reducers: {},
+  reducers: {
+    setProjectsList: (state,action) => {
+      state.projects = action.payload;
+      console.log("Done Projects")
+    },
+  },
   extraReducers: (builder) => {
     // fetchProjects ------------------------------------------------------------->
     builder.addCase(fetchProjectsThunk.fulfilled, (state, action)=>{
@@ -127,3 +132,4 @@ const projectsSlice = createSlice({
 });
 
 export default projectsSlice.reducer;
+export const { setProjectsList } = projectsSlice.actions;
