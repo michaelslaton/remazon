@@ -10,22 +10,19 @@ import ProjectType from "../../types/projectType";
 import EmployeeType from "../../types/employeeType";
 import "./projects.css";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
-import RankType from "../../types/rankType";
 
 const Projects: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
   const projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
-  const employees: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
   const loadingProjects: boolean = useAppSelector((state) => state.projectsControl.loading);
   const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
 
   useEffect(()=>{
     dispatch(fetchProjectsThunk());
-    if (employees.length < 1) dispatch(fetchEmployeesListThunk);
-    if (ranks.length < 1) dispatch(fetchRanksThunk);
+    dispatch(fetchEmployeesListThunk);
+    dispatch(fetchRanksThunk);
   },[]);
 
   if(loadingProjects || loadingEmployees) return <>Loading...</>;

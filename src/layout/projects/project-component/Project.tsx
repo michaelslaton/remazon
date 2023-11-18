@@ -1,8 +1,9 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { faEdit } from "@fortawesome/free-regular-svg-icons";
+import { faEdit, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAppSelector } from "../../../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
+import { deleteProjectThunk, fetchProjectsThunk } from "../../../redux/slices/projectsSlice";
 import RankType from "../../../types/rankType";
 import ProjectType from "../../../types/projectType";
 import "../projects.css";
@@ -14,11 +15,19 @@ type ProjectProps = {
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
   const navigate: NavigateFunction = useNavigate();
+  const dispatch = useAppDispatch();
+  const [ showConfirm, setShowConfirm ] = useState<boolean>(false);
   const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const host: EmployeeType | undefined = employees.find((employee)=> employee.id === data.hostId);
   const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const currentHostsRank: RankType | undefined = ranks.find((rank)=> rank.id === host?.rank);
+
+  const deleteButtonHandler = (): void => {
+    dispatch(deleteProjectThunk(data.id))
+      .then(() => dispatch(fetchProjectsThunk()))
+      .then(() => setShowConfirm(!showConfirm));
+  };
 
   // editButtonRender checks all the conditions to see if access is permitted to edit a project.
   // An Admin may always edit, otherwise employees can only edit their hosted projects if an admin has not locked it.
@@ -27,6 +36,15 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     else if (currentEmployee?.admin || currentEmployee?.id === data.hostId) return (
       <button className="button" onClick={()=> navigate(`/projects/edit/${data.id}`)}>
         <FontAwesomeIcon icon={faEdit}/>
+      </button>
+    );
+  };
+  
+  const deleteButtonRender = (): ReactNode | null => {
+    if ( data.locked && !currentEmployee?.admin ) return;
+    else if (currentEmployee?.admin || currentEmployee?.id === data.hostId) return (
+      <button className="button delete" onClick={()=> deleteButtonHandler()}>
+        <FontAwesomeIcon icon={faTrashCan}/>
       </button>
     );
   };
@@ -65,6 +83,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
 
       </ul>
       <div className="project__edit-button_wrapper">
+        {deleteButtonRender()}
         {editButtonRender()}
       </div>
     </div>
