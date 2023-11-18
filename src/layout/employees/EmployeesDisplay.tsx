@@ -4,7 +4,6 @@ import { fetchEmployeesListThunk } from "../../redux/slices/employeesSlice";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import Employee from "./employee-component/Employee";
 import EmployeeType from "../../types/employeeType";
-import RankType from "../../types/rankType";
 import "./employees.css";
 
 const EmployeesDisplay: React.FC = () => {
@@ -12,11 +11,10 @@ const EmployeesDisplay: React.FC = () => {
   const employees: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
   const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
   const loadingRanks: boolean = useAppSelector((state) => state.ranksControl.loading);
-  const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
 
   useEffect(()=>{
     dispatch(fetchEmployeesListThunk());
-    if (ranks.length < 1) dispatch(fetchRanksThunk());
+    dispatch(fetchRanksThunk());
   },[]);
 
   if (loadingEmployees || loadingRanks) return <p>Loading...</p>;

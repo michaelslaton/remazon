@@ -56,6 +56,11 @@ img {
   color: #ffffff;
 }
 
+.button.delete:hover {
+  border-color: #ff0000;
+  color: #ffffff;
+}
+
 input, textarea, select {
   display: block;
   background: var(--nav-button-active-bg);
