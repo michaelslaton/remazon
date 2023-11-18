@@ -48,6 +48,16 @@ export const editProjectThunk = createAsyncThunk("projects/edit", async (updated
   const data = response.json();
   return data;
 });
+
+export const deleteProjectThunk = createAsyncThunk("projects/delete", async (id: Number, _thunkApi)=> {
+  await fetch(`${projectsUrl}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type":"application/json"
+    },
+  });
+  return console.log(`Poject ${id} deleted.`);
+});
 // -------------------------------------------------------------------------------------------->
 
 const projectsSlice = createSlice({
@@ -65,6 +75,20 @@ const projectsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchProjectsThunk.rejected, (state, action)=>{
+      state.projects = [...state.projects];
+      state.error = action.error.message;
+      state.loading = false;
+    });
+
+    // deleteProject ------------------------------------------------------------->
+    builder.addCase(deleteProjectThunk.fulfilled, (state)=>{
+      state.error = '';
+      state.loading = false;
+    });
+    builder.addCase(deleteProjectThunk.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(deleteProjectThunk.rejected, (state, action)=>{
       state.projects = [...state.projects];
       state.error = action.error.message;
       state.loading = false;

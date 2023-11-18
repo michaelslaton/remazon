@@ -57,6 +57,8 @@ li > article {
   position: absolute;
   right: .5em;
   bottom: .5em;
+  display: flex;
+  gap: .5em;
 }
 
 button.project__edit-control {
