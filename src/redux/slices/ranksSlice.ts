@@ -54,7 +54,12 @@ export const editRankThunk = createAsyncThunk("ranks/edit", async (updatedRank: 
 const ranksslice = createSlice({
   name: "ranksControl",
   initialState,
-  reducers: {},
+  reducers: {
+    setRanksList: (state,action) => {
+      state.ranks = action.payload;
+      console.log("Done Ranks")
+    },
+  },
   extraReducers: (builder) => {
     // fetchRanks ------------------------------------------------------------->
     builder.addCase(fetchRanksThunk.fulfilled, (state, action)=>{
@@ -106,3 +111,4 @@ const ranksslice = createSlice({
 });
 
 export default ranksslice.reducer;
+export const { setRanksList } = ranksslice.actions;

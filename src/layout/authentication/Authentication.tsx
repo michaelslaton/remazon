@@ -3,7 +3,7 @@ import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchCurrentEmployeeThunk } from "../../redux/slices/employeesSlice";
 import { clearCurrentEmployee } from "../../redux/slices/employeesSlice";
-import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
+// import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignIn, faX, faNewspaper, faSignOut } from "@fortawesome/free-solid-svg-icons";
@@ -18,12 +18,12 @@ const Authentication: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const currentEmployeesRank: RankType | undefined = ranks.find((rank)=> rank.id === currentEmployee?.rank);
+  const currentEmployeesRank: RankType | undefined = ranks?.find((rank)=> rank.id === currentEmployee?.rank);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   useEffect(()=>{
-    if(ranks.length < 1) dispatch(fetchRanksThunk());
+    // if(ranks.length < 1) dispatch(fetchRanksThunk());
   },[])
 
   const loginHandler = (e: React.FormEvent): void => {
