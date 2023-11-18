@@ -30,7 +30,6 @@ const EditEmployee: React.FC = () => {
   // --- >
 
   const submitHandler: Function = (e: React.FormEvent): void => {
-    console.log("In submit")
     e.preventDefault();
     if(bdayRef.current!.value) {
       const newBirthday = bdayRef.current!.value.split("-");
@@ -49,7 +48,6 @@ const EditEmployee: React.FC = () => {
       status: statusRef.current!.checked,
       admin: selectedEmployee!.admin
     };
-    console.log(updatedEmployee)
     dispatch(editEmployeeThunk(updatedEmployee));
     navigate(-1);
     return;

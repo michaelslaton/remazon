@@ -15,6 +15,9 @@ import RanksDisplay from "./layout/ranks/RanksDisplay";
 import SignUp from "./layout/authentication/SignUp";
 import { initializeApp } from "firebase/app";
 import RouteError from "./utils/errors/RouteError";
+import { useState, useEffect } from "react";
+import { useAppDispatch } from "./redux/hooks";
+import { initialLoadThunk } from "./redux/slices/controlsSlice";
 
 initializeApp(firebaseConfig);
 
@@ -86,7 +89,19 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App: React.FC = () => {
+const App: React.FC = () => { 
+  const [ loading, setLoading ] = useState(true);
+  const dispatch = useAppDispatch();
+  
+  useEffect(()=>{
+    dispatch(initialLoadThunk())
+      .then(()=> setLoading(false));
+  },[])
+
+  if(loading) return (
+    <>
+    </>
+  );
 
   return (
     <>
