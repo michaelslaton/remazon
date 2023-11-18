@@ -30,20 +30,26 @@ const EditEmployee: React.FC = () => {
   // --- >
 
   const submitHandler: Function = (e: React.FormEvent): void => {
+    console.log("In submit")
     e.preventDefault();
     if(bdayRef.current!.value) {
       const newBirthday = bdayRef.current!.value.split("-");
       employeeBirthday = new Date(`${newBirthday[1]}-${newBirthday[2]}-${newBirthday[0]}`);
     };
+    
+    let updatedRank = selectedEmployee!.rank;
+    if(currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
+
     const updatedEmployee: EmployeeType = {
       ...selectedEmployee!,
       name: nameRef.current!.value,
       birthday: employeeBirthday,
-      rank: Number(rankRef.current!.value),
+      rank: updatedRank,
       description: descriptionRef.current!.value,
       status: statusRef.current!.checked,
       admin: selectedEmployee!.admin
     };
+    console.log(updatedEmployee)
     dispatch(editEmployeeThunk(updatedEmployee));
     navigate(-1);
     return;
