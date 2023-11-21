@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useAppDispatch } from "../../redux/hooks";
-import { EmployeePostType } from "../../types/employeeType";
 import { createEmployeeThunk } from "../../redux/slices/employeesSlice";
+import { EmployeePostType } from "../../types/employeeType";
 import "./authentication.css";
 
 
