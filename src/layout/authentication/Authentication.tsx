@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchCurrentEmployeeThunk } from "../../redux/slices/employeesSlice";
 import { clearCurrentEmployee } from "../../redux/slices/employeesSlice";
 // import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
-import { NavigateFunction, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignIn, faX, faNewspaper, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import RankType from "../../types/rankType";
