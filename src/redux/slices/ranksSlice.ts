@@ -57,7 +57,6 @@ const ranksslice = createSlice({
   reducers: {
     setRanksList: (state,action) => {
       state.ranks = action.payload;
-      console.log("Done Ranks")
     },
   },
   extraReducers: (builder) => {
