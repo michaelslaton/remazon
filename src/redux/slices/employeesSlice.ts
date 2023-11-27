@@ -67,7 +67,6 @@ const employeesSlice = createSlice({
   reducers: {
     setEmployeesList: (state,action) => {
       state.employees = action.payload;
-      console.log("Done Employees")
     },
     clearCurrentEmployee: (state) => {
       state.currentEmployee = null;
