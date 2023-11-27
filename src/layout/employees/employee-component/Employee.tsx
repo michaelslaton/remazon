@@ -36,25 +36,38 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
   return (
     <div className="employee__wrapper" style={{borderColor: currentEmployeesRank?.color}}>
       <h2 className="title">{data.name}<div className={`status-dot ${data.status ? "active" : ""}`}/></h2>
+
       <ul className="employee__info">
-        <li>Rank: 
-          <div className="employee__rank" style={{color: currentEmployeesRank?.color}}>
+
+        <li>
+          <div className="employee__rank" style={{backgroundColor: currentEmployeesRank?.color}}>
             {currentEmployeesRank!.name}
           </div>
         </li>
+
         { birthday ?
-          <li>Birthday: {birthday.getDate()} - {months[birthday.getMonth()]}</li>
+          <li>
+            <div className="employee__info-key">
+              Birthday:
+            </div>
+            {birthday.getDate()} - {months[birthday.getMonth()]}
+          </li>
           : 
-          <></> }
-        <li>Bio:
-          <article>
+          <></>
+        }
+
+        <li>
+          <div className="employee__info-key">
+            Bio:
+          </div>
             {data.description}
-          </article>
         </li>
       </ul>
+      
       <div className="employee__edit-button_wrapper">
         {editButtonRender()}
       </div>
+
     </div>
   );
 };

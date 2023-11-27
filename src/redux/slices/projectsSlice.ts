@@ -66,7 +66,6 @@ const projectsSlice = createSlice({
   reducers: {
     setProjectsList: (state,action) => {
       state.projects = action.payload;
-      console.log("Done Projects")
     },
   },
   extraReducers: (builder) => {

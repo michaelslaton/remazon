@@ -1,5 +1,6 @@
-.employees-display__wrapper {
-  border-radius: var(--border-radius);
+.employees-display__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .employee__wrapper {
@@ -10,10 +11,11 @@
   border-radius: var(--border-radius);
   min-width: 20rem;
   position: relative;
+  aspect-ratio: 2.5/1;
 }
 
-li > article {
-  margin: 0 .5em;
+.employee__info > li {
+  margin-bottom: .2em;
 }
 
 .employee__wrapper > h2 {
@@ -25,9 +27,26 @@ li > article {
   list-style: none;
 }
 
-.employee__rank {
+.employee__info-key{
+  color: var(--remazon-prime);
   display: inline;
-  margin-left: .2em;
+  margin-right: .2em;
+}
+
+.employee__rank {
+  display: block;
+  margin: .05rem -.5rem .3rem;
+  text-align: center;
+  padding: .1rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 1.2rem;
+}
+
+.employee__edit-button_wrapper {
+  position: absolute;
+  right: .5em;
+  bottom: .5em;
 }
 
 .employee__edit-form > label {
@@ -39,11 +58,6 @@ li > article {
   margin-top: .2rem;
 }
 
-.employee__edit-button_wrapper {
-  position: absolute;
-  right: .5em;
-  bottom: .5em;
-}
 
 button.employee__edit-control {
   display: inline;

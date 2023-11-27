@@ -20,12 +20,14 @@ const EmployeesDisplay: React.FC = () => {
   if (loadingEmployees || loadingRanks) return <p>Loading...</p>;
 
   return (
-      <div className="employees-display__wrapper">
+      <>
         <h2 className="title">Employees</h2>
-        {employees.map((employee)=>(
-          <Employee key={employee.id} data={employee}/>
-        ))}
-      </div>
+        <div className="employees-display__grid">
+          {employees.map((employee)=>(
+            <Employee key={employee.id} data={employee}/>
+          ))}
+        </div>
+      </>
   );
 };
 
