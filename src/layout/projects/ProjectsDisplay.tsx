@@ -32,9 +32,11 @@ const Projects: React.FC = () => {
       <div className="projects__header">
         <h2 className="title projects-display-title">Projects</h2>
       </div>
-      {projects.map((project)=>(
-        <Project key={project.id} data={project}/>
-      ))}
+      <div className="projects-display__grid">
+        {projects.map((project)=>(
+          <Project key={project.id} data={project}/>
+        ))}
+      </div>
       { currentEmployee?.uid && currentEmployee.rank < 5 &&
           <button className="button create-project-button" onClick={()=> navigate("/projects/create")}><FontAwesomeIcon icon={faPlus}/></button>
         }
