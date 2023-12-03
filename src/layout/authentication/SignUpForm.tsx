@@ -33,6 +33,8 @@ const SignUp: React.FC = () => {
         description: descriptionRef.current!.value,
       }      
       dispatch(createEmployeeThunk(newEmployee));
+    })
+    .then(()=> {
       navigate("/");
     })
     .catch((error) => {

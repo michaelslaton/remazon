@@ -12,7 +12,7 @@ import Layout from "./layout/Layout";
 import NotificationsDisplay from "./layout/notifications/NotificationsDisplay";
 import ProjectsDisplay from "./layout/projects/ProjectsDisplay";
 import RanksDisplay from "./layout/ranks/RanksDisplay";
-import SignUp from "./layout/authentication/SignUp";
+import SignUpForm from "./layout/authentication/SignUpForm";
 import { initializeApp } from "firebase/app";
 import RouteError from "./utils/errors/RouteError";
 import { useState, useEffect } from "react";
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <SignUp/>,
+        element: <SignUpForm/>,
       },
       {
         path: "/ranks",
