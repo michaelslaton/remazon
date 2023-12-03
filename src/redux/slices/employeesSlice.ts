@@ -19,7 +19,8 @@ const employeesUrl: URL = new URL("http://localhost:5000/remazon/employees");
 
 // Api Calls --------------------------------------------------------------------------------->
 
-export const fetchCurrentEmployeeThunk = createAsyncThunk("users/fetch", async (uid: string, _thunkApi)=>{
+export const fetchCurrentEmployeeThunk = createAsyncThunk("users/fetch", async (uid: string, thunkApi)=>{
+  await thunkApi.dispatch(fetchEmployeesListThunk());
   const response = await fetch(`${employeesUrl}/${uid}`, {
     method: "GET",
   });
