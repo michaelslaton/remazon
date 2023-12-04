@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
-import { createEmployeeThunk } from "../../redux/slices/employeesSlice";
+import { createEmployeeThunk, fetchEmployeesListThunk, fetchCurrentEmployeeThunk } from "../../redux/slices/employeesSlice";
+import { setAuthDisplay } from "../../redux/slices/controlsSlice";
 import { EmployeePostType } from "../../types/employeeType";
 import "./authentication.css";
-
 
 const SignUp: React.FC = () => {
   const auth = getAuth();
@@ -33,6 +33,13 @@ const SignUp: React.FC = () => {
         description: descriptionRef.current!.value,
       }      
       dispatch(createEmployeeThunk(newEmployee));
+    })
+    .then(()=> {
+      dispatch(fetchEmployeesListThunk());
+    })
+    .then(()=> {
+      dispatch(fetchCurrentEmployeeThunk(auth.currentUser!.uid))
+      dispatch(setAuthDisplay("logged in"))
     })
     .then(()=> {
       navigate("/");

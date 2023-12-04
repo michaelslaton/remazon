@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useAppSelector } from "../../../redux/hooks";
 import NotificationType from "../../../types/notificationType";

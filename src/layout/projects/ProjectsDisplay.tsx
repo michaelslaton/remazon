@@ -3,13 +3,13 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
 import { fetchEmployeesListThunk } from "../../redux/slices/employeesSlice";
+import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Project from "./project-component/Project";
 import ProjectType from "../../types/projectType";
 import EmployeeType from "../../types/employeeType";
 import "./projects.css";
-import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 
 const Projects: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
