@@ -23,6 +23,10 @@ initializeApp(firebaseConfig);
 
 const router = createBrowserRouter([
   {
+    path: "/signup",
+    element: <SignUpForm/>,
+  },
+  {
     path: "/",
     element: <Layout/>,
     children: [

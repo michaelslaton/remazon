@@ -1,10 +1,10 @@
-import EmployeeType from "../../../types/employeeType";
+import { ReactNode } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
-import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-regular-svg-icons";
+import EmployeeType from "../../../types/employeeType";
 import RankType from "../../../types/rankType";
-import { ReactNode } from "react";
 import "../employees.css";
 
 type EmployeeProps = {

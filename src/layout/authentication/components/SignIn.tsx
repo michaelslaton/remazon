@@ -1,22 +1,17 @@
 import { useRef } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from "../../../redux/slices/employeesSlice";
 import { useAppDispatch } from "../../../redux/hooks";
+import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from "../../../redux/slices/employeesSlice";
+import { setAuthDisplay } from "../../../redux/slices/controlsSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignIn, faX } from "@fortawesome/free-solid-svg-icons";
 import "../authentication.css";
 
-type SignInProps = {
-  setControls: React.Dispatch<React.SetStateAction<string>>;
-}
-
-
-const SignIn: React.FC<SignInProps> = ({ setControls }) => {
+const SignIn: React.FC = () => {
+  const auth = getAuth();
+  const dispatch = useAppDispatch();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const dispatch = useAppDispatch();
-  const auth = getAuth();
-
 
   const loginHandler = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -28,12 +23,12 @@ const SignIn: React.FC<SignInProps> = ({ setControls }) => {
     signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
       .then(() => {
         dispatch(fetchCurrentEmployeeThunk(auth.currentUser!.uid));
-        setControls("logout");
+        dispatch(setAuthDisplay("logout"));
       })
       .catch((error) => {
         console.error(error.code);
         console.error(error.message);
-        setControls("login signup");
+        dispatch(setAuthDisplay("login signup"));
       });
   };
 
@@ -52,7 +47,7 @@ const SignIn: React.FC<SignInProps> = ({ setControls }) => {
           onClick={(e) => loginHandler(e)}>
           <FontAwesomeIcon icon={faSignIn}/>
         </button>
-        <button className="button" onClick={()=> setControls("login signup")}>
+        <button className="button" onClick={()=> dispatch(setAuthDisplay("login signup"))}>
           <FontAwesomeIcon icon={faX}/>
         </button>
       </form>

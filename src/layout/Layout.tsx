@@ -4,8 +4,6 @@ import Header from "./header/Header";
 import { useAppSelector } from "../redux/hooks";
 import "./layout.css";
 
-
-
 const Layout: React.FC = () => {
   const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
 
