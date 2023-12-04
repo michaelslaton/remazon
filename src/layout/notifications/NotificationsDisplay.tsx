@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { fetchNotificationsThunk } from "../../redux/slices/notificationsSlice";
+import { fetchEmployeesListThunk } from "../../redux/slices/employeesSlice";
 import Notification from "./notifications-component/Notification";
 import NotificationType from "../../types/notificationType";
-import "./notifications.css";
-import { fetchEmployeesListThunk } from "../../redux/slices/employeesSlice";
 import EmployeeType from "../../types/employeeType";
+import "./notifications.css";
 
 const NotificationsDisplay: React.FC = () => {
   const [ selectedNotification, setSelectedApplication ] = useState<NotificationType | null>(null);

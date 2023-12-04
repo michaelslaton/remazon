@@ -4,18 +4,16 @@ import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EmployeeType from "../../types/employeeType";
-// import { NavigateFunction, useNavigate } from "react-router-dom";
 import Rank from "./rank-component/Rank";
 import RankType from "../../types/rankType";
 import "./ranks.css";
 
 const RanksDisplay: React.FC = () => {
+  const dispatch = useAppDispatch();
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const nonMutRanks = [...ranks];
   const sortedRanks: RankType[] = nonMutRanks.sort((a,b)=> a.id - b.id);
-  // const navigate: NavigateFunction = useNavigate();
-  const dispatch = useAppDispatch();
   
   useEffect(()=>{
     dispatch(fetchRanksThunk());
