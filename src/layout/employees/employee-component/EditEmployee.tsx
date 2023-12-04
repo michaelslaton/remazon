@@ -10,15 +10,15 @@ const EditEmployee: React.FC = () => {
   const { paramId } = useParams<string>();
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
+  const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
+  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
+  const selectedEmployee: EmployeeType | undefined = employees.find((dude)=> dude.id === Number(paramId));
   const nameRef = useRef<HTMLInputElement>(null);
   const statusRef = useRef<HTMLInputElement>(null);  
   const rankRef = useRef<HTMLSelectElement>(null);
   const bdayRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
-  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
-  const selectedEmployee: EmployeeType | undefined = employees.find((dude)=> dude.id === Number(paramId));
 
   // Birthday formatting ------------------------------------------------------ >
   let employeeBirthday: Date | null = null;

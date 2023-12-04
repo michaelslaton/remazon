@@ -1,20 +1,18 @@
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setAuthDisplay } from "../../../redux/slices/controlsSlice";
 import "../authentication.css";
 
-
-type SignUpProps = {
-  setControls: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const SignUp: React.FC<SignUpProps> = ({ setControls }) => {
+const SignUp: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     <>
       <button
         className="button"
         type="submit"
-        onClick={() => setControls("login")}>
+        onClick={() => dispatch(setAuthDisplay("login"))}>
         Sign In
       </button>
       or 

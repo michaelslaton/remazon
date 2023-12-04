@@ -6,12 +6,14 @@ import { setRanksList } from "./ranksSlice";
 type InitialState = {
   navOpen: boolean;
   loading: boolean;
+  authDisplay: string;
   error: any;
 };
 
 const initialState: InitialState = {
   navOpen: false,
   loading: false,
+  authDisplay: "login signup",
   error: '',
 };
 
@@ -41,6 +43,9 @@ const mainControl = createSlice({
     navToggle: (state) => {
       state.navOpen = !state.navOpen;
     },
+    setAuthDisplay: (state,action) => {
+      state.authDisplay = action.payload;
+    },
   },
   extraReducers: (builder) => {
 // initialLoad ------------------------------------------------------------->
@@ -59,4 +64,4 @@ const mainControl = createSlice({
 });
 
 export default mainControl.reducer;
-export const { navToggle } = mainControl.actions;
+export const { navToggle, setAuthDisplay } = mainControl.actions;

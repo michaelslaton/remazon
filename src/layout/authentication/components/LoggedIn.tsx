@@ -1,22 +1,19 @@
-import { useAppSelector } from "../../../redux/hooks";
+import { getAuth, signOut } from "firebase/auth";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import RankType from "../../../types/rankType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNewspaper, faSignOut } from "@fortawesome/free-solid-svg-icons";
-import { useAppDispatch } from "../../../redux/hooks";
-import { getAuth, signOut } from "firebase/auth";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { clearCurrentEmployee } from "../../../redux/slices/employeesSlice";
+import RankType from "../../../types/rankType";
 import "../authentication.css";
 
-
 const LoggedIn: React.FC = () => {
-  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
+  const auth = getAuth();
   const ranks = useAppSelector((state)=> state.ranksControl.ranks);
   const navigate: NavigateFunction = useNavigate();  
-  const auth = getAuth();
   const dispatch = useAppDispatch();
+  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const currentEmployeesRank: RankType | undefined = ranks?.find((rank)=> rank.id === currentEmployee?.rank);
-  
 
   const logoutHandler = (): void => {
     navigate(0);
