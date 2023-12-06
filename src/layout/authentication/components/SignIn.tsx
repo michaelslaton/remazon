@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useAppDispatch } from "../../../redux/hooks";
-import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from "../../../redux/slices/employeesSlice";
+import { fetchCurrentEmployeeThunk } from "../../../redux/slices/employeesSlice";
 import { setAuthDisplay } from "../../../redux/slices/controlsSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignIn, faX } from "@fortawesome/free-solid-svg-icons";
@@ -17,8 +17,6 @@ const SignIn: React.FC = () => {
     e.preventDefault();
     const enteredEmail: string = emailRef.current!.value;
     const enteredPassword: string = passwordRef.current!.value;
-    
-    dispatch(fetchEmployeesListThunk());
     
     signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
       .then(() => {

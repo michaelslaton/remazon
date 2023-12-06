@@ -10,10 +10,12 @@ const EditEmployee: React.FC = () => {
   const { paramId } = useParams<string>();
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
+  // States ------------------------------------------------------------------ >
   const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
   const selectedEmployee: EmployeeType | undefined = employees.find((dude)=> dude.id === Number(paramId));
+  // Refs -------------------------------------------------------------------- >
   const nameRef = useRef<HTMLInputElement>(null);
   const statusRef = useRef<HTMLInputElement>(null);  
   const rankRef = useRef<HTMLSelectElement>(null);
@@ -52,8 +54,6 @@ const EditEmployee: React.FC = () => {
     navigate(-1);
     return;
   };
-  
-  if(!currentEmployee?.uid) navigate("/");
 
   return (
     <>

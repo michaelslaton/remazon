@@ -56,7 +56,7 @@ export const deleteProjectThunk = createAsyncThunk("projects/delete", async (id:
       "Content-Type":"application/json"
     },
   });
-  return console.log(`Poject ${id} deleted.`);
+  return;
 });
 // -------------------------------------------------------------------------------------------->
 
