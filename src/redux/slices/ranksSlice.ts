@@ -49,6 +49,17 @@ export const editRankThunk = createAsyncThunk("ranks/edit", async (updatedRank: 
   return data;
 });
 
+export const deleteRankThunk = createAsyncThunk("ranks/delete", async (rankId: number, thunkApi)=> {
+  await fetch(`${ranksUrl}/${rankId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type":"application/json"
+    }
+  });
+  await thunkApi.dispatch(fetchRanksThunk());
+  return;
+});
+
 // -------------------------------------------------------------------------------------------->
 
 const ranksslice = createSlice({
@@ -102,6 +113,20 @@ const ranksslice = createSlice({
       state.loading = true;
     });
     builder.addCase(editRankThunk.rejected, (state, action)=>{
+      state.loading = false;
+      state.ranks = [...state.ranks];
+      state.error = action.error.message;
+    });
+
+    // deleteRank ---------------------------------------------------------------->
+    builder.addCase(deleteRankThunk.fulfilled, (state)=>{
+      state.loading = false;
+      state.error = '';
+    });
+    builder.addCase(deleteRankThunk.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(deleteRankThunk.rejected, (state, action)=>{
       state.loading = false;
       state.ranks = [...state.ranks];
       state.error = action.error.message;

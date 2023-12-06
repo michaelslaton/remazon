@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
-import { useAppDispatch } from "../../../redux/hooks";
-import { editRankThunk } from "../../../redux/slices/ranksSlice";
-import { faEdit } from "@fortawesome/free-regular-svg-icons";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { deleteRankThunk, editRankThunk } from "../../../redux/slices/ranksSlice";
+import { faEdit, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RankType from "../../../types/rankType";
 import "../ranks.css";
+import EmployeeType from "../../../types/employeeType";
 
 type RankProps = {
   rankData: RankType;
@@ -12,6 +13,7 @@ type RankProps = {
 
 const Rank: React.FC<RankProps> = ({ rankData }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
+  const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const dispatch = useAppDispatch();
   const titleRef = useRef<HTMLInputElement>(null);
   const colorRef = useRef<HTMLInputElement>(null)
@@ -28,6 +30,12 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
     dispatch(editRankThunk(updatedRank));
     setEditMode(false);
     return;
+  };
+
+  const deleteButtonHandler = (): void => {
+    const employeesAssignedRank = employeeList.filter((employee)=> employee.rank === rankData.id);
+    if(employeesAssignedRank.length) console.error(`Please reassign all employees currently assigned to the rank of ${rankData.name}.`);
+    else dispatch(deleteRankThunk(rankData.id));
   };
 
   // Render Edit Mode ------------------------------------------------->
@@ -70,9 +78,18 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
   return (
     <div className="rank">
       <h2 className="rank__title" style={{color: rankData.color}}>{rankData!.name}</h2>
-      <button className="button rank__submit" onClick={()=> setEditMode(true)}>
-        <FontAwesomeIcon icon={faEdit}/>
-      </button>
+      <div>
+        <button className="button rank__submit" onClick={()=> setEditMode(true)}>
+          <FontAwesomeIcon icon={faEdit}/>
+        </button>
+        
+        {/* Conditional : Can't delete the Ceo rank*/}
+        { rankData.id !== 1 && 
+          <button className="button delete" onClick={()=> deleteButtonHandler()}>
+            <FontAwesomeIcon icon={faTrashCan}/>
+          </button>
+        }
+      </div>
     </div>
   );
 };

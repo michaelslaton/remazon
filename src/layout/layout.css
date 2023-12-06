@@ -44,6 +44,8 @@ img {
 }
 
 .button {
+  min-width: 2rem;
+  min-height: 2rem;
   display: block;
   border: .1rem solid var(--remazon-prime);
   background: transparent;
@@ -55,9 +57,12 @@ img {
 .button:hover {
   color: #ffffff;
 }
-
 .button.delete:hover {
   border-color: #ff0000;
+  color: #ffffff;
+}
+.button.create:hover {
+  border-color: rgb(9, 255, 0);
   color: #ffffff;
 }
 
