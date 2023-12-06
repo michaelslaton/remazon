@@ -1,9 +1,9 @@
 import { ReactNode, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { faEdit, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import { deleteProjectThunk, fetchProjectsThunk } from "../../../redux/slices/projectsSlice";
+import { faEdit, faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RankType from "../../../types/rankType";
 import ProjectType from "../../../types/projectType";
 import "../projects.css";
