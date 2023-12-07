@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchCurrentEmployeeThunk } from "../../redux/slices/employeesSlice";
 import LoggedIn from "./components/LoggedIn";
 import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import LoggedOut from "./components/LoggedOut";
 import EmployeeType from "../../types/employeeType";
 import "./authentication.css";
 
@@ -30,7 +30,7 @@ const Authentication: React.FC = () => {
 
   // Default view to show sign in or sign up ----------------------------------------------------------------------------------------------------->
   else if (authDisplay === "login signup") return (
-    <SignUp/>
+    <LoggedOut/>
   );
 };
 

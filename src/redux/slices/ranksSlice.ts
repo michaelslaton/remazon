@@ -69,6 +69,9 @@ const ranksslice = createSlice({
     setRanksList: (state,action) => {
       state.ranks = action.payload;
     },
+    clearRankError: (state) => {
+      state.error = "";
+    }
   },
   extraReducers: (builder) => {
     // fetchRanks ------------------------------------------------------------->
@@ -135,4 +138,7 @@ const ranksslice = createSlice({
 });
 
 export default ranksslice.reducer;
-export const { setRanksList } = ranksslice.actions;
+export const {
+  setRanksList,
+  clearRankError
+} = ranksslice.actions;

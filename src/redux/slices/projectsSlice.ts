@@ -67,6 +67,9 @@ const projectsSlice = createSlice({
     setProjectsList: (state,action) => {
       state.projects = action.payload;
     },
+    clearProjectError: (state) => {
+      state.error = "";
+    }
   },
   extraReducers: (builder) => {
     // fetchProjects ------------------------------------------------------------->
@@ -131,4 +134,7 @@ const projectsSlice = createSlice({
 });
 
 export default projectsSlice.reducer;
-export const { setProjectsList } = projectsSlice.actions;
+export const {
+  setProjectsList,
+  clearProjectError
+} = projectsSlice.actions;
