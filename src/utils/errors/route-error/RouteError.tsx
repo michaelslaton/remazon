@@ -1,4 +1,4 @@
-import "./errors.css";
+import "./routeError.css";
 
 const RouteError: React.FC = () => {
 
