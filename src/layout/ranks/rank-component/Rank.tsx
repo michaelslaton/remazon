@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { deleteRankThunk, editRankThunk } from "../../../redux/slices/ranksSlice";
+import { setUiError } from "../../../redux/slices/controlsSlice";
 import { faEdit, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RankType from "../../../types/rankType";
@@ -34,7 +35,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
 
   const deleteButtonHandler = (): void => {
     const employeesAssignedRank = employeeList.filter((employee)=> employee.rank === rankData.id);
-    if(employeesAssignedRank.length) console.error(`Please reassign all employees currently assigned to the rank of ${rankData.name}.`);
+    if(employeesAssignedRank.length) dispatch(setUiError(`Please reassign all employees currently assigned to the rank of ${rankData.name} before attempting to delete.`));
     else dispatch(deleteRankThunk(rankData.id));
   };
 
@@ -78,7 +79,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
   return (
     <div className="rank">
       <h2 className="rank__title" style={{color: rankData.color}}>{rankData!.name}</h2>
-      <div>
+      <div className="rank__buttons-wrapper">
         <button className="button rank__submit" onClick={()=> setEditMode(true)}>
           <FontAwesomeIcon icon={faEdit}/>
         </button>

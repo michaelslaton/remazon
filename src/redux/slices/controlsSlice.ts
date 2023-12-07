@@ -7,6 +7,7 @@ type InitialState = {
   navOpen: boolean;
   loading: boolean;
   authDisplay: string;
+  uiError: string;
   error: any;
 };
 
@@ -14,6 +15,7 @@ const initialState: InitialState = {
   navOpen: false,
   loading: false,
   authDisplay: "login signup",
+  uiError: '',
   error: '',
 };
 
@@ -46,6 +48,15 @@ const mainControl = createSlice({
     setAuthDisplay: (state,action) => {
       state.authDisplay = action.payload;
     },
+    setUiError: (state,action) => {
+      state.uiError = action.payload;
+    },
+    clearUiError: (state) => {
+      state.uiError = "";
+    },
+    clearControlError: (state) => {
+      state.error = "";
+    }
   },
   extraReducers: (builder) => {
 // initialLoad ------------------------------------------------------------->
@@ -64,4 +75,10 @@ const mainControl = createSlice({
 });
 
 export default mainControl.reducer;
-export const { navToggle, setAuthDisplay } = mainControl.actions;
+export const {
+  navToggle,
+  setAuthDisplay,
+  setUiError,
+  clearUiError,
+  clearControlError
+} = mainControl.actions;

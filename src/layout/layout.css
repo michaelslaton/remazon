@@ -27,6 +27,7 @@ img {
   margin: .2rem auto .6rem;
   width: 99%;
   height: .2rem;
+  border-radius: var(--border-radius);
 }
 
 .status-dot {
@@ -44,8 +45,8 @@ img {
 }
 
 .button {
+  aspect-ratio: 1/1;
   min-width: 2rem;
-  min-height: 2rem;
   display: block;
   border: .1rem solid var(--remazon-prime);
   background: transparent;
@@ -75,6 +76,10 @@ input, textarea, select {
   border: .11rem solid var(--remazon-prime);
   border-radius: var(--border-radius);
   color: white;
+}
+
+option {
+  color: black;
 }
 
 .main-screen {
