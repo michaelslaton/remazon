@@ -72,6 +72,9 @@ const employeesSlice = createSlice({
     clearCurrentEmployee: (state) => {
       state.currentEmployee = null;
     },
+    clearEmployeeError: (state) => {
+      state.error = "";
+    }
   },
   extraReducers: (builder) => {
     // fetchUser ------------------------------------------------------------->
@@ -139,4 +142,5 @@ export default employeesSlice.reducer;
 export const {
   setEmployeesList,
   clearCurrentEmployee,
+  clearEmployeeError,
 } = employeesSlice.actions;

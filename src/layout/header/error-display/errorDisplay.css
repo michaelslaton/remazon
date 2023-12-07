@@ -1,0 +1,47 @@
+.error-display {
+  background-color: rgb(184, 0, 0);
+  border-radius: var(--border-radius);
+  text-align: center;
+  width: 99%;
+  margin: auto;
+  padding: .1rem;
+  height: 1.3rem;
+  margin-top: -.3rem;
+  margin-bottom: .2rem;
+  opacity: 1;
+  transition: all 80ms ease-in-out;
+}
+.error-display.inactive {
+  opacity: 0;
+  height: 0rem;
+  transition: all 80ms ease-in-out;
+}
+
+.button.close-button {
+  display: inline-block;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  min-width: auto;
+  width: 1.1rem;
+  line-height: 0%;
+  padding: .2rem;
+  text-align: center;
+  position: relative !important;
+  transform: translate(.3rem, -.25rem);
+  font-size: .8rem;
+  color: white;
+  border-color: white;
+  border-width: .15rem;
+}
+
+.close-button {
+  position: relative !important;
+}
+.close-button:hover {
+  border-color: var(--remazon-prime)
+}
+
+.button-text {
+  position: absolute;
+  transform: translate(-.5px, 1px);
+}
