@@ -1,0 +1,54 @@
+.error404__wrapper {
+  width: 100%;
+  margin: 10rem auto;
+}
+
+.error404__title--wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error404__title {
+  display: inline;
+  position: relative;
+  right: -4rem;
+  margin: 0;
+  padding: 0;
+  font-size: 9rem;
+  letter-spacing: .6rem;
+  color: var(--remazon-prime);
+}
+
+.error404__text {
+  position: relative;
+  left: -3.5rem;
+  top: 3.3rem;
+  font-size: 3rem;
+  font-family: "bebas";
+  color: white;
+  white-space: nowrap;
+}
+
+.error404__links {
+  box-sizing: border-box;
+  width: 100%;
+  white-space: nowrap;
+  margin-top: 1.4rem;
+  text-align: center;
+}
+.error404-link {
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 0;
+  background: transparent;
+  display: inline;
+  margin: 0 1em;
+  font-size: 1.3em;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 300ms ease-in-out;
+}
+.error404-link:hover {
+  border-bottom: 2px solid var(--remazon-prime);
+  transition: 50ms ease-in-out;
+}
