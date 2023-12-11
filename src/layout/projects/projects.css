@@ -1,6 +1,9 @@
-.projects-display__grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+.projects__cards-wrapper {
+  display: flex;
+  max-width: 95%;
+  flex-wrap: wrap;
+  margin-top: .5rem;
+  gap: .5rem;
 }
 
 .projects-display__wrapper {
@@ -10,7 +13,6 @@
 .project__wrapper {
   display: inline-block;
   border: .15rem solid var(--remazon-prime);
-  margin-right: .5rem;
   padding: .3rem;
   border-radius: var(--border-radius);
   min-width: 20rem;

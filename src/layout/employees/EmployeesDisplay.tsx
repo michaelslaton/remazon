@@ -22,7 +22,7 @@ const EmployeesDisplay: React.FC = () => {
   return (
       <>
         <h2 className="title">Employees</h2>
-        <div className="employees-display__grid">
+        <div className="employee__cards-wrapper">
           {employees.map((employee)=>(
             <Employee key={employee.id} data={employee}/>
           ))}
