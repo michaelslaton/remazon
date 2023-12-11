@@ -3,8 +3,7 @@ import EmployeeType from "./employeeType";
 type ProjectType = {
   id: number;
   name: string;
-  host: string;
-  hostId: number;
+  host: number;
   attending?: EmployeeType[];
   type: string;
   description: string;
