@@ -1,16 +1,18 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useParams, useNavigate, NavigateFunction } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editEmployeeThunk } from "../../../redux/slices/employeesSlice";
 import EmployeeType from "../../../types/employeeType";
 import Rank from "../../../types/rankType";
 import "../employees.css";
+import { setUiError } from "../../../redux/slices/controlsSlice";
 
 const EditEmployee: React.FC = () => {
   const { paramId } = useParams<string>();
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
   // States ------------------------------------------------------------------ >
+  const [ countData, setCountData ] = useState<number>(0);
   const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
@@ -31,8 +33,16 @@ const EditEmployee: React.FC = () => {
   };
   // --- >
 
+  useEffect(()=> setCountData(selectedEmployee!.description.length),[]);
+
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
+
+    if (descriptionRef.current!.value.length > 100) {
+      dispatch(setUiError("Please shorten your description to 100 characters or less."));
+      return;
+    };
+
     if(bdayRef.current!.value) {
       const newBirthday = bdayRef.current!.value.split("-");
       employeeBirthday = new Date(`${newBirthday[1]}-${newBirthday[2]}-${newBirthday[0]}`);
@@ -56,65 +66,74 @@ const EditEmployee: React.FC = () => {
   };
 
   return (
-    <>
-      <h2 className="title">Edit {selectedEmployee!.name}</h2>
-      <form className="employee__edit-form">
-        
-        <label>
-          Name:
-          <input
-            type="text"
-            id="name"
-            name="name"
-            ref={nameRef}
-            defaultValue={selectedEmployee?.name}/>
-        </label>
-
-        { currentEmployee!.admin &&
+    <div className="center-display-space">
+      <div className="form-wrapper">
+        <h2 className="title">Edit {selectedEmployee!.name}</h2>
+        <form className="employee__edit-form">
+          
           <label>
-            Rank:
-            <select
-              id="rank"
-              name="rank"
-              ref={rankRef}
-              defaultValue={selectedEmployee?.rank}>
-              {ranks.map(((rank)=>(
-                <option key={rank.id} value={rank.rank}>{rank.name}</option>
-              )))}
-            </select>
+            <div className="form-input-label">Name:</div>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              ref={nameRef}
+              defaultValue={selectedEmployee?.name}/>
           </label>
-        }
 
-        <label>
-          Birthday:
-          <input
-            type="date"
-            id="birthday"
-            name="birthday"
-            ref={bdayRef}
-            defaultValue={birthdayString}/>
-        </label>
+          { currentEmployee!.admin &&
+            <label>
+              <div className="form-input-label">Rank:</div>
+              <select
+                id="rank"
+                name="rank"
+                ref={rankRef}
+                defaultValue={selectedEmployee?.rank}>
+                {ranks.map(((rank)=>(
+                  <option key={rank.id} value={rank.rank}>{rank.name}</option>
+                )))}
+              </select>
+            </label>
+          }
 
-        <label>
-          Description:
-          <textarea
-            id="description"
-            name="description"
-            ref={descriptionRef}
-            defaultValue={selectedEmployee?.description}/>
-        </label>
+          <label>
+            <div className="form-input-label">Birthday:</div>
+            <input
+              type="date"
+              id="birthday"
+              name="birthday"
+              ref={bdayRef}
+              defaultValue={birthdayString}/>
+          </label>
 
-        <label>
-          Active:
-          <input
-            type="checkbox"
-            ref={statusRef}
-            defaultChecked={selectedEmployee?.status}/>
-        </label>
-          <button className="button employee__edit-control" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
-          <button className="button employee__edit-control" onClick={()=> navigate("/employees")}>Cancel</button>
-      </form>
-    </>
+          <label>
+            <div className="form-input-label">Description:</div>
+            <textarea
+              id="description"
+              name="description"
+              ref={descriptionRef}
+              maxLength={101}
+              onChange={(e)=> setCountData(e.currentTarget.value.length)}
+              defaultValue={selectedEmployee?.description}/>
+          </label>
+          <div className="parameter-text">
+            {countData} of 100
+          </div>
+
+          <label>
+            <div className="form-input-label">Active:</div>
+            <input
+              className="checkbox"
+              type="checkbox"
+              ref={statusRef}
+              defaultChecked={selectedEmployee?.status}/>
+          </label>
+
+            <button className="button employee__edit-control" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
+            <button className="button employee__edit-control" onClick={()=> navigate("/employees")}>Cancel</button>
+        </form>
+      </div>
+    </div>
   );
 };
 

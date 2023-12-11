@@ -11,17 +11,19 @@
 }
 
 .project__wrapper {
+  width: 25rem;
   display: inline-block;
   border: .15rem solid var(--remazon-prime);
   padding: .3rem;
   border-radius: var(--border-radius);
-  min-width: 20rem;
   position: relative;
   overflow: hidden;
 }
 
 .projects__header {
   display: flex;
+  justify-content: space-between;
+  position: relative;
 }
 
 .projects-display-title {
@@ -41,37 +43,51 @@
 }
 
 .create-project-button {
-  margin-top: .5rem;
+  position: absolute;
+  margin-right: .5rem;
+  right: 0;
+  top: -.25rem;
 }
 
 li > article {
-  margin: 0 .5em;
+  display: inline;
+  margin: 0 .3em;
 }
 
 .project__wrapper > h2 {
   margin: 0;
 }
 
+.project__info-wrapper{
+  position: relative;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
 .project__info {
   all: unset;
   list-style: none;
 }
 
 .project__edit-form > label {
+  box-sizing: border-box;
   display: block;
   margin-bottom: .5rem !important;
+  margin-top: .5rem;
 }
 
 .project__edit-form > label > input, textarea, select {
-  margin-top: .2rem;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: .1rem;
 }
 
-.project__edit-button_wrapper {
+.project__buttons_wrapper {
   position: absolute;
-  right: .5em;
-  bottom: .5em;
+  right: 0em;
+  top: .4em;
   display: flex;
-  gap: .5em;
+  gap: .4em;
 }
 
 button.project__edit-control {
@@ -95,4 +111,12 @@ button.project__edit-control {
 
 .project-title > .status-dot {
   top: .5rem;
+}
+
+.parameter-text {
+  color: red;
+  font-size: .8em;
+  margin-top: -.3rem;
+  width: 100%;
+  text-align: end;
 }

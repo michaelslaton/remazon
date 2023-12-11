@@ -24,8 +24,8 @@ const LoggedIn: React.FC = () => {
   return (
     <div className="logged-in-wrapper">
       Signed in as <div className="authentication__employee-name" style={{color: currentEmployeesRank?.color}}>{currentEmployee?.name}</div>
-      <button className="button" onClick={()=> navigate("/notifications")}><FontAwesomeIcon icon={faNewspaper}/></button>
-      <button className="button signout-button" onClick={()=> logoutHandler()}><FontAwesomeIcon icon={faSignOut}/></button>
+      <button className="button card-button" onClick={()=> navigate("/notifications")}><FontAwesomeIcon icon={faNewspaper}/></button>
+      <button className="button signout-button card-button" onClick={()=> logoutHandler()}><FontAwesomeIcon icon={faSignOut}/></button>
     </div>
   );
 };

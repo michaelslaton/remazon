@@ -31,15 +31,15 @@ const Projects: React.FC = () => {
     <div className="projects-display__wrapper">
       <div className="projects__header">
         <h2 className="title projects-display-title">Projects</h2>
+        { currentEmployee?.uid && currentEmployee.rank < 5 &&
+          <button className="button create-project-button card-button" onClick={()=> navigate("/projects/create")}><FontAwesomeIcon icon={faPlus}/></button>
+        }
       </div>
       <div className="projects__cards-wrapper">
         {projects.map((project)=>(
           <Project key={project.id} data={project}/>
         ))}
       </div>
-      { currentEmployee?.uid && currentEmployee.rank < 5 &&
-          <button className="button create-project-button" onClick={()=> navigate("/projects/create")}><FontAwesomeIcon icon={faPlus}/></button>
-        }
     </div>
   );
 };
