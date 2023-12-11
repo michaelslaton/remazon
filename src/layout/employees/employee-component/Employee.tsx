@@ -27,7 +27,7 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
   const editButtonRender = (): ReactNode | null => {
     if ( data.locked && !currentEmployee?.admin ) return;
     else if (currentEmployee?.admin || currentEmployee?.uid === data.uid) return (
-      <button className="button" onClick={()=> navigate(`/employees/edit/${data.id}`)}>
+      <button className="button card-button" onClick={()=> navigate(`/employees/edit/${data.id}`)}>
         <FontAwesomeIcon icon={faEdit}/>
       </button>
     );
