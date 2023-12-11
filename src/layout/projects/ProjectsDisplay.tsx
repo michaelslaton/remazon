@@ -32,7 +32,7 @@ const Projects: React.FC = () => {
       <div className="projects__header">
         <h2 className="title projects-display-title">Projects</h2>
       </div>
-      <div className="projects-display__grid">
+      <div className="projects__cards-wrapper">
         {projects.map((project)=>(
           <Project key={project.id} data={project}/>
         ))}
