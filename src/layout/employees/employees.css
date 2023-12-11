@@ -57,7 +57,9 @@
 }
 
 .employee__edit-form > label > input, textarea, select {
-  margin-top: .2rem;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: .1rem;
 }
 
 
