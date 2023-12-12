@@ -4,7 +4,7 @@ const RouteError: React.FC = () => {
 
   return (
     <>
-      Something went wrong...
+      Something went wrong... Please refresh the page.
     </>
   );
 };
