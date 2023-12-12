@@ -21,13 +21,14 @@ const SignUp: React.FC = () => {
     e.preventDefault();
     let employeeBirthday: Date | null = null;
     if(bdayRef.current!.value) employeeBirthday = new Date(bdayRef.current!.value);
-
     const enteredEmail: string = emailRef.current!.value;
     const enteredPassword: string = passwordRef.current!.value;
+    const newEmployeeName = nameRef.current!.value.toLowerCase();
+
     createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
     .then(() => {      
       const newEmployee: EmployeePostType = {
-        name: nameRef.current!.value,
+        name: newEmployeeName,
         birthday: employeeBirthday,
         uid: auth.currentUser!.uid,
         description: descriptionRef.current!.value,
@@ -51,56 +52,58 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <>
-      <h2 className="title">Sign Up</h2>
-      <form className="signup">
+    <div className="center-display-space">
+      <div className="form-wrapper">
+        <h2 className="title">Sign Up</h2>
+        <form className="signup">
 
-        <label htmlFor="name">
-          Name:
-          <input
-            type="text"
-            name="name"
-            id="id"
-            ref={nameRef}/>
-        </label>
+          <label htmlFor="name">
+            <div className="form-input-label">Name:</div>
+            <input
+              type="text"
+              name="name"
+              id="id"
+              ref={nameRef}/>
+          </label>
 
-        <label htmlFor="email">
-          Email: 
-          <input type="email" ref={emailRef}/>
-        </label>
+          <label htmlFor="email">
+            <div className="form-input-label">Email: </div>
+            <input type="email" ref={emailRef}/>
+          </label>
 
-        <label htmlFor="password">
-          Password: 
-          <input type="password" ref={passwordRef}/>
-        </label>
+          <label htmlFor="password">
+            <div className="form-input-label">Password: </div>
+            <input type="password" ref={passwordRef}/>
+          </label>
 
-        <label>
-          Birthday:
-          <input
-            type="date"
-            id="birthday"
-            name="birthday"
-            ref={bdayRef}/>
-        </label>
+          <label>
+            <div className="form-input-label">Birthday: </div>
+            <input
+              type="date"
+              id="birthday"
+              name="birthday"
+              ref={bdayRef}/>
+          </label>
 
-        <label>
-          Description:
-          <textarea
-            id="description"
-            name="description"
-            ref={descriptionRef}/>
-        </label>
+          <label>
+            <div className="form-input-label">Description:</div>
+            <textarea
+              id="description"
+              name="description"
+              ref={descriptionRef}/>
+          </label>
 
-        <button
-          className="button signup-control"
-          type="submit"
-          onClick={(e) => submitHandler(e)}>
-            Sign Up
-        </button>
-        <button className="button signup-control" onClick={()=> navigate("/")}>Cancel</button>
+          <button
+            className="button signup-control"
+            type="submit"
+            onClick={(e) => submitHandler(e)}>
+              Sign Up
+          </button>
+          <button className="button signup-control" onClick={()=> navigate("/")}>Cancel</button>
 
-      </form>
-    </>
+        </form>
+      </div>
+    </div>
   );
 };
 
