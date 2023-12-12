@@ -25,6 +25,7 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUpForm/>,
+    errorElement: <RouteError/>,
   },
   {
     path: "/",
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUpForm/>,
+        errorElement: <RouteError/>,
       },
       {
         path: "/ranks",
@@ -63,6 +65,7 @@ const router = createBrowserRouter([
       {
         path: "/projects",
         element: <ProjectsDisplay/>,
+        errorElement: <RouteError/>,
       },
       {
         path: "/projects/create",
@@ -88,6 +91,7 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <Error404/>,
+        errorElement: <RouteError/>,
       }
     ],
   },
