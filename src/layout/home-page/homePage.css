@@ -1,0 +1,11 @@
+.most-recent-container {
+  width: 100%;
+}
+
+.most-recent-wrapper {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  gap: 0 1rem;
+}

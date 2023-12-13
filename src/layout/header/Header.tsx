@@ -1,5 +1,6 @@
 import Authentication from "../authentication/Authentication";
 import ErrorDisplay from "./error-display/ErrorDisplay";
+import Divider from "../../utils/divider/Divider";
 import "./header.css";
 
 const Header: React.FC = () => {
@@ -14,7 +15,7 @@ const Header: React.FC = () => {
           <Authentication/>
         </div>
       </div>
-      <div className="divider"/>
+      <Divider/>
       <ErrorDisplay/>
     </>
   );
