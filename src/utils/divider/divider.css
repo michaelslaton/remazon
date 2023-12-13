@@ -1,0 +1,17 @@
+.divider {
+  background-color: var(--remazon-prime);
+  margin: .4rem auto .6rem;
+  width: 99%;
+  height: 3px;
+  border-radius: var(--border-radius);
+  box-shadow: .3rem .3rem .2rem black;
+}
+
+.divider.grey {
+  background-color: var(--rp-brown);
+}
+
+.divider.vertical {
+  width: 3px;
+  height: 8rem;
+}
