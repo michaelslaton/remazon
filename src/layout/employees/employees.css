@@ -16,7 +16,7 @@
   position: relative;
   box-shadow: .5rem .5rem .2rem black;
   margin-bottom: .5rem;
-  background-color: rgb(34, 29, 22);
+  background-color: var(--rp-dark-brown);
 }
 
 .employee__info {

@@ -7,6 +7,7 @@ type InitialState = {
   navOpen: boolean;
   loading: boolean;
   authDisplay: string;
+  motd: string;
   uiError: string;
   error: any;
 };
@@ -15,6 +16,7 @@ const initialState: InitialState = {
   navOpen: false,
   loading: false,
   authDisplay: "login signup",
+  motd: "Currently Empty!",
   uiError: '',
   error: '',
 };
