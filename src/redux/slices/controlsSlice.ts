@@ -16,7 +16,7 @@ const initialState: InitialState = {
   navOpen: false,
   loading: false,
   authDisplay: "login signup",
-  motd: "Currently Empty!",
+  motd: "",
   uiError: '',
   error: '',
 };
@@ -35,7 +35,15 @@ export const initialLoadThunk = createAsyncThunk("initialLoad/fetch", async (_, 
   thunkApi.dispatch(setProjectsList(data.data.projects))
   thunkApi.dispatch(setRanksList(data.data.ranks))
   
-  return;
+  return data;
+});
+
+export const fetchMotdThunk = createAsyncThunk("motd/fetch", async (_thunkApi)=>{
+  const response = await fetch(`${remazonUrl}/motd`, {
+    method: "GET",
+  });
+  const data = response.json();
+  return data;
 });
 
 // -------------------------------------------------------------------------------------------->
@@ -50,6 +58,9 @@ const mainControl = createSlice({
     setAuthDisplay: (state,action) => {
       state.authDisplay = action.payload;
     },
+    setMotd: (state,action) => {
+      state.motd = action.payload.data;
+    },
     setUiError: (state,action) => {
       state.uiError = action.payload;
     },
@@ -62,8 +73,9 @@ const mainControl = createSlice({
   },
   extraReducers: (builder) => {
 // initialLoad ------------------------------------------------------------->
-    builder.addCase(initialLoadThunk.fulfilled, (state)=>{
+    builder.addCase(initialLoadThunk.fulfilled, (state,action)=>{
       state.loading = false;
+      state.motd = action.payload.data.motd;
       state.error = '';
     });
     builder.addCase(initialLoadThunk.pending, (state)=>{
@@ -73,6 +85,19 @@ const mainControl = createSlice({
       state.loading = false;
       state.error = action.error.message;
     });
+  // Motd ------------------------------------------------------------->
+      builder.addCase(fetchMotdThunk.fulfilled, (state, action)=>{
+        state.loading = false;
+        state.motd = action.payload.data;
+        state.error = '';
+      });
+      builder.addCase(fetchMotdThunk.pending, (state)=>{
+        state.loading = true;
+      });
+      builder.addCase(fetchMotdThunk.rejected, (state, action)=>{
+        state.loading = false;
+        state.error = action.error.message;
+      });
   }
 });
 
