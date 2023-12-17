@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminAccessRoute from "./utils/admin-access-route/AdminAccessRoute";
 import AuthRoute from "./utils/firebase/AuthRoute";
+import AdminPanel from "./layout/admin-panel/AdminPanel";
 import CreateProject from "./layout/projects/project-component/CreateProject";
 import EditEmployee from "./layout/employees/employee-component/EditEmployee";
 import EditProject from "./layout/projects/project-component/EditProject";
@@ -34,6 +35,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage/>,
+        errorElement: <RouteError/>,
+      },
+      {
+        path: "/admin",
+        element: 
+          <AdminAccessRoute>
+            <AdminPanel/>
+          </AdminAccessRoute>,
         errorElement: <RouteError/>,
       },
       {

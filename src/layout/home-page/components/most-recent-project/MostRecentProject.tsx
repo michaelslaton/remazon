@@ -12,7 +12,12 @@ const MostRecentProject: React.FC = () => {
 
   return (
     <div>
-      <Project data={mostRecentProject}/>
+      <div className="most-recent-cel-title">
+        Most Recent Project
+      </div>
+      <div>
+        <Project data={mostRecentProject}/>
+      </div>
     </div>
   )
 };
