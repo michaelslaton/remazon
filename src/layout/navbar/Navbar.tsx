@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../redux/hooks";
 import CollapseButton from "./collapse-button/CollapseButton";
 import LinkButton from "./link-button/LinkButton";
-import { faHouse, faProjectDiagram, faUsers, faRankingStar } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faProjectDiagram, faUsers, faRankingStar, faStar } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import EmployeeType from "../../types/employeeType";
 import "./navbar.css";
@@ -45,12 +45,20 @@ const Navbar: React.FC = () => {
         <LinkButton key={data.id} data={data}/>
       ))}
       { currentEmployee?.admin &&
-        <LinkButton data={{
-          id: 4,
-          name: "Ranks",
-          url: "/ranks",
-          icon: faRankingStar,
-        }}/>
+        <>
+          <LinkButton data={{
+            id: 4,
+            name: "Ranks",
+            url: "/ranks",
+            icon: faRankingStar,
+          }}/>
+          <LinkButton data={{
+            id: 5,
+            name: "Admin",
+            url: "/admin",
+            icon: faStar,
+          }}/>
+        </>
       }
     </div>
   );

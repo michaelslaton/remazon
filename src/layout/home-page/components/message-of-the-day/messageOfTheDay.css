@@ -1,5 +1,6 @@
 .motd__container {
   width: 100%;
+  margin-top: 2rem;
 }
 
 .motd__wrapper {
@@ -20,4 +21,5 @@
 .motd {
   font-size: 1.5rem;
   font-style: italic;
+  margin-top: .5rem;
 }
