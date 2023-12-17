@@ -12,7 +12,12 @@ const MostRecentEmployee: React.FC = () => {
 
   return (
     <div>
-      <Employee data={mostRecentEmployee}/>
+      <div className="most-recent-cel-title">
+        Most Recent Employee
+      </div>
+      <div>
+        <Employee data={mostRecentEmployee}/>
+      </div>
     </div>
   )
 };

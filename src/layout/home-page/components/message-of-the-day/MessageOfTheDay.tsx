@@ -1,8 +1,15 @@
-import { useAppSelector } from "../../../../redux/hooks";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import "./messageOfTheDay.css";
+import { fetchMotdThunk } from "../../../../redux/slices/controlsSlice";
 
 const MessageOfTheDay: React.FC = () => {
   const motd = useAppSelector((state)=> state.mainControl.motd);
+  const dispatch = useAppDispatch();
+
+  useEffect(()=>{
+    dispatch(fetchMotdThunk());
+  },[]);
 
   return (
     <>
