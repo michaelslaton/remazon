@@ -10,10 +10,11 @@ const HomePage: React.FC = () => {
     <>
       <MessageOfTheDay />
       <div className="most-recent-container">
-        <Divider grey={true}/>
         <div className="most-recent-wrapper">
           <MostRecentEmployee/>
-          <Divider vertical={true}/>
+          <div className="most-recent-divider">
+            <Divider vertical={true}/>
+          </div>
           <MostRecentProject/>
         </div>
       </div>
