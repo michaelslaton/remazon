@@ -27,8 +27,8 @@ const AdminPanel: React.FC = () => {
   };
 
   return (
-    <>
-      <form>
+    <div className="center-display-space">
+      <form className="form-wrapper">
         <label>
           <div className="form-input-label">Message of the Day:</div>
           <textarea
@@ -47,7 +47,7 @@ const AdminPanel: React.FC = () => {
             Save Changes
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
