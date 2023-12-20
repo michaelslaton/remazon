@@ -53,7 +53,12 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
             {birthday.getDate()} - {months[birthday.getMonth()]}
           </li>
           : 
-          <></>
+          <li>
+            <div className="employee__info-key">
+              Birthday:
+            </div>
+              N/A
+          </li>
         }
 
         <li>

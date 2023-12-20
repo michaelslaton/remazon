@@ -15,10 +15,8 @@ const AdminAccessRoute: React.FC<AuthProps> = ({ children }) => {
       console.error("Admin access only.");
       navigate("/");
     }
-    else console.log("Admin access granted.");
   },[]);
 
-  
   if(!currentEmployee?.admin) return <></>;
 
   return (

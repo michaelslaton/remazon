@@ -1,9 +1,10 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { ProjectPostType } from "../../../types/projectType";
 import { createProjectThunk } from "../../../redux/slices/projectsSlice";
+import { projectTypes } from "../../../data/projectTypes";
 import "../projects.css";
-import { useNavigate } from "react-router-dom";
 
 const CreateProject: React.FC = () => {
   const navigate = useNavigate();
@@ -47,7 +48,11 @@ const CreateProject: React.FC = () => {
             id="type"
             name="type"
             ref={typeRef}>
-            <option value="string">Eh ??</option>
+            {
+              projectTypes.map((type)=> (
+                <option key={type.id} value={type.name}>{type.name}</option>
+              ))
+            }
           </select>
         </label>
 
