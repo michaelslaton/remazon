@@ -23,7 +23,7 @@ const RanksDisplay: React.FC = () => {
 
   return (
     <div className="center-display-space">
-      <div className="form-wrapper">
+      <div className="form-wrapper ranks-wrapper">
         <h2 className="title">Ranks</h2>
         {sortedRanks.map((rank)=>(
           <Rank key={rank.id} rankData={rank}/>

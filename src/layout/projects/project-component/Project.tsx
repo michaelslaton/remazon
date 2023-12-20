@@ -24,9 +24,11 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   const currentHostsRank: RankType | undefined = ranks.find((rank)=> rank.id === host?.rank);
 
   const deleteButtonHandler = (): void => {
+    if (window.confirm(`Are you sure you want to delete the project ${data.name} ?`)) {
     dispatch(deleteProjectThunk(data.id))
       .then(() => dispatch(fetchProjectsThunk()))
       .then(() => setShowConfirm(!showConfirm));
+    }
   };
 
   // editButtonRender checks all the conditions to see if access is permitted to edit a project.

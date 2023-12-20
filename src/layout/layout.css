@@ -57,7 +57,7 @@ img {
   min-width: 2rem;
   display: block;
   border: .1rem solid var(--remazon-prime);
-  background: transparent;
+  background-color: var(--nav-background-color);
   color: var(--remazon-prime);
   font-size: 1.1rem;
   border-radius: var(--border-radius);
