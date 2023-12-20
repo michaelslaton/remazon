@@ -10,6 +10,7 @@
   padding: .5rem 5rem;
   background-color: var(--rp-brown);
   border-radius: var(--border-radius);
+  box-shadow: .5rem .5rem .2rem black;
 }
 
 .motd__a-message {

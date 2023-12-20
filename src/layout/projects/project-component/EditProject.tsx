@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editProjectThunk } from "../../../redux/slices/projectsSlice";
 import { setUiError } from "../../../redux/slices/controlsSlice";
+import { projectTypes } from "../../../data/projectTypes";
 import ProjectType from "../../../types/projectType";
 import EmployeeType from "../../../types/employeeType";
 import "../projects.css";
@@ -16,13 +17,24 @@ const EditProject: React.FC = () => {
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const statusRef = useRef<HTMLInputElement>(null);
   const hostRef = useRef<HTMLSelectElement>(null);
-  const typeRef = useRef<HTMLInputElement>(null);
+  const typeRef = useRef<HTMLSelectElement>(null);
   const projects: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects)
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const selectedProject: ProjectType | undefined = projects.find((project)=> project.id === Number(paramId));
   const employeesList = useAppSelector((state)=> state.employeesControl.employees);
 
   useEffect(()=> setCountData(selectedProject!.description.length),[]);
+
+  const checkForVariance = (): boolean => {
+    if (
+      nameRef.current!.value === selectedProject?.name &&
+      descriptionRef.current!.value === selectedProject?.description &&
+      statusRef.current!.checked === selectedProject?.status &&
+      Number(hostRef.current!.value) === selectedProject?.host &&
+      typeRef.current!.value === selectedProject?.type
+      ) return false;
+    else return true;
+  };
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -33,6 +45,11 @@ const EditProject: React.FC = () => {
       return;
     };
     if (currentEmployee!.admin) inputHost = Number(hostRef.current!.value);
+
+    if(!checkForVariance()) {
+      dispatch(setUiError("No changes have been made."));
+      return;
+    };
 
     const updatedProject: ProjectType = {
       ...selectedProject!,
@@ -81,12 +98,17 @@ const EditProject: React.FC = () => {
 
           <label>
             <div className="form-input-label">Type:</div>
-            <input
-              type="text"
+            <select
               id="type"
               name="type"
               ref={typeRef}
-              defaultValue={selectedProject?.type}/>
+              defaultValue={selectedProject?.type}>
+              {
+                projectTypes.map((type)=> (
+                  <option key={type.id} value={type.name}>{type.name}</option>
+                ))
+              }
+            </select>
           </label>
 
           <label>
