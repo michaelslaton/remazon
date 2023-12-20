@@ -11,10 +11,10 @@ const ErrorDisplay: React.FC = () => {
   const projectError: string = useAppSelector((state)=> state.projectsControl.error);
   const rankError: string = useAppSelector((state)=> state.ranksControl.error);
   const uiError: string = useAppSelector((state)=> state.mainControl.uiError);
+  const dispatch = useAppDispatch();
 
   const generateError = (type: string, error: string): JSX.Element => {
-    const dispatch = useAppDispatch();
-
+    
     const generateCloseButton = (): JSX.Element => {
       if (type === "control") return (
         <button className="button close-button" onClick={()=> dispatch(clearControlError())}>

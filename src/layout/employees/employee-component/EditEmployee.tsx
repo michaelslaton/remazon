@@ -26,6 +26,7 @@ const EditEmployee: React.FC = () => {
 
   // Birthday formatting ------------------------------------------------------ >
   let employeeBirthday: Date | null = null;
+  let updatedBirthday: Date | null = null;
   let birthdayString: string = "";
   if(selectedEmployee?.birthday) {
     employeeBirthday = new Date(selectedEmployee?.birthday);
@@ -35,18 +36,45 @@ const EditEmployee: React.FC = () => {
 
   useEffect(()=> setCountData(selectedEmployee!.description.length),[]);
 
+  const checkForVariance = (): boolean => {
+    let updatedRank = selectedEmployee!.rank;
+    let birthdayCheck: boolean = false;
+    if(currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
+
+    if(bdayRef.current!.value) {
+      const newBirthday = bdayRef.current!.value.split("-");
+      updatedBirthday = new Date(`${newBirthday[1]}-${newBirthday[2]}-${newBirthday[0]}`);
+    };
+    
+    if(updatedBirthday && employeeBirthday) {
+      if (employeeBirthday.getTime() !== updatedBirthday.getTime()) birthdayCheck = true;
+    };
+
+    if (
+      nameRef.current!.value === selectedEmployee?.name &&
+      descriptionRef.current!.value === selectedEmployee?.description &&
+      statusRef.current!.checked === selectedEmployee?.status &&
+      updatedRank === selectedEmployee?.rank &&
+      !birthdayCheck
+      ) return false;
+    else return true;
+  };
+
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
+    const isThereVariance = checkForVariance();
+
+    if(!isThereVariance) {
+      dispatch(setUiError("No changes have been made."));
+      return;
+    };
 
     if (descriptionRef.current!.value.length > 100) {
       dispatch(setUiError("Please shorten your description to 100 characters or less."));
       return;
     };
 
-    if(bdayRef.current!.value) {
-      const newBirthday = bdayRef.current!.value.split("-");
-      employeeBirthday = new Date(`${newBirthday[1]}-${newBirthday[2]}-${newBirthday[0]}`);
-    };
+    if(updatedBirthday) employeeBirthday = updatedBirthday; 
     
     let updatedRank = selectedEmployee!.rank;
     if(currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);

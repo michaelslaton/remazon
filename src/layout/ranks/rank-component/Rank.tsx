@@ -36,7 +36,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
   const deleteButtonHandler = (): void => {
     const employeesAssignedRank = employeeList.filter((employee)=> employee.rank === rankData.id);
     if(employeesAssignedRank.length) dispatch(setUiError(`Please reassign all employees currently assigned to the rank of ${rankData.name} before attempting to delete.`));
-    else dispatch(deleteRankThunk(rankData.id));
+    else if (window.confirm(`Are you sure you want to delete the rank ${rankData.name} ?`)) dispatch(deleteRankThunk(rankData.id));
   };
 
   // Render Edit Mode ------------------------------------------------->
