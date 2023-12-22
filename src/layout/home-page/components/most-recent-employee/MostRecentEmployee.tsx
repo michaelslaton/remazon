@@ -1,7 +1,7 @@
-import { useAppSelector } from "../../../../redux/hooks";
-import EmployeeType from "../../../../types/employeeType";
-import Employee from "../../../employees/employee-component/Employee";
-import "./mostRecentEmployee.css";
+import { useAppSelector } from '../../../../redux/hooks';
+import EmployeeType from '../../../../types/employeeType';
+import Employee from '../../../employees/employee-component/Employee';
+import './mostRecentEmployee.css';
 
 const MostRecentEmployee: React.FC = () => {
   const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
@@ -12,7 +12,7 @@ const MostRecentEmployee: React.FC = () => {
 
   return (
     <div>
-      <div className="most-recent-cel-title">
+      <div className='most-recent-cel-title'>
         Most Recent Employee
       </div>
       <div>

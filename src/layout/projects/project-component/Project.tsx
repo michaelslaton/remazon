@@ -1,13 +1,13 @@
-import { ReactNode, useState } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
-import { deleteProjectThunk, fetchProjectsThunk } from "../../../redux/slices/projectsSlice";
-import { faEdit, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RankType from "../../../types/rankType";
-import ProjectType from "../../../types/projectType";
-import "../projects.css";
-import EmployeeType from "../../../types/employeeType";
+import { ReactNode, useState } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
+import { deleteProjectThunk, fetchProjectsThunk } from '../../../redux/slices/projectsSlice';
+import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import RankType from '../../../types/rankType';
+import ProjectType from '../../../types/projectType';
+import '../projects.css';
+import EmployeeType from '../../../types/employeeType';
 
 type ProjectProps = {
   data: ProjectType;
@@ -36,7 +36,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   const editButtonRender = (): ReactNode | null => {
     if ( data.locked && !currentEmployee?.admin ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
-      <button className="button card-button" onClick={()=> navigate(`/projects/edit/${data.id}`)}>
+      <button className='button card-button' onClick={()=> navigate(`/projects/edit/${data.id}`)}>
         <FontAwesomeIcon icon={faEdit}/>
       </button>
     );
@@ -45,47 +45,47 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   const deleteButtonRender = (): ReactNode | null => {
     if ( data.locked && !currentEmployee?.admin ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
-      <button className="button delete card-button" onClick={()=> deleteButtonHandler()}>
+      <button className='button delete card-button' onClick={()=> deleteButtonHandler()}>
         <FontAwesomeIcon icon={faTrashCan}/>
       </button>
     );
   };
 
   return (
-    <div className="project__wrapper">
-      <h2 className="title project-title">{data.name}<div className={`status-dot ${data.status ? "active" : ""}`}/></h2>
-      <div className="project__info-wrapper">
-        <ul className="project__info">
+    <div className='project__wrapper'>
+      <h2 className='title project-title'>{data.name}<div className={`status-dot ${data.status ? 'active' : ''}`}/></h2>
+      <div className='project__info-wrapper'>
+        <ul className='project__info'>
 
           <li>
-            <div className="project-data__key">
+            <div className='project-data__key'>
               Host:
             </div> 
-            <div className="project-data__value" style={{display: "inline", color: currentHostsRank?.color}}>
+            <div className='project-data__value' style={{display: 'inline', color: currentHostsRank?.color}}>
               {host!.name}
             </div>
           </li>
 
           <li>
-            <div className="project-data__key">
+            <div className='project-data__key'>
               Type:
             </div>
-            <div className="project-data__value">
+            <div className='project-data__value'>
               {data.type}
             </div>
           </li>
 
           <li>
-            <div className="project-data__key">
+            <div className='project-data__key'>
               Description:
             </div>
-            <article className="project-data__description">
+            <article className='project-data__description'>
               {data.description}
             </article>
           </li>
 
         </ul>
-        <div className="project__buttons_wrapper">
+        <div className='project__buttons_wrapper'>
           {editButtonRender()}
           {deleteButtonRender()}
         </div>

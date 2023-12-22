@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { Auth, getAuth, onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
 
 type AuthProps = {
   children: JSX.Element;
@@ -15,8 +15,8 @@ const AuthRoute: React.FC<AuthProps> = ({ children }) => {
     onAuthStateChanged(auth, (user)=>{
       if(user) setLoading(false);
       else {
-        console.error("Unauthorized");
-        navigate("/login");
+        console.error('Unauthorized');
+        navigate('/login');
       };
     });
   },[auth]);
