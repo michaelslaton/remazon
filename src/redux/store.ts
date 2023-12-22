@@ -1,16 +1,16 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import mainControlReducer from "./slices/controlsSlice";
-import employeesReducer from "./slices/employeesSlice";
-import projectsReducer from "./slices/projectsSlice";
-import ranksReducer from "./slices/ranksSlice";
-import notificationsReducer from "./slices/notificationsSlice";
-import storage from "redux-persist/lib/storage";
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import mainControlReducer from './slices/controlsSlice';
+import employeesReducer from './slices/employeesSlice';
+import projectsReducer from './slices/projectsSlice';
+import ranksReducer from './slices/ranksSlice';
+import notificationsReducer from './slices/notificationsSlice';
+import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
-    key: "root",
+    key: 'root',
     storage,
-    blacklist: [ "mainControl", "notificationsControl" ],
+    blacklist: [ 'mainControl', 'notificationsControl' ],
 };
 
 const reducer = combineReducers({

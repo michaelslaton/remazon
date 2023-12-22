@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
+import { useEffect } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
 
 type AuthProps = {
   children: JSX.Element;
@@ -12,8 +12,8 @@ const AdminAccessRoute: React.FC<AuthProps> = ({ children }) => {
 
   useEffect(()=>{
     if(!currentEmployee?.admin) {
-      console.error("Admin access only.");
-      navigate("/");
+      console.error('Admin access only.');
+      navigate('/');
     }
   },[]);
 

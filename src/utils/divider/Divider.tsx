@@ -1,4 +1,4 @@
-import "./divider.css";
+import './divider.css';
 
 type DividerProps = {
   vertical?: boolean;
@@ -8,7 +8,7 @@ type DividerProps = {
 const Divider: React.FC<DividerProps> = ({ vertical=false, grey=false }) => {
 
   return (
-    <div className={`divider ${vertical ? "vertical" : ""} ${grey ? "grey" : ""}`}/>
+    <div className={`divider ${vertical ? 'vertical' : ''} ${grey ? 'grey' : ''}`}/>
   );
 };
 

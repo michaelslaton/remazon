@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useAppSelector } from "../../../redux/hooks";
-import NotificationType from "../../../types/notificationType";
-import EmployeeType from "../../../types/employeeType";
-import "../notifications.css";
+import { useEffect } from 'react';
+import { useAppSelector } from '../../../redux/hooks';
+import NotificationType from '../../../types/notificationType';
+import EmployeeType from '../../../types/employeeType';
+import '../notifications.css';
 
 type NotificationProps = {
   data: NotificationType | null;

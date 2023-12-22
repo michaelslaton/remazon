@@ -1,10 +1,10 @@
-import { useRef } from "react";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { createRankThunk, fetchRanksThunk } from "../../../redux/slices/ranksSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faCheck } from "@fortawesome/free-solid-svg-icons";
-import { RankPostType } from "../../../types/rankType";
-import "../ranks.css";
+import { useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { createRankThunk, fetchRanksThunk } from '../../../redux/slices/ranksSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { RankPostType } from '../../../types/rankType';
+import '../ranks.css';
 
 type NewRankProps = {
   setNewRankDisplay: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,36 +31,36 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
   };
 
   return (
-    <div className="rank edit">
-      <form className="rank__form">
+    <div className='rank edit'>
+      <form className='rank__form'>
 
-      <label htmlFor="title">
+      <label htmlFor='title'>
         Title:
         <input
-          type="text"
-          id="title"
-          name="title"
+          type='text'
+          id='title'
+          name='title'
           ref={titleRef}
         />
       </label>
 
-      <label htmlFor="color">
+      <label htmlFor='color'>
         Color:
         <input
-          type="color"
-          id="color"
-          name="color"
+          type='color'
+          id='color'
+          name='color'
           ref={colorRef}
-          className="rank-color-selector"
-          defaultValue={"#ffa500"}
+          className='rank-color-selector'
+          defaultValue={'#ffa500'}
         />
       </label>
       <div>
-        <button type="submit" className="button rank__submit create" onClick={(e)=> submitHandler(e)}>
+        <button type='submit' className='button rank__submit create' onClick={(e)=> submitHandler(e)}>
           <FontAwesomeIcon icon={faCheck}/>
         </button>
 
-        <button className="button rank_submit delete" onClick={()=> setNewRankDisplay(false)}>
+        <button className='button rank_submit delete' onClick={()=> setNewRankDisplay(false)}>
           <FontAwesomeIcon icon={faX}/>
         </button>
       </div>

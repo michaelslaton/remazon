@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { getAuth } from "firebase/auth";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchCurrentEmployeeThunk } from "../../redux/slices/employeesSlice";
-import LoggedIn from "./components/LoggedIn";
-import SignIn from "./components/SignIn";
-import LoggedOut from "./components/LoggedOut";
-import EmployeeType from "../../types/employeeType";
-import "./authentication.css";
+import { useEffect } from 'react';
+import { getAuth } from 'firebase/auth';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { fetchCurrentEmployeeThunk } from '../../redux/slices/employeesSlice';
+import LoggedIn from './components/LoggedIn';
+import SignIn from './components/SignIn';
+import LoggedOut from './components/LoggedOut';
+import EmployeeType from '../../types/employeeType';
+import './authentication.css';
 
 const Authentication: React.FC = () => {
   const auth = getAuth();
@@ -24,12 +24,12 @@ const Authentication: React.FC = () => {
   );
 
   // Show if the employee wants to sign in ------------------------------------------------------------------------------------------------------>
-  else if(authDisplay === "login") return (
+  else if(authDisplay === 'login') return (
     <SignIn/>
   );
 
   // Default view to show sign in or sign up ----------------------------------------------------------------------------------------------------->
-  else if (authDisplay === "login signup") return (
+  else if (authDisplay === 'login signup') return (
     <LoggedOut/>
   );
 };

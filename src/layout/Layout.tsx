@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "./navbar/Navbar";
-import Header from "./header/Header";
-import { useAppSelector } from "../redux/hooks";
-import "./layout.css";
+import { Outlet } from 'react-router-dom';
+import Navbar from './navbar/Navbar';
+import Header from './header/Header';
+import { useAppSelector } from '../redux/hooks';
+import './layout.css';
 
 const Layout: React.FC = () => {
   const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
@@ -10,7 +10,7 @@ const Layout: React.FC = () => {
   return (
     <>
       <Navbar/>
-      <div className={`main-screen ${ navActive ? "active" : ""}`}>
+      <div className={`main-screen ${ navActive ? 'active' : ''}`}>
         <Header/>
         <Outlet/>
       </div>

@@ -1,11 +1,11 @@
-import { useRef, useState, useEffect } from "react";
-import { useParams, useNavigate, NavigateFunction } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { editEmployeeThunk } from "../../../redux/slices/employeesSlice";
-import EmployeeType from "../../../types/employeeType";
-import Rank from "../../../types/rankType";
-import "../employees.css";
-import { setUiError } from "../../../redux/slices/controlsSlice";
+import { useRef, useState, useEffect } from 'react';
+import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { editEmployeeThunk } from '../../../redux/slices/employeesSlice';
+import EmployeeType from '../../../types/employeeType';
+import Rank from '../../../types/rankType';
+import '../employees.css';
+import { setUiError } from '../../../redux/slices/controlsSlice';
 
 const EditEmployee: React.FC = () => {
   const { paramId } = useParams<string>();
@@ -27,7 +27,7 @@ const EditEmployee: React.FC = () => {
   // Birthday formatting ------------------------------------------------------ >
   let employeeBirthday: Date | null = null;
   let updatedBirthday: Date | null = null;
-  let birthdayString: string = "";
+  let birthdayString: string = '';
   if(selectedEmployee?.birthday) {
     employeeBirthday = new Date(selectedEmployee?.birthday);
     birthdayString = employeeBirthday.toISOString().split('T')[0];
@@ -42,7 +42,7 @@ const EditEmployee: React.FC = () => {
     if(currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
 
     if(bdayRef.current!.value) {
-      const newBirthday = bdayRef.current!.value.split("-");
+      const newBirthday = bdayRef.current!.value.split('-');
       updatedBirthday = new Date(`${newBirthday[1]}-${newBirthday[2]}-${newBirthday[0]}`);
     };
     
@@ -65,12 +65,12 @@ const EditEmployee: React.FC = () => {
     const isThereVariance = checkForVariance();
 
     if(!isThereVariance) {
-      dispatch(setUiError("No changes have been made."));
+      dispatch(setUiError('No changes have been made.'));
       return;
     };
 
     if (descriptionRef.current!.value.length > 100) {
-      dispatch(setUiError("Please shorten your description to 100 characters or less."));
+      dispatch(setUiError('Please shorten your description to 100 characters or less.'));
       return;
     };
 
@@ -94,27 +94,27 @@ const EditEmployee: React.FC = () => {
   };
 
   return (
-    <div className="center-display-space">
-      <div className="form-wrapper">
-        <h2 className="title">Edit {selectedEmployee!.name}</h2>
-        <form className="employee__edit-form">
+    <div className='center-display-space'>
+      <div className='form-wrapper'>
+        <h2 className='title'>Edit {selectedEmployee!.name}</h2>
+        <form className='employee__edit-form'>
           
           <label>
-            <div className="form-input-label">Name:</div>
+            <div className='form-input-label'>Name:</div>
             <input
-              type="text"
-              id="name"
-              name="name"
+              type='text'
+              id='name'
+              name='name'
               ref={nameRef}
               defaultValue={selectedEmployee?.name}/>
           </label>
 
           { currentEmployee!.admin &&
             <label>
-              <div className="form-input-label">Rank:</div>
+              <div className='form-input-label'>Rank:</div>
               <select
-                id="rank"
-                name="rank"
+                id='rank'
+                name='rank'
                 ref={rankRef}
                 defaultValue={selectedEmployee?.rank}>
                 {ranks.map(((rank)=>(
@@ -125,40 +125,40 @@ const EditEmployee: React.FC = () => {
           }
 
           <label>
-            <div className="form-input-label">Birthday:</div>
+            <div className='form-input-label'>Birthday:</div>
             <input
-              type="date"
-              id="birthday"
-              name="birthday"
+              type='date'
+              id='birthday'
+              name='birthday'
               ref={bdayRef}
               defaultValue={birthdayString}/>
           </label>
 
           <label>
-            <div className="form-input-label">Description:</div>
+            <div className='form-input-label'>Description:</div>
             <textarea
-              id="description"
-              name="description"
+              id='description'
+              name='description'
               ref={descriptionRef}
               maxLength={101}
               onChange={(e)=> setCountData(e.currentTarget.value.length)}
               defaultValue={selectedEmployee?.description}/>
           </label>
-          <div className="parameter-text">
+          <div className='parameter-text'>
             {countData} of 100
           </div>
 
           <label>
-            <div className="form-input-label">Active:</div>
+            <div className='form-input-label'>Active:</div>
             <input
-              className="checkbox"
-              type="checkbox"
+              className='checkbox'
+              type='checkbox'
               ref={statusRef}
               defaultChecked={selectedEmployee?.status}/>
           </label>
 
-            <button className="button employee__edit-control" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
-            <button className="button employee__edit-control" onClick={()=> navigate("/employees")}>Cancel</button>
+            <button className='button employee__edit-control' type='submit' onClick={(e)=> submitHandler(e)}>Submit</button>
+            <button className='button employee__edit-control' onClick={()=> navigate('/employees')}>Cancel</button>
         </form>
       </div>
     </div>
