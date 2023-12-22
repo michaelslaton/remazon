@@ -1,11 +1,11 @@
-import { getAuth, signOut } from "firebase/auth";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faNewspaper, faSignOut } from "@fortawesome/free-solid-svg-icons";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { clearCurrentEmployee } from "../../../redux/slices/employeesSlice";
-import RankType from "../../../types/rankType";
-import "../authentication.css";
+import { getAuth, signOut } from 'firebase/auth';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faNewspaper, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { clearCurrentEmployee } from '../../../redux/slices/employeesSlice';
+import RankType from '../../../types/rankType';
+import '../authentication.css';
 
 const LoggedIn: React.FC = () => {
   const auth = getAuth();
@@ -22,10 +22,10 @@ const LoggedIn: React.FC = () => {
   };
 
   return (
-    <div className="logged-in-wrapper">
-      Signed in as <div className="authentication__employee-name" style={{color: currentEmployeesRank?.color}}>{currentEmployee?.name}</div>
-      <button className="button card-button" onClick={()=> navigate("/notifications")}><FontAwesomeIcon icon={faNewspaper}/></button>
-      <button className="button signout-button card-button" onClick={()=> logoutHandler()}><FontAwesomeIcon icon={faSignOut}/></button>
+    <div className='logged-in-wrapper'>
+      Signed in as <div className='authentication__employee-name' style={{color: currentEmployeesRank?.color}}>{currentEmployee?.name}</div>
+      <button className='button card-button' onClick={()=> navigate('/notifications')}><FontAwesomeIcon icon={faNewspaper}/></button>
+      <button className='button signout-button card-button' onClick={()=> logoutHandler()}><FontAwesomeIcon icon={faSignOut}/></button>
     </div>
   );
 };

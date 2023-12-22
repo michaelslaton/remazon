@@ -1,8 +1,8 @@
-import { useRef } from "react";
-import { useNavigate, NavigateFunction } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setUiError, updateMotdThunk } from "../../redux/slices/controlsSlice";
-import "./adminPanel.css";
+import { useRef } from 'react';
+import { useNavigate, NavigateFunction } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { setUiError, updateMotdThunk } from '../../redux/slices/controlsSlice';
+import './adminPanel.css';
 
 const AdminPanel: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ const AdminPanel: React.FC = () => {
     e.preventDefault();
 
     if(motdRef.current!.value === currentMotd) {
-      dispatch(setUiError("No changes have been made."));
+      dispatch(setUiError('No changes have been made.'));
       return;
     };
 
@@ -22,18 +22,18 @@ const AdminPanel: React.FC = () => {
       motd: motdRef.current!.value
     }));
 
-    navigate("/");
+    navigate('/');
     return;
   };
 
   return (
-    <div className="center-display-space">
-      <form className="form-wrapper">
+    <div className='center-display-space'>
+      <form className='form-wrapper'>
         <label>
-          <div className="form-input-label">Message of the Day:</div>
+          <div className='form-input-label'>Message of the Day:</div>
           <textarea
-            id="description"
-            name="description"
+            id='description'
+            name='description'
             ref={motdRef}
             // maxLength={101}
             // onChange={(e)=> setCountData(e.currentTarget.value.length)}
@@ -41,8 +41,8 @@ const AdminPanel: React.FC = () => {
         </label>
 
         <button
-          className="button"
-          type="submit"
+          className='button'
+          type='submit'
           onClick={(e)=> submitHandler(e)}>
             Save Changes
         </button>

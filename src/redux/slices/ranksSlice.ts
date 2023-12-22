@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import RankType, { RankPostType } from "../../types/rankType";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import RankType, { RankPostType } from '../../types/rankType';
 
 type InitialState = {
     loading: boolean,
@@ -10,26 +10,26 @@ type InitialState = {
 const initialState: InitialState = {
   loading: false,
   ranks: [],
-  error: "",
+  error: '',
 };
 
-const ranksUrl: URL= new URL("http://localhost:5000/remazon/ranks");
+const ranksUrl: URL= new URL('http://localhost:5000/remazon/ranks');
 
 // Api Calls --------------------------------------------------------------------------------->
 
-export const fetchRanksThunk = createAsyncThunk("ranks/fetch", async (_thunkApi)=>{
+export const fetchRanksThunk = createAsyncThunk('ranks/fetch', async (_thunkApi)=>{
   const response = await fetch(ranksUrl, {
-    method: "GET",
+    method: 'GET',
   });
   const data = response.json();
   return data;
 });
 
-export const createRankThunk = createAsyncThunk("ranks/create", async (newRank: RankPostType, _thunkApi)=> {
+export const createRankThunk = createAsyncThunk('ranks/create', async (newRank: RankPostType, _thunkApi)=> {
   const response = await fetch(ranksUrl, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type":"application/json"
+      'Content-Type':'application/json'
     },
     body:JSON.stringify(newRank)
   });
@@ -37,11 +37,11 @@ export const createRankThunk = createAsyncThunk("ranks/create", async (newRank: 
   return data;
 });
 
-export const editRankThunk = createAsyncThunk("ranks/edit", async (updatedRank: RankType, _thunkApi)=> {
+export const editRankThunk = createAsyncThunk('ranks/edit', async (updatedRank: RankType, _thunkApi)=> {
   const response = await fetch(ranksUrl, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type":"application/json"
+      'Content-Type':'application/json'
     },
     body:JSON.stringify(updatedRank)
   });
@@ -49,11 +49,11 @@ export const editRankThunk = createAsyncThunk("ranks/edit", async (updatedRank: 
   return data;
 });
 
-export const deleteRankThunk = createAsyncThunk("ranks/delete", async (rankId: number, thunkApi)=> {
+export const deleteRankThunk = createAsyncThunk('ranks/delete', async (rankId: number, thunkApi)=> {
   await fetch(`${ranksUrl}/${rankId}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-Type":"application/json"
+      'Content-Type':'application/json'
     }
   });
   await thunkApi.dispatch(fetchRanksThunk());
@@ -63,14 +63,14 @@ export const deleteRankThunk = createAsyncThunk("ranks/delete", async (rankId: n
 // -------------------------------------------------------------------------------------------->
 
 const ranksslice = createSlice({
-  name: "ranksControl",
+  name: 'ranksControl',
   initialState,
   reducers: {
     setRanksList: (state,action) => {
       state.ranks = action.payload;
     },
     clearRankError: (state) => {
-      state.error = "";
+      state.error = '';
     }
   },
   extraReducers: (builder) => {
@@ -78,7 +78,7 @@ const ranksslice = createSlice({
     builder.addCase(fetchRanksThunk.fulfilled, (state, action)=>{
       state.ranks = []
       state.ranks = action.payload.data;
-      state.error = "";
+      state.error = '';
       state.loading = false;
     });
     builder.addCase(fetchRanksThunk.pending, (state)=>{
@@ -93,7 +93,7 @@ const ranksslice = createSlice({
     // createRank ------------------------------------------------------------->
     builder.addCase(createRankThunk.fulfilled, (state)=>{
       fetchRanksThunk();
-      state.error = "";
+      state.error = '';
       state.loading = false;
     });
     builder.addCase(createRankThunk.pending, (state)=>{

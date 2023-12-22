@@ -1,12 +1,12 @@
-import { useRef, useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { editProjectThunk } from "../../../redux/slices/projectsSlice";
-import { setUiError } from "../../../redux/slices/controlsSlice";
-import { projectTypes } from "../../../data/projectTypes";
-import ProjectType from "../../../types/projectType";
-import EmployeeType from "../../../types/employeeType";
-import "../projects.css";
+import { useRef, useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { editProjectThunk } from '../../../redux/slices/projectsSlice';
+import { setUiError } from '../../../redux/slices/controlsSlice';
+import { projectTypes } from '../../../data/projectTypes';
+import ProjectType from '../../../types/projectType';
+import EmployeeType from '../../../types/employeeType';
+import '../projects.css';
 
 const EditProject: React.FC = () => {
   const { paramId } = useParams<string>();
@@ -41,13 +41,13 @@ const EditProject: React.FC = () => {
     let inputHost = selectedProject!.host;
 
     if (descriptionRef.current!.value.length > 200) {
-      dispatch(setUiError("Please shorten your description to 200 characters or less."));
+      dispatch(setUiError('Please shorten your description to 200 characters or less.'));
       return;
     };
     if (currentEmployee!.admin) inputHost = Number(hostRef.current!.value);
 
     if(!checkForVariance()) {
-      dispatch(setUiError("No changes have been made."));
+      dispatch(setUiError('No changes have been made.'));
       return;
     };
 
@@ -66,27 +66,27 @@ const EditProject: React.FC = () => {
   };
 
   return (
-    <div className="center-display-space">
-      <div className="form-wrapper">
-        <h2 className="title">Edit {selectedProject!.name}</h2>
-        <form className="project__edit-form">
+    <div className='center-display-space'>
+      <div className='form-wrapper'>
+        <h2 className='title'>Edit {selectedProject!.name}</h2>
+        <form className='project__edit-form'>
           
           <label>
-            <div className="form-input-label">Name:</div>
+            <div className='form-input-label'>Name:</div>
             <input
-              type="text"
-              id="name"
-              name="name"
+              type='text'
+              id='name'
+              name='name'
               ref={nameRef}
               defaultValue={selectedProject?.name}/>
           </label>
 
           { currentEmployee!.admin &&
             <label>
-              <div className="form-input-label">Host:</div>
+              <div className='form-input-label'>Host:</div>
               <select
-                id="host"
-                name="host"
+                id='host'
+                name='host'
                 ref={hostRef}
                 defaultValue={selectedProject?.host}>
                   {employeesList?.map((employee)=> (
@@ -97,10 +97,10 @@ const EditProject: React.FC = () => {
           }
 
           <label>
-            <div className="form-input-label">Type:</div>
+            <div className='form-input-label'>Type:</div>
             <select
-              id="type"
-              name="type"
+              id='type'
+              name='type'
               ref={typeRef}
               defaultValue={selectedProject?.type}>
               {
@@ -112,32 +112,32 @@ const EditProject: React.FC = () => {
           </label>
 
           <label>
-            <div className="form-input-label">Description:</div>
+            <div className='form-input-label'>Description:</div>
             <textarea
-              id="description"
-              name="description"
+              id='description'
+              name='description'
               ref={descriptionRef}
               maxLength={200}
               onChange={(e)=> setCountData(e.currentTarget.value.length)}
               defaultValue={selectedProject?.description}/>
           </label>
-          <div className="parameter-text">
+          <div className='parameter-text'>
             {countData} of 200
           </div>
 
           <label>
-            <div className="form-input-label">Active:</div>
+            <div className='form-input-label'>Active:</div>
             <input
-              className="checkbox"
-              type="checkbox"
-              id="status"
-              name="status"
+              className='checkbox'
+              type='checkbox'
+              id='status'
+              name='status'
               ref={statusRef}
               defaultChecked={selectedProject?.status}/>
           </label>
 
-          <button className="button project__edit-control" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
-          <button className="button project__edit-control" onClick={()=> navigate("/projects")}>Cancel</button>
+          <button className='button project__edit-control' type='submit' onClick={(e)=> submitHandler(e)}>Submit</button>
+          <button className='button project__edit-control' onClick={()=> navigate('/projects')}>Cancel</button>
         </form>
       </div>
     </div>

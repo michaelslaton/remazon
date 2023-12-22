@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import EmployeeType, { EmployeePostType } from "../../types/employeeType";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import EmployeeType, { EmployeePostType } from '../../types/employeeType';
 
 type InitialState = {
   loading: boolean;
@@ -15,32 +15,32 @@ const initialState: InitialState = {
   error: '',
 };
 
-const employeesUrl: URL = new URL("http://localhost:5000/remazon/employees");
+const employeesUrl: URL = new URL('http://localhost:5000/remazon/employees');
 
 // Api Calls --------------------------------------------------------------------------------->
 
-export const fetchCurrentEmployeeThunk = createAsyncThunk("users/fetch", async (uid: string, thunkApi)=>{
+export const fetchCurrentEmployeeThunk = createAsyncThunk('users/fetch', async (uid: string, thunkApi)=>{
   await thunkApi.dispatch(fetchEmployeesListThunk());
   const response = await fetch(`${employeesUrl}/${uid}`, {
-    method: "GET",
+    method: 'GET',
   });
   const data = response.json();
   return data;
 });
 
-export const fetchEmployeesListThunk = createAsyncThunk("employees/fetch", async (_thunkApi)=>{
+export const fetchEmployeesListThunk = createAsyncThunk('employees/fetch', async (_thunkApi)=>{
   const response = await fetch(employeesUrl, {
-    method: "GET",
+    method: 'GET',
   });
   const data = response.json();
   return data;
 });
 
-export const createEmployeeThunk = createAsyncThunk("employees/create", async (newEmployee: EmployeePostType, _thunkApi)=> {
+export const createEmployeeThunk = createAsyncThunk('employees/create', async (newEmployee: EmployeePostType, _thunkApi)=> {
   const response = await fetch(employeesUrl, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type":"application/json"
+      'Content-Type':'application/json'
     },
     body:JSON.stringify(newEmployee)
   });
@@ -48,11 +48,11 @@ export const createEmployeeThunk = createAsyncThunk("employees/create", async (n
   return data;
 });
 
-export const editEmployeeThunk = createAsyncThunk("employees/edit", async (updatedEmployee: EmployeeType, _thunkApi)=> {
+export const editEmployeeThunk = createAsyncThunk('employees/edit', async (updatedEmployee: EmployeeType, _thunkApi)=> {
   const response = await fetch(employeesUrl, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type":"application/json"
+      'Content-Type':'application/json'
     },
     body:JSON.stringify(updatedEmployee)
   });
@@ -63,7 +63,7 @@ export const editEmployeeThunk = createAsyncThunk("employees/edit", async (updat
 // -------------------------------------------------------------------------------------------->
 
 const employeesSlice = createSlice({
-  name: "employees",
+  name: 'employees',
   initialState,
   reducers: {
     setEmployeesList: (state,action) => {
@@ -73,7 +73,7 @@ const employeesSlice = createSlice({
       state.currentEmployee = null;
     },
     clearEmployeeError: (state) => {
-      state.error = "";
+      state.error = '';
     }
   },
   extraReducers: (builder) => {

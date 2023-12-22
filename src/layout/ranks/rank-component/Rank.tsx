@@ -1,12 +1,12 @@
-import { useState, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { deleteRankThunk, editRankThunk } from "../../../redux/slices/ranksSlice";
-import { setUiError } from "../../../redux/slices/controlsSlice";
-import { faEdit, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RankType from "../../../types/rankType";
-import "../ranks.css";
-import EmployeeType from "../../../types/employeeType";
+import { useState, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { deleteRankThunk, editRankThunk } from '../../../redux/slices/ranksSlice';
+import { setUiError } from '../../../redux/slices/controlsSlice';
+import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import RankType from '../../../types/rankType';
+import '../ranks.css';
+import EmployeeType from '../../../types/employeeType';
 
 type RankProps = {
   rankData: RankType;
@@ -41,33 +41,33 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
 
   // Render Edit Mode ------------------------------------------------->
   if (editMode) return (
-    <div className="rank edit">
-      <form className="rank__form">
+    <div className='rank edit'>
+      <form className='rank__form'>
 
-      <label htmlFor="title">
+      <label htmlFor='title'>
         Title:
         <input
-          type="text"
-          id="title"
-          name="title"
+          type='text'
+          id='title'
+          name='title'
           ref={titleRef}
           defaultValue={rankData!.name}
         />
       </label>
 
-      <label htmlFor="color">
+      <label htmlFor='color'>
         Color:
         <input
-          type="color"
-          id="color"
-          name="color"
+          type='color'
+          id='color'
+          name='color'
           ref={colorRef}
-          className="rank-color-selector"
+          className='rank-color-selector'
           defaultValue={rankData!.color}
         />
       </label>
 
-      <button type="submit" className="button rank__submit" onClick={(e)=> editSubmit(e)}>
+      <button type='submit' className='button rank__submit' onClick={(e)=> editSubmit(e)}>
         <FontAwesomeIcon icon={faEdit}/>
       </button>
 
@@ -77,16 +77,16 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
   
   // Render Display Mode ------------------------------------------------->
   return (
-    <div className="rank">
-      <h2 className="rank__title" style={{color: rankData.color}}>{rankData!.name}</h2>
-      <div className="rank__buttons-wrapper">
-        <button className="button rank__submit" onClick={()=> setEditMode(true)}>
+    <div className='rank'>
+      <h2 className='rank__title' style={{color: rankData.color}}>{rankData!.name}</h2>
+      <div className='rank__buttons-wrapper'>
+        <button className='button rank__submit' onClick={()=> setEditMode(true)}>
           <FontAwesomeIcon icon={faEdit}/>
         </button>
         
         {/* Conditional : Can't delete the Ceo rank*/}
         { rankData.id !== 1 && 
-          <button className="button delete" onClick={()=> deleteButtonHandler()}>
+          <button className='button delete' onClick={()=> deleteButtonHandler()}>
             <FontAwesomeIcon icon={faTrashCan}/>
           </button>
         }

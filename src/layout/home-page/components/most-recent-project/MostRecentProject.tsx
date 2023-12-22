@@ -1,7 +1,7 @@
-import { useAppSelector } from "../../../../redux/hooks";
-import Project from "../../../projects/project-component/Project";
-import ProjectType from "../../../../types/projectType";
-import "./mostRecentProject.css";
+import { useAppSelector } from '../../../../redux/hooks';
+import Project from '../../../projects/project-component/Project';
+import ProjectType from '../../../../types/projectType';
+import './mostRecentProject.css';
 
 const MostRecentProject: React.FC = () => {
   const projectList: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects);
@@ -12,7 +12,7 @@ const MostRecentProject: React.FC = () => {
 
   return (
     <div>
-      <div className="most-recent-cel-title">
+      <div className='most-recent-cel-title'>
         Most Recent Project
       </div>
       <div>

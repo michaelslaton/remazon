@@ -1,10 +1,10 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { ProjectPostType } from "../../../types/projectType";
-import { createProjectThunk } from "../../../redux/slices/projectsSlice";
-import { projectTypes } from "../../../data/projectTypes";
-import "../projects.css";
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { ProjectPostType } from '../../../types/projectType';
+import { createProjectThunk } from '../../../redux/slices/projectsSlice';
+import { projectTypes } from '../../../data/projectTypes';
+import '../projects.css';
 
 const CreateProject: React.FC = () => {
   const navigate = useNavigate();
@@ -30,23 +30,23 @@ const CreateProject: React.FC = () => {
 
   return (
     <>
-      <h2 className="title">Create Project</h2>
-      <form className="project__edit-form">
+      <h2 className='title'>Create Project</h2>
+      <form className='project__edit-form'>
 
         <label>
           Name:
           <input
-            type="text"
-            id="name"
-            name="name"
+            type='text'
+            id='name'
+            name='name'
             ref={nameRef}/>
         </label>
 
         <label>
           Type:
           <select
-            id="type"
-            name="type"
+            id='type'
+            name='type'
             ref={typeRef}>
             {
               projectTypes.map((type)=> (
@@ -59,13 +59,13 @@ const CreateProject: React.FC = () => {
         <label>
           Description:
           <textarea
-            id="description"
-            name="description"
+            id='description'
+            name='description'
             ref={descriptionRef}/>
         </label>
 
-        <button className="button project__edit-control" type="submit" onClick={(e)=> submitHandler(e)}>Submit</button>
-          <button className="button project__edit-control" onClick={()=> navigate("/projects")}>Cancel</button>
+        <button className='button project__edit-control' type='submit' onClick={(e)=> submitHandler(e)}>Submit</button>
+          <button className='button project__edit-control' onClick={()=> navigate('/projects')}>Cancel</button>
       </form>
     </>
   );
