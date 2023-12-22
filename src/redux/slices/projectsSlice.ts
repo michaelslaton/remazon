@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ProjectType, { ProjectPostType } from "../../types/projectType";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import ProjectType, { ProjectPostType } from '../../types/projectType';
 
 type InitialState = {
   loading: boolean;
@@ -10,26 +10,26 @@ type InitialState = {
 const initialState: InitialState = {
   loading: false,
   projects: [],
-  error: "",
+  error: '',
 };
 
-const projectsUrl: URL= new URL("http://localhost:5000/remazon/projects");
+const projectsUrl: URL= new URL('http://localhost:5000/remazon/projects');
 
 // Api Calls --------------------------------------------------------------------------------->
 
-export const fetchProjectsThunk = createAsyncThunk("projects/fetch", async (_thunkApi)=>{
+export const fetchProjectsThunk = createAsyncThunk('projects/fetch', async (_thunkApi)=>{
   const response = await fetch(projectsUrl, {
-    method: "GET",
+    method: 'GET',
   });
   const data = response.json();
   return data;
 });
 
-export const createProjectThunk = createAsyncThunk("projects/create", async (newProject: ProjectPostType, _thunkApi)=> {
+export const createProjectThunk = createAsyncThunk('projects/create', async (newProject: ProjectPostType, _thunkApi)=> {
   const response = await fetch(projectsUrl, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type":"application/json"
+      'Content-Type':'application/json'
     },
     body:JSON.stringify(newProject)
   });
@@ -37,11 +37,11 @@ export const createProjectThunk = createAsyncThunk("projects/create", async (new
   return data;
 });
 
-export const editProjectThunk = createAsyncThunk("projects/edit", async (updatedProject: ProjectType, _thunkApi)=> {
+export const editProjectThunk = createAsyncThunk('projects/edit', async (updatedProject: ProjectType, _thunkApi)=> {
   const response = await fetch(projectsUrl, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type":"application/json"
+      'Content-Type':'application/json'
     },
     body:JSON.stringify(updatedProject)
   });
@@ -49,11 +49,11 @@ export const editProjectThunk = createAsyncThunk("projects/edit", async (updated
   return data;
 });
 
-export const deleteProjectThunk = createAsyncThunk("projects/delete", async (id: Number, _thunkApi)=> {
+export const deleteProjectThunk = createAsyncThunk('projects/delete', async (id: Number, _thunkApi)=> {
   await fetch(`${projectsUrl}/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-Type":"application/json"
+      'Content-Type':'application/json'
     },
   });
   return;
@@ -61,21 +61,21 @@ export const deleteProjectThunk = createAsyncThunk("projects/delete", async (id:
 // -------------------------------------------------------------------------------------------->
 
 const projectsSlice = createSlice({
-  name: "projects",
+  name: 'projects',
   initialState,
   reducers: {
     setProjectsList: (state,action) => {
       state.projects = action.payload;
     },
     clearProjectError: (state) => {
-      state.error = "";
+      state.error = '';
     }
   },
   extraReducers: (builder) => {
     // fetchProjects ------------------------------------------------------------->
     builder.addCase(fetchProjectsThunk.fulfilled, (state, action)=>{
       state.projects = action.payload.data;
-      state.error = "";
+      state.error = '';
       state.loading = false;
     });
     builder.addCase(fetchProjectsThunk.pending, (state)=>{
@@ -104,7 +104,7 @@ const projectsSlice = createSlice({
     // createProject ------------------------------------------------------------->
     builder.addCase(createProjectThunk.fulfilled, (state)=>{
       fetchProjectsThunk();
-      state.error = "";
+      state.error = '';
       state.loading = false;
     });
     builder.addCase(createProjectThunk.pending, (state)=>{

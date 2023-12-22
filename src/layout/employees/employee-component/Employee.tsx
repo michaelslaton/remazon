@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../redux/hooks";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-regular-svg-icons";
-import EmployeeType from "../../../types/employeeType";
-import RankType from "../../../types/rankType";
-import "../employees.css";
+import { ReactNode } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../../redux/hooks';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import EmployeeType from '../../../types/employeeType';
+import RankType from '../../../types/rankType';
+import '../employees.css';
 
 type EmployeeProps = {
   data: EmployeeType;
@@ -27,34 +27,34 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
   const editButtonRender = (): ReactNode | null => {
     if ( data.locked && !currentEmployee?.admin ) return;
     else if (currentEmployee?.admin || currentEmployee?.uid === data.uid) return (
-      <button className="button card-button" onClick={()=> navigate(`/employees/edit/${data.id}`)}>
+      <button className='button card-button' onClick={()=> navigate(`/employees/edit/${data.id}`)}>
         <FontAwesomeIcon icon={faEdit}/>
       </button>
     );
   };
 
   return (
-    <div className="employee__wrapper" style={{borderColor: currentEmployeesRank?.color}}>
-      <h2 className="title">{data.name}<div className={`status-dot ${data.status ? "active" : ""}`}/></h2>
+    <div className='employee__wrapper' style={{borderColor: currentEmployeesRank?.color}}>
+      <h2 className='title'>{data.name}<div className={`status-dot ${data.status ? 'active' : ''}`}/></h2>
 
-      <ul className="employee__info">
+      <ul className='employee__info'>
 
         <li>
-          <div className="employee__rank" style={{backgroundColor: currentEmployeesRank?.color}}>
+          <div className='employee__rank' style={{backgroundColor: currentEmployeesRank?.color}}>
             {currentEmployeesRank!.name}
           </div>
         </li>
 
         { birthday ?
           <li>
-            <div className="employee__info-key">
+            <div className='employee__info-key'>
               Birthday:
             </div>
             {birthday.getDate()} - {months[birthday.getMonth()]}
           </li>
           : 
           <li>
-            <div className="employee__info-key">
+            <div className='employee__info-key'>
               Birthday:
             </div>
               N/A
@@ -62,14 +62,14 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
         }
 
         <li>
-          <div className="employee__info-key">
+          <div className='employee__info-key'>
             Bio:
           </div>
             {data.description}
         </li>
       </ul>
       
-      <div className="employee__edit-button_wrapper">
+      <div className='employee__edit-button_wrapper'>
         {editButtonRender()}
       </div>
 

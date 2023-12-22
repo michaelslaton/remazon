@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import "./messageOfTheDay.css";
-import { fetchMotdThunk } from "../../../../redux/slices/controlsSlice";
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import './messageOfTheDay.css';
+import { fetchMotdThunk } from '../../../../redux/slices/controlsSlice';
 
 const MessageOfTheDay: React.FC = () => {
   const motd = useAppSelector((state)=> state.mainControl.motd);
@@ -14,12 +14,12 @@ const MessageOfTheDay: React.FC = () => {
   return (
     <>
       {motd.length ? 
-        <div className="motd__container">
-          <div className="motd__wrapper">
-            <div className="motd__a-message">
+        <div className='motd__container'>
+          <div className='motd__wrapper'>
+            <div className='motd__a-message'>
               A Message from the Boss!!
             </div>
-            <div className="motd">
+            <div className='motd'>
               "{motd}"
             </div>
           </div>

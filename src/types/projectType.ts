@@ -1,4 +1,4 @@
-import EmployeeType from "./employeeType";
+import EmployeeType from './employeeType';
 
 type ProjectType = {
   id: number;
