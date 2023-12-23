@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { fetchNotificationsThunk } from '../../redux/slices/notificationsSlice';
 import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
+import Loading from '../../utils/loading/Loading';
 import Notification from './notifications-component/Notification';
 import NotificationType from '../../types/notificationType';
 import EmployeeType from '../../types/employeeType';
@@ -18,7 +19,7 @@ const NotificationsDisplay: React.FC = () => {
     if(employeesList.length < 1) dispatch(fetchEmployeesListThunk());
   },[]);
 
-  if(!notificationsList.length) return <>'Loading...'</>
+  if(!notificationsList.length) return ( <Loading/> )
 
   return (
     <>

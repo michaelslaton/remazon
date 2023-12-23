@@ -10,10 +10,12 @@ import Error404 from './utils/errors/error404/Error404';
 import firebaseConfig from './utils/firebase/firebase';
 import HomePage from './layout/home-page/HomePage';
 import Layout from './layout/Layout';
+import Awards from './layout/awards/Awards';
 import NotificationsDisplay from './layout/notifications/NotificationsDisplay';
 import ProjectsDisplay from './layout/projects/ProjectsDisplay';
 import RanksDisplay from './layout/ranks/RanksDisplay';
 import SignUpForm from './layout/authentication/SignUpForm';
+import Loading from './utils/loading/Loading';
 import { initializeApp } from 'firebase/app';
 import RouteError from './utils/errors/route-error/RouteError';
 import { useState, useEffect } from 'react';
@@ -98,6 +100,11 @@ const router = createBrowserRouter([
         errorElement: <RouteError/>,
       },
       {
+        path: '/awards',
+        element: <Awards/>,
+        errorElement: <RouteError/>,
+      },
+      {
         path: '*',
         element: <Error404/>,
         errorElement: <RouteError/>,
@@ -115,10 +122,7 @@ const App: React.FC = () => {
       .then(()=> setLoading(false));
   },[])
 
-  if(loading) return (
-    <>
-    </>
-  );
+  if(loading) return ( <Loading/> );
 
   return (
     <>
