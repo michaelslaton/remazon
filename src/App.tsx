@@ -14,13 +14,14 @@ import Awards from './layout/awards/Awards';
 import NotificationsDisplay from './layout/notifications/NotificationsDisplay';
 import ProjectsDisplay from './layout/projects/ProjectsDisplay';
 import RanksDisplay from './layout/ranks/RanksDisplay';
-import SignUpForm from './layout/authentication/SignUpForm';
+import SignUpForm from './layout/authentication/components/SignUp';
 import Loading from './utils/loading/Loading';
 import { initializeApp } from 'firebase/app';
 import RouteError from './utils/errors/route-error/RouteError';
 import { useState, useEffect } from 'react';
 import { useAppDispatch } from './redux/hooks';
 import { initialLoadThunk } from './redux/slices/controlsSlice';
+import SignIn from './layout/authentication/components/SignIn';
 
 initializeApp(firebaseConfig);
 
@@ -45,6 +46,11 @@ const router = createBrowserRouter([
           <AdminAccessRoute>
             <AdminPanel/>
           </AdminAccessRoute>,
+        errorElement: <RouteError/>,
+      },
+      {
+        path: '/signin',
+        element: <SignIn/>,
         errorElement: <RouteError/>,
       },
       {
