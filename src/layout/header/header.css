@@ -3,7 +3,7 @@
   text-transform: uppercase;
   margin: 0;
   line-height: .8;
-  margin-top: 1rem;
+  margin-top: .5rem;
   font-size: 4rem;
   font-family: "coolvetica";
   letter-spacing: .3rem;
@@ -11,6 +11,7 @@
 
 .header__wrapper {
   display: flex;
+  flex-direction: column-reverse;
   justify-content: space-between;
   align-items: end;
 }
@@ -18,4 +19,15 @@
 .header__items {
   display: flex;
   align-items: end;
+}
+
+@media (min-width: 375px){
+
+  .header__wrapper {
+    flex-direction: row;
+  }
+
+  .header__title {
+    margin-top: 1rem;
+  }
 }

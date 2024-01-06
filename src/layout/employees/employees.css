@@ -8,15 +8,16 @@
 
 .employee__wrapper {
   aspect-ratio: 2.5/1;
+  width: 20rem;
   display: inline-block;
-  border: .15rem solid var(--remazon-prime);
-  padding: .5rem;
-  border-radius: var(--border-radius);
-  min-width: 20rem;
   position: relative;
+  box-sizing: border-box;
+  background-color: var(--rp-dark-brown);
+  border: .15rem solid var(--remazon-prime);
+  border-radius: var(--border-radius);
+  padding: .5rem;
   box-shadow: .5rem .5rem .2rem black;
   margin-bottom: .5rem;
-  background-color: var(--rp-dark-brown);
 }
 
 .employee__info {
@@ -70,4 +71,7 @@ button.employee__edit-control {
   display: inline;
   margin-top: .5em;
   margin-right: .5em;
+}
+
+@media (min-width: 375px){
 }

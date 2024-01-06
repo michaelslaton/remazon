@@ -8,9 +8,15 @@
   margin-top: .1rem;
 }
 
+.authentication__wrapper {
+  display: flex;
+  top: 0;
+  right: 0;
+}
+
 .logged-in-wrapper {
   display: flex;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-right: .5rem;
 }
 
@@ -43,4 +49,16 @@
   display: inline;
   margin-top: .5em;
   margin-right: .5em;
+}
+
+@media (min-width: 375px){
+  .authentication__wrapper {
+    position: static;
+  }
+
+  .logged-in-wrapper {
+    display: flex;
+    font-size: 1.5rem;
+    margin-right: .5rem;
+  }
 }
