@@ -5,8 +5,9 @@
 
 .most-recent-wrapper {
   width: fit-content;
-  display: grid;
-  grid-template-columns: repeat(3, fit-content(.1rem));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: auto;
   gap: 0 1rem;
 }
@@ -21,7 +22,18 @@
 }
 
 .most-recent-divider {
-  display: flex;
-  align-items: center;
-  height: 100%;
+  display: none;
+}
+
+@media (min-width: 375px){
+  .most-recent-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, fit-content(.1rem));
+  }
+
+  .most-recent-divider {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
 }

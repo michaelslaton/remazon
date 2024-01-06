@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice';
@@ -9,6 +10,7 @@ import '../authentication.css';
 
 const SignIn: React.FC = () => {
   const auth = getAuth();
+  const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -23,6 +25,7 @@ const SignIn: React.FC = () => {
         dispatch(fetchCurrentEmployeeThunk(auth.currentUser!.uid));
         dispatch(setAuthDisplay('logout'));
       })
+      .then(()=> navigate('/'))
       .catch((error) => {
         console.error(error.code);
         console.error(error.message);

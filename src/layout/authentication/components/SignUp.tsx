@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/hooks';
-import { createEmployeeThunk, fetchEmployeesListThunk, fetchCurrentEmployeeThunk } from '../../redux/slices/employeesSlice';
-import { setAuthDisplay } from '../../redux/slices/controlsSlice';
-import { EmployeePostType } from '../../types/employeeType';
-import './authentication.css';
+import { useAppDispatch } from '../../../redux/hooks';
+import { createEmployeeThunk, fetchEmployeesListThunk, fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice';
+import { setAuthDisplay } from '../../../redux/slices/controlsSlice';
+import { EmployeePostType } from '../../../types/employeeType';
+import '../authentication.css';
 
 const SignUp: React.FC = () => {
   const auth = getAuth();

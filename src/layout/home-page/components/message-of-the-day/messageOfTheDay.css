@@ -24,3 +24,9 @@
   font-style: italic;
   margin-top: .5rem;
 }
+
+@media (min-width: 375px){
+  .motd__wrapper {
+    width: fit-content;
+  }
+}

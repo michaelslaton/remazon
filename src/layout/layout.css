@@ -98,12 +98,9 @@ option {
   box-sizing: border-box;
   position: relative;
   min-height: 100vh;
-  margin-left: 4rem;
+  margin-left: 1rem;
   margin-right: 1rem;
   transition: margin-left 70ms ease-in-out;
-}
-.main-screen.active {
-  margin-left: 12rem;
 }
 
 .center-display-space {
@@ -113,8 +110,7 @@ option {
 .form-wrapper {
   box-sizing: border-box;
   border: .15rem solid var(--remazon-prime);
-  min-width: fit-content;
-  max-width: 30%;
+  min-width: 100%;
   margin: auto;
   margin-top: 2rem;
   padding: .5rem .8rem 1rem;
@@ -123,10 +119,47 @@ option {
 
 .checkbox {
   display: inline-block;
-  width:fit-content !important;
+  width: fit-content !important;
 }
 
 .form-input-label {
   display: inline;
   font-size: 1.2rem;
 }
+
+@media (min-width: 375px){
+  .main-screen {
+    margin-top: 0;
+    margin-left: 4rem;
+  }
+  .main-screen.active {
+    margin-left: 12rem;
+  }
+
+  .form-wrapper {
+    min-width: fit-content;
+    max-width: 30%;
+  }
+}
+
+@media (min-width: 768px){
+}
+
+@media (min-width: 1920px){
+}
+
+/*
+2560×1440
+1920×1080
+1600×900
+1536×864
+1440×900
+1366×768
+1280×720
+810×1080
+414×896
+412×915
+390×844
+375×812
+360×800
+*/
