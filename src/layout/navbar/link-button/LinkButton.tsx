@@ -1,8 +1,9 @@
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LinkButtonData } from '../Navbar';
-import './linkButton.css';
+import '../navbar.css';
+import { navToggle } from '../../../redux/slices/controlsSlice';
 
 type LinkButtonProps = {
   data: LinkButtonData,
@@ -10,10 +11,17 @@ type LinkButtonProps = {
 
 const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
   const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
+  const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
 
+  const onClickHandler = (): void => {
+    const windowWidth = document.documentElement.clientWidth;
+    navigate(data.url)
+    if( windowWidth <= 375 ) dispatch(navToggle());
+  }
+
   return (
-    <button className={`link-button ${ navActive ? 'active' : '' }`} onClick={()=> navigate(data.url)}>
+    <button className={`link-button ${ navActive ? 'active' : '' }`} onClick={()=> onClickHandler()}>
       { navActive ?
         <><FontAwesomeIcon icon={data.icon}/> {data.name}</>
         :
