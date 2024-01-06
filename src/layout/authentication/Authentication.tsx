@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchCurrentEmployeeThunk } from '../../redux/slices/employeesSlice';
 import LoggedIn from './components/LoggedIn';
 import SignIn from './components/SignIn';
-import LoggedOut from './components/LoggedOut';
 import EmployeeType from '../../types/employeeType';
 import './authentication.css';
 
@@ -20,17 +19,22 @@ const Authentication: React.FC = () => {
 
   // Show if the employee is signed in --------------------------------------------------------------------------------------------------------->
   if(auth.currentUser || currentEmployee) return (
-    <LoggedIn/>
+    <div className="authentication__wrapper">
+      <LoggedIn/>
+    </div>
   );
 
   // Show if the employee wants to sign in ------------------------------------------------------------------------------------------------------>
   else if(authDisplay === 'login') return (
-    <SignIn/>
+    <div className="authentication__wrapper">
+      <SignIn/>
+    </div>
   );
 
   // Default view to show sign in or sign up ----------------------------------------------------------------------------------------------------->
   else if (authDisplay === 'login signup') return (
-    <LoggedOut/>
+    <>
+    </>
   );
 };
 
