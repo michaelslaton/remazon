@@ -128,12 +128,18 @@ option {
 }
 
 @media (min-width: 375px){
+}
+
+@media (min-width: 390px){
+}
+
+@media (min-width: 414px){
+}
+
+@media (min-width: 768px){
   .main-screen {
     margin-top: 0;
     margin-left: 4rem;
-  }
-  .main-screen.active {
-    margin-left: 12rem;
   }
 
   .form-wrapper {
@@ -142,10 +148,31 @@ option {
   }
 }
 
-@media (min-width: 768px){
+@media (min-width: 810px){ 
+}
+
+@media (min-width: 1280px){
+  .main-screen.active {
+    margin-left: 12rem;
+  }
+}
+
+@media (min-width: 1366px){
+}
+
+@media (min-width: 1440px){
+}
+
+@media (min-width: 1536px){
+}
+
+@media (min-width: 1600px){
 }
 
 @media (min-width: 1920px){
+}
+
+@media (min-width: 2560px){
 }
 
 /*

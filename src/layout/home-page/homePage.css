@@ -26,6 +26,15 @@
 }
 
 @media (min-width: 375px){
+}
+
+@media (min-width: 390px){
+}
+
+@media (min-width: 414px){
+}
+
+@media (min-width: 768px){
   .most-recent-wrapper {
     display: grid;
     grid-template-columns: repeat(3, fit-content(.1rem));
@@ -36,4 +45,28 @@
     align-items: center;
     height: 100%;
   }
+}
+
+@media (min-width: 810px){ 
+}
+
+@media (min-width: 1280px){
+}
+
+@media (min-width: 1366px){
+}
+
+@media (min-width: 1440px){
+}
+
+@media (min-width: 1536px){
+}
+
+@media (min-width: 1600px){
+}
+
+@media (min-width: 1920px){
+}
+
+@media (min-width: 2560px){
 }
