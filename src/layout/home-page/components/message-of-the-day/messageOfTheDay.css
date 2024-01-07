@@ -1,20 +1,21 @@
 .motd__container {
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .motd__wrapper {
-  width: fit-content;
+  box-sizing: border-box;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
-  padding: .5rem 5rem;
+  padding: .5rem .2rem;
   background-color: var(--rp-brown);
   border-radius: var(--border-radius);
   box-shadow: .5rem .5rem .2rem black;
 }
 
 .motd__a-message {
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-family: "coolvetica-straight";
   color: var(--remazon-prime);
 }
@@ -26,7 +27,53 @@
 }
 
 @media (min-width: 375px){
+}
+
+@media (min-width: 390px){
+  .motd__a-message {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 414px){
+}
+
+@media (min-width: 768px){
   .motd__wrapper {
+    padding: .5rem 10rem;
     width: fit-content;
   }
+
+  .motd__a-message {
+    font-size: 3rem;
+  }
+
+  .motd {
+    font-size: 1.8rem;
+    margin: .5rem 0;
+  }
+}
+
+@media (min-width: 810px){ 
+}
+
+@media (min-width: 1280px){
+}
+
+@media (min-width: 1366px){
+}
+
+@media (min-width: 1440px){
+}
+
+@media (min-width: 1536px){
+}
+
+@media (min-width: 1600px){
+}
+
+@media (min-width: 1920px){
+}
+
+@media (min-width: 2560px){
 }
