@@ -17,7 +17,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
   const onClickHandler = (): void => {
     const windowWidth = document.documentElement.clientWidth;
     navigate(data.url)
-    if( windowWidth <= 375 ) dispatch(navToggle());
+    if( windowWidth <= 1280 && navActive) dispatch(navToggle());
   }
 
   return (

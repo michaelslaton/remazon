@@ -9,9 +9,9 @@
 }
 
 .authentication__wrapper {
+  box-sizing: border-box;
   display: flex;
-  top: 0;
-  right: 0;
+  margin-top: .5rem;
 }
 
 .logged-in-wrapper {
@@ -52,6 +52,21 @@
 }
 
 @media (min-width: 375px){
+}
+
+@media (min-width: 390px){
+}
+
+@media (min-width: 414px){
+}
+
+@media (min-width: 768px){
+}
+
+@media (min-width: 810px){ 
+}
+
+@media (min-width: 1280px){
   .authentication__wrapper {
     position: static;
   }
@@ -61,4 +76,22 @@
     font-size: 1.5rem;
     margin-right: .5rem;
   }
+}
+
+@media (min-width: 1366px){
+}
+
+@media (min-width: 1440px){
+}
+
+@media (min-width: 1536px){
+}
+
+@media (min-width: 1600px){
+}
+
+@media (min-width: 1920px){
+}
+
+@media (min-width: 2560px){
 }
