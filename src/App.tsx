@@ -10,7 +10,7 @@ import Error404 from './utils/errors/error404/Error404';
 import firebaseConfig from './utils/firebase/firebase';
 import HomePage from './layout/home-page/HomePage';
 import Layout from './layout/Layout';
-import Awards from './layout/awards/Awards';
+import AwardsDisplay from './layout/awards/AwardsDisplay';
 import NotificationsDisplay from './layout/notifications/NotificationsDisplay';
 import ProjectsDisplay from './layout/projects/ProjectsDisplay';
 import RanksDisplay from './layout/ranks/RanksDisplay';
@@ -107,7 +107,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/awards',
-        element: <Awards/>,
+        element: <AwardsDisplay/>,
         errorElement: <RouteError/>,
       },
       {
