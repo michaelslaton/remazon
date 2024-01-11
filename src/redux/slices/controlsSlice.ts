@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setEmployeesList } from './employeesSlice';
 import { setProjectsList } from './projectsSlice';
 import { setRanksList } from './ranksSlice';
+import { setAwardsList } from './awardsSlice';
 
 type InitialState = {
   navOpen: boolean;
@@ -31,6 +32,7 @@ export const initialLoadThunk = createAsyncThunk('initialLoad/fetch', async (_, 
   });
   const data = await response.json();
 
+  thunkApi.dispatch(setAwardsList(data.data.awards));
   thunkApi.dispatch(setEmployeesList(data.data.employees));
   thunkApi.dispatch(setProjectsList(data.data.projects));
   thunkApi.dispatch(setRanksList(data.data.ranks));

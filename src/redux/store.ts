@@ -4,6 +4,7 @@ import mainControlReducer from './slices/controlsSlice';
 import employeesReducer from './slices/employeesSlice';
 import projectsReducer from './slices/projectsSlice';
 import ranksReducer from './slices/ranksSlice';
+import awardsReducer from './slices/awardsSlice';
 import notificationsReducer from './slices/notificationsSlice';
 import storage from 'redux-persist/lib/storage';
 
@@ -18,6 +19,7 @@ const reducer = combineReducers({
     employeesControl: employeesReducer,
     projectsControl: projectsReducer,
     ranksControl: ranksReducer,
+    awardsControl: awardsReducer,
     notificationsControl: notificationsReducer,
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
