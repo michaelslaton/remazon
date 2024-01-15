@@ -7,27 +7,58 @@
 }
 
 .award__wrapper {
-  aspect-ratio: 2.5/1;
-  width: 20rem;
-  display: inline-block;
-  position: relative;
+  aspect-ratio: 1/1.5;
   box-sizing: border-box;
+  width: 13rem;
   background-color: var(--rp-dark-brown);
   border: .15rem solid var(--remazon-prime);
   border-radius: var(--border-radius);
-  padding: .5rem;
   box-shadow: .5rem .5rem .2rem black;
-  margin-bottom: .5rem;
 }
 
-.award__info {
-  all: unset;
-  list-style: none;
+.award__plate {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 1rem;
 }
-.award__info-key {
-  color: var(--remazon-prime);
-  display: inline;
-  margin-right: .2em;
+
+.belt__title {
+  z-index: 12;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  font-size: 1.1rem;
+}
+.belt__buckle {
+  box-sizing: border-box;
+  aspect-ratio: 1/1;
+  position: absolute;
+  background-color: var(--remazon-prime);
+  border: .15rem solid var(--remazon-prime);
+  border-radius: 50%;
+  width: 6rem;
+  z-index: 11;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.belt__plaque {
+  background-color: var(--rp-dark-brown);
+  position: absolute;
+  height: 1.5rem;
+  width: 110%;
+}
+.belt__strap {
+  position: absolute;
+  background-color: var(--rp-dark-brown);
+  width: 100%;
+  height: 1.5rem;
+  border-top: .15rem solid var(--remazon-prime);
+  border-bottom: .15rem solid var(--remazon-prime);
+  z-index: 10;
 }
 
 
