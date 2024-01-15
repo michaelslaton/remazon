@@ -7,21 +7,23 @@ type AwardProps = {
 
 const Award: React.FC<AwardProps> = ({ awardData }) => {
 
-  return (
+  if (awardData.type === 'belt') return (
     <div className='award__wrapper'>
-      <h2 className='title'>{awardData.name}</h2>
-      <ul className='award__info'>
-        { awardData.holder &&
-          <li>
-            <div className='award__info-key'>
-              Holder:
-            </div>
-            {awardData.holder}
-          </li>
-        }
-      </ul>
+      <div className='award__plate'>
+        <div className='belt__title'>
+          {awardData.name}
+        </div>
+        <div className='belt__buckle'>
+          <div className='belt__plaque'/>
+        </div>
+        <div className='belt__strap'/>
+      </div>
+      {awardData.holder}
+      {awardData.type}
     </div>
   );
+  else return (<>'Please finish this Mike'</>)
 };
+
 
 export default Award;
