@@ -1,4 +1,6 @@
+import { useAppSelector } from '../../../redux/hooks';
 import AwardType from '../../../types/awardType';
+import EmployeeType from '../../../types/employeeType';
 import '../awards.css';
 
 type AwardProps = {
@@ -6,24 +8,59 @@ type AwardProps = {
 }
 
 const Award: React.FC<AwardProps> = ({ awardData }) => {
+  const employeeList = useAppSelector((state)=> state.employeesControl.employees);
+  const currentHolder: EmployeeType | undefined = employeeList.find((employee)=> employee.id === awardData.holder);
 
-  if (awardData.type === 'belt') return (
+  return (
     <div className='award__wrapper'>
       <div className='award__plate'>
         <div className='belt__title'>
           {awardData.name}
         </div>
-        <div className='belt__buckle'>
-          <div className='belt__plaque'/>
-        </div>
-        <div className='belt__strap'/>
+        { awardData.type === 'belt' ?
+            <>
+              <div className='belt__buckle'>
+                <div className='belt__top-plate'/>
+                <div className='belt__plaque'/>
+              </div>
+              <div className='belt__strap'/>
+            </>
+            :
+            <>
+              <div className='trophy__plate'>
+                <div className='trophy__top-plate'/>
+                <div className='belt__plaque'/>
+              </div>
+              <div className='belt__strap'/>
+            </>
+        }
       </div>
-      {awardData.holder}
-      {awardData.type}
+
+      <div className='award__info-wrapper'>
+        <ul className='award__info-list'>
+          <li>
+            <div className='award__info-key'>
+              Type:
+            </div>
+            <div className='award__info-value'>
+              {awardData.type}
+            </div>
+          </li>
+          { awardData.holder &&
+            <li>
+              <div className='award__info-key'>
+                Holder:
+              </div>
+              <div className='award__info-value'>
+                {currentHolder?.name}
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+      
     </div>
   );
-  else return (<>'Please finish this Mike'</>)
 };
-
 
 export default Award;
