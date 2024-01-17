@@ -36,7 +36,6 @@
   padding-left: .5rem;
   margin: 1rem 0;
 }
-
 .link-button:hover {
   border-color: var(--remazon-prime);
   color: #ffffff;
