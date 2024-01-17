@@ -24,7 +24,6 @@
   all: unset;
   list-style: none;
 }
-
 .employee__info > li {
   margin-bottom: .2em;
 }
@@ -59,13 +58,11 @@
   display: block;
   margin-bottom: .5rem;
 }
-
 .employee__edit-form > label > input, textarea, select {
   box-sizing: border-box;
   width: 100%;
   margin-top: .1rem;
 }
-
 
 button.employee__edit-control {
   display: inline;
@@ -73,6 +70,13 @@ button.employee__edit-control {
   margin-right: .5em;
 }
 
+.employees__view-controls {
+  margin: .5rem 0;
+}
+
+.employees__sort {
+  width: fit-content;
+}
 
 @media (min-width: 375px){
 }
