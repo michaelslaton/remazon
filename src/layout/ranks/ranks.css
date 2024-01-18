@@ -8,14 +8,14 @@
   border-radius: var(--border-radius);
   min-width: 10rem;
   position: relative;
-  background-color: var(--background-color);
+  background-color: var(--off-black);
 }
 .rank.edit {
   display: block;
 }
 
 .ranks-wrapper {
-  background-color: var(--nav-background-color);
+  background-color: var(--vanta-black);
   box-shadow: .5rem .5rem .2rem black;
   margin: 0;
 }
@@ -32,6 +32,7 @@
 
 .rank__title {
   margin: 0;
+  font-family: 'gvd';
   font-size: 1.5rem;
 }
 

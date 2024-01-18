@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +11,7 @@ type LinkButtonProps = {
 };
 
 const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
+  const [ hovering, setHovering ] = useState<boolean>(false)
   const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
@@ -21,9 +23,19 @@ const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
   }
 
   return (
-    <button className={`link-button ${ navActive ? 'active' : '' }`} onClick={()=> onClickHandler()}>
+    <button
+      className={`link-button ${ navActive ? 'active' : '' }`}
+      onClick={()=> onClickHandler()}
+      onMouseOver={() => setHovering(true)}
+      onMouseOut={() => setHovering(false)}
+    >
       { navActive ?
-        <><FontAwesomeIcon icon={data.icon}/> {data.name}</>
+        <>
+          <FontAwesomeIcon icon={data.icon}/>
+          <div className={`button__text ${hovering ? 'hovering' : ''}`}>
+            {data.name}
+          </div>
+        </>
         :
         <FontAwesomeIcon icon={data.icon}/>
       }
