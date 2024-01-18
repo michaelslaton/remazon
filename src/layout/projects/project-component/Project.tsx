@@ -52,8 +52,8 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   };
 
   return (
-    <div className='project__wrapper'>
-      <h2 className='title project-title'>{data.name}<div className={`status-dot ${data.status ? 'active' : ''}`}/></h2>
+    <div className={`project__wrapper ${ !data.status ? 'deactivated' : '' }`}>
+      <h2 className={`title project-title ${ !data.status ? 'deactivated' : '' }`}>{data.name}</h2>
       <div className='project__info-wrapper'>
         <ul className='project__info'>
 
@@ -83,6 +83,17 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
               {data.description}
             </article>
           </li>
+
+          { !data.status &&
+            <li>
+              <div className='project-data__key'>
+                Status:
+              </div>
+              <div className='project-data__value deactivated'>
+                Deactivated
+              </div>
+            </li>
+          }
 
         </ul>
         <div className='project__buttons_wrapper'>
