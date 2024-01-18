@@ -29,8 +29,8 @@
   position: relative !important;
   transform: translate(.3rem, -.25rem);
   font-size: .8rem;
-  color: white;
-  border-color: white;
+  color: var(--font-white);
+  border-color: var(--font-white);
   border-width: .15rem;
 }
 

@@ -9,6 +9,7 @@ import EmployeeType from '../../types/employeeType';
 import './navbar.css';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { clearCurrentEmployee } from '../../redux/slices/employeesSlice';
+import { useState } from 'react';
 
 export type LinkButtonData = {
   id: number;
@@ -45,6 +46,7 @@ const navData: LinkButtonData[] = [
 ];
 
 const Navbar: React.FC = () => {
+  const [ hovering, setHovering ] = useState<boolean>(false)
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
   const auth = getAuth();
@@ -92,9 +94,18 @@ const Navbar: React.FC = () => {
         }
         { currentEmployee &&
           <>
-            <button className={`link-button ${ navActive ? 'active' : ''}`} onClick={()=> logoutHandler()}>
+            <button
+              className={`link-button ${ navActive ? 'active' : ''}`}
+              onClick={()=> logoutHandler()}
+              onMouseOver={()=> setHovering(true)}
+              onMouseOut={()=> setHovering(false)}
+            >
               <FontAwesomeIcon icon={faSignOut}/> 
-              {`${ navActive ? ' Sign Out' : ''}`}
+              { navActive &&
+                <div className={`button__text ${ hovering ? 'hovering' : '' }`}>
+                  Sign Out
+                </div>
+              }
             </button>
           </>
         }

@@ -4,16 +4,20 @@ import Employee from '../../../employees/employee-component/Employee';
 import './mostRecentEmployee.css';
 
 const MostRecentEmployee: React.FC = () => {
-  const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
-  const mostRecentEmployee: EmployeeType = employeeList.reduce((prev, current)=> { return prev.id > current.id ? prev : current });
-
+  const employeeList: EmployeeType[] = useAppSelector((state) =>
+    state.employeesControl.employees.filter((employee) => employee.rank !== 0)
+  );
+  const mostRecentEmployee: EmployeeType = employeeList.reduce((prev, current) => {
+      return prev.id > current.id ? prev : current;
+    }
+  );
 
   if(!employeeList.length) return <></>;
 
   return (
     <div>
       <div className='most-recent-cel-title'>
-        Most Recent Employee
+        New Hire
       </div>
       <div>
         <Employee data={mostRecentEmployee}/>

@@ -44,7 +44,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
     <div className='rank edit'>
       <form className='rank__form'>
 
-      <label htmlFor='title'>
+      <label htmlFor='title rank__title'>
         Title:
         <input
           type='text'
@@ -84,8 +84,8 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
           <FontAwesomeIcon icon={faEdit}/>
         </button>
         
-        {/* Conditional : Can't delete the Ceo rank*/}
-        { rankData.id !== 1 && 
+        {/* Conditional : Can't delete the Ceo or Deactivated rank*/}
+        { rankData.id > 1 && 
           <button className='button delete' onClick={()=> deleteButtonHandler()}>
             <FontAwesomeIcon icon={faTrashCan}/>
           </button>

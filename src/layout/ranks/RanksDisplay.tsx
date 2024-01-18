@@ -25,9 +25,11 @@ const RanksDisplay: React.FC = () => {
     <div className='center-display-space'>
       <div className='form-wrapper ranks-wrapper'>
         <h2 className='title'>Ranks</h2>
-        {sortedRanks.map((rank)=>(
+        {sortedRanks.map((rank)=> rank.id !== 0 ?
           <Rank key={rank.id} rankData={rank}/>
-        ))}
+          :
+          <></>
+        )}
         { currentEmployee?.admin &&
           <>
             { newRankDisplay ? 

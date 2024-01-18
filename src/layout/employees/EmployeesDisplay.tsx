@@ -9,6 +9,7 @@ import './employees.css';
 
 const EmployeesDisplay: React.FC = () => {
   const [ sortType, setSortType ] = useState<string>('');
+  const [ showDeactivated, setShowDeactivated ] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const employees: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
   const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
@@ -28,8 +29,8 @@ const EmployeesDisplay: React.FC = () => {
 
     if (sortType === "alphabetical")
       results = [...employees].sort((a, b) => {
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
+        if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+        if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
         return 0;
       });
 
@@ -42,9 +43,21 @@ const EmployeesDisplay: React.FC = () => {
 
     return (
       <>
-        {results.map((employee)=>(
-          <Employee key={employee.id} data={employee}/>
-        ))}
+        {results.map((employee) =>
+          employee.rank !== 0 ? (
+            <Employee key={employee.id} data={employee} />
+          ) : (
+            ""
+          )
+        )}
+        {showDeactivated &&
+          results.map((employee) =>
+            employee.rank === 0 ? (
+              <Employee key={employee.id} data={employee} />
+            ) : (
+              ""
+            )
+          )}
       </>
     );
   };
@@ -65,6 +78,12 @@ const EmployeesDisplay: React.FC = () => {
           <option value='alphabetical'>Alphabetical</option>
           <option value='rank'>Rank</option>
         </select>
+        Show deactivated ? 
+        <input
+          type='checkbox'
+          defaultChecked={false}
+          onChange={(e)=> setShowDeactivated(e.target.checked)}
+        />
       </div>
 
       <div className='employee__cards-wrapper'>

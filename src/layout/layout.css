@@ -12,20 +12,42 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "gvd";
+  src: url("../assets/fonts/grandviewdisplay/GrandviewLight.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "gvd-italic";
+  src: url("../assets/fonts/grandviewdisplay/GrandviewLightItalic.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "gvd-bold";
+  src: url("../assets/fonts/grandviewdisplay/Grandviewb.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  --background-color: #141414;
-  --nav-background-color: #000000;
-  --font-color: #ffffff;
+  --vanta-black: #000000;
+  --off-black: #141414;
+  --font-white: #DCE1DE;
   --remazon-prime: #ffa500;
-  --rp-brown: #443b2f;
-  --rp-dark-brown: #221d16;
+  --brown: #443b2f;
+  --dark-brown: #221d16;
   --border-radius: 5px;
 }
 
 body {
   margin: 0;
-  background-color: var(--background-color);
-  color: var(--font-color);
+  background-color: var(--off-black);
+  color: var(--font-white);
+  font-family: 'gvd';
 }
 
 img {
@@ -39,40 +61,26 @@ img {
   text-transform: capitalize;
 }
 
-.status-dot {
-  aspect-ratio: 1/1;
-  display: inline-block;
-  background-color: #b40000;
-  border-radius: 50%;
-  margin: 0 .5rem;
-  width: .7rem;
-  position: absolute;
-  right: 0;
-}
-.status-dot.active {
-  background-color: #00b400;
-}
-
 .button {
   min-width: 2rem;
   display: block;
   border: .1rem solid var(--remazon-prime);
-  background-color: var(--nav-background-color);
+  background-color: var(--vanta-black);
   color: var(--remazon-prime);
   font-size: 1.1rem;
   border-radius: var(--border-radius);
   cursor: pointer;
 }
 .button:hover {
-  color: #ffffff;
+  color: var(--font-white);
 }
 .button.delete:hover {
   border-color: #ff0000;
-  color: #ffffff;
+  color: var(--font-white);
 }
 .button.create:hover {
   border-color: rgb(9, 255, 0);
-  color: #ffffff;
+  color: var(--font-white);
 }
 
 .card-button {
@@ -87,7 +95,7 @@ input, textarea, select {
   box-shadow: none;
   border: .11rem solid var(--remazon-prime);
   border-radius: var(--border-radius);
-  color: white;
+  color: var(--font-white);
 }
 
 option {

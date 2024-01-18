@@ -4,8 +4,12 @@ import ProjectType from '../../../../types/projectType';
 import './mostRecentProject.css';
 
 const MostRecentProject: React.FC = () => {
-  const projectList: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects);
-  const mostRecentProject: ProjectType = projectList.reduce((prev, current)=> { return prev.id > current.id ? prev : current });
+  const projectList: ProjectType[] = useAppSelector((state) =>
+    state.projectsControl.projects.filter((project) => project.status === true)
+  );
+  const mostRecentProject: ProjectType = projectList.reduce((prev, current) => {
+    return prev.id > current.id ? prev : current;
+  });
 
 
   if(!projectList.length) return <></>;
@@ -13,7 +17,7 @@ const MostRecentProject: React.FC = () => {
   return (
     <div>
       <div className='most-recent-cel-title'>
-        Most Recent Project
+        Newest Project
       </div>
       <div>
         <Project data={mostRecentProject}/>

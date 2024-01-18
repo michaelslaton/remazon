@@ -1,6 +1,6 @@
 .navbar__wrapper {
   box-sizing: border-box;
-  background-color: var(--nav-background-color);
+  background-color: var(--vanta-black);
   position: absolute;
   width: 100%;
   min-height: 100vh;
@@ -24,7 +24,7 @@
   border: .1rem solid transparent;
   border-right: 0;
   border-left: .5rem solid transparent;
-  background-color: var(--background-color);
+  background-color: var(--off-black);
   color: var(--remazon-prime);
   text-transform: uppercase;
   padding: .2em;
@@ -38,7 +38,15 @@
 }
 .link-button:hover {
   border-color: var(--remazon-prime);
-  color: #ffffff;
+  color: var(--font-white);
+}
+
+.button__text {
+  display: inline;
+  margin-left: .25rem;
+}
+.button__text.hovering {
+  color: var(--remazon-white);
 }
 
 @media (min-width: 375px){
