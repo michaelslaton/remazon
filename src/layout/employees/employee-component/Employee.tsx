@@ -34,13 +34,19 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
   };
 
   return (
-    <div className='employee__wrapper' style={{borderColor: currentEmployeesRank?.color}}>
-      <h2 className='title'>{data.name}<div className={`status-dot ${data.status ? 'active' : ''}`}/></h2>
+    <div
+      className={`employee__wrapper ${data.rank === 0 ? 'deactivated' : ''}`}
+      style={{borderColor: currentEmployeesRank?.color}}
+    >
+      <h2 className='title employee__name'>{data.name}</h2>
 
       <ul className='employee__info'>
 
         <li>
-          <div className='employee__rank' style={{backgroundColor: currentEmployeesRank?.color}}>
+          <div
+            className={`employee__rank ${data.rank === 0 ? 'deactivated' : ''}`}
+            style={{backgroundColor: currentEmployeesRank?.color}}
+          >
             {currentEmployeesRank!.name}
           </div>
         </li>

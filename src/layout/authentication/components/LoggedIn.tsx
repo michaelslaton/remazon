@@ -13,7 +13,7 @@ const LoggedIn: React.FC = () => {
 
   return (
     <div className='logged-in-wrapper'>
-      Signed in as <div className='authentication__employee-name' style={{color: currentEmployeesRank?.color}}>{currentEmployee?.name}</div>
+      <div className='authentication__employee-name' style={{color: currentEmployeesRank?.color}}>{currentEmployee?.name}</div>
       <button className='button card-button' onClick={()=> navigate('/notifications')}><FontAwesomeIcon icon={faNewspaper}/></button>
     </div>
   );

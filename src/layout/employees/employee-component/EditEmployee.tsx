@@ -19,7 +19,6 @@ const EditEmployee: React.FC = () => {
   const selectedEmployee: EmployeeType | undefined = employees.find((dude)=> dude.id === Number(paramId));
   // Refs -------------------------------------------------------------------- >
   const nameRef = useRef<HTMLInputElement>(null);
-  const statusRef = useRef<HTMLInputElement>(null);  
   const rankRef = useRef<HTMLSelectElement>(null);
   const bdayRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
@@ -48,12 +47,12 @@ const EditEmployee: React.FC = () => {
     
     if(updatedBirthday && employeeBirthday) {
       if (employeeBirthday.getTime() !== updatedBirthday.getTime()) birthdayCheck = true;
-    };
+    }
+    else if (employeeBirthday === null && updatedBirthday) birthdayCheck = true;
 
     if (
       nameRef.current!.value === selectedEmployee?.name &&
       descriptionRef.current!.value === selectedEmployee?.description &&
-      statusRef.current!.checked === selectedEmployee?.status &&
       updatedRank === selectedEmployee?.rank &&
       !birthdayCheck
       ) return false;
@@ -85,7 +84,6 @@ const EditEmployee: React.FC = () => {
       birthday: employeeBirthday,
       rank: updatedRank,
       description: descriptionRef.current!.value,
-      status: statusRef.current!.checked,
       admin: selectedEmployee!.admin
     };
     dispatch(editEmployeeThunk(updatedEmployee));
@@ -147,15 +145,6 @@ const EditEmployee: React.FC = () => {
           <div className='parameter-text'>
             {countData} of 100
           </div>
-
-          <label>
-            <div className='form-input-label'>Active:</div>
-            <input
-              className='checkbox'
-              type='checkbox'
-              ref={statusRef}
-              defaultChecked={selectedEmployee?.status}/>
-          </label>
 
             <button className='button employee__edit-control' type='submit' onClick={(e)=> submitHandler(e)}>Submit</button>
             <button className='button employee__edit-control' onClick={()=> navigate('/employees')}>Cancel</button>

@@ -9,20 +9,20 @@
   margin: 0 auto;
   text-align: center;
   padding: .5rem .2rem;
-  background-color: var(--rp-brown);
+  background-color: var(--brown);
   border-radius: var(--border-radius);
   box-shadow: .5rem .5rem .2rem black;
 }
 
 .motd__a-message {
   font-size: 1.4rem;
-  font-family: "coolvetica-straight";
+  font-family: "gvd";
   color: var(--remazon-prime);
 }
 
 .motd {
   font-size: 1.5rem;
-  font-style: italic;
+  font-family: 'gvd-italic';
   margin-top: .5rem;
 }
 

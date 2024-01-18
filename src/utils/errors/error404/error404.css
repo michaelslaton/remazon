@@ -21,11 +21,10 @@
 
 .error404__text {
   position: relative;
-  left: -3.5rem;
+  left: -2.75rem;
   top: 3.3rem;
   font-size: 3rem;
-  font-family: "bebas";
-  color: white;
+  color: var(--font-white);
   white-space: nowrap;
 }
 
@@ -44,7 +43,7 @@
   display: inline;
   margin: 0 1em;
   font-size: 1.3em;
-  color: #ffffff;
+  color: var(--font-white);
   cursor: pointer;
   transition: 300ms ease-in-out;
 }
