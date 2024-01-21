@@ -38,6 +38,7 @@
   --off-black: #141414;
   --font-white: #DCE1DE;
   --remazon-prime: #ffa500;
+  --charcoal: #333E48;
   --brown: #443b2f;
   --dark-brown: #221d16;
   --border-radius: 5px;
@@ -106,8 +107,6 @@ option {
   box-sizing: border-box;
   position: relative;
   min-height: 100vh;
-  margin-left: 1rem;
-  margin-right: 1rem;
   transition: margin-left 70ms ease-in-out;
 }
 
@@ -135,6 +134,10 @@ option {
   font-size: 1.2rem;
 }
 
+.date-input {
+  color-scheme: dark;
+}
+
 @media (min-width: 375px){
 }
 
@@ -147,7 +150,7 @@ option {
 @media (min-width: 768px){
   .main-screen {
     margin-top: 0;
-    margin-left: 4rem;
+    margin-left: 3rem;
   }
 
   .form-wrapper {
@@ -161,7 +164,7 @@ option {
 
 @media (min-width: 1280px){
   .main-screen.active {
-    margin-left: 12rem;
+    margin-left: 11rem;
   }
 }
 
