@@ -82,6 +82,7 @@ const SignUp: React.FC = () => {
               type='date'
               id='birthday'
               name='birthday'
+              className='date-input'
               ref={bdayRef}/>
           </label>
 

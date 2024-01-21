@@ -22,6 +22,9 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   const host: EmployeeType | undefined = employees.find((employee)=> employee.id === data.host);
   const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const currentHostsRank: RankType | undefined = ranks.find((rank)=> rank.id === host?.rank);
+  const projectDate: Date = new Date(data.date);
+
+  const months: string[] = [ `January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December` ];
 
   const deleteButtonHandler = (): void => {
     if (window.confirm(`Are you sure you want to delete the project ${data.name} ?`)) {
@@ -63,6 +66,15 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
             </div> 
             <div className='project-data__value' style={{display: 'inline', color: currentHostsRank?.color}}>
               {host!.name}
+            </div>
+          </li>
+
+          <li>
+            <div className='project-data__key'>
+              Date:
+            </div> 
+            <div className='project-data__value'>
+              {months[projectDate.getMonth()]} {projectDate.getDate()}
             </div>
           </li>
 
