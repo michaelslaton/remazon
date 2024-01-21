@@ -63,7 +63,7 @@ const EmployeesDisplay: React.FC = () => {
   };
 
   return (
-    <>
+    <div className='employees__display-wrapper'>
       <h2 className='title'>Employees</h2>
 
       <div className='employees__view-controls'>
@@ -89,7 +89,7 @@ const EmployeesDisplay: React.FC = () => {
       <div className='employee__cards-wrapper'>
         {applySort()}
       </div>
-    </>
+    </div>
   );
 };
 

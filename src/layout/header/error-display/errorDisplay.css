@@ -4,22 +4,24 @@
   text-align: center;
   width: 99%;
   margin: auto;
+  margin-top: .3rem;
+  margin-bottom: .2rem;
   padding: .1rem;
   height: 1.3rem;
-  margin-top: -.3rem;
-  margin-bottom: .2rem;
   opacity: 1;
   transition: all 80ms ease-in-out;
 }
 .error-display.inactive {
   opacity: 0;
   height: 0rem;
+  margin: 0;
+  padding: 0;
   transition: all 80ms ease-in-out;
 }
 
 .button.close-button {
-  display: inline-block;
   aspect-ratio: 1/1;
+  display: inline-block;
   border-radius: 50%;
   min-width: auto;
   width: 1.1rem;
