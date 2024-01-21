@@ -1,57 +1,57 @@
 .motd__container {
   width: 100%;
-  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--off-black);
 }
 
 .motd__wrapper {
   box-sizing: border-box;
+  position: relative;
   width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  padding: .5rem .2rem;
-  background-color: var(--brown);
-  border-radius: var(--border-radius);
-  box-shadow: .5rem .5rem .2rem black;
+  /* padding: .5rem .2rem; */
 }
 
 .motd__a-message {
-  font-size: 1.4rem;
-  font-family: "gvd";
+  position: absolute;
+  font-size: 2rem;
   color: var(--remazon-prime);
+  top: 3rem;
+  left: 6rem;
 }
 
 .motd {
+  position: absolute;
   font-size: 1.5rem;
   font-family: 'gvd-italic';
   margin-top: .5rem;
+  top: 6rem;
+  right: 10rem;
+}
+
+.rembo {
+  position: absolute;
+  text-align: end;
+  right: -2rem;
+  font-family: 'gvd';
+  font-size: .8em;
+}
+
+.placeholder {
+  height: 200px;
+  background: linear-gradient(90deg, rgba(2,0,36,0) 0%, var(--font-white) 14%);
 }
 
 @media (min-width: 375px){
 }
 
 @media (min-width: 390px){
-  .motd__a-message {
-    font-size: 1.8rem;
-  }
 }
 
 @media (min-width: 414px){
 }
 
 @media (min-width: 768px){
-  .motd__wrapper {
-    padding: .5rem 10rem;
-    width: fit-content;
-  }
-
-  .motd__a-message {
-    font-size: 3rem;
-  }
-
-  .motd {
-    font-size: 1.8rem;
-    margin: .5rem 0;
-  }
 }
 
 @media (min-width: 810px){ 

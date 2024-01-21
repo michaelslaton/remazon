@@ -21,8 +21,12 @@ const MessageOfTheDay: React.FC = () => {
             </div>
             <div className='motd'>
               "{motd}"
+              <div className='rembo'>
+                - Rembo
+              </div>
             </div>
           </div>
+          <div className='placeholder'/>
         </div>
         :
         <></>

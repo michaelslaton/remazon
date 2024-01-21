@@ -5,6 +5,7 @@ type ProjectType = {
   name: string;
   host: number;
   attending?: EmployeeType[];
+  date: Date;
   type: string;
   description: string;
   locked: boolean;
@@ -15,6 +16,7 @@ export type ProjectPostType = {
   name: string;
   host: number;
   type: string;
+  date: Date;
   description: string;
 };
 
