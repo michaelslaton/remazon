@@ -5,13 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import EmployeeType from '../../../types/employeeType';
 import RankType from '../../../types/rankType';
+import months from '../../../data/months';
 import '../employees.css';
 
 type EmployeeProps = {
   data: EmployeeType;
 };
-
-const months: string[] = [ `January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December` ];
 
 const Employee: React.FC<EmployeeProps> = ({ data }) => {
   const navigate: NavigateFunction = useNavigate();
