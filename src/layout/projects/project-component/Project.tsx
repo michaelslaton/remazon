@@ -1,8 +1,10 @@
 import { ReactNode, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
-import { deleteProjectThunk, fetchProjectsThunk } from '../../../redux/slices/projectsSlice';
+import { deleteProjectThunk, editProjectThunk, fetchProjectsThunk } from '../../../redux/slices/projectsSlice';
+import { setUiError } from '../../../redux/slices/controlsSlice';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RankType from '../../../types/rankType';
 import ProjectType from '../../../types/projectType';
@@ -33,22 +35,67 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     }
   };
 
+  // attendButtonHandler handles the functionality of the button to add or remove a user from attendance.
+  // Type = 'add' or 'remove'
+  // attendGuttonHandler adjusted the attendance list accordingly and sends an api call to adjust the project.
+  const attendButtonHandler = (type: string): void => {
+    let updatedProject: ProjectType = {...data};
+    let attendingList: string[] = [];
+    if (data.attending?.length) attendingList = [...data.attending.split(",")];
+
+    if(type === 'add') {
+      attendingList = [ ...attendingList, currentEmployee!.uid ];
+    } else if (type === 'remove') {
+      if (data.host === currentEmployee!.id) {
+        dispatch(setUiError(`The host must attend!`));
+        return;
+      };
+      attendingList = attendingList.filter((currentUid)=> currentUid !== currentEmployee!.uid);
+    };
+
+    updatedProject.attending = attendingList.toString();
+    dispatch(editProjectThunk(updatedProject))
+      .then(() => dispatch(fetchProjectsThunk()))
+      .then(() => setShowConfirm(!showConfirm));
+      return;
+  };
+
   // editButtonRender checks all the conditions to see if access is permitted to edit a project.
   // An Admin may always edit, otherwise employees can only edit their hosted projects if an admin has not locked it.
   const editButtonRender = (): ReactNode | null => {
     if ( data.locked && !currentEmployee?.admin ) return;
+    if ( !currentEmployee?.admin && data.host !== currentEmployee?.id ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
       <button className='button card-button' onClick={()=> navigate(`/projects/edit/${data.id}`)}>
         <FontAwesomeIcon icon={faEdit}/>
       </button>
     );
   };
-  
+
+  // deleteButtonRender checks all the conditions to see if access is permitted to delete a project.
+  // An Admin may always delete, otherwise employees can only delete their hosted projects if an admin has not locked it.
   const deleteButtonRender = (): ReactNode | null => {
     if ( data.locked && !currentEmployee?.admin ) return;
+    if ( !currentEmployee?.admin && data.host !== currentEmployee?.id ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
       <button className='button delete card-button' onClick={()=> deleteButtonHandler()}>
         <FontAwesomeIcon icon={faTrashCan}/>
+      </button>
+    );
+  };
+
+  // attendButtonRender checks to make sure a user is logged in.
+  // if so, it renders the appropriate button (add or remove) depending on whether the current user is already attending or not.
+  const attendButtonRender = (): ReactNode | null => {
+    if ( !currentEmployee ) return;
+    if (data.attending?.includes(currentEmployee!.uid)) return (
+      <button className='button card-button' onClick={()=> attendButtonHandler('remove')}>
+        <FontAwesomeIcon icon={faMinus}/>
+      </button>
+    );
+    else return (
+      <button className='button card-button' onClick={()=> attendButtonHandler('add')}>
+        <FontAwesomeIcon icon={faPlus}/>
       </button>
     );
   };
@@ -86,6 +133,17 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
             </div>
           </li>
 
+          { data.attending?.length &&
+            <li>
+              <div className='project-data__key'>
+                Confirmed Attending:
+              </div>
+              <div className='project-data__value'>
+                {data.attending.split(',').length}
+              </div>
+            </li>
+          }
+
           <li>
             <div className='project-data__key'>
               Description:
@@ -108,6 +166,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
 
         </ul>
         <div className='project__buttons_wrapper'>
+          {attendButtonRender()}
           {editButtonRender()}
           {deleteButtonRender()}
         </div>

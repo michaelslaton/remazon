@@ -1,10 +1,8 @@
-import EmployeeType from './employeeType';
-
 type ProjectType = {
   id: number;
   name: string;
   host: number;
-  attending?: EmployeeType[];
+  attending?: string;
   date: Date;
   type: string;
   description: string;
@@ -17,6 +15,7 @@ export type ProjectPostType = {
   host: number;
   type: string;
   date: Date;
+  attending?: string;
   description: string;
 };
 

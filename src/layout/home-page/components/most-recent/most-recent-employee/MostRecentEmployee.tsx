@@ -4,11 +4,10 @@ import RankType from '../../../../../types/rankType';
 import '../mostRecent.css';
 
 const MostRecentEmployee: React.FC = () => {
-  const rankList = useAppSelector((state)=> state.ranksControl.ranks);
-  const employeeList: EmployeeType[] = useAppSelector((state) =>
-    state.employeesControl.employees.filter((employee) => employee.rank !== 0)
-  );
-  const mostRecentEmployee: EmployeeType = employeeList.reduce((prev, current) => {
+  const rankList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
+  let employeeList: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
+  employeeList = [...employeeList].filter((employee) => employee.rank !== 0);
+  const mostRecentEmployee: EmployeeType = [...employeeList].reduce((prev, current) => {
       return prev.id > current.id ? prev : current;
     }
   );

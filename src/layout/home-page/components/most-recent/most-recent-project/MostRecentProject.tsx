@@ -4,9 +4,8 @@ import months from '../../../../../data/months';
 import '../mostRecent.css';
 
 const MostRecentProject: React.FC = () => {
-  const projectList: ProjectType[] = useAppSelector((state) =>
-    state.projectsControl.projects.filter((project) => project.status === true)
-  );
+  let projectList: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
+  projectList = [...projectList].filter((project) => project.status === true);
   const mostRecentProject: ProjectType = projectList.reduce((prev, current) => {
     return prev.id > current.id ? prev : current;
   });
