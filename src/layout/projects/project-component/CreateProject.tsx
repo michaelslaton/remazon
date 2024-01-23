@@ -38,6 +38,7 @@ const CreateProject: React.FC = () => {
       name: nameRef.current!.value,
       host: currentEmployee!.id,
       type: typeRef.current!.value,
+      attending: `${currentEmployee!.uid}`,
       date: projectDate,
       description: descriptionRef.current!.value,
     };
