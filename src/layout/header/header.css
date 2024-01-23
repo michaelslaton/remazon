@@ -7,6 +7,7 @@
   font-size: 4rem;
   font-family: "coolvetica";
   letter-spacing: .3rem;
+  padding: 0 0 .5rem .5rem;
 }
 
 .header__wrapper {
@@ -39,11 +40,11 @@
   }
 
   .header__title {
-    margin-top: 1rem;
+    margin-top: .3rem;
   }
 
   .header__items {
-    align-self: end;
+    margin: auto 0;
   }
 }
 
@@ -51,6 +52,10 @@
 }
 
 @media (min-width: 1280px){
+  .header__title {
+    padding: 0;
+  }
+
   .header__wrapper {
     flex-direction: row;
     border-bottom: .3rem solid var(--remazon-prime);
