@@ -6,8 +6,9 @@ import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RankType from '../../../types/rankType';
 import ProjectType from '../../../types/projectType';
-import '../projects.css';
 import EmployeeType from '../../../types/employeeType';
+import months from '../../../data/months';
+import '../projects.css';
 
 type ProjectProps = {
   data: ProjectType;
@@ -23,8 +24,6 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const currentHostsRank: RankType | undefined = ranks.find((rank)=> rank.id === host?.rank);
   const projectDate: Date = new Date(data.date);
-
-  const months: string[] = [ `January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December` ];
 
   const deleteButtonHandler = (): void => {
     if (window.confirm(`Are you sure you want to delete the project ${data.name} ?`)) {

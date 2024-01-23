@@ -1,29 +1,4 @@
-.most-recent-container {
-  width: 100%;
-  margin-top: 2rem;
-}
 
-.most-recent-wrapper {
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: auto;
-  gap: 0 1rem;
-}
-
-.most-recent-cel-title {
-  font-family: "gvd-bold";
-  color: var(--remazon-prime);
-  text-align: center;
-  font-size: 1.5rem;
-  margin: .5rem 0;
-  letter-spacing: .5px;
-}
-
-.most-recent-divider {
-  display: none;
-}
 
 @media (min-width: 375px){
 }
@@ -35,16 +10,6 @@
 }
 
 @media (min-width: 768px){
-  .most-recent-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, fit-content(.1rem));
-  }
-
-  .most-recent-divider {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
 }
 
 @media (min-width: 810px){ 
