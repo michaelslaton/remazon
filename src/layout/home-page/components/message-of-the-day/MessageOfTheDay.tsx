@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import './messageOfTheDay.css';
 import { fetchMotdThunk } from '../../../../redux/slices/controlsSlice';
+import banner from '../../../../assets/imgs/motdBanner.jpg'
 
 const MessageOfTheDay: React.FC = () => {
   const motd = useAppSelector((state)=> state.mainControl.motd);
@@ -26,7 +27,11 @@ const MessageOfTheDay: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className='placeholder'/>
+          <div className='motd__banner-wrapper'>
+            <img
+              src={banner}
+            />
+          </div>
         </div>
         :
         <></>

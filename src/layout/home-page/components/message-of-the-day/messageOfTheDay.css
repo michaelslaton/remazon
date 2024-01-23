@@ -1,45 +1,42 @@
 .motd__container {
+  box-sizing: border-box;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background-color: var(--off-black);
+  display: flex;
+  padding: 1rem;
 }
 
 .motd__wrapper {
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  /* padding: .5rem .2rem; */
 }
 
 .motd__a-message {
-  position: absolute;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: var(--remazon-prime);
-  top: 3rem;
-  left: 6rem;
 }
 
 .motd {
-  position: absolute;
-  font-size: 1.5rem;
+  font-size: 3.5rem;
   font-family: 'gvd-italic';
   margin-top: .5rem;
-  top: 6rem;
-  right: 10rem;
 }
 
 .rembo {
-  position: absolute;
   text-align: end;
   right: -2rem;
   font-family: 'gvd';
-  font-size: .8em;
+  font-size: .5em;
 }
 
-.placeholder {
-  height: 200px;
-  background: linear-gradient(90deg, rgba(2,0,36,0) 0%, var(--font-white) 14%);
+.motd__banner-wrapper {
+  aspect-ratio: 2.10/1;
+  width: 85rem;
+  position: relative;
+  box-sizing: border-box;
+  display: none;
+  flex-direction: row-reverse;
+  overflow: hidden;
 }
 
 @media (min-width: 375px){
@@ -64,6 +61,30 @@
 }
 
 @media (min-width: 1440px){
+  .motd__container {
+    padding: 0;
+  }
+
+  .motd__a-message {
+    position: absolute;
+    top: 3.5rem;
+    left: 6rem;
+  }
+
+  .motd {
+    position: absolute;
+    top: 10.5rem;
+    right: 12rem;
+  }
+
+  .rembo {
+    position: absolute;
+    text-align: end;
+  }
+
+  .motd__banner-wrapper {
+    display: flex;
+  }
 }
 
 @media (min-width: 1536px){
