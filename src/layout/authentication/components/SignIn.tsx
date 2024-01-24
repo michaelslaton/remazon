@@ -3,9 +3,8 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice';
-import { setAuthDisplay } from '../../../redux/slices/controlsSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignIn, faX } from '@fortawesome/free-solid-svg-icons';
+import { faSignIn } from '@fortawesome/free-solid-svg-icons';
 import '../authentication.css';
 
 const SignIn: React.FC = () => {
@@ -23,13 +22,11 @@ const SignIn: React.FC = () => {
     signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
       .then(() => {
         dispatch(fetchCurrentEmployeeThunk(auth.currentUser!.uid));
-        dispatch(setAuthDisplay('logout'));
       })
       .then(()=> navigate('/'))
       .catch((error) => {
         console.error(error.code);
         console.error(error.message);
-        dispatch(setAuthDisplay('login signup'));
       });
   };
 
@@ -47,9 +44,6 @@ const SignIn: React.FC = () => {
           type='submit'
           onClick={(e) => loginHandler(e)}>
           <FontAwesomeIcon icon={faSignIn}/>
-        </button>
-        <button className='button' onClick={()=> dispatch(setAuthDisplay('login signup'))}>
-          <FontAwesomeIcon icon={faX}/>
         </button>
       </form>
     </>
