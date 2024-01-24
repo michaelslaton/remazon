@@ -1,4 +1,4 @@
-import Authentication from '../authentication/Authentication';
+import UserDisplay from './user-display/UserDisplay';
 import ErrorDisplay from './error-display/ErrorDisplay';
 import './header.css';
 
@@ -11,7 +11,7 @@ const Header: React.FC = () => {
           <h1 className='header__title'>Remazon Prime</h1>
         </div>
         <div className='header__items'>
-          <Authentication/>
+          <UserDisplay/>
         </div>
       </div>
       <ErrorDisplay/>

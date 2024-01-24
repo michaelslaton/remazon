@@ -1,35 +1,19 @@
-.signup > label {
-  display: block;
-}
-
-.signup > label > input, textarea, select {
+.user-display__wrapper {
   box-sizing: border-box;
-  width: 100%;
-  margin-top: .1rem;
-}
-
-.login-form {
   display: flex;
-  margin-right: 1rem;
+  margin-top: .5rem;
 }
 
-.login-form > label {
-  margin-right: .5rem;
+.user-display__user-wrapper {
+  display: flex;
+  font-size: 1.3rem;
 }
 
-.login-button { 
+.user-display__employee-name {
   display: inline;
-  margin-right: .5rem;
-}
-
-.signout-button {
-  margin-left: .4em;
-}
-
-.signup-control {
-  display: inline;
-  margin-top: .5em;
-  margin-right: .5em;
+  margin-left: .3em;
+  margin-right: .3em;
+  text-transform: capitalize;
 }
 
 @media (min-width: 375px){
@@ -48,6 +32,14 @@
 }
 
 @media (min-width: 1280px){
+  .user-display__wrapper {
+    position: static;
+  }
+
+  .user-display__user-wrapper {
+    display: flex;
+    font-size: 1.5rem;
+  }
 }
 
 @media (min-width: 1366px){
