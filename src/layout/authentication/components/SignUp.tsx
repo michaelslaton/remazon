@@ -3,7 +3,6 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/hooks';
 import { createEmployeeThunk, fetchEmployeesListThunk, fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice';
-import { setAuthDisplay } from '../../../redux/slices/controlsSlice';
 import { EmployeePostType } from '../../../types/employeeType';
 import '../authentication.css';
 
@@ -40,7 +39,6 @@ const SignUp: React.FC = () => {
     })
     .then(()=> {
       dispatch(fetchCurrentEmployeeThunk(auth.currentUser!.uid))
-      dispatch(setAuthDisplay('logged in'))
     })
     .then(()=> {
       navigate('/');

@@ -43,7 +43,6 @@
 
 .button__text {
   display: inline;
-  margin-left: .25rem;
 }
 .button__text.hovering {
   color: var(--remazon-white);

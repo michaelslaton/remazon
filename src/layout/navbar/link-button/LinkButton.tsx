@@ -3,8 +3,8 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LinkButtonData } from '../Navbar';
-import '../navbar.css';
 import { navToggle } from '../../../redux/slices/controlsSlice';
+import '../navbar.css';
 
 type LinkButtonProps = {
   data: LinkButtonData,
@@ -33,7 +33,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
         <>
           <FontAwesomeIcon icon={data.icon}/>
           <div className={`button__text ${hovering ? 'hovering' : ''}`}>
-            {data.name}
+            {` ${data.name}`}
           </div>
         </>
         :

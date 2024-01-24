@@ -7,7 +7,6 @@ import { setAwardsList } from './awardsSlice';
 type InitialState = {
   navOpen: boolean;
   loading: boolean;
-  authDisplay: string;
   motd: string;
   uiError: string;
   error: any;
@@ -16,7 +15,6 @@ type InitialState = {
 const initialState: InitialState = {
   navOpen: false,
   loading: false,
-  authDisplay: 'login signup',
   motd: '',
   uiError: '',
   error: '',
@@ -68,9 +66,6 @@ const mainControl = createSlice({
   reducers: {
     navToggle: (state) => {
       state.navOpen = !state.navOpen;
-    },
-    setAuthDisplay: (state,action) => {
-      state.authDisplay = action.payload;
     },
     setMotd: (state,action) => {
       state.motd = action.payload.data;
@@ -134,7 +129,6 @@ const mainControl = createSlice({
 export default mainControl.reducer;
 export const {
   navToggle,
-  setAuthDisplay,
   setUiError,
   clearUiError,
   clearControlError
