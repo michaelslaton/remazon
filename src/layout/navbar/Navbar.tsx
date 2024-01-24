@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
               <FontAwesomeIcon icon={faSignOut}/> 
               { navActive &&
                 <div className={`button__text ${ hovering ? 'hovering' : '' }`}>
-                  Sign Out
+                  {` Sign Out`}
                 </div>
               }
             </button>
