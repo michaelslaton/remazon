@@ -17,8 +17,8 @@ const notificationsUrl: URL= new URL('http://localhost:5000/remazon/notification
 
 // Api Calls --------------------------------------------------------------------------------->
 
-export const fetchNotificationsThunk = createAsyncThunk('notifications/fetch', async (_thunkApi)=>{
-  const response = await fetch(notificationsUrl, {
+export const fetchNotificationsThunk = createAsyncThunk('notifications/fetch', async (uid: string, _thunkApi)=>{
+  const response = await fetch(`${notificationsUrl}/${uid}`, {
     method: 'GET',
   });
   const data = response.json();
