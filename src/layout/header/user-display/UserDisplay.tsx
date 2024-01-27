@@ -8,6 +8,7 @@ import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import EmployeeType from '../../../types/employeeType';
 import RankType from '../../../types/rankType';
 import './userDisplay.css';
+import { fetchNotificationsThunk } from '../../../redux/slices/notificationsSlice';
 
 const UserDisplay: React.FC = () => {
   const auth = getAuth();
@@ -20,6 +21,7 @@ const UserDisplay: React.FC = () => {
 
   useEffect(()=>{
     if(auth.currentUser && !currentEmployee) dispatch(fetchCurrentEmployeeThunk(auth.currentUser?.uid));
+    if(auth.currentUser && currentEmployee) dispatch(fetchNotificationsThunk(currentEmployee.uid));
   },[]);
 
   if(auth.currentUser || currentEmployee) return (

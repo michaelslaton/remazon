@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
-import { useAppSelector } from '../../../redux/hooks';
+// import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
 import NotificationType from '../../../types/notificationType';
-import EmployeeType from '../../../types/employeeType';
 import '../notifications.css';
 
 type NotificationProps = {
@@ -9,22 +7,21 @@ type NotificationProps = {
 };
 
 const Notification: React.FC<NotificationProps> = ({ data = null }) => {
-  const selectedEmployee: EmployeeType | undefined = useAppSelector((state)=> state.employeesControl.employees).find((employee)=> employee.id === data?.requestedEmployee);
   // const dispatch = useAppDispatch();
 
-  useEffect(()=>{
-  },[]);
-
   
-  if(!data) return <></>
+  if(!data) return <>eh??</>
   else return (
-    <div>
+    <div className='notification__wrapper'>
       <div>
-        User: {data.user}
+        {data.title}
       </div>
       <div>
-        Employee Requested: {selectedEmployee?.name}
+        {data.type}
       </div>
+      <p>
+        {data.message}
+      </p>
     </div>
   );
 };
