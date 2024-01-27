@@ -25,11 +25,26 @@ export const fetchNotificationsThunk = createAsyncThunk('notifications/fetch', a
   return data;
 });
 
+export const removeNotificationThunk = createAsyncThunk('notifications/remove', async (mydata: {uid: string, id: number}, _thunkApi)=> {
+  const { uid, id } = mydata;
+  const response = await fetch(`${notificationsUrl}/${uid}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type':'application/json'
+    },
+  });
+  const data = response.json();
+  return data;
+});
+
+// -------------------------------------------------------------------------------------------->
+
 const notificationsSlice = createSlice({
   name: 'applicationsSlice',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // Fetch Notifications -------------------------------------------------------------------->
     builder.addCase(fetchNotificationsThunk.fulfilled, (state, action)=>{
       state.notifications = action.payload.data;
       state.error = '';
@@ -39,6 +54,20 @@ const notificationsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchNotificationsThunk.rejected, (state, action)=>{
+      state.notifications = [...state.notifications];
+      state.error = action.error.message;
+      state.loading = false;
+    });
+    // Remove Notifications -------------------------------------------------------------------->
+    builder.addCase(removeNotificationThunk.fulfilled, (state, action)=>{
+      state.notifications = action.payload.data;
+      state.error = '';
+      state.loading = false;
+    });
+    builder.addCase(removeNotificationThunk.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(removeNotificationThunk.rejected, (state, action)=>{
       state.notifications = [...state.notifications];
       state.error = action.error.message;
       state.loading = false;
