@@ -32,7 +32,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     dispatch(deleteProjectThunk(data.id))
       .then(() => dispatch(fetchProjectsThunk()))
       .then(() => setShowConfirm(!showConfirm));
-    }
+    };
   };
 
   // attendButtonHandler handles the functionality of the button to add or remove a user from attendance.

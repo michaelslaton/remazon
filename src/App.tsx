@@ -102,7 +102,10 @@ const router = createBrowserRouter([
       },
       {
         path: '/notifications',
-        element: <NotificationsDisplay/>,
+        element:
+          <AuthRoute>
+            <NotificationsDisplay/>
+          </AuthRoute>,
         errorElement: <RouteError/>,
       },
       {
