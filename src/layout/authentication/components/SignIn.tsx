@@ -6,6 +6,7 @@ import { fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignIn } from '@fortawesome/free-solid-svg-icons';
 import '../authentication.css';
+import { fetchNotificationsThunk } from '../../../redux/slices/notificationsSlice';
 
 const SignIn: React.FC = () => {
   const auth = getAuth();
@@ -22,6 +23,7 @@ const SignIn: React.FC = () => {
     signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
       .then(() => {
         dispatch(fetchCurrentEmployeeThunk(auth.currentUser!.uid));
+        dispatch(fetchNotificationsThunk(auth.currentUser!.uid));
       })
       .then(()=> navigate('/'))
       .catch((error) => {

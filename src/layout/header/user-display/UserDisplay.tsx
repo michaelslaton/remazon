@@ -21,7 +21,7 @@ const UserDisplay: React.FC = () => {
 
   useEffect(()=>{
     if(auth.currentUser && !currentEmployee) dispatch(fetchCurrentEmployeeThunk(auth.currentUser?.uid));
-    if(auth.currentUser && currentEmployee) dispatch(fetchNotificationsThunk(currentEmployee.uid));
+    if(currentEmployee) dispatch(fetchNotificationsThunk(currentEmployee.uid));
   },[]);
 
   if(auth.currentUser || currentEmployee) return (
@@ -34,7 +34,7 @@ const UserDisplay: React.FC = () => {
           >
             {currentEmployee?.name}
           </div>
-          { notifications.length &&
+          { notifications.length > 0 &&
             <button
               className="button card-button"
               onClick={() => navigate("/notifications")}
