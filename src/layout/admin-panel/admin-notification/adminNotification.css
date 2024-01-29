@@ -1,0 +1,63 @@
+.admin__send-to-grid {
+  display: grid;
+  grid-template-columns: 1fr .5fr 1fr;
+  border-radius: var(--border-radius);
+}
+
+.admin__send-to__unlist {
+  min-height: 10rem;
+  background-color: var(--charcoal);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding: .3rem .8rem;
+  border-radius: var(--border-radius);
+}
+
+.admin__send-to__listing {
+  background-color: var(--off-black);
+  border: .15rem solid transparent;
+  margin: .5rem 0;
+  padding: .5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+.admin__send-to__listing.selected {
+  border: .15rem solid var(--remazon-prime);
+}
+
+@media (min-width: 375px){
+}
+
+@media (min-width: 390px){
+}
+
+@media (min-width: 414px){
+}
+
+@media (min-width: 768px){
+}
+
+@media (min-width: 810px){ 
+}
+
+@media (min-width: 1280px){
+}
+
+@media (min-width: 1366px){
+}
+
+@media (min-width: 1440px){
+}
+
+@media (min-width: 1536px){
+}
+
+@media (min-width: 1600px){
+}
+
+@media (min-width: 1920px){
+}
+
+@media (min-width: 2560px){
+}
