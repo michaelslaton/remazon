@@ -4,12 +4,14 @@ import { clearControlError, clearUiError } from '../../../redux/slices/controlsS
 import { clearProjectError } from '../../../redux/slices/projectsSlice';
 import { clearRankError } from '../../../redux/slices/ranksSlice';
 import './errorDisplay.css';
+import { clearNotificationsError } from '../../../redux/slices/notificationsSlice';
 
 const ErrorDisplay: React.FC = () => {
   const controlError: string = useAppSelector((state)=> state.mainControl.error);
   const employeeError: string = useAppSelector((state)=> state.employeesControl.error);
   const projectError: string = useAppSelector((state)=> state.projectsControl.error);
   const rankError: string = useAppSelector((state)=> state.ranksControl.error);
+  const notificationsError: string = useAppSelector((state)=> state.notificationsControl.error);
   const uiError: string = useAppSelector((state)=> state.mainControl.uiError);
   const dispatch = useAppDispatch();
 
@@ -44,6 +46,13 @@ const ErrorDisplay: React.FC = () => {
           </div>
         </button>
       );
+      else if (type === 'notifications') return (
+        <button className='button close-button' onClick={()=> dispatch(clearNotificationsError())}>
+          <div className='button-text'>
+            X
+          </div>
+        </button>
+      );
       else return (
         <button className='button close-button' onClick={()=> dispatch(clearUiError())}>
           <div className='button-text'>
@@ -61,7 +70,7 @@ const ErrorDisplay: React.FC = () => {
   }
 
   return (
-    <div className={`error-display ${ controlError.length || employeeError.length || projectError.length || rankError.length || uiError.length ? '' : 'inactive' }`}>
+    <div className={`error-display ${ controlError.length || employeeError.length || projectError.length || rankError.length || uiError.length || notificationsError.length ? '' : 'inactive' }`}>
       { uiError.length ?
         <>{generateError('ui', uiError)}</>
         :
@@ -79,6 +88,11 @@ const ErrorDisplay: React.FC = () => {
       }
       { projectError.length ?
         <>{generateError('project', projectError)}</>
+        :
+        ''
+      }
+      { projectError.length ?
+        <>{generateError('notifications', notificationsError)}</>
         :
         ''
       }
