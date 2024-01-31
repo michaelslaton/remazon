@@ -54,7 +54,11 @@ export const removeNotificationThunk = createAsyncThunk('notifications/remove', 
 const notificationsSlice = createSlice({
   name: 'applicationsSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    clearNotificationsError: (state) => {
+      state.error = '';
+    }
+  },
   extraReducers: (builder) => {
 
     // Fetch Notifications -------------------------------------------------------------------->
@@ -104,3 +108,7 @@ const notificationsSlice = createSlice({
 });
 
 export default notificationsSlice.reducer;
+
+export const {
+  clearNotificationsError
+} = notificationsSlice.actions;
