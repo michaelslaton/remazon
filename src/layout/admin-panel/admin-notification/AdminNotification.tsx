@@ -1,5 +1,8 @@
 import { useRef, useState } from 'react';
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { NotificationPostType } from '../../../types/notificationType';
+import { createNotificationThunk, fetchNotificationsThunk } from '../../../redux/slices/notificationsSlice';
+import { setUiError } from '../../../redux/slices/controlsSlice';
 import EmployeeType from '../../../types/employeeType';
 import './adminNotification.css';
 
@@ -19,12 +22,13 @@ const initialState = {
 
 const AdminNotification: React.FC = () => {
   const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  const currentEmployeeUid: string | undefined = useAppSelector((state)=> state.employeesControl.currentEmployee?.uid);
   const [ listState, setListState ] = useState<InitialStateType>({
     ...initialState,
     unlisted: employeeList,
   });
+  const dispatch = useAppDispatch();
   const titleRef = useRef<HTMLTextAreaElement>(null);
-  const typeRef = useRef<HTMLSelectElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
   const alphabetizeEmployees = (arr: EmployeeType[]): EmployeeType[] => {
@@ -95,6 +99,18 @@ const AdminNotification: React.FC = () => {
     return;
   };
 
+  const handleMoveAll = (): void => {
+    let newListed = [...listState.unlisted];
+    let newUnlisted = [...listState.listed];
+
+    setListState({
+      ...listState,
+      unlisted: newUnlisted,
+      listed: newListed,
+    });
+    return;
+  };
+
   const handleReset = (): void=> {
     setListState({
       ...initialState,
@@ -103,7 +119,36 @@ const AdminNotification: React.FC = () => {
   };
 
   const submitHandler = (e: React.FormEvent): void => {
-    e.preventDefault();
+    e.preventDefault()
+
+    if(messageRef.current!.value.length < 1) {
+      dispatch(setUiError('Please enter a message for the notification.'));
+      return;
+    };
+    if(titleRef.current!.value.length < 1) {
+      dispatch(setUiError('Please enter a title for the notification.'));
+      return;
+    };
+    if(listState.listed.length < 1) {
+      dispatch(setUiError('Please enter at least 1 recipient for the notification.'));
+      return;
+    };
+
+    const attendingList = listState.listed.map((employee)=> employee.uid).toString();
+    const newNotification: NotificationPostType = {
+      title: titleRef.current!.value,
+      users: attendingList,
+      type: 'admin',
+      message: messageRef.current!.value,
+    };
+
+    dispatch(createNotificationThunk(newNotification))
+      .then(()=> dispatch(fetchNotificationsThunk(currentEmployeeUid!)))
+      .then(()=> {
+        handleReset();
+      });
+    
+    return;
   };
 
   return (
@@ -141,9 +186,17 @@ const AdminNotification: React.FC = () => {
             <button
               type='button'
               className='button'
+              onClick={() => handleMoveAll()}
+            >
+              {`>>`}
+            </button>
+
+            <button
+              type='button'
+              className='button'
               onClick={()=> handleReset()}
             >
-              X
+              {`<<`}
             </button>
 
             <button
@@ -184,19 +237,6 @@ const AdminNotification: React.FC = () => {
             name='title'
             ref={titleRef}
           />
-
-          <label
-            htmlFor='type'
-            className='form-input-label'
-          >
-            Type:
-          </label>
-          <select
-            id='type'
-            name='type'
-            ref={typeRef}
-          >
-          </select>
 
           <label
             htmlFor='message'
