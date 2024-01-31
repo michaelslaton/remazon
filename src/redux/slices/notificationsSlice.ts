@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import NotificationType from '../../types/notificationType';
+import NotificationType, { NotificationPostType } from '../../types/notificationType';
 
 type InitialState = {
   loading: boolean,
@@ -25,6 +25,18 @@ export const fetchNotificationsThunk = createAsyncThunk('notifications/fetch', a
   return data;
 });
 
+export const createNotificationThunk = createAsyncThunk('notifications/create', async (newNotification: NotificationPostType, _thunkApi)=> {
+  const response = await fetch(notificationsUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify(newNotification)
+  });
+  const data = response.json();
+  return data;
+});
+
 export const removeNotificationThunk = createAsyncThunk('notifications/remove', async (mydata: {uid: string, id: number}, _thunkApi)=> {
   const { uid, id } = mydata;
   const response = await fetch(`${notificationsUrl}/${uid}/${id}`, {
@@ -44,6 +56,7 @@ const notificationsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+
     // Fetch Notifications -------------------------------------------------------------------->
     builder.addCase(fetchNotificationsThunk.fulfilled, (state, action)=>{
       state.notifications = action.payload.data;
@@ -58,6 +71,21 @@ const notificationsSlice = createSlice({
       state.error = action.error.message;
       state.loading = false;
     });
+
+    // createProject ------------------------------------------------------------->
+    builder.addCase(createNotificationThunk.fulfilled, (state)=>{
+      state.error = '';
+      state.loading = false;
+    });
+    builder.addCase(createNotificationThunk.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(createNotificationThunk.rejected, (state, action)=>{
+      state.notifications = [...state.notifications];
+      state.error = action.error.message;
+      state.loading = false;
+    });
+
     // Remove Notifications -------------------------------------------------------------------->
     builder.addCase(removeNotificationThunk.fulfilled, (state, action)=>{
       state.notifications = action.payload.data;
