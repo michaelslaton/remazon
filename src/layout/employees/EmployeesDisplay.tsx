@@ -27,14 +27,14 @@ const EmployeesDisplay: React.FC = () => {
   const applySort = (): JSX.Element => {
     let results = [...employees];
 
-    if (sortType === "alphabetical")
+    if (sortType === 'alphabetical')
       results = [...employees].sort((a, b) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
         if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
         return 0;
       });
 
-    if (sortType === "rank")
+    if (sortType === 'rank')
       results = [...employees].sort((a, b) => {
         if (a.rank < b.rank) return -1;
         if (a.rank > b.rank) return 1;
@@ -47,7 +47,7 @@ const EmployeesDisplay: React.FC = () => {
           employee.rank !== 0 ? (
             <Employee key={employee.id} data={employee} />
           ) : (
-            ""
+            ''
           )
         )}
         {showDeactivated &&
@@ -55,7 +55,7 @@ const EmployeesDisplay: React.FC = () => {
             employee.rank === 0 ? (
               <Employee key={employee.id} data={employee} />
             ) : (
-              ""
+              ''
             )
           )}
       </>

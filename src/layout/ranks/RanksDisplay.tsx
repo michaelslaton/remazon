@@ -14,8 +14,6 @@ const RanksDisplay: React.FC = () => {
   const dispatch = useAppDispatch();
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
-  const nonMutRanks = [...ranks];
-  const sortedRanks: RankType[] = nonMutRanks.sort((a,b)=> a.id - b.id);
   
   useEffect(()=>{
     dispatch(fetchRanksThunk());
@@ -24,8 +22,8 @@ const RanksDisplay: React.FC = () => {
   return (
     <div className='center-display-space'>
       <div className='form-wrapper ranks-wrapper'>
-        <h2 className='title'>Ranks</h2>
-        {sortedRanks.map((rank)=> rank.id !== 0 ?
+        <h2 className='title form-title'>Ranks</h2>
+        {[...ranks].sort((a,b)=> a.id - b.id).map((rank)=> rank.id !== 0 ?
           <Rank key={rank.id} rankData={rank}/>
           :
           <></>

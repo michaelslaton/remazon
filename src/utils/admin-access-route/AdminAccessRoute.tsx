@@ -11,13 +11,13 @@ const AdminAccessRoute: React.FC<AuthProps> = ({ children }) => {
   const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
 
   useEffect(()=>{
-    if(!currentEmployee?.admin) {
+    if (!currentEmployee?.admin) {
       console.error('Admin access only.');
       navigate('/');
     }
   },[]);
 
-  if(!currentEmployee?.admin) return <></>;
+  if (!currentEmployee?.admin) return <></>;
 
   return (
     <>

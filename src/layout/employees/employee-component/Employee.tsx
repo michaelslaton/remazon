@@ -19,7 +19,7 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
   const currentEmployeesRank: RankType | undefined = ranks.find((rank)=> rank.id === data.rank);
   
   let birthday: Date | null = null;
-  if(data.birthday) birthday = new Date(data.birthday); 
+  if (data.birthday) birthday = new Date(data.birthday); 
 
   // editButtonRender checks all the conditions to see if access is permitted to edit an employee.
   // An Admin may always edit, otherwise employees can only edit their own employee profile if an admin has not locked it.

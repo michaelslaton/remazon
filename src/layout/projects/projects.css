@@ -3,9 +3,9 @@
 }
 
 .projects__header {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  position: relative;
 }
 
 .projects-display-title {
@@ -15,24 +15,24 @@
 
 .projects__cards-wrapper {
   display: flex;
-  max-width: 95%;
   flex-wrap: wrap;
-  margin-top: .5rem;
   gap: 1rem;
+  max-width: 95%;
+  margin-top: .5rem;
 }
 
 .project__wrapper {
-  width: 20rem;
-  display: inline-block;
   box-sizing: border-box;
+  background-color: var(--dark-brown);
   border: .15rem solid var(--remazon-prime);
-  padding: .3rem;
   border-radius: var(--border-radius);
+  box-shadow: .5rem .5rem .2rem black;
+  display: inline-block;
   position: relative;
   overflow: hidden;
-  box-shadow: .5rem .5rem .2rem black;
+  width: 20rem;
   margin-bottom: .5rem;
-  background-color: var(--dark-brown);
+  padding: .3rem;
 }
 .project__wrapper.deactivated {
   background-color: black;
@@ -43,14 +43,14 @@
 }
 
 .project-title {
-  text-transform: uppercase;
-  font-size: 2rem !important;
   background-color: var(--vanta-black);
-  margin: -.4rem !important;
-  margin-bottom: 0 !important;
-  text-align: center;
   border-bottom: .1rem solid var(--remazon-prime);
   font-family: 'gvd-bold';
+  font-size: 2rem !important;
+  text-transform: uppercase;
+  text-align: center;
+  margin: -.4rem !important;
+  margin-bottom: 0 !important;
 }
 .project-title.deactivated {
   border-color: #404040;
@@ -72,10 +72,10 @@ li > article {
 
 .project__buttons_wrapper {
   position: absolute;
-  right: 0em;
-  top: .4em;
   display: flex;
   gap: .4em;
+  right: 0em;
+  top: .4em;
 }
 
 button.project__edit-control {
@@ -86,9 +86,9 @@ button.project__edit-control {
 
 .create-project-button {
   position: absolute;
-  margin-right: .5rem;
   right: 0;
   top: -.25rem;
+  margin-right: .5rem;
 }
 
 .project__edit-form > label {
@@ -113,26 +113,26 @@ button.project__edit-control {
 }
 
 .project-data__value {
-  margin-left: .3em;
   text-transform: capitalize;
+  margin-left: .3em;
 }
 .project-data__value.deactivated {
   color: red;
 }
 
 .parameter-text {
+  width: 100%;
   color: red;
   font-size: .8em;
-  margin-top: .3rem;
-  width: 100%;
   text-align: end;
+  margin-top: .3rem;
 }
 
 .projects__view-controls {
   display: flex;
   align-items: center;
-  margin: .5rem 0;
   gap: 0 .5rem;
+  margin: .5rem 0;
 }
 
 .projects__sort {

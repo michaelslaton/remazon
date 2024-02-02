@@ -11,9 +11,9 @@
 
 .user-display__employee-name {
   display: inline;
+  text-transform: capitalize;
   margin-left: .3em;
   margin-right: .3em;
-  text-transform: capitalize;
 }
 
 @media (min-width: 375px){

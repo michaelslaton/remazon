@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { ProjectPostType } from '../../../types/projectType';
 import { createProjectThunk } from '../../../redux/slices/projectsSlice';
+import { setUiError } from '../../../redux/slices/controlsSlice';
+import { ProjectPostType } from '../../../types/projectType';
 import { projectTypes } from '../../../data/projectTypes';
 import '../projects.css';
-import { setUiError } from '../../../redux/slices/controlsSlice';
 
 const CreateProject: React.FC = () => {
   const navigate = useNavigate();
@@ -18,18 +18,19 @@ const CreateProject: React.FC = () => {
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
+
     const dateFromRef = dateRef.current!.value.split('-');
     const projectDate = new Date(`${dateFromRef[1]}-${dateFromRef[2]}-${dateFromRef[0]}`)
 
-    if(nameRef.current!.value.length < 1) {
+    if (nameRef.current!.value.length < 1) {
       dispatch(setUiError('Name length is too short.'));
       return;
     };
-    if(descriptionRef.current!.value.length < 1) {
+    if (descriptionRef.current!.value.length < 1) {
       dispatch(setUiError('Description length is too short.'));
       return;
     };
-    if(!projectDate.getTime()) {
+    if (!projectDate.getTime()) {
       dispatch(setUiError('Please select a date for the project.'));
       return;
     };
@@ -45,63 +46,92 @@ const CreateProject: React.FC = () => {
     
     dispatch(createProjectThunk(newProject));
     navigate(-1);
-    return
+    return;
   };
 
   return (
     <div className='center-display-space'>
-      <div className='form-wrapper'>
-        <h2 className='title'>Create Project</h2>
-        <form className='project__edit-form'>
+      <form className='form-wrapper project__edit-form'>
+        <h2 className='title'>
+          Create Project
+        </h2>
 
-          <label>
-            Name:
-            <input
-              type='text'
-              id='name'
-              name='name'
-              ref={nameRef}>
-            </input>
-          </label>
+        <label
+          htmlFor='name'
+          className='form-input-label'
+        >
+          Name:
+        </label>
+        <input
+          type='text'
+          id='name'
+          name='name'
+          ref={nameRef}
+        />
 
-          <label>
-            <div className='form-input-label'>Date:</div>
-            <input
-              type='date'
-              id='date'
-              className='date-input'
-              ref={dateRef}
-              name='date'>
-            </input>
-          </label>
+        <label
+          htmlFor='date'
+          className='form-input-label'
+        >
+          Date:
+        </label>
+        <input
+          type='date'
+          id='date'
+          className='date-input'
+          ref={dateRef}
+          name='date'
+        />
 
-          <label>
-            Type:
-            <select
-              id='type'
-              name='type'
-              ref={typeRef}>
-              {
-                projectTypes.map((type)=> (
-                  <option key={type.id} value={type.name}>{type.name}</option>
-                ))
-              }
-            </select>
-          </label>
+        <label
+          htmlFor='type'
+          className='form-input-label'
+        >
+          Type:
+        </label>
+        <select
+          id='type'
+          name='type'
+          ref={typeRef}
+        >
+          {projectTypes.map((type) => (
+            <option
+              key={type.id}
+              value={type.name}
+            >
+              {type.name}
+            </option>
+          ))}
+        </select>
 
-          <label>
-            Description:
-            <textarea
-              id='description'
-              name='description'
-              ref={descriptionRef}>
-            </textarea>
-          </label>
+        <label
+          htmlFor='description'
+          className='form-input-label'
+        >
+          Description:
+        </label>
+        <textarea
+          id='description'
+          name='description'
+          ref={descriptionRef}
+        />
 
-          <button className='button project__edit-control' type='submit' value='send' onClick={(e)=> submitHandler(e)}>Submit</button>
-          <button className='button project__edit-control' onClick={()=> navigate('/projects')}>Cancel</button>
-        </form>
-      </div>
+        <button
+          className='button project__edit-control'
+          type='submit'
+          value='send'
+          onClick={(e) => submitHandler(e)}
+        >
+          Submit
+        </button>
+        <button
+          className='button project__edit-control'
+          onClick={() => navigate('/projects')}
+        >
+          Cancel
+        </button>
+
+      </form>
     </div>
   );
 };

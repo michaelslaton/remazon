@@ -11,21 +11,24 @@ type LinkButtonProps = {
 };
 
 const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
-  const [ hovering, setHovering ] = useState<boolean>(false)
-  const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
+  const [ hovering, setHovering ] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
+  const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
 
   const onClickHandler = (): void => {
     const windowWidth = document.documentElement.clientWidth;
     navigate(data.url)
-    if( windowWidth <= 1280 && navActive) dispatch(navToggle());
-  }
+    if ( windowWidth <= 1280 && navActive) dispatch(navToggle());
+  };
 
   return (
     <button
-      className={`link-button ${ navActive ? 'active' : '' }`}
-      onClick={()=> onClickHandler()}
+      className={`link-button ${ navActive ? 'active' : '' } ${ data.styling ? `${data.styling}` : ''}`}
+      onClick={()=> {
+        if (data.callback) data.callback(); 
+        else onClickHandler();
+      }}
       onMouseOver={() => setHovering(true)}
       onMouseOut={() => setHovering(false)}
     >

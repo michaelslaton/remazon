@@ -18,10 +18,13 @@ const Notification: React.FC<NotificationProps> = ({ data, uid, action }) => {
     return;
   };
   
-  if(!data) return <>eh??</>
+  if (!data) return <>eh??</>
   else return (
     <div className='notification__wrapper'>
-      <div className='title notification__title'>{data.title}</div>
+      <div className='title notification__title'>
+        {data.title}
+      </div>
+
       <ul className='notification__info-list'>
         <li>
           <div className='notification__info-key'>Type:</div><div className='notification__info-value'>{` ${data.type}`}</div>
@@ -31,6 +34,7 @@ const Notification: React.FC<NotificationProps> = ({ data, uid, action }) => {
           <p className='notification__info-value'>{` ${data.message}`}</p>
         </li>
       </ul>
+
       <div className='notification__buttons-wrapper'>
         <button
           className='notification__button delete'
@@ -39,6 +43,7 @@ const Notification: React.FC<NotificationProps> = ({ data, uid, action }) => {
             Delete
         </button>
       </div>
+      
     </div>
   );
 };

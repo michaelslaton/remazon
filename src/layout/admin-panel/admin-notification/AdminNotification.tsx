@@ -22,12 +22,12 @@ const initialState = {
 
 const AdminNotification: React.FC = () => {
   const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
-  const currentEmployeeUid: string | undefined = useAppSelector((state)=> state.employeesControl.currentEmployee?.uid);
   const [ listState, setListState ] = useState<InitialStateType>({
     ...initialState,
     unlisted: employeeList,
   });
   const dispatch = useAppDispatch();
+  const currentEmployeeUid: string | undefined = useAppSelector((state)=> state.employeesControl.currentEmployee?.uid);
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
@@ -44,7 +44,7 @@ const AdminNotification: React.FC = () => {
   const handleClickUnlisted = (employee: EmployeeType): void => {
     let currentClickedUnlisted = [...listState.clickedUnlisted];
 
-    if(currentClickedUnlisted.includes(employee.uid)) currentClickedUnlisted = currentClickedUnlisted.filter((uid)=> uid !== employee.uid);
+    if (currentClickedUnlisted.includes(employee.uid)) currentClickedUnlisted = currentClickedUnlisted.filter((uid)=> uid !== employee.uid);
     else currentClickedUnlisted = [...currentClickedUnlisted, employee.uid];
 
     setListState({...listState, clickedUnlisted: currentClickedUnlisted});
@@ -54,7 +54,7 @@ const AdminNotification: React.FC = () => {
   const handleClickListed = (employee: EmployeeType): void => {
     let currentClickedListed = [...listState.clickedListed];
 
-    if(currentClickedListed.includes(employee.uid)) currentClickedListed = currentClickedListed.filter((uid)=> uid !== employee.uid);
+    if (currentClickedListed.includes(employee.uid)) currentClickedListed = currentClickedListed.filter((uid)=> uid !== employee.uid);
     else currentClickedListed = [...currentClickedListed, employee.uid];
 
     setListState({...listState, clickedListed: currentClickedListed});
@@ -66,7 +66,7 @@ const AdminNotification: React.FC = () => {
     let currentUnlisted = [...listState.unlisted];
 
     currentUnlisted.forEach((employee) => {
-      if(listState.clickedUnlisted.includes(employee.uid)) currentListed.push(employee);
+      if (listState.clickedUnlisted.includes(employee.uid)) currentListed.push(employee);
     });
 
     currentUnlisted = currentUnlisted.filter((employee)=> !listState.clickedUnlisted.includes(employee.uid));
@@ -85,7 +85,7 @@ const AdminNotification: React.FC = () => {
     let currentUnlisted = [...listState.unlisted];
 
     currentListed.forEach((employee) => {
-      if(listState.clickedListed.includes(employee.uid)) currentUnlisted.push(employee);
+      if (listState.clickedListed.includes(employee.uid)) currentUnlisted.push(employee);
     });
 
     currentListed = currentListed.filter((employee)=> !listState.clickedListed.includes(employee.uid));
@@ -125,11 +125,11 @@ const AdminNotification: React.FC = () => {
       dispatch(setUiError('Please enter a message for the notification.'));
       return;
     };
-    if(titleRef.current!.value.length < 1) {
+    if (titleRef.current!.value.length < 1) {
       dispatch(setUiError('Please enter a title for the notification.'));
       return;
     };
-    if(listState.listed.length < 1) {
+    if (listState.listed.length < 1) {
       dispatch(setUiError('Please enter at least 1 recipient for the notification.'));
       return;
     };
@@ -146,6 +146,10 @@ const AdminNotification: React.FC = () => {
       .then(()=> dispatch(fetchNotificationsThunk(currentEmployeeUid!)))
       .then(()=> {
         handleReset();
+      })
+      .catch((error) => {
+        console.error(error.code);
+        console.error(error.message);
       });
     
     return;
@@ -154,14 +158,13 @@ const AdminNotification: React.FC = () => {
   return (
     <div>
       <form className='form-wrapper'>
-        <div className='title'>Admin Notification</div>
-        <div
-          className='form-input-label'
-        >
+        <h2 className='title form-title'>Admin Notification</h2>
+
+        <label className='form-input-label'>
           Send To:
-        </div>
+        </label>
         <div className='admin__send-to-grid'>
-          <ul className='admin__send-to__unlist'>
+          <ul className='admin__send-to__list'>
             {alphabetizeEmployees(listState.unlisted).map((employee) => (
               <li
                 className={`admin__send-to__listing ${
@@ -174,6 +177,7 @@ const AdminNotification: React.FC = () => {
               </li>
             ))}
           </ul>
+          
           <div>
             <button
               type='button'
@@ -209,7 +213,7 @@ const AdminNotification: React.FC = () => {
           </div>
 
           <div>
-            <ul className='admin__send-to__unlist'>
+            <ul className='admin__send-to__list'>
               {alphabetizeEmployees(listState.listed).map((employee) => (
                 <li
                   className={`admin__send-to__listing ${

@@ -1,22 +1,18 @@
 .rank {
-  display: flex;
-  justify-content: space-between;
-  border: .15rem solid var(--remazon-prime);
-  margin-bottom: 1rem;
-  margin-top: .5rem;
-  padding: .3rem;
+  background-color: var(--off-black);
   border-radius: var(--border-radius);
   min-width: 10rem;
+  display: flex;
+  justify-content: space-between;
   position: relative;
-  background-color: var(--off-black);
+  margin: 1rem 0;
+  padding: .5rem;
 }
 .rank.edit {
   display: block;
 }
 
 .ranks-wrapper {
-  background-color: var(--vanta-black);
-  box-shadow: .5rem .5rem .2rem black;
   margin: 0;
 }
 
@@ -32,8 +28,8 @@
 
 .rank__title {
   margin: 0;
-  font-family: 'gvd-bold';
   font-size: 1.5rem;
+  transform: translate(0, 15%)
 }
 
 .rank__submit {
@@ -66,7 +62,8 @@
 
 @media (min-width: 1280px){
   .rank__title {
-    font-size: 1.5rem;
+    font-family: 'gvd-italic';
+    font-size: 1.2rem;
   }
 
   .ranks-wrapper {

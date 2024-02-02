@@ -27,17 +27,17 @@ initializeApp(firebaseConfig);
 
 const router = createBrowserRouter([
   {
-    path: '/signup',
-    element: <SignUpForm/>,
-    errorElement: <RouteError/>,
-  },
-  {
     path: '/',
     element: <Layout/>,
     children: [
       {
         index: true,
         element: <HomePage/>,
+        errorElement: <RouteError/>,
+      },
+      {
+        path: '/signup',
+        element: <SignUpForm/>,
         errorElement: <RouteError/>,
       },
       {
@@ -128,10 +128,14 @@ const App: React.FC = () => {
   
   useEffect(()=>{
     dispatch(initialLoadThunk())
-      .then(()=> setLoading(false));
+      .then(()=> setLoading(false))
+      .catch((error) => {
+        console.error(error.code);
+        console.error(error.message);
+      });;
   },[])
 
-  if(loading) return ( <Loading/> );
+  if (loading) return ( <Loading/> );
 
   return (
     <>
