@@ -33,22 +33,43 @@ const SignIn: React.FC = () => {
   };
 
   return (
-    <>
-      <form className='login-form'>
-        <label htmlFor='email'>
-          <input type='email' ref={emailRef} placeholder='Email'/>
+    <div className='center-display-space'>
+      <form className='form-wrapper'>
+
+        <label
+          htmlFor='email'
+          className='form-input-label'
+        >
+          E-Mail:
         </label>
-        <label htmlFor='password'>
-          <input type='password' ref={passwordRef} placeholder='Password'/>
+        <input
+          type='email'
+          ref={emailRef}
+          placeholder='Email'
+        />
+
+        <label
+          htmlFor='password'
+          className='form-input-label'
+        >
+          Password: 
         </label>
+        <input
+          type='password'
+          ref={passwordRef}
+          placeholder='Password'
+        />
+
         <button
           className='button login-button'
           type='submit'
-          onClick={(e) => loginHandler(e)}>
+          onClick={(e) => loginHandler(e)}
+        >
           <FontAwesomeIcon icon={faSignIn}/>
         </button>
+        
       </form>
-    </>
+    </div>
   );
 };
 

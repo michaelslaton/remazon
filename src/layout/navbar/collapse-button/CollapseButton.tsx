@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './collapseButton.css';
 
 const CollapseButton: React.FC = () => {
-  const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
   const dispatch = useAppDispatch();
+  const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
 
   return (
     <div className='collapse-button__wrapper'>

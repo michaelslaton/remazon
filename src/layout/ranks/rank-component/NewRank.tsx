@@ -18,6 +18,7 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
 
   const submitHandler = (e: React.FormEvent): void => {
     e.preventDefault();
+
     const newRank: RankPostType = {
       name: titleRef.current!.value,
       rank: rankList[rankList.length - 1].rank + 1,
@@ -26,7 +27,12 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
 
     dispatch(createRankThunk(newRank))
     .then(()=> dispatch(fetchRanksThunk()))
-    .then(()=> setNewRankDisplay(false));
+    .then(()=> setNewRankDisplay(false))
+    .catch((error) => {
+      console.error(error.code);
+      console.error(error.message);
+    });
+
     return;
   };
 
@@ -34,18 +40,23 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
     <div className='rank edit'>
       <form className='rank__form'>
 
-      <label htmlFor='title'>
-        Title:
+        <label
+          htmlFor='title'
+        >
+          Title:
+        </label>
         <input
           type='text'
           id='title'
           name='title'
           ref={titleRef}
         />
-      </label>
 
-      <label htmlFor='color'>
-        Color:
+        <label
+          htmlFor='color'
+        >
+          Color:
+        </label>
         <input
           type='color'
           id='color'
@@ -54,16 +65,23 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
           className='rank-color-selector'
           defaultValue={'#ffa500'}
         />
-      </label>
-      <div>
-        <button type='submit' className='button rank__submit create' onClick={(e)=> submitHandler(e)}>
-          <FontAwesomeIcon icon={faCheck}/>
-        </button>
+        
+        <div>
+          <button
+            type='submit'
+            className='button rank__submit create'
+            onClick={(e) => submitHandler(e)}
+          >
+            <FontAwesomeIcon icon={faCheck} />
+          </button>
 
-        <button className='button rank_submit delete' onClick={()=> setNewRankDisplay(false)}>
-          <FontAwesomeIcon icon={faX}/>
-        </button>
-      </div>
+          <button
+            className='button rank_submit delete'
+            onClick={() => setNewRankDisplay(false)}
+          >
+            <FontAwesomeIcon icon={faX} />
+          </button>
+        </div>
 
       </form>
     </div>
