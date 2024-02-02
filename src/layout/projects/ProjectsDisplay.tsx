@@ -28,14 +28,14 @@ const Projects: React.FC = () => {
     dispatch(fetchRanksThunk);
   },[]);
 
-  if(loadingProjects || loadingEmployees) return ( <Loading/> );
+  if (loadingProjects || loadingEmployees) return ( <Loading/> );
 
-    // applySort checks the current sortType state
+  // applySort checks the current sortType state
   // returning a properly sorted and mapped array of JSX employee elements.
   const applySort = (): JSX.Element => {
     let results = [...projects];
 
-    if (sortType === "alphabetical")
+    if (sortType === 'alphabetical')
       results = [...projects].sort((a, b) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
         if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
@@ -48,7 +48,7 @@ const Projects: React.FC = () => {
           project.status ? (
             <Project key={project.id} data={project}/>
           ) : (
-            ""
+            ''
           )
         )}
         {showDeactivated &&
@@ -56,7 +56,7 @@ const Projects: React.FC = () => {
             !project.status ? (
               <Project key={project.id} data={project}/>
             ) : (
-              ""
+              ''
             )
           )}
       </>
@@ -67,7 +67,9 @@ const Projects: React.FC = () => {
     <div className='projects-display__wrapper'>
 
       <div className='projects__header'>
-        <h2 className='title projects-display-title'>Projects</h2>
+        <h2 className='title projects-display-title'>
+          Projects
+        </h2>
         { currentEmployee?.uid && currentEmployee.rank < 5 &&
           <button
             className='button create-project-button card-button'
@@ -86,9 +88,17 @@ const Projects: React.FC = () => {
           defaultValue=''
           onChange={(e)=> setSortType(e.target.value)}
         >
-          <option disabled={true} value=''>Sort By</option>
-          <option value='alphabetical'>Alphabetical</option>
+          <option
+            disabled={true}
+            value=''
+          >
+              Sort By
+          </option>
+          <option value='alphabetical'>
+            Alphabetical
+          </option>
         </select>
+        
         Show deactivated ? 
         <input
           type='checkbox'

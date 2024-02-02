@@ -10,12 +10,12 @@ import './notifications.css';
 const NotificationsDisplay: React.FC = () => {
   const [ selectedNotification, setSelectedNotification ] = useState<NotificationType | null>(null);
   const dispatch = useAppDispatch();
+  const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const notificationsList: NotificationType[] = useAppSelector((state)=> state.notificationsControl.notifications);
-  const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
 
   useEffect(()=>{
-    if (currentEmployee) { dispatch(fetchNotificationsThunk(currentEmployee.uid)) }
+    if (currentEmployee) dispatch(fetchNotificationsThunk(currentEmployee.uid));
     if (employeesList.length < 1) dispatch(fetchEmployeesListThunk());
   },[]);
 

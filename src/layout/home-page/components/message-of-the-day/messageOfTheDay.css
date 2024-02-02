@@ -1,7 +1,7 @@
 .motd__container {
   box-sizing: border-box;
-  width: 100%;
   display: flex;
+  width: 100%;
   padding: 1rem;
 }
 
@@ -23,20 +23,19 @@
 }
 
 .rembo {
-  text-align: end;
-  right: -2rem;
   font-family: 'gvd';
   font-size: .5em;
+  text-align: end;
+  right: -2rem;
 }
 
 .motd__banner-wrapper {
   aspect-ratio: 2.10/1;
-  width: 85rem;
-  position: relative;
   box-sizing: border-box;
   display: none;
-  flex-direction: row-reverse;
+  position: relative;
   overflow: hidden;
+  width: 85rem;
 }
 
 @media (min-width: 375px){

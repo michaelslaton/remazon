@@ -4,17 +4,8 @@
 
 .signup > label > input, textarea, select {
   box-sizing: border-box;
-  width: 100%;
   margin-top: .1rem;
-}
-
-.login-form {
-  display: flex;
-  margin-right: 1rem;
-}
-
-.login-form > label {
-  margin-right: .5rem;
+  width: 100%;
 }
 
 .login-button { 

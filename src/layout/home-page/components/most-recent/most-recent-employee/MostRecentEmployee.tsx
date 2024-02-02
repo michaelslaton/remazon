@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../../../../redux/hooks';
 import EmployeeType from '../../../../../types/employeeType';
 import RankType from '../../../../../types/rankType';
+import Loading from '../../../../../utils/loading/Loading';
 import '../mostRecent.css';
 
 const MostRecentEmployee: React.FC = () => {
@@ -8,14 +9,13 @@ const MostRecentEmployee: React.FC = () => {
   let employeeList: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
   employeeList = [...employeeList].filter((employee) => employee.rank !== 0);
   const mostRecentEmployee: EmployeeType = [...employeeList].reduce((prev, current) => {
-      return prev.id > current.id ? prev : current;
-    }
-  );
+    return prev.id > current.id ? prev : current;
+  });
   const employeeRank: RankType | undefined = rankList.find(
     (rank) => rank.id === mostRecentEmployee.rank
   );
 
-  if(!employeeList.length) return <></>;
+  if (!employeeList.length) return <Loading/>;
 
   return (
     <div className='most-recent__cel'>

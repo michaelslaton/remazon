@@ -1,8 +1,8 @@
 .notifications-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 80%;
   gap: 2rem;
+  width: 80%;
   margin: auto;
   margin-top: 2rem;
 }
@@ -10,18 +10,18 @@
 .notification__list {
   background-color: var(--charcoal);
   border-radius: var(--border-radius);
-  padding: .6rem;
   min-height: 10rem;
+  padding: .6rem;
 }
 
 .notification__list-item {
-  border: .15rem solid transparent;
-  cursor: pointer;
   background-color: var(--off-black);
+  box-shadow: .3rem .3rem .2rem #272727;
+  border: .15rem solid transparent;
   border-radius: var(--border-radius);
   padding: .5em;
   margin: .7rem 0;
-  box-shadow: .3rem .3rem .2rem rgb(39, 39, 39);
+  cursor: pointer;
 }
 .notification__list-item.active {
   border: .15rem solid var(--remazon-prime);
@@ -29,16 +29,16 @@
 
 .notification__wrapper {
   background-color: var(--charcoal);
-  padding: .7rem;
   border-radius: var(--border-radius);
+  padding: .7rem;
 }
 
 .notification__title {
   background-color: var(--off-black);
-  border-radius: var(--border-radius);
-  padding: .2em;
-  margin-bottom: .7rem;
   box-shadow: .3rem .3rem .2rem rgb(39, 39, 39);
+  border-radius: var(--border-radius);
+  margin-bottom: .7rem;
+  padding: .2em;
 }
 
 .notification__info-list {
@@ -49,8 +49,8 @@
 }
 .notification__info-key {
   display: inline-block;
+  color: var(--remazon-prime);
   margin-bottom: .5rem;
-  color: var(--remazon-prime)
 }
 .notification__info-value {
   display: inline;
@@ -62,24 +62,23 @@
 }
 
 .notification__buttons-wrapper {
-  width: 100%;
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 }
 
 .notification__button {
   background-color: var(--off-black);
   border: .15rem solid transparent;
+  border-radius: var(--border-radius);
+  box-shadow: .3rem .3rem .2rem #272727;
+  font-size: 1rem;
   color: var(--font-wite);
   padding: .4rem 2rem;
-  font-size: 1rem;
-  border-radius: var(--border-radius);
   cursor: pointer;
-  box-shadow: .3rem .3rem .2rem rgb(39, 39, 39);
 }
 .notification__button.delete:hover {
   background-color: rgb(209, 0, 0);
-  /* color: var(--off-black); */
   border-color: var(--off-black);
 }
 

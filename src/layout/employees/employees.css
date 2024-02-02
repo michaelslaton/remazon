@@ -4,24 +4,24 @@
 
 .employee__cards-wrapper {
   display: flex;
-  max-width: 95%;
-  flex-wrap: wrap;
-  margin-top: .5rem;
   gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 95%;
+  margin-top: .5rem;
 }
 
 .employee__wrapper {
   aspect-ratio: 2.5/1;
-  width: 20rem;
-  display: inline-block;
-  position: relative;
   box-sizing: border-box;
   background-color: var(--dark-brown);
   border: .15rem solid var(--remazon-prime);
   border-radius: var(--border-radius);
-  padding: .5rem;
   box-shadow: .5rem .5rem .2rem black;
+  display: inline-block;
+  position: relative;
+  width: 20rem;
   margin-bottom: .5rem;
+  padding: .5rem;
 }
 .employee__wrapper.deactivated {
   background-color: black;
@@ -44,20 +44,20 @@
 }
 
 .employee__info-key{
-  color: var(--remazon-prime);
   display: inline;
+  color: var(--remazon-prime);
   margin-right: .2em;
 }
 
 .employee__rank {
   display: block;
-  margin: .05rem -.5rem .3rem;
+  font-family: 'gvd-bold';
+  font-size: 1.2rem;
   text-align: center;
-  padding: .1rem;
   text-transform: uppercase;
   letter-spacing: .1em;
-  font-size: 1.2rem;
-  font-family: 'gvd-bold';
+  margin: .05rem -.5rem .3rem;
+  padding: .1rem;
 }
 .employee__rank.deactivated {
   color: red;
@@ -88,8 +88,8 @@ button.employee__edit-control {
 .employees__view-controls {
   display: flex;
   align-items: center;
-  margin: .5rem 0;
   gap: 0 .5rem;
+  margin: .5rem 0;
 }
 
 .employees__sort {

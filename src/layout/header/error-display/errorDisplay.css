@@ -21,19 +21,19 @@
 
 .button.close-button {
   aspect-ratio: 1/1;
-  display: inline-block;
   border-radius: 50%;
-  min-width: auto;
-  width: 1.1rem;
-  line-height: 0%;
-  padding: .2rem;
-  text-align: center;
-  position: relative !important;
-  transform: translate(.3rem, -.25rem);
-  font-size: .8rem;
-  color: var(--font-white);
   border-color: var(--font-white);
   border-width: .15rem;
+  position: relative !important;
+  display: inline-block;
+  font-size: .8rem;
+  color: var(--font-white);
+  text-align: center;
+  line-height: 0%;
+  min-width: auto;
+  width: 1.1rem;
+  padding: .2rem;
+  transform: translate(.3rem, -.25rem);
 }
 
 .close-button {

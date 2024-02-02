@@ -27,7 +27,7 @@ const EditEmployee: React.FC = () => {
   let employeeBirthday: Date | null = null;
   let updatedBirthday: Date | null = null;
   let birthdayString: string = '';
-  if(selectedEmployee?.birthday) {
+  if (selectedEmployee?.birthday) {
     employeeBirthday = new Date(selectedEmployee?.birthday);
     birthdayString = employeeBirthday.toISOString().split('T')[0];
   };
@@ -38,14 +38,14 @@ const EditEmployee: React.FC = () => {
   const checkForVariance = (): boolean => {
     let updatedRank = selectedEmployee!.rank;
     let birthdayCheck: boolean = false;
-    if(currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
+    if (currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
 
-    if(bdayRef.current!.value) {
+    if (bdayRef.current!.value) {
       const newBirthday = bdayRef.current!.value.split('-');
       updatedBirthday = new Date(`${newBirthday[1]}-${newBirthday[2]}-${newBirthday[0]}`);
     };
     
-    if(updatedBirthday && employeeBirthday) {
+    if (updatedBirthday && employeeBirthday) {
       if (employeeBirthday.getTime() !== updatedBirthday.getTime()) birthdayCheck = true;
     }
     else if (employeeBirthday === null && updatedBirthday) birthdayCheck = true;
@@ -63,7 +63,7 @@ const EditEmployee: React.FC = () => {
     e.preventDefault();
     const isThereVariance = checkForVariance();
 
-    if(!isThereVariance) {
+    if (!isThereVariance) {
       dispatch(setUiError('No changes have been made.'));
       return;
     };
@@ -73,10 +73,10 @@ const EditEmployee: React.FC = () => {
       return;
     };
 
-    if(updatedBirthday) employeeBirthday = updatedBirthday; 
+    if (updatedBirthday) employeeBirthday = updatedBirthday; 
     
     let updatedRank = selectedEmployee!.rank;
-    if(currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
+    if (currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
 
     const updatedEmployee: EmployeeType = {
       ...selectedEmployee!,
@@ -93,69 +93,95 @@ const EditEmployee: React.FC = () => {
 
   return (
     <div className='center-display-space'>
-      <div className='form-wrapper'>
-        <h2 className='title'>Edit {selectedEmployee!.name}</h2>
-        <form className='employee__edit-form'>
-          
-          <label>
-            <div className='form-input-label'>Name:</div>
-          </label>
-          <input
-            type='text'
-            id='name'
-            name='name'
-            ref={nameRef}
-            defaultValue={selectedEmployee?.name}
-          />
+      <form className='form-wrapper employee__edit-form'>
+        <h2 className='title'>
+          Edit {selectedEmployee!.name}
+        </h2>
 
-          { currentEmployee!.admin &&
-            <>
-              <label>
-                <div className='form-input-label'>Rank:</div>
-              </label>
-              <select
-                id='rank'
-                name='rank'
-                ref={rankRef}
-                defaultValue={selectedEmployee?.rank}>
-                {ranks.map(((rank)=>(
-                  <option key={rank.id} value={rank.rank}>{rank.name}</option>
-                )))}
-              </select>
-            </>
-          }
+        <label
+          htmlFor='name'
+          className='form-input-label'
+        >
+          Name:
+        </label>
+        <input
+          type='text'
+          id='name'
+          name='name'
+          ref={nameRef}
+          defaultValue={selectedEmployee?.name}
+        />
 
-          <label>
-            <div className='form-input-label'>Birthday:</div>
-          </label>
-          <input
-            type='date'
-            id='birthday'
-            name='birthday'
-            className='date-input'
-            ref={bdayRef}
-            defaultValue={birthdayString}
-          />
+        {currentEmployee!.admin && (
+          <>
+            <label
+              htmlFor='rank'
+              className='form-input-label'
+            >
+              Rank:
+            </label>
+            <select
+              id='rank'
+              name='rank'
+              ref={rankRef}
+              defaultValue={selectedEmployee?.rank}
+            >
+              {ranks.map((rank) => (
+                <option key={rank.id} value={rank.rank}>
+                  {rank.name}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
 
-          <label>
-            <div className='form-input-label'>Description:</div>
-          </label>
-          <textarea
-            id='description'
-            name='description'
-            ref={descriptionRef}
-            maxLength={101}
-            onChange={(e)=> setCountData(e.currentTarget.value.length)}
-            defaultValue={selectedEmployee?.description}
-          />
-          <div className='parameter-text'>
-            {countData} of 100
-          </div>
+        <label
+          htmlFor='birthday'
+          className='form-input-label'
+        >
+          Birthday:
+        </label>
+        <input
+          type='date'
+          id='birthday'
+          name='birthday'
+          className='date-input'
+          ref={bdayRef}
+          defaultValue={birthdayString}
+        />
 
-            <button className='button employee__edit-control' type='submit' onClick={(e)=> submitHandler(e)}>Submit</button>
-            <button className='button employee__edit-control' onClick={()=> navigate('/employees')}>Cancel</button>
-        </form>
-      </div>
+        <label
+          htmlFor='description'
+          className='form-input-label'
+        >
+          Description:
+        </label>
+        <textarea
+          id='description'
+          name='description'
+          ref={descriptionRef}
+          maxLength={101}
+          onChange={(e) => setCountData(e.currentTarget.value.length)}
+          defaultValue={selectedEmployee?.description}
+        />
+
+        <div className='parameter-text'>{countData} of 100</div>
+
+        <button
+          className='button employee__edit-control'
+          type='submit'
+          onClick={(e) => submitHandler(e)}
+        >
+          Submit
+        </button>
+        <button
+          className='button employee__edit-control'
+          onClick={() => navigate('/employees')}
+        >
+          Cancel
+        </button>
+
+      </form>
     </div>
   );
 };

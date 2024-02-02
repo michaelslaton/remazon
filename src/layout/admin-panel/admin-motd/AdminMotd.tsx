@@ -13,7 +13,7 @@ const AdminMotd: React.FC = () => {
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
 
-    if(motdRef.current!.value === currentMotd) {
+    if (motdRef.current!.value === currentMotd) {
       dispatch(setUiError('No changes have been made.'));
       return;
     };
@@ -28,24 +28,27 @@ const AdminMotd: React.FC = () => {
 
   return (
     <form className='form-wrapper'>
-      <div className='title'>Message of the Day</div>
-      <label className='form-input-label'>
+      <div className='title form-title'>Message of the Day</div>
+      
+      <label
+        htmlFor='description'
+        className='form-input-label'
+      >
         Message:
       </label>
       <textarea
         id='description'
         name='description'
-        ref={motdRef}
-        // maxLength={101}
-        // onChange={(e)=> setCountData(e.currentTarget.value.length)}
+        ref={motdRef}  // onChange={(e)=> setCountData(e.currentTarget.value.length)}
         defaultValue={currentMotd}
       />
 
       <button
         className='button'
         type='submit'
-        onClick={(e)=> submitHandler(e)}>
-          Save Changes
+        onClick={(e)=> submitHandler(e)}
+      >
+        Save Changes
       </button>
     </form>
   );

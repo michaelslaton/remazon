@@ -14,7 +14,7 @@ const AuthRoute: React.FC<AuthProps> = ({ children }) => {
 
   useEffect(()=>{
     onAuthStateChanged(auth, (user)=>{
-      if(user) setLoading(false);
+      if (user) setLoading(false);
       else {
         console.error('Unauthorized');
         navigate('/signin');

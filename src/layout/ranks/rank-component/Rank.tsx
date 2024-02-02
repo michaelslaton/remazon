@@ -5,8 +5,8 @@ import { setUiError } from '../../../redux/slices/controlsSlice';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RankType from '../../../types/rankType';
-import '../ranks.css';
 import EmployeeType from '../../../types/employeeType';
+import '../ranks.css';
 
 type RankProps = {
   rankData: RankType;
@@ -17,10 +17,11 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
   const dispatch = useAppDispatch();
   const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const titleRef = useRef<HTMLInputElement>(null);
-  const colorRef = useRef<HTMLInputElement>(null)
+  const colorRef = useRef<HTMLInputElement>(null);
 
   const editSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
+
     const updatedRank: RankType = {
       id: rankData!.id,
       name: titleRef.current!.value,
@@ -35,17 +36,20 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
 
   const deleteButtonHandler = (): void => {
     const employeesAssignedRank = employeeList.filter((employee)=> employee.rank === rankData.id);
-    if(employeesAssignedRank.length) dispatch(setUiError(`Please reassign all employees currently assigned to the rank of ${rankData.name} before attempting to delete.`));
+
+    if (employeesAssignedRank.length) dispatch(setUiError(`Please reassign all employees currently assigned to the rank of ${rankData.name} before attempting to delete.`));
     else if (window.confirm(`Are you sure you want to delete the rank ${rankData.name} ?`)) dispatch(deleteRankThunk(rankData.id));
+    
+    return;
   };
 
   // Render Edit Mode ------------------------------------------------->
   if (editMode) return (
     <div className='rank edit'>
       <form className='rank__form'>
-
-      <label htmlFor='title rank__title'>
-        Title:
+        <label htmlFor='title rank__title'>
+          Title:
+        </label>
         <input
           type='text'
           id='title'
@@ -53,10 +57,10 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
           ref={titleRef}
           defaultValue={rankData!.name}
         />
-      </label>
 
-      <label htmlFor='color'>
-        Color:
+        <label htmlFor='color'>
+          Color:
+        </label>
         <input
           type='color'
           id='color'
@@ -65,11 +69,14 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
           className='rank-color-selector'
           defaultValue={rankData!.color}
         />
-      </label>
 
-      <button type='submit' className='button rank__submit' onClick={(e)=> editSubmit(e)}>
-        <FontAwesomeIcon icon={faEdit}/>
-      </button>
+        <button
+          type='submit'
+          className='button rank__submit'
+          onClick={(e) => editSubmit(e)}
+        >
+          <FontAwesomeIcon icon={faEdit} />
+        </button>
 
       </form>
     </div>
@@ -78,19 +85,32 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
   // Render Display Mode ------------------------------------------------->
   return (
     <div className='rank'>
-      <h2 className='rank__title' style={{color: rankData.color}}>{rankData!.name}</h2>
+      <h2
+        className='rank__title'
+        style={{ color: rankData.color }}
+      >
+        {rankData!.name}
+      </h2>
+      
       <div className='rank__buttons-wrapper'>
-        <button className='button rank__submit' onClick={()=> setEditMode(true)}>
-          <FontAwesomeIcon icon={faEdit}/>
+        <button
+          className='button rank__submit'
+          onClick={() => setEditMode(true)}
+        >
+          <FontAwesomeIcon icon={faEdit} />
         </button>
-        
+
         {/* Conditional : Can't delete the Ceo or Deactivated rank*/}
-        { rankData.id > 1 && 
-          <button className='button delete' onClick={()=> deleteButtonHandler()}>
-            <FontAwesomeIcon icon={faTrashCan}/>
+        { rankData.id > 1 &&
+          <button
+            className='button delete'
+            onClick={() => deleteButtonHandler()}
+          >
+            <FontAwesomeIcon icon={faTrashCan} />
           </button>
         }
       </div>
+
     </div>
   );
 };
