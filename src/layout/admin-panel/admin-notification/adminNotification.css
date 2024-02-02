@@ -4,23 +4,22 @@
   border-radius: var(--border-radius);
 }
 
-.admin__send-to__unlist {
-  min-height: 10rem;
-  background-color: var(--charcoal);
+.admin__send-to__list {
+  background-color: var(--off-black);
+  border-radius: var(--border-radius);
+  box-shadow: .3rem .3rem .2rem #272727;
   list-style: none;
-  padding: 0;
+  min-height: 10rem;
   margin: 0;
   padding: .3rem .8rem;
-  border-radius: var(--border-radius);
 }
 
 .admin__send-to__listing {
-  background-color: var(--off-black);
   border: .15rem solid transparent;
-  margin: .5rem 0;
-  padding: .5rem 1rem;
   border-radius: var(--border-radius);
   cursor: pointer;
+  margin: .5rem 0;
+  padding: .5rem 1rem;
 }
 .admin__send-to__listing.selected {
   border: .15rem solid var(--remazon-prime);

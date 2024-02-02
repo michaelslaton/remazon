@@ -17,9 +17,9 @@ type ProjectProps = {
 };
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
+  const [ showConfirm, setShowConfirm ] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
-  const [ showConfirm, setShowConfirm ] = useState<boolean>(false);
   const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const host: EmployeeType | undefined = employees.find((employee)=> employee.id === data.host);
@@ -31,7 +31,11 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     if (window.confirm(`Are you sure you want to delete the project ${data.name} ?`)) {
     dispatch(deleteProjectThunk(data.id))
       .then(() => dispatch(fetchProjectsThunk()))
-      .then(() => setShowConfirm(!showConfirm));
+      .then(() => setShowConfirm(!showConfirm))
+      .catch((error) => {
+        console.error(error.code);
+        console.error(error.message);
+      });
     };
   };
 
@@ -41,9 +45,9 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   const attendButtonHandler = (type: string): void => {
     let updatedProject: ProjectType = {...data};
     let attendingList: string[] = [];
-    if (data.attending?.length) attendingList = [...data.attending.split(",")];
+    if (data.attending?.length) attendingList = [...data.attending.split(',')];
 
-    if(type === 'add') {
+    if (type === 'add') {
       attendingList = [ ...attendingList, currentEmployee!.uid ];
     } else if (type === 'remove') {
       if (data.host === currentEmployee!.id) {
@@ -56,15 +60,21 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     updatedProject.attending = attendingList.toString();
     dispatch(editProjectThunk(updatedProject))
       .then(() => dispatch(fetchProjectsThunk()))
-      .then(() => setShowConfirm(!showConfirm));
+      .then(() => setShowConfirm(!showConfirm))
+      .catch((error) => {
+        console.error(error.code);
+        console.error(error.message);
+      });
       return;
   };
 
   // editButtonRender checks all the conditions to see if access is permitted to edit a project.
   // An Admin may always edit, otherwise employees can only edit their hosted projects if an admin has not locked it.
   const editButtonRender = (): ReactNode | null => {
-    if ( data.locked && !currentEmployee?.admin ) return;
-    if ( !currentEmployee?.admin && data.host !== currentEmployee?.id ) return;
+    if ( 
+      data.locked && !currentEmployee?.admin ||
+      !currentEmployee?.admin && data.host !== currentEmployee?.id
+    ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
       <button className='button card-button' onClick={()=> navigate(`/projects/edit/${data.id}`)}>
         <FontAwesomeIcon icon={faEdit}/>
@@ -75,8 +85,10 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   // deleteButtonRender checks all the conditions to see if access is permitted to delete a project.
   // An Admin may always delete, otherwise employees can only delete their hosted projects if an admin has not locked it.
   const deleteButtonRender = (): ReactNode | null => {
-    if ( data.locked && !currentEmployee?.admin ) return;
-    if ( !currentEmployee?.admin && data.host !== currentEmployee?.id ) return;
+    if ( 
+      data.locked && !currentEmployee?.admin ||
+      !currentEmployee?.admin && data.host !== currentEmployee?.id
+    ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
       <button className='button delete card-button' onClick={()=> deleteButtonHandler()}>
         <FontAwesomeIcon icon={faTrashCan}/>
@@ -102,7 +114,9 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
 
   return (
     <div className={`project__wrapper ${ !data.status ? 'deactivated' : '' }`}>
-      <h2 className={`title project-title ${ !data.status ? 'deactivated' : '' }`}>{data.name}</h2>
+      <h2 className={`title project-title ${ !data.status ? 'deactivated' : '' }`}>
+        {data.name}
+      </h2>
       <div className='project__info-wrapper'>
         <ul className='project__info'>
 

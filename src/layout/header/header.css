@@ -1,22 +1,22 @@
 .header__title {
+  font-family: "coolvetica";
+  font-size: 4rem;
   color: var(--remazon-prime);
   text-transform: uppercase;
-  margin: 0;
   line-height: .8;
-  margin-top: .5rem;
-  font-size: 4rem;
-  font-family: "coolvetica";
   letter-spacing: .3rem;
+  margin: 0;
+  margin-top: .5rem;
   padding: 0 0 .5rem .5rem;
 }
 
 .header__wrapper {
   box-sizing: border-box;
+  background-color: var(--font-white);
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
   align-items: end;
-  background-color: var(--font-white);
 }
 
 .header__items {
