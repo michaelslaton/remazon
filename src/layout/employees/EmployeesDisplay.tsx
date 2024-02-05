@@ -63,10 +63,12 @@ const EmployeesDisplay: React.FC = () => {
   };
 
   return (
-    <div className='employees__display-wrapper'>
-      <h2 className='title'>Employees</h2>
+    <>
+      <div className='display__header'>
+        <h2>Employees</h2>
+      </div>
 
-      <div className='employees__view-controls'>
+      <div className='display__controls'>
         <select
           id='employees sort'
           name='employees sort'
@@ -78,18 +80,22 @@ const EmployeesDisplay: React.FC = () => {
           <option value='alphabetical'>Alphabetical</option>
           <option value='rank'>Rank</option>
         </select>
-        Show deactivated ? 
-        <input
-          type='checkbox'
-          defaultChecked={false}
-          onChange={(e)=> setShowDeactivated(e.target.checked)}
-        />
+
+        <div className='display__controls--deactivated'>
+          Show deactivated ? 
+          <input
+            type='checkbox'
+            defaultChecked={false}
+            onChange={(e)=> setShowDeactivated(e.target.checked)}
+          />
+        </div>
       </div>
 
       <div className='employee__cards-wrapper'>
         {applySort()}
       </div>
-    </div>
+
+    </>
   );
 };
 

@@ -1,13 +1,10 @@
-.awards__display-wrapper {
-  padding: .8rem;
-}
-
 .award__cards-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   max-width: 95%;
   margin-top: 1rem;
+  padding: .8rem 2rem;
 }
 
 .award__wrapper {

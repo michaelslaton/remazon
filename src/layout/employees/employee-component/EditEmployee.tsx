@@ -94,7 +94,7 @@ const EditEmployee: React.FC = () => {
   return (
     <div className='center-display-space'>
       <form className='form-wrapper employee__edit-form'>
-        <h2 className='title'>
+        <h2 className='title form-title'>
           Edit {selectedEmployee!.name}
         </h2>
 
