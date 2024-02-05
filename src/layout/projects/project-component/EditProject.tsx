@@ -86,7 +86,9 @@ const EditProject: React.FC = () => {
   return (
     <div className='center-display-space'>
       <form className='form-wrapper project__edit-form'>
-        <h2 className='title'>Edit {selectedProject!.name}</h2>
+        <h2 className='title form-title'>
+          Edit {selectedProject!.name}
+        </h2>
         
         <label
           htmlFor='name'

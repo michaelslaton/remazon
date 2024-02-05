@@ -28,7 +28,7 @@
 
 .rank__title {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.1rem !important;
   transform: translate(0, 15%)
 }
 

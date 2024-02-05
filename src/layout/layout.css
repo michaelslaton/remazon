@@ -59,7 +59,6 @@ img {
 
 .title {
   color: var(--remazon-prime);
-  font-size: 1.5rem;
   text-transform: capitalize;
   margin: 0;
 }
@@ -85,6 +84,9 @@ img {
   border-color: rgb(9, 255, 0);
   color: var(--font-white);
 }
+input[type="checkbox"]:checked {
+  accent-color: var(--remazon-prime);
+}
 
 .card-button {
   aspect-ratio: 1/1;
@@ -92,13 +94,18 @@ img {
 
 input, textarea, select {
   display: block;
-  background: var(--nav-button-active-bg);
-  padding: 0.4em .5em;
+  background-color: var(--off-black);
   outline-style: none;
-  box-shadow: none;
-  border: .11rem solid var(--remazon-prime);
+  border: .15rem solid transparent;
   border-radius: var(--border-radius);
+  box-shadow: none;
+  font-family: 'gvd-italic';
+  font-size: 1rem;
+  padding: 0.4em .5em;
   color: var(--font-white);
+}
+input:focus, textarea:focus, select:focus  {
+  border-color: var(--remazon-prime);
 }
 
 option {
@@ -116,6 +123,40 @@ option {
   width: 100%;
 }
 
+.display__header {
+  background: linear-gradient(90deg, rgba(20,20,20,1) 30%, rgba(255,165,0,1) 100%);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.display__header > h2 {
+  font-family: 'gvd';
+  font-size: 3rem;
+  color: var(--remazon-prime);
+  margin: 0rem;
+}
+.display__controls {
+  background-color: var(--charcoal);
+  display: flex;
+  align-items: center;
+  border-top: .1rem solid var(--font-white);
+  border-bottom: .1rem solid var(--font-white);
+  padding: .5rem 2rem;
+}
+.display__controls--deactivated {
+  background-color: var(--off-black);
+  display: flex;
+  font-size: 1rem;
+  font-family: 'gvd-italic';
+  margin: 0 .5em;
+  padding: .49rem 1rem;
+  border-radius: var(--border-radius);
+}
+.display__controls--deactivated > input {
+  margin-left: .5rem;
+}
+
 .form-wrapper {
   box-sizing: border-box;
   background-color: var(--charcoal);
@@ -126,13 +167,9 @@ option {
   margin-top: 2rem;
   padding: .8rem;
 }
-.form-wrapper > textarea, .form-wrapper > input {
-  background-color: var(--off-black);
-  border-color: transparent;
-  color: var(--font-white);
-}
-.form-wrapper > textarea:focus, .form-wrapper > input:focus {
-  border-color: var(--remazon-prime);
+
+option {
+  color: var(--font-white)
 }
 
 .form-title {

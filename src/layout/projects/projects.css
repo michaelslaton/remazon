@@ -1,24 +1,10 @@
-.projects-display__wrapper {
-  padding: .8rem;
-}
-
-.projects__header {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-}
-
-.projects-display-title {
-  margin-right: .5em !important;
-  margin-bottom: 1rem;
-}
-
 .projects__cards-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   max-width: 95%;
   margin-top: .5rem;
+  padding: .8rem 2rem;
 }
 
 .project__wrapper {
@@ -84,13 +70,6 @@ button.project__edit-control {
   margin-right: .5em;
 }
 
-.create-project-button {
-  position: absolute;
-  right: 0;
-  top: -.25rem;
-  margin-right: .5rem;
-}
-
 .project__edit-form > label {
   box-sizing: border-box;
   display: block;
@@ -126,13 +105,6 @@ button.project__edit-control {
   font-size: .8em;
   text-align: end;
   margin-top: .3rem;
-}
-
-.projects__view-controls {
-  display: flex;
-  align-items: center;
-  gap: 0 .5rem;
-  margin: .5rem 0;
 }
 
 .projects__sort {
