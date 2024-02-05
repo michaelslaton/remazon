@@ -64,23 +64,12 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <div className='projects-display__wrapper'>
-
-      <div className='projects__header'>
-        <h2 className='title projects-display-title'>
-          Projects
-        </h2>
-        { currentEmployee?.uid && currentEmployee.rank < 5 &&
-          <button
-            className='button create-project-button card-button'
-            onClick={()=> navigate('/projects/create')}
-          >
-            <FontAwesomeIcon icon={faPlus}/>
-          </button>
-        }
+    <>
+      <div className='display__header'>
+        <h2>Projects</h2>
       </div>
 
-      <div className='projects__view-controls'>
+      <div className='display__controls'>
         <select
           id='projects sort'
           name='projects sort'
@@ -99,19 +88,28 @@ const Projects: React.FC = () => {
           </option>
         </select>
         
-        Show deactivated ? 
-        <input
-          type='checkbox'
-          defaultChecked={false}
-          onChange={(e)=> setShowDeactivated(e.target.checked)}
-        />
+        <div className='display__controls--deactivated'>
+          Show deactivated ? 
+          <input
+            type='checkbox'
+            defaultChecked={false}
+            onChange={(e)=> setShowDeactivated(e.target.checked)}
+          />
+        </div>
+        { currentEmployee?.uid && currentEmployee.rank < 5 &&
+          <button
+            className='button card-button'
+            onClick={()=> navigate('/projects/create')}
+          >
+            <FontAwesomeIcon icon={faPlus}/>
+          </button>
+        }
       </div>
 
       <div className='projects__cards-wrapper'>
         {applySort()}
       </div>
-
-    </div>
+    </>
   );
 };
 

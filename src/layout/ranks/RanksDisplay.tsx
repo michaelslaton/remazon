@@ -26,7 +26,7 @@ const RanksDisplay: React.FC = () => {
         {[...ranks].sort((a,b)=> a.id - b.id).map((rank)=> rank.id !== 0 ?
           <Rank key={rank.id} rankData={rank}/>
           :
-          <></>
+          ''
         )}
         { currentEmployee?.admin &&
           <>
