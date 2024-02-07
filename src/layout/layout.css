@@ -64,17 +64,17 @@ img {
 }
 
 .button {
-  min-width: 2rem;
-  display: block;
-  border: .1rem solid var(--remazon-prime);
-  background-color: var(--vanta-black);
-  color: var(--remazon-prime);
-  font-size: 1.1rem;
+  background-color: var(--off-black);
+  border: .1rem solid var(--off-black);
   border-radius: var(--border-radius);
+  min-width: 2rem;
+  font-size: 1.1rem;
+  color: var(--remazon-prime);
   cursor: pointer;
 }
 .button:hover {
   color: var(--font-white);
+  border-color: var(--remazon-prime);
 }
 .button.delete:hover {
   border-color: #ff0000;
@@ -87,7 +87,6 @@ img {
 input[type="checkbox"]:checked {
   accent-color: var(--remazon-prime);
 }
-
 .card-button {
   aspect-ratio: 1/1;
 }

@@ -178,10 +178,10 @@ const AdminNotification: React.FC = () => {
             ))}
           </ul>
           
-          <div>
+          <div className='admin__send-to--buttons-wrapper'>
             <button
               type='button'
-              className='button'
+              className='admin__send-to-button'
               onClick={() => handleMoveRight()}
             >
               {`>`}
@@ -189,7 +189,7 @@ const AdminNotification: React.FC = () => {
 
             <button
               type='button'
-              className='button'
+              className='admin__send-to-button'
               onClick={() => handleMoveAll()}
             >
               {`>>`}
@@ -197,7 +197,7 @@ const AdminNotification: React.FC = () => {
 
             <button
               type='button'
-              className='button'
+              className='admin__send-to-button'
               onClick={()=> handleReset()}
             >
               {`<<`}
@@ -205,7 +205,7 @@ const AdminNotification: React.FC = () => {
 
             <button
               type='button'
-              className='button'
+              className='admin__send-to-button'
               onClick={() => handleMoveLeft()}
             >
               {`<`}

@@ -30,6 +30,7 @@
 .most-recent__item-title {
   color: var(--remazon-prime);
   font-size: 1.4rem;
+  text-transform: capitalize;
 }
 
 .most-recent__info-list {
