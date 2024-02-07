@@ -3,12 +3,13 @@
 }
 
 .employee__cards-wrapper {
+  box-sizing: border-box;
   display: flex;
-  gap: 1rem;
+  gap: 0 1rem;
   flex-wrap: wrap;
   max-width: 95%;
   margin-top: .5rem;
-  padding: .8rem 2rem;
+  padding: .8rem 0;
 }
 
 .employee__wrapper {
@@ -23,6 +24,7 @@
   width: 20rem;
   margin-bottom: .5rem;
   padding: .5rem;
+  cursor: pointer;
 }
 .employee__wrapper.deactivated {
   background-color: black;
@@ -113,6 +115,10 @@ button.employee__edit-control {
 }
 
 @media (min-width: 1280px){
+  .employee__cards-wrapper {
+    gap: 1rem;
+    padding: .8rem 2rem;
+  }
 }
 
 @media (min-width: 1366px){
