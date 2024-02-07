@@ -5,16 +5,11 @@
 }
 
 .collapse-button {
-  background-color: var(--off-black);
-  border: .1rem solid var(--remazon-prime);
-  border-radius: var(--border-radius);
-  position: fixed;
+  position: fixed !important;
   top: .5rem;
   left: .5rem;
-  font-size: 1.4rem;
-  color: var(--remazon-prime);
+  font-size: 1.4rem !important;
   padding: .1rem .5rem;
-  cursor: pointer;
   z-index: 10;
 }
 .collapse-button:hover {
@@ -37,10 +32,10 @@
   }
   
   .collapse-button {
-    position: relative;
+    position: relative !important;
     top: auto;
     left: auto;
-    margin-right: .2rem;
+    margin-right: .3rem;
   }
 }
 

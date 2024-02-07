@@ -26,16 +26,27 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
   const editButtonRender = (): ReactNode | null => {
     if ( data.locked && !currentEmployee?.admin ) return;
     else if (currentEmployee?.admin || currentEmployee?.uid === data.uid) return (
-      <button className='button card-button' onClick={()=> navigate(`/employees/edit/${data.id}`)}>
+      <button
+        className='button card-button'
+        onClick={(e)=> {
+          e.stopPropagation();
+          navigate(`/employees/edit/${data.id}`)
+        }}>
         <FontAwesomeIcon icon={faEdit}/>
       </button>
     );
   };
 
+  const onClickHandler = (): void => {
+    console.log('clicked')
+    return;
+  }
+
   return (
     <div
       className={`employee__wrapper ${data.rank === 0 ? 'deactivated' : ''}`}
       style={{borderColor: currentEmployeesRank?.color}}
+      onClick={()=> onClickHandler()}
     >
       <h2 className='title employee__name'>{data.name}</h2>
 
