@@ -53,7 +53,7 @@ const SignUp: React.FC = () => {
   return (
     <div className='center-display-space'>
         <form className='form-wrapper signup'>
-        <h2 className='title form-title'>Sign Up</h2>
+          <h2 className='title form-title'>Sign Up</h2>
 
           <label
             htmlFor='name'
@@ -114,13 +114,13 @@ const SignUp: React.FC = () => {
           />
 
           <button
-            className='button signup-control'
+            className='button form__control'
             type='submit'
             onClick={(e) => submitHandler(e)}>
               Sign Up
           </button>
           <button 
-            className='button signup-control'
+            className='button form__control'
             onClick={()=> navigate('/')}
           >
             Cancel

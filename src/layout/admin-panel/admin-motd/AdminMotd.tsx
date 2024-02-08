@@ -28,7 +28,9 @@ const AdminMotd: React.FC = () => {
 
   return (
     <form className='form-wrapper'>
-      <div className='title form-title'>Message of the Day</div>
+      <div className='form__section'>
+        <h2 className='title form-title'>Message of the Day</h2>
+      </div>
       
       <label
         htmlFor='description'
@@ -44,11 +46,11 @@ const AdminMotd: React.FC = () => {
       />
 
       <button
-        className='button'
+        className='button form__control'
         type='submit'
         onClick={(e)=> submitHandler(e)}
       >
-        Save Changes
+        Save
       </button>
     </form>
   );
