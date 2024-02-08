@@ -1,26 +1,5 @@
-.signup > label {
-  display: block;
-}
-
-.signup > label > input, textarea, select {
-  box-sizing: border-box;
-  margin-top: .1rem;
-  width: 100%;
-}
-
-.login-button { 
-  display: inline;
-  margin-right: .5rem;
-}
-
 .signout-button {
   margin-left: .4em;
-}
-
-.signup-control {
-  display: inline;
-  margin-top: .5em;
-  margin-right: .5em;
 }
 
 @media (min-width: 375px){

@@ -35,6 +35,7 @@ const SignIn: React.FC = () => {
   return (
     <div className='center-display-space'>
       <form className='form-wrapper'>
+        <h2 className='title form-title'>Sign In</h2>
 
         <label
           htmlFor='email'
@@ -61,11 +62,19 @@ const SignIn: React.FC = () => {
         />
 
         <button
-          className='button login-button'
+          className='button form__control'
           type='submit'
-          onClick={(e) => loginHandler(e)}
+          onClick={(e)=> loginHandler(e)}
         >
           <FontAwesomeIcon icon={faSignIn}/>
+        </button>
+
+        <button
+          className='button form__control'
+          type='button'
+          onClick={()=> navigate('/signup')}
+        >
+          Sign Up
         </button>
         
       </form>
