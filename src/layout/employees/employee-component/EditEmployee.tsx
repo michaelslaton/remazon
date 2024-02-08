@@ -168,14 +168,14 @@ const EditEmployee: React.FC = () => {
         <div className='parameter-text'>{countData} of 100</div>
 
         <button
-          className='button employee__edit-control'
+          className='button form__control'
           type='submit'
           onClick={(e) => submitHandler(e)}
         >
           Submit
         </button>
         <button
-          className='button employee__edit-control'
+          className='button form__control'
           onClick={() => navigate('/employees')}
         >
           Cancel

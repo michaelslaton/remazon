@@ -85,7 +85,7 @@ const EditProject: React.FC = () => {
 
   return (
     <div className='center-display-space'>
-      <form className='form-wrapper project__edit-form'>
+      <form className='form-wrapper'>
         <h2 className='title form-title'>
           Edit {selectedProject!.name}
         </h2>
@@ -195,14 +195,14 @@ const EditProject: React.FC = () => {
         </div>
 
         <button
-          className='button project__edit-control'
+          className='button form__control'
           type='submit'
           onClick={(e)=> submitHandler(e)}
         >
           Submit
         </button>
         <button
-          className='button project__edit-control'
+          className='button form__control'
           onClick={()=> navigate('/projects')}
         >
           Cancel

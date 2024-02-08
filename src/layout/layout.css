@@ -167,6 +167,18 @@ option {
   padding: .8rem;
 }
 
+.form-wrapper > input, 
+.form-wrapper > textarea, 
+.form-wrapper > select {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.form-wrapper > label {
+  display: inline-block;
+  margin-top: .7rem;
+}
+
 option {
   color: var(--font-white)
 }
@@ -181,6 +193,14 @@ option {
 .form-input-label {
   display: inline;
   font-size: 1.2rem;
+  margin-left: .1rem;
+}
+
+.form__control {
+  margin-top: .7rem;
+  margin-right: .5rem;
+  padding: .2rem 1.5rem;
+  box-shadow: .3rem .3rem .2rem #272727;
 }
 
 .checkbox {
@@ -190,6 +210,18 @@ option {
 
 .date-input {
   color-scheme: dark;
+}
+
+.parameter-text {
+  box-sizing: border-box;
+  width: 100%;
+  color: rgb(255, 0, 0);
+  font-size: .8em;
+  font-family: auto;
+  text-align: end;
+  margin-top: .3rem;
+  padding-right: .5rem;
+  margin-bottom: -1rem;
 }
 
 @media (min-width: 375px){
