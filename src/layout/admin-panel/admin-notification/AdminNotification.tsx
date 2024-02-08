@@ -156,114 +156,114 @@ const AdminNotification: React.FC = () => {
   };
 
   return (
-    <div>
-      <form className='form-wrapper'>
+    <form className='form-wrapper'>
+      <div className='form__section'>
         <h2 className='title form-title'>Admin Notification</h2>
+      </div>
 
-        <label className='form-input-label'>
-          Send To:
-        </label>
-        <div className='admin__send-to-grid'>
+      <label className='form-input-label'>
+        Send To:
+      </label>
+      <div className='admin__send-to-grid'>
+        <ul className='admin__send-to__list'>
+          {alphabetizeEmployees(listState.unlisted).map((employee) => (
+            <li
+              className={`admin__send-to__listing ${
+                listState.clickedUnlisted.includes(employee.uid) ? 'selected' : ''
+              }`}
+              onClick={() => handleClickUnlisted(employee)}
+              key={employee.id}
+            >
+              {employee.name}
+            </li>
+          ))}
+        </ul>
+        
+        <div className='admin__send-to--buttons-wrapper'>
+          <button
+            type='button'
+            className='admin__send-to-button'
+            onClick={() => handleMoveRight()}
+          >
+            {`>`}
+          </button>
+
+          <button
+            type='button'
+            className='admin__send-to-button'
+            onClick={() => handleMoveAll()}
+          >
+            {`>>`}
+          </button>
+
+          <button
+            type='button'
+            className='admin__send-to-button'
+            onClick={()=> handleReset()}
+          >
+            {`<<`}
+          </button>
+
+          <button
+            type='button'
+            className='admin__send-to-button'
+            onClick={() => handleMoveLeft()}
+          >
+            {`<`}
+          </button>
+        </div>
+
+        <div>
           <ul className='admin__send-to__list'>
-            {alphabetizeEmployees(listState.unlisted).map((employee) => (
+            {alphabetizeEmployees(listState.listed).map((employee) => (
               <li
                 className={`admin__send-to__listing ${
-                  listState.clickedUnlisted.includes(employee.uid) ? 'selected' : ''
+                  listState.clickedListed.includes(employee.uid) ? 'selected' : ''
                 }`}
-                onClick={() => handleClickUnlisted(employee)}
+                onClick={() => handleClickListed(employee)}
                 key={employee.id}
               >
                 {employee.name}
               </li>
             ))}
           </ul>
-          
-          <div className='admin__send-to--buttons-wrapper'>
-            <button
-              type='button'
-              className='admin__send-to-button'
-              onClick={() => handleMoveRight()}
-            >
-              {`>`}
-            </button>
-
-            <button
-              type='button'
-              className='admin__send-to-button'
-              onClick={() => handleMoveAll()}
-            >
-              {`>>`}
-            </button>
-
-            <button
-              type='button'
-              className='admin__send-to-button'
-              onClick={()=> handleReset()}
-            >
-              {`<<`}
-            </button>
-
-            <button
-              type='button'
-              className='admin__send-to-button'
-              onClick={() => handleMoveLeft()}
-            >
-              {`<`}
-            </button>
-          </div>
-
-          <div>
-            <ul className='admin__send-to__list'>
-              {alphabetizeEmployees(listState.listed).map((employee) => (
-                <li
-                  className={`admin__send-to__listing ${
-                    listState.clickedListed.includes(employee.uid) ? 'selected' : ''
-                  }`}
-                  onClick={() => handleClickListed(employee)}
-                  key={employee.id}
-                >
-                  {employee.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-
         </div>
 
-          <label
-            htmlFor='title'
-            className='form-input-label'
-          >
-            Title:
-          </label>
-          <textarea
-            id='title'
-            name='title'
-            ref={titleRef}
-          />
+      </div>
 
-          <label
-            htmlFor='message'
-            className='form-input-label'
-          >
-            Message:
-          </label>
-          <textarea
-            id='message'
-            name='message'
-            ref={messageRef}
-          />
+      <label
+        htmlFor='title'
+        className='form-input-label'
+      >
+        Title:
+      </label>
+      <textarea
+        id='title'
+        name='title'
+        ref={titleRef}
+      />
 
-          <button
-            className='button'
-            type='submit'
-            onClick={(e)=> submitHandler(e)}
-          >
-            Send
-          </button>
+      <label
+        htmlFor='message'
+        className='form-input-label'
+      >
+        Message:
+      </label>
+      <textarea
+        id='message'
+        name='message'
+        ref={messageRef}
+      />
 
-      </form>
-    </div>
+      <button
+        className='button form__control'
+        type='submit'
+        onClick={(e)=> submitHandler(e)}
+      >
+        Send
+      </button>
+
+    </form>
   );
 };
 

@@ -64,24 +64,6 @@ li > article {
   top: .4em;
 }
 
-button.project__edit-control {
-  display: inline;
-  margin-top: .5em;
-  margin-right: .5em;
-}
-
-.project__edit-form > label {
-  box-sizing: border-box;
-  display: block;
-  margin-top: .5rem;
-}
-
-.project__edit-form > input, textarea, select {
-  box-sizing: border-box;
-  width: 100%;
-  margin-top: .1rem;
-}
-
 .project-data__key, .project-data__value {
   display: inline;
 }
@@ -97,14 +79,6 @@ button.project__edit-control {
 }
 .project-data__value.deactivated {
   color: red;
-}
-
-.parameter-text {
-  width: 100%;
-  color: red;
-  font-size: .8em;
-  text-align: end;
-  margin-top: .3rem;
 }
 
 .projects__sort {
