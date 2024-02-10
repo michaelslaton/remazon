@@ -27,7 +27,6 @@
 .project__wrapper {
   box-sizing: border-box;
   background-color: var(--charcoal);
-  /* border: .15rem solid var(--remazon-prime); */
   border-radius: var(--border-radius);
   box-shadow: .5rem .5rem .2rem black;
   display: inline-block;
@@ -57,6 +56,7 @@
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 0 !important;
+  padding-top: .5rem;
 }
 .project-title.deactivated {
   border-color: #404040;
