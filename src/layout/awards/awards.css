@@ -8,7 +8,7 @@
 }
 
 .award__wrapper {
-  aspect-ratio: 1/1.5;
+  aspect-ratio: 1/1.1;
   box-sizing: border-box;
   background-color: var(--dark-brown);
   border: .15rem solid var(--remazon-prime);

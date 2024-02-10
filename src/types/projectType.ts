@@ -6,6 +6,7 @@ type ProjectType = {
   date: Date;
   type: string;
   description: string;
+  regularity: string;
   locked: boolean;
   status: boolean;
 };
@@ -16,6 +17,7 @@ export type ProjectPostType = {
   type: string;
   date: Date;
   attending?: string;
+  regularity?: string;
   description: string;
 };
 

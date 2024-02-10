@@ -33,6 +33,20 @@
   font-style: normal;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+} */
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--remazon-prime);
+  border-radius: var(--border-radius);
+}
+
 :root {
   /* Colors */
   --remazon-prime: #ffa500;
@@ -51,6 +65,11 @@ body {
   color: var(--font-white);
   font-family: 'gvd';
   margin: 0;
+}
+
+html {
+  min-height: 100% !important;
+  height: 100%;
 }
 
 img {
