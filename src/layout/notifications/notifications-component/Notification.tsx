@@ -21,9 +21,7 @@ const Notification: React.FC<NotificationProps> = ({ data, uid, action }) => {
   if (!data) return <>eh??</>
   else return (
     <div className='notification__wrapper'>
-      <div className='title notification__title'>
-        {data.title}
-      </div>
+      <h2 className='title form-title'>{data.title}</h2>
 
       <ul className='notification__info-list'>
         <li>

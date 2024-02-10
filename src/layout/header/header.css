@@ -9,6 +9,14 @@
   margin-top: .5rem;
   padding: 0 0 .5rem .5rem;
 }
+.header__title > .remazon {
+  display: inline;
+}
+.header__title > .prime {
+  font-family: 'gvd-italic';
+  font-size: 2.5rem;
+  display: inline;
+}
 
 .header__wrapper {
   box-sizing: border-box;

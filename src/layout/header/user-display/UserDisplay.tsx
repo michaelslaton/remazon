@@ -34,14 +34,12 @@ const UserDisplay: React.FC = () => {
           >
             {currentEmployee?.name}
           </div>
-          { notifications.length > 0 &&
             <button
-              className='button card-button'
+              className={`notification-button ${notifications.length ? 'active' : ''}`}
               onClick={() => navigate('/notifications')}
             >
               <FontAwesomeIcon icon={faNewspaper} />
             </button>
-          }
         </div>
       )}
     </div>
