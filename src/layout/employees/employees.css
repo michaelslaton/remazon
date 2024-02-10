@@ -15,7 +15,7 @@
 .employee__wrapper {
   aspect-ratio: 2.5/1;
   box-sizing: border-box;
-  background-color: var(--dark-brown);
+  background-color: var(--charcoal);
   border: .15rem solid var(--remazon-prime);
   border-radius: var(--border-radius);
   box-shadow: .5rem .5rem .2rem black;

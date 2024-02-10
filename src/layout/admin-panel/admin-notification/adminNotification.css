@@ -7,7 +7,6 @@
 .admin__send-to__list {
   background-color: var(--off-black);
   border-radius: var(--border-radius);
-  box-shadow: .3rem .3rem .2rem #272727;
   list-style: none;
   height: 10rem;
   margin: 0;
