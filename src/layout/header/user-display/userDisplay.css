@@ -16,6 +16,23 @@
   margin-right: .3em;
 }
 
+.notification-button {
+  aspect-ratio: 1/1;
+  background-color: transparent;
+  border: .1rem solid var(--off-black);
+  border-radius: 50%;
+  color: var(--off-black);
+  cursor: pointer;
+}
+.notification-button.active {
+  color: var(--remazon-prime);
+  background-color: black;
+  border-color: var(--remazon-prime);
+}
+.notification-button:hover {
+  border-color: var(--remazon-prime);
+}
+
 @media (min-width: 375px){
 }
 
