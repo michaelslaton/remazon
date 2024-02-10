@@ -34,7 +34,18 @@ const MessageOfTheDay: React.FC = () => {
           </div>
         </div>
         :
-        <></>
+        <div className='motd__container'>
+          <div className='motd__wrapper'>
+            <div className='motd'>
+              Welcome to Remazon Prime
+            </div>
+          </div>
+          <div className='motd__banner-wrapper'>
+            <img
+              src={banner}
+            />
+          </div>
+        </div>
       }
     </>
   )

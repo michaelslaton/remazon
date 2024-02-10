@@ -20,35 +20,43 @@ const NotificationsDisplay: React.FC = () => {
   },[]);
 
   return (
-    <div className='notifications-container'>
-
-      <div className='notification__list'>
-        { notificationsList.length ?
-          <>
-            {notificationsList.map((notification)=>(
-              <div
-                key={notification.id}
-                className={`notification__list-item ${selectedNotification?.id === notification.id ? 'active' : ''}`}
-                onClick={()=> setSelectedNotification(notification)}
-              >
-                {notification.title}
-              </div>
-            ))}
-          </>
-          :
-          <div>
-            No notifications to display!
-          </div>
-        }
+    <>
+      <div className='display__header'>
+        <h2>Notifications</h2>
       </div>
 
-      <div className='notification__display'>
-        { selectedNotification &&
-          <Notification data={selectedNotification} uid={currentEmployee!.uid} action={setSelectedNotification}/>
-        }
-      </div>
+      <div className='display__controls'/>
 
-    </div>
+      <div className='notifications-container'>
+        <div className='notification__list'>
+          { notificationsList.length ?
+            <>
+              {notificationsList.map((notification)=>(
+                <div
+                  key={notification.id}
+                  className={
+                    `notification__list-item ${selectedNotification?.id === notification.id ? 'active' : '' } ${notification.type === 'admin' ? 'rembo-notification' : ''} `}
+                  onClick={()=> setSelectedNotification(notification)}
+                >
+                  {notification.title}
+                </div>
+              ))}
+            </>
+            :
+            <div>
+              No notifications to display!
+            </div>
+          }
+        </div>
+
+        <div className='notification__list'>
+          { selectedNotification &&
+            <Notification data={selectedNotification} uid={currentEmployee!.uid} action={setSelectedNotification}/>
+          }
+        </div>
+
+      </div>
+    </>
   );
 };
 

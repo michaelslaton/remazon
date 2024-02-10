@@ -9,7 +9,7 @@ const Header: React.FC = () => {
       <div className='header__wrapper'>
         <div>
           <h1 className='header__title'>
-            Remazon Prime
+            <div className='remazon'>Remazon</div><div className='prime'>Prime</div>
           </h1>
         </div>
         <div className='header__items'>

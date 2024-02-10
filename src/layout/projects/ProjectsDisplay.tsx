@@ -17,7 +17,7 @@ const Projects: React.FC = () => {
   const [ showDeactivated, setShowDeactivated ] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
-  const projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
+  let projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
   const loadingProjects: boolean = useAppSelector((state) => state.projectsControl.loading);
   const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
@@ -30,38 +30,19 @@ const Projects: React.FC = () => {
 
   if (loadingProjects || loadingEmployees) return ( <Loading/> );
 
-  // applySort checks the current sortType state
-  // returning a properly sorted and mapped array of JSX employee elements.
-  const applySort = (): JSX.Element => {
-    let results = [...projects];
+  if (sortType === 'alphabetical')
+   projects = [...projects].sort((a, b) => {
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+      return 0;
+  });
 
-    if (sortType === 'alphabetical')
-      results = [...projects].sort((a, b) => {
-        if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-        if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-        return 0;
-      });
-
-    return (
-      <>
-        {results.map((project) =>
-          project.status ? (
-            <Project key={project.id} data={project}/>
-          ) : (
-            ''
-          )
-        )}
-        {showDeactivated &&
-          results.map((project) =>
-            !project.status ? (
-              <Project key={project.id} data={project}/>
-            ) : (
-              ''
-            )
-          )}
-      </>
-    );
-  };
+  if (sortType === 'host')
+  projects = [...projects].sort((a, b) => {
+     if (a.host < b.host) return -1;
+     if (a.host > b.host) return 1;
+     return 0;
+ });
 
   return (
     <>
@@ -86,6 +67,9 @@ const Projects: React.FC = () => {
           <option value='alphabetical'>
             Alphabetical
           </option>
+          <option value='host'>
+            Host
+          </option>
         </select>
         
         <div className='display__controls--deactivated'>
@@ -105,9 +89,49 @@ const Projects: React.FC = () => {
           </button>
         }
       </div>
+      
+      <div className='projects__section-wrapper'>
+        <div className='projects__section dark'>
+          <h2 className='projects__section-title'>Special Events...</h2>
+          <div className='projects__cards-wrapper'>
+            {projects.map((project) =>
+              project.status && project.regularity === 'special' ? (
+                <Project key={project.id} data={project}/>
+              ) : (
+                ''
+              )
+            )}
+          </div>
+        </div>
 
-      <div className='projects__cards-wrapper'>
-        {applySort()}
+        <div className='projects__section light'>
+          <h2 className='projects__section-title'>Recurring...</h2>
+          <div className='projects__cards-wrapper'>
+            {projects.map((project) =>
+              project.status && project.regularity === 'recurring' ? (
+                <Project key={project.id} data={project}/>
+              ) : (
+                ''
+              )
+            )}
+          </div>
+        </div>
+
+        { showDeactivated &&
+          <div className='projects__section dark'>
+            <h2 className='projects__section-title'>Deactivated</h2>
+            <div className='projects__cards-wrapper'>
+              {showDeactivated &&
+                projects.map((project) =>
+                  !project.status ? (
+                    <Project key={project.id} data={project}/>
+                  ) : (
+                    ''
+                  )
+              )}
+            </div>
+          </div>
+        }
       </div>
     </>
   );
