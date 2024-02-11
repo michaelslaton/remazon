@@ -12,11 +12,7 @@ const AwardsDisplay: React.FC = () => {
         <h2>Awards</h2>
       </div>
       
-      <div className='display__controls'>
-        <div>
-          Mike work on this
-        </div>
-      </div>
+      <div className='display__controls'/>
       
       <div className='award__cards-wrapper'>
         {awardsList.map((award)=> (
