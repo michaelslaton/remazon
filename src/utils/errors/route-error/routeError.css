@@ -1,0 +1,36 @@
+.route-error__wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.route-error__title--wrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  margin: auto;
+}
+.route-error__title {
+  display: inline;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 5rem;
+  letter-spacing: .3rem;
+  color: var(--remazon-prime);
+  white-space: nowrap;
+}
+
+.route-error__text {
+  position: relative;
+  left: 12.2rem;
+  top: -1.5rem;
+  font-size: 2rem;
+  color: var(--font-white);
+  white-space: nowrap;
+}
