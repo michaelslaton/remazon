@@ -46,7 +46,6 @@ const SignIn: React.FC = () => {
         <input
           type='email'
           ref={emailRef}
-          placeholder='Email'
         />
 
         <label
@@ -58,24 +57,25 @@ const SignIn: React.FC = () => {
         <input
           type='password'
           ref={passwordRef}
-          placeholder='Password'
         />
 
-        <button
-          className='button form__control'
-          type='submit'
-          onClick={(e)=> loginHandler(e)}
-        >
-          <FontAwesomeIcon icon={faSignIn}/>
-        </button>
+        <div className='form__control-wrapper'>
+          <button
+            className='button form__control'
+            type='submit'
+            onClick={(e)=> loginHandler(e)}
+          >
+            <FontAwesomeIcon icon={faSignIn}/>
+          </button>
 
-        <button
-          className='button form__control'
-          type='button'
-          onClick={()=> navigate('/signup')}
-        >
-          Sign Up
-        </button>
+          <button
+            className='button form__control'
+            type='button'
+            onClick={()=> navigate('/signup')}
+          >
+            Sign Up
+          </button>
+        </div>
         
       </form>
     </div>

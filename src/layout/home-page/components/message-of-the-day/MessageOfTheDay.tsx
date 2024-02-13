@@ -14,36 +14,34 @@ const MessageOfTheDay: React.FC = () => {
 
   return (
     <>
-      {motd.length ? 
+      { motd.length ? 
         <div className='motd__container'>
-          <div className='motd__wrapper'>
-            <div className='motd__a-message'>
-              A Message from the Boss!!
-            </div>
-            <div className='motd'>
-              "{motd}"
-              <div className='rembo'>
-                - Rembo
-              </div>
+          <div className='motd__message-container'>
+            <div className='motd__message-wrapper'>
+              <h2 className='motd__message-from-the-boss'>
+                A Message from the Boss!!
+              </h2>
+              <h2 className='motd'>
+                "{motd}"
+                <h3 className='rembo'>
+                  - Rembo
+                </h3>
+              </h2>
             </div>
           </div>
           <div className='motd__banner-wrapper'>
-            <img
-              src={banner}
-            />
+            <img src={banner}/>
           </div>
         </div>
         :
         <div className='motd__container'>
           <div className='motd__wrapper'>
-            <div className='motd'>
+            <h2 className='motd'>
               Welcome to Remazon Prime
-            </div>
+            </h2>
           </div>
           <div className='motd__banner-wrapper'>
-            <img
-              src={banner}
-            />
+            <img src={banner}/>
           </div>
         </div>
       }

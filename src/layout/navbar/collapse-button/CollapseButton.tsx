@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { navToggle } from '../../../redux/slices/controlsSlice';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './collapseButton.css';
 
@@ -10,9 +9,9 @@ const CollapseButton: React.FC = () => {
   const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
 
   return (
-    <div className='collapse-button__wrapper'>
-      <button className='button card-button collapse-button' onClick={()=>dispatch(navToggle())}>
-        {navActive ? <FontAwesomeIcon icon={faArrowLeft}/> : <FontAwesomeIcon icon={faArrowRight}/>}
+    <div className={`collapse-button__wrapper ${ navActive ? 'active' : '' }`}>
+      <button className={`collapse-button ${ navActive ? 'active' : '' }`} onClick={()=>dispatch(navToggle())}>
+        { navActive ? <FontAwesomeIcon icon={faX}/> : <FontAwesomeIcon icon={faBars}/> }
       </button>
     </div>
   );

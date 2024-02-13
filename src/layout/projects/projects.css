@@ -84,7 +84,8 @@ li > article {
   top: .4em;
 }
 
-.project-data__key, .project-data__value {
+.project-data__key,
+.project-data__value {
   display: inline;
 }
 
@@ -99,10 +100,6 @@ li > article {
 }
 .project-data__value.deactivated {
   color: red;
-}
-
-.projects__sort {
-  width: fit-content;
 }
 
 @media (min-width: 375px){

@@ -13,7 +13,7 @@ type InitialStateType = {
   clickedListed: string[];
 };
 
-const initialState = {
+const initialState: InitialStateType = {
   unlisted: [],
   listed: [],
   clickedUnlisted: [],
@@ -22,6 +22,7 @@ const initialState = {
 
 const AdminNotification: React.FC = () => {
   const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  const [ countData, setCountData ] = useState<number>(0);
   const [ listState, setListState ] = useState<InitialStateType>({
     ...initialState,
     unlisted: employeeList,
@@ -30,6 +31,7 @@ const AdminNotification: React.FC = () => {
   const currentEmployeeUid: string | undefined = useAppSelector((state)=> state.employeesControl.currentEmployee?.uid);
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const alphabetizeEmployees = (arr: EmployeeType[]): EmployeeType[] => {
     const sorted = [...arr].sort((a, b) => {
@@ -72,6 +74,7 @@ const AdminNotification: React.FC = () => {
     currentUnlisted = currentUnlisted.filter((employee)=> !listState.clickedUnlisted.includes(employee.uid));
 
     setListState({
+      ...listState,
       listed: currentListed,
       unlisted: currentUnlisted,
       clickedListed: [],
@@ -91,6 +94,7 @@ const AdminNotification: React.FC = () => {
     currentListed = currentListed.filter((employee)=> !listState.clickedListed.includes(employee.uid));
 
     setListState({
+      ...listState,
       listed: currentListed,
       unlisted: currentUnlisted,
       clickedListed: [],
@@ -117,10 +121,18 @@ const AdminNotification: React.FC = () => {
       unlisted: employeeList,
     });
   };
+  
+  const handleFullReset = (): void=> {
+    formRef.current!.reset();
+    handleReset();
+  };
 
   const submitHandler = (e: React.FormEvent): void => {
     e.preventDefault()
-
+    if (messageRef.current!.value.length > 200) {
+      dispatch(setUiError('Please shorten your notification length to 200 characters or less.'));
+      return;
+    };
     if(messageRef.current!.value.length < 1) {
       dispatch(setUiError('Please enter a message for the notification.'));
       return;
@@ -145,18 +157,17 @@ const AdminNotification: React.FC = () => {
     dispatch(createNotificationThunk(newNotification))
       .then(()=> dispatch(fetchNotificationsThunk(currentEmployeeUid!)))
       .then(()=> {
-        handleReset();
+        handleFullReset();
       })
       .catch((error) => {
         console.error(error.code);
         console.error(error.message);
       });
-    
     return;
   };
 
   return (
-    <form className='form-wrapper'>
+    <form className='form-wrapper' ref={formRef}>
       <div className='form__section'>
         <h2 className='title form-title'>Admin Notification</h2>
       </div>
@@ -240,6 +251,7 @@ const AdminNotification: React.FC = () => {
       <textarea
         id='title'
         name='title'
+        rows={1}
         ref={titleRef}
       />
 
@@ -252,16 +264,31 @@ const AdminNotification: React.FC = () => {
       <textarea
         id='message'
         name='message'
+        rows={6}
         ref={messageRef}
+        maxLength={200}
+        onChange={(e)=> setCountData(e.currentTarget.value.length)}
       />
+      <div className='parameter-text'>
+        {countData} of 200
+      </div>
 
-      <button
-        className='button form__control'
-        type='submit'
-        onClick={(e)=> submitHandler(e)}
-      >
-        Send
-      </button>
+      <div className='form__control-wrapper'>
+        <button
+          className='button form__control'
+          type='button'
+          onClick={()=> handleFullReset()}
+        >
+          Clear
+        </button>
+        <button
+          className='button form__control'
+          type='submit'
+          onClick={(e)=> submitHandler(e)}
+        >
+          Send
+        </button>
+      </div>
 
     </form>
   );
