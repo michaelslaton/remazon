@@ -23,7 +23,6 @@
   position: relative;
   width: 20rem;
   margin-bottom: .5rem;
-  padding: .5rem;
   cursor: pointer;
 }
 .employee__wrapper.deactivated {
@@ -31,8 +30,10 @@
 }
 
 .employee__info {
-  all: unset;
+  /* all: unset; */
+  margin: 0;
   list-style: none;
+  padding: .5rem;
 }
 .employee__info > li {
   margin-bottom: .2em;
@@ -44,6 +45,13 @@
 
 .employee__name {
   font-family: 'gvd-bold';
+  margin: 0;
+  padding: .5rem;
+  padding-top: .7rem;
+  line-height: 1rem;
+  background-color: var(--charcoal);
+  color: var(--font-white);
+  text-transform: capitalize;
 }
 
 .employee__info-key{
@@ -59,7 +67,6 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: .1em;
-  margin: .05rem -.5rem .3rem;
   padding: .1rem;
 }
 .employee__rank.deactivated {
@@ -77,10 +84,6 @@
   align-items: center;
   gap: 0 .5rem;
   margin: .5rem 0;
-}
-
-.employees__sort {
-  width: fit-content;
 }
 
 @media (min-width: 375px){

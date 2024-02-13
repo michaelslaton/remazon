@@ -194,19 +194,21 @@ const EditProject: React.FC = () => {
           />
         </div>
 
-        <button
-          className='button form__control'
-          type='submit'
-          onClick={(e)=> submitHandler(e)}
-        >
-          Submit
-        </button>
-        <button
-          className='button form__control'
-          onClick={()=> navigate('/projects')}
-        >
-          Cancel
-        </button>
+        <div className='form__control-wrapper'>
+          <button
+            className='button form__control'
+            type='submit'
+            onClick={(e)=> submitHandler(e)}
+          >
+            Submit
+          </button>
+          <button
+            className='button form__control'
+            onClick={()=> navigate('/projects')}
+          >
+            Cancel
+          </button>
+        </div>
         
       </form>
     </div>

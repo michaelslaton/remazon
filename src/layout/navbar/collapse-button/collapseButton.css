@@ -1,18 +1,25 @@
 .collapse-button__wrapper {
   width: 100%;
-  text-align: end;
+  /* text-align: end; */
   margin: .5rem 0;
 }
 
 .collapse-button {
+  aspect-ratio: 1/1;
   position: fixed !important;
-  top: .5rem;
-  left: .5rem;
-  font-size: 1.4rem !important;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  background-color: var(--off-black);
+  color: var(--remazon-prime);
+  /* top: .5rem; */
+  /* left: .5rem; */
+  font-size: 1rem !important;
   padding: .1rem .5rem;
   z-index: 10;
+  width: 2rem !important;
 }
 .collapse-button:hover {
+  border: 1px solid var(--remazon-prime);
   color: var(--font-white);
 }
 
@@ -28,14 +35,18 @@
 @media (min-width: 768px){
   .collapse-button__wrapper {
     width: 100%;
+    text-align: center;
+  }
+  .collapse-button__wrapper.active {
+    width: 100%;
     text-align: end;
   }
   
   .collapse-button {
     position: relative !important;
-    top: auto;
-    left: auto;
-    margin-right: .3rem;
+  }  
+  .collapse-button.active {
+    margin-right: .4rem;
   }
 }
 

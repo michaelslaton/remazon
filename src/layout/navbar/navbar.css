@@ -51,6 +51,12 @@
   color: var(--remazon-white);
 }
 
+.info-button {
+  position: absolute;
+  bottom: 4.2rem;
+  margin: 0;
+}
+
 .authentication-button {
   position: absolute;
   bottom: 0;
