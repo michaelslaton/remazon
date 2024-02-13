@@ -23,7 +23,7 @@ const Projects: React.FC = () => {
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
 
   useEffect(()=>{
-    dispatch(fetchProjectsThunk());
+    dispatch(fetchProjectsThunk);
     dispatch(fetchEmployeesListThunk);
     dispatch(fetchRanksThunk);
   },[]);
@@ -54,7 +54,6 @@ const Projects: React.FC = () => {
         <select
           id='projects sort'
           name='projects sort'
-          className='projects__sort'
           defaultValue=''
           onChange={(e)=> setSortType(e.target.value)}
         >

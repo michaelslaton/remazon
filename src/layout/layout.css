@@ -105,7 +105,9 @@ input[type="checkbox"]:checked {
   aspect-ratio: 1/1;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   display: block;
   background-color: var(--off-black);
   outline-style: none;
@@ -117,12 +119,14 @@ input, textarea, select {
   padding: 0.4em .5em;
   color: var(--font-white);
 }
-input:focus, textarea:focus, select:focus  {
+input:focus,
+textarea:focus,
+select:focus  {
   border-color: var(--remazon-prime);
 }
-
-option {
-  color: black;
+textarea {
+  resize: vertical;
+  min-height: 2.5rem;
 }
 
 .main-screen {
@@ -170,6 +174,9 @@ option {
 .display__controls--deactivated > input {
   margin-left: .5rem;
 }
+.display__controls-sort {
+  width: fit-content;
+}
 
 .form-wrapper {
   box-sizing: border-box;
@@ -195,7 +202,7 @@ option {
 }
 
 option {
-  color: var(--font-white)
+  color: var(--font-white);
 }
 
 .form-title {
@@ -213,9 +220,13 @@ option {
 
 .form__control {
   margin-top: .7rem;
-  margin-right: .5rem;
+  margin-left: .7rem;
   padding: .2rem 1.5rem;
   box-shadow: .3rem .3rem .2rem #272727;
+}
+.form__control-wrapper {
+  width: 100%;
+  text-align: end;
 }
 
 .checkbox {
@@ -233,7 +244,7 @@ option {
   color: rgb(255, 0, 0);
   font-size: .8em;
   font-family: auto;
-  text-align: end;
+  text-align: start;
   margin-top: .3rem;
   padding-right: .5rem;
   margin-bottom: -1rem;

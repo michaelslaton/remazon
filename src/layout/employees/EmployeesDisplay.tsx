@@ -72,7 +72,6 @@ const EmployeesDisplay: React.FC = () => {
         <select
           id='employees sort'
           name='employees sort'
-          className='employees__sort'
           defaultValue=''
           onChange={(e)=> setSortType(e.target.value)}
         >

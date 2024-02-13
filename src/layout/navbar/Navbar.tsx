@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getAuth, signOut } from 'firebase/auth';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { clearCurrentEmployee } from '../../redux/slices/employeesSlice';
-import { faHouse, faProjectDiagram, faUsers, faRankingStar, faStar, faTrophy, faSignIn, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faProjectDiagram, faRankingStar, faStar, faTrophy, faSignIn, faSignOut, faAddressCard, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import CollapseButton from './collapse-button/CollapseButton';
 import LinkButton from './link-button/LinkButton';
@@ -29,7 +29,7 @@ const navData: LinkButtonData[] = [
     id: 2,
     name: 'Employees',
     url: '/employees',
-    icon: faUsers,
+    icon: faAddressCard,
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const navData: LinkButtonData[] = [
     name: 'Awards',
     url: '/awards',
     icon: faTrophy,
-  }
+  },
 ];
 
 const Navbar: React.FC = () => {
@@ -69,38 +69,53 @@ const Navbar: React.FC = () => {
             data={data}
           />
         ))}
+
         { currentEmployee?.admin &&
           <>
             <LinkButton
               data={{
-                id: 6,
+                id: 8,
                 name: 'Ranks',
                 url: '/ranks',
                 icon: faRankingStar,
-              }}/>
+              }}
+            />
             <LinkButton
               data={{
-                id: 7,
+                id: 9,
                 name: 'Admin',
                 url: '/admin',
                 icon: faStar,
-              }}/>
+              }}
+            />
           </>
         }
+
+        {/* <LinkButton
+          data={{
+            id: 5,
+            name: 'Info',
+            url: '/info',
+            icon: faCircleInfo,
+            styling: 'info-button',
+          }}
+        /> */}
+
         { !currentEmployee &&
           <LinkButton
             data={{
-              id: 5,
+              id: 6,
               name: 'Sign In',
               url: '/signin',
               icon: faSignIn,
               styling: 'authentication-button'
-          }}/>
+            }}
+          />
         }
         { currentEmployee &&
           <LinkButton
             data={{
-              id: 5,
+              id: 7,
               name: 'Sign Out',
               url: '/',
               icon: faSignOut,
@@ -109,8 +124,8 @@ const Navbar: React.FC = () => {
             }}
           />
         }
-      </div>
 
+      </div>
     </div>
   );
 };

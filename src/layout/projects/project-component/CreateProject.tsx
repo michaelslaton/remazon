@@ -116,20 +116,22 @@ const CreateProject: React.FC = () => {
           ref={descriptionRef}
         />
 
-        <button
-          className='button form__control'
-          type='submit'
-          value='send'
-          onClick={(e) => submitHandler(e)}
-        >
-          Submit
-        </button>
-        <button
-          className='button form__control'
-          onClick={() => navigate('/projects')}
-        >
-          Cancel
-        </button>
+        <div className='form__control-wrapper'>
+          <button
+            className='button form__control'
+            type='submit'
+            value='send'
+            onClick={(e) => submitHandler(e)}
+          >
+            Submit
+          </button>
+          <button
+            className='button form__control'
+            onClick={() => navigate('/projects')}
+          >
+            Cancel
+          </button>
+        </div>
 
       </form>
     </div>
