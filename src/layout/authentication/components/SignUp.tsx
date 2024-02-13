@@ -113,18 +113,27 @@ const SignUp: React.FC = () => {
             ref={descriptionRef}
           />
 
-          <button
-            className='button form__control'
-            type='submit'
-            onClick={(e) => submitHandler(e)}>
-              Sign Up
-          </button>
-          <button 
-            className='button form__control'
-            onClick={()=> navigate('/')}
-          >
-            Cancel
-          </button>
+          <div className='form__control-wrapper'>
+            <button
+              className='button form__control'
+              type='button'
+              onClick={() => navigate('/signin')}>
+                Sign In
+            </button>
+            <button
+              className='button form__control'
+              type='submit'
+              onClick={(e) => submitHandler(e)}>
+                Create Account
+            </button>
+            <button 
+              className='button form__control'
+              type='button'
+              onClick={()=> navigate('/')}
+            >
+              Cancel
+            </button>
+          </div>
 
         </form>
     </div>

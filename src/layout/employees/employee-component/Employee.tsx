@@ -48,19 +48,15 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
       style={{borderColor: currentEmployeesRank?.color}}
       onClick={()=> onClickHandler()}
     >
-      <h2 className='title employee__name'>{data.name}</h2>
+      <h2 className='employee__name'>{data.name}</h2>
+      <div
+        className={`employee__rank ${data.rank === 0 ? 'deactivated' : ''}`}
+        style={{backgroundColor: currentEmployeesRank?.color}}
+      >
+        {currentEmployeesRank!.name}
+      </div>
 
       <ul className='employee__info'>
-
-        <li>
-          <div
-            className={`employee__rank ${data.rank === 0 ? 'deactivated' : ''}`}
-            style={{backgroundColor: currentEmployeesRank?.color}}
-          >
-            {currentEmployeesRank!.name}
-          </div>
-        </li>
-
         { birthday ?
           <li>
             <div className='employee__info-key'>
