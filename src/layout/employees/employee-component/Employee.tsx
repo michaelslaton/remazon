@@ -6,6 +6,7 @@ import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import EmployeeType from '../../../types/employeeType';
 import RankType from '../../../types/rankType';
 import months from '../../../data/months';
+import cupcake from '../../../assets/imgs/cupcake.png';
 import '../employees.css';
 
 type EmployeeProps = {
@@ -48,7 +49,16 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
       style={{borderColor: currentEmployeesRank?.color}}
       onClick={()=> onClickHandler()}
     >
-      <h2 className='employee__name'>{data.name}</h2>
+      <div className='employee__header'>
+        <h2 className='employee__name'>{data.name}</h2>
+        <div>
+          { data.rank > 1 &&
+            <>
+              {`${data.cupcakes} `}<img src={cupcake} className='cupcake'/>
+            </>
+          }          
+        </div>
+      </div>
       <div
         className={`employee__rank ${data.rank === 0 ? 'deactivated' : ''}`}
         style={{backgroundColor: currentEmployeesRank?.color}}
@@ -60,14 +70,14 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
         { birthday ?
           <li>
             <div className='employee__info-key'>
-              Birthday:
+              Birthday{`: `}
             </div>
             {birthday.getDate()} - {months[birthday.getMonth()]}
           </li>
           : 
           <li>
             <div className='employee__info-key'>
-              Birthday:
+              Birthday{`: `}
             </div>
               N/A
           </li>
@@ -75,10 +85,11 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
 
         <li>
           <div className='employee__info-key'>
-            Bio:
+            Bio{`: `}
           </div>
             {data.description}
         </li>
+
       </ul>
       
       <div className='employee__edit-button_wrapper'>

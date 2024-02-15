@@ -1,0 +1,95 @@
+.leaderboard__wrapper {
+  background-color: #1aaec2;
+  border-radius: var(--border-radius);
+  margin: 1rem;
+  width: fit-content;
+  padding: 1rem 1rem;
+}
+
+.leaderboard-cupcake {
+  aspect-ratio: 1/1;
+  width: 3.5rem;
+}
+
+.leaderboard__header {
+  font-size: 1.6rem;
+  color: white;
+  text-shadow: 3px 3px 1px #fd6efd;
+}
+
+.leaderboard__header-text {
+  letter-spacing: .05em;
+  font-family: 'ginger';
+  display: inline-block;
+  text-align: center;
+  line-height: 1.3em;
+  margin: 0 .3em;
+}
+
+.leaderboard__entry {
+  width: 90%;
+  font-family: 'gvd-italic';
+  font-size: 1.2em;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: #7fffff;
+  color: #ff88ff;
+  padding: .45rem;
+  text-shadow: 1px 1px 1px #276b6b;
+}
+.leaderboard__entry:first-child {
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+}
+.leaderboard__entry:nth-child(even){
+  color: white;
+  background-color: #ff88ff;
+  text-shadow: 1px 1px 1px #662166;
+}
+.leaderboard__entry:last-child {
+  border-bottom-right-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+.leaderboard__entry-name {
+  text-transform: capitalize;
+}
+.leaderboard__entry-cupcakes {
+  font-family: 'gvd';
+}
+
+@media (min-width: 375px){
+}
+
+@media (min-width: 390px){
+}
+
+@media (min-width: 414px){
+}
+
+@media (min-width: 768px){
+}
+
+@media (min-width: 810px){ 
+}
+
+@media (min-width: 1280px){
+}
+
+@media (min-width: 1366px){
+}
+
+@media (min-width: 1440px){
+}
+
+@media (min-width: 1536px){
+}
+
+@media (min-width: 1600px){
+}
+
+@media (min-width: 1920px){
+}
+
+@media (min-width: 2560px){
+}

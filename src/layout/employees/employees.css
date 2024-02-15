@@ -30,7 +30,6 @@
 }
 
 .employee__info {
-  /* all: unset; */
   margin: 0;
   list-style: none;
   padding: .5rem;
@@ -43,21 +42,26 @@
   margin: 0;
 }
 
+.employee__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: .5rem;
+}
+
 .employee__name {
   font-family: 'gvd-bold';
   margin: 0;
   padding: .5rem;
   padding-top: .7rem;
   line-height: 1rem;
-  background-color: var(--charcoal);
-  color: var(--font-white);
+  color: var(--remazon-prime);
   text-transform: capitalize;
 }
 
 .employee__info-key{
   display: inline;
   color: var(--remazon-prime);
-  margin-right: .2em;
 }
 
 .employee__rank {
@@ -84,6 +88,17 @@
   align-items: center;
   gap: 0 .5rem;
   margin: .5rem 0;
+}
+
+.cupcake-wrapper {
+  display: inline;
+  margin-right: 0em;
+}
+.cupcake {
+  aspect-ratio: 1/1;
+  position: relative;
+  bottom: -1px;
+  width: 20px;
 }
 
 @media (min-width: 375px){
