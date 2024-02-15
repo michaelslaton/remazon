@@ -23,10 +23,10 @@ const MessageOfTheDay: React.FC = () => {
               </h2>
               <h2 className='motd'>
                 "{motd}"
-                <h3 className='rembo'>
-                  - Rembo
-                </h3>
               </h2>
+              <h3 className='rembo'>
+                - Rembo
+              </h3>
             </div>
           </div>
           <div className='motd__banner-wrapper'>
