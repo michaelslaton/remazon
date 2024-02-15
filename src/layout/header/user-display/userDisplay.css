@@ -32,6 +32,10 @@
 .notification-button:hover {
   border-color: var(--remazon-prime);
 }
+.notification-button.active:hover {
+  color: var(--font-color);
+  border-color: var(--remazon-prime);
+}
 
 @media (min-width: 375px){
 }

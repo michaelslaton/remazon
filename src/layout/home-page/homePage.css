@@ -1,3 +1,11 @@
+.popups {
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 0 auto;
+}
+
 @media (min-width: 375px){
 }
 
