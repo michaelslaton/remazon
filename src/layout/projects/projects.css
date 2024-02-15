@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 .projects__section {
-  padding: 1.5rem 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem;
 }
 .projects__section.light {
   background-color: var(--charcoal);  
@@ -13,7 +13,7 @@
 .projects__section-title {
   font-family: 'gvd-italic';
   margin: 0;
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
 }
 
 .projects__cards-wrapper {
