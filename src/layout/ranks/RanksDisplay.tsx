@@ -8,6 +8,7 @@ import EmployeeType from '../../types/employeeType';
 import Rank from './rank-component/Rank';
 import RankType from '../../types/rankType';
 import './ranks.css';
+import Loading from '../../utils/loading/Loading';
 
 const RanksDisplay: React.FC = () => {
   const [ newRankDisplay, setNewRankDisplay ] = useState<boolean>(false);
@@ -18,6 +19,8 @@ const RanksDisplay: React.FC = () => {
   useEffect(()=>{
     dispatch(fetchRanksThunk());
   },[]);
+
+  if (!ranks.length) return ( <Loading/> );
 
   return (
     <>
