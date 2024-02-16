@@ -44,6 +44,8 @@ const Projects: React.FC = () => {
      return 0;
  });
 
+  if(!projects.length) return ( <>No projects to show.</> )
+
   return (
     <>
       <div className='display__header'>
