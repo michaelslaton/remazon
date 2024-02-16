@@ -28,6 +28,8 @@ const AwardsDisplay: React.FC = () => {
     return 0;
   });
 
+  if(!awardsList.length) return ( <>No awards to display</> );
+
   return (
     <>
       <div className='display__header'>
