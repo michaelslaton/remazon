@@ -62,6 +62,8 @@ const EmployeesDisplay: React.FC = () => {
     );
   };
 
+  if(!employees.length) return ( <Loading/> );
+
   return (
     <>
       <div className='display__header'>
