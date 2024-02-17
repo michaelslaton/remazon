@@ -5,8 +5,9 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignIn } from '@fortawesome/free-solid-svg-icons';
-import '../authentication.css';
 import { fetchNotificationsThunk } from '../../../redux/slices/notificationsSlice';
+import { setUiError } from '../../../redux/slices/controlsSlice';
+import '../authentication.css';
 
 const SignIn: React.FC = () => {
   const auth = getAuth();
@@ -17,6 +18,20 @@ const SignIn: React.FC = () => {
 
   const loginHandler = (e: React.FormEvent): void => {
     e.preventDefault();
+
+    if (emailRef.current!.value.length < 1) {
+      dispatch(setUiError('Please enter an E-Mail address.'));
+      return;
+    };
+    if(!emailRef.current!.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
+      dispatch(setUiError('E-mail address format is invalid.'));
+      return;
+    };
+    if (passwordRef.current!.value.length < 1) {
+      dispatch(setUiError('Please enter a password.'));
+      return;
+    };
+
     const enteredEmail: string = emailRef.current!.value;
     const enteredPassword: string = passwordRef.current!.value;
     
@@ -27,7 +42,7 @@ const SignIn: React.FC = () => {
       })
       .then(()=> navigate('/'))
       .catch((error) => {
-        console.error(error.code);
+        dispatch(setUiError(`Error: ${error.code}`));
         console.error(error.message);
       });
   };
@@ -46,6 +61,7 @@ const SignIn: React.FC = () => {
         <input
           type='email'
           ref={emailRef}
+          required
         />
 
         <label
@@ -57,6 +73,7 @@ const SignIn: React.FC = () => {
         <input
           type='password'
           ref={passwordRef}
+          required
         />
 
         <div className='form__control-wrapper'>
