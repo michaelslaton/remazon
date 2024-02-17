@@ -3,11 +3,7 @@ import EmployeeType from '../../../../types/employeeType';
 import colorCupcake from '../../../../assets/imgs/cupcakeColor.png';
 import './cupcakeLeaderboard.css';
 
-type CupcakeLeaderboardProps = {
-  rows: number;
-}
-
-const CupcakeLeaderboard: React.FC<CupcakeLeaderboardProps> = ({ rows }) => {
+const CupcakeLeaderboardWidget: React.FC = () => {
   let employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
 
   const leaderboardList = (): JSX.Element => {
@@ -28,7 +24,7 @@ const CupcakeLeaderboard: React.FC<CupcakeLeaderboardProps> = ({ rows }) => {
               {employee.cupcakes}
             </div>
           </div>
-        )).splice(0,rows) }
+        )).splice(0,3) }
       </div>
     )
   };
@@ -58,4 +54,4 @@ const CupcakeLeaderboard: React.FC<CupcakeLeaderboardProps> = ({ rows }) => {
   );
 };
 
-export default CupcakeLeaderboard;
+export default CupcakeLeaderboardWidget;
