@@ -41,6 +41,7 @@
 .project__wrapper.deactivated {
   background-color: black;
   border-color: #404040;
+  box-shadow: .5rem .5rem .2rem #111111;
 }
 .project__wrapper > h2 {
   margin: 0;
