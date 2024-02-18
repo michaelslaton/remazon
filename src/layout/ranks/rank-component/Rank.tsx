@@ -22,19 +22,16 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
 
   const editSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
-
-    if(titleRef.current!.value.length < 1) {
-      dispatch(setUiError('Please enter a name for the rank.'));
+    if (titleRef.current!.value.length < 1) {
+      dispatch(setUiError("Please enter a name for the rank."));
       return;
     };
-
     const updatedRank: RankType = {
       id: rankData!.id,
       name: titleRef.current!.value,
       rank: rankData!.rank,
       color: colorRef.current!.value,
     };
-
     dispatch(editRankThunk(updatedRank));
     setEditMode(false);
     return;
@@ -42,10 +39,8 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
 
   const deleteButtonHandler = (): void => {
     const employeesAssignedRank = employeeList.filter((employee)=> employee.rank === rankData.id);
-
     if (employeesAssignedRank.length) dispatch(setUiError(`Please reassign all employees currently assigned to the rank of ${rankData.name} before attempting to delete.`));
     else if (window.confirm(`Are you sure you want to delete the rank ${rankData.name} ?`)) dispatch(deleteRankThunk(rankData.id));
-    
     return;
   };
 
@@ -54,7 +49,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
     <div className='rank edit'>
       <form className='rank__form'>
 
-        <section className='rank__edit-form--input-section'>
+        <div className='rank__edit-form--input-section'>
           <label htmlFor='title'>
             Title :
           </label>
@@ -78,9 +73,9 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
             className='rank__edit-form--color-selector'
             defaultValue={rankData!.color}
           />
-        </section>
+        </div>
 
-        <section className='rank__buttons-wrapper'>
+        <div className='rank__buttons-wrapper'>
           <button
             type='submit'
             className='button rank__submit'
@@ -96,7 +91,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
           >
             <FontAwesomeIcon icon={faX} />
           </button>
-        </section>
+        </div>
 
       </form>
     </div>
@@ -130,7 +125,6 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
           </button>
         }
       </div>
-
     </div>
   );
 };

@@ -1,9 +1,11 @@
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../redux/hooks';
 import ProjectType from '../../../../../types/projectType';
 import months from '../../../../../data/months';
 import '../mostRecent.css';
 
 const MostRecentProject: React.FC = () => {
+  const navigate: NavigateFunction = useNavigate();
   let projectList: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
   projectList = [...projectList].filter((project) => project.status === true);
   const mostRecentProject: ProjectType = projectList.reduce((prev, current) => {
@@ -18,7 +20,10 @@ const MostRecentProject: React.FC = () => {
       <div className='most-recent__cel-title'>
         New Project
       </div>
-      <div className='most-recent__content-wrapper'>
+      <div
+        className='most-recent__content-wrapper'
+        onClick={()=> navigate('/projects')}
+      >
         <div className='most-recent__item-title'>
           {mostRecentProject.name}
         </div>
