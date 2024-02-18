@@ -53,9 +53,9 @@ const Navbar: React.FC = () => {
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
 
   const logoutHandler = (): void => {
-    navigate(0);
     signOut(auth);
     dispatch(clearCurrentEmployee());
+    navigate(0);
   };
 
   return (

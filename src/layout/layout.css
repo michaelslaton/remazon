@@ -248,6 +248,7 @@ option {
 .checkbox {
   display: inline-block;
   width: fit-content !important;
+  margin-top: 1.6em;
 }
 
 .date-input {

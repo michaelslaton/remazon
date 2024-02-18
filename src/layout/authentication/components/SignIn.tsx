@@ -43,6 +43,7 @@ const SignIn: React.FC = () => {
       .then(()=> navigate('/'))
       .catch((error) => {
         dispatch(setUiError(`Error: ${error.code}`));
+        console.error(error.code);
         console.error(error.message);
       });
   };

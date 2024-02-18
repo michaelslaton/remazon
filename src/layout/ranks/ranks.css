@@ -29,10 +29,23 @@
 .rank__form {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.rank__edit-form--input-section > label {
+  font-family: 'gvd-bold';
+  color: var(--remazon-prime);
+}
+.rank__edit-form--input-section > input {
+  margin-right: 1rem;
+}
+.rank__edit-form--input-section > label,
+.rank__edit-form--input-section > input {
+  display: inline-block;
 }
 
 .rank__title {
   margin: 0;
+  font-family: 'gvd-italic';
   font-size: 1.1rem !important;
   transform: translate(0, 15%)
 }
@@ -43,11 +56,17 @@
   height: fit-content;
 }
 
-.rank-color-selector {
+.rank__edit-form--color-selector {
   background-color: transparent;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
   width: 4rem;
-  height: 2rem;
+  height: 1.5rem;
+}
+
+.rank__edit-form--input {
+  width: 10rem;
 }
 
 @media (min-width: 375px){
@@ -66,11 +85,6 @@
 }
 
 @media (min-width: 1280px){
-  .rank__title {
-    font-family: 'gvd-italic';
-    font-size: 1.2rem;
-  }
-
   .ranks-wrapper {
     margin: auto;
     margin-top: 2rem;
