@@ -1,3 +1,4 @@
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../redux/hooks';
 import EmployeeType from '../../../../../types/employeeType';
 import RankType from '../../../../../types/rankType';
@@ -6,6 +7,7 @@ import '../mostRecent.css';
 
 const MostRecentEmployee: React.FC = () => {
   const rankList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
+  const navigate: NavigateFunction = useNavigate();
   let employeeList: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
   employeeList = [...employeeList].filter((employee) => employee.rank !== 0);
   const mostRecentEmployee: EmployeeType = [...employeeList].reduce((prev, current) => {
@@ -22,7 +24,10 @@ const MostRecentEmployee: React.FC = () => {
       <div className='most-recent__cel-title'>
         New Hire
       </div>
-      <div className='most-recent__content-wrapper'>
+      <div 
+        className='most-recent__content-wrapper'
+        onClick={()=> navigate('/employees')}
+      >
         <div className='most-recent__item-title'>
           {mostRecentEmployee.name}
         </div>
@@ -36,22 +41,19 @@ const MostRecentEmployee: React.FC = () => {
                 {` ${employeeRank?.name}`}
             </div>
           </li>
-          <li>
-            Birthday:
-            <div
-              className='most-recent__info-value'
-            >
-              {mostRecentEmployee.birthday ?
-                <>
-                  {` ${mostRecentEmployee.birthday}`}
-                </>
-                :
-                <>
-                  {` N/a`}
-                </>
-              }
-            </div>
-          </li>
+
+          {
+            mostRecentEmployee.birthday &&
+            <li>
+              Birthday:
+              <div
+                className='most-recent__info-value'
+              >
+                {` ${mostRecentEmployee.birthday}`}
+              </div>
+            </li>
+          }
+          
         </ul>
       </div>
     </div>

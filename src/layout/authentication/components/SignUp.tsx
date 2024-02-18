@@ -173,7 +173,6 @@ const SignUp: React.FC = () => {
               Cancel
             </button>
           </div>
-
         </form>
     </div>
   );

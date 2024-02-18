@@ -38,16 +38,16 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
     );
   };
 
-  const onClickHandler = (): void => {
-    console.log('clicked')
-    return;
-  }
+  // const onClickHandler = (): void => {
+  //   console.log('clicked')
+  //   return;
+  // }
 
   return (
     <div
       className={`employee__wrapper ${data.rank === 0 ? 'deactivated' : ''}`}
       style={{borderColor: currentEmployeesRank?.color}}
-      onClick={()=> onClickHandler()}
+      // onClick={()=> onClickHandler()}
     >
       <div className='employee__header'>
         <h2 className='employee__name'>{data.name}</h2>
@@ -95,7 +95,6 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
       <div className='employee__edit-button_wrapper'>
         {editButtonRender()}
       </div>
-
     </div>
   );
 };
