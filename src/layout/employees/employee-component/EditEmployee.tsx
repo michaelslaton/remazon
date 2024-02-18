@@ -61,21 +61,22 @@ const EditEmployee: React.FC = () => {
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
-    const isThereVariance = checkForVariance();
+    let updatedRank = selectedEmployee!.rank;
 
-    if (!isThereVariance) {
+    if (!checkForVariance()) {
       dispatch(setUiError('No changes have been made.'));
       return;
     };
-
+    if (nameRef.current!.value.length < 1) {
+      dispatch(setUiError('Please enter a name for the employee.'));
+      return;
+    }
     if (descriptionRef.current!.value.length > 100) {
       dispatch(setUiError('Please shorten your description to 100 characters or less.'));
       return;
     };
 
     if (updatedBirthday) employeeBirthday = updatedBirthday; 
-    
-    let updatedRank = selectedEmployee!.rank;
     if (currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
 
     const updatedEmployee: EmployeeType = {
@@ -92,99 +93,106 @@ const EditEmployee: React.FC = () => {
   };
 
   return (
-    <div className='center-display-space'>
-      <form className='form-wrapper employee__edit-form'>
-        <h2 className='title form-title'>
-          Edit {selectedEmployee!.name}
-        </h2>
+    <>
+      <div className='display__header'>
+        <h2>Employee Directory</h2>
+      </div>
+      <div className='display__controls'/>
 
-        <label
-          htmlFor='name'
-          className='form-input-label'
-        >
-          Name:
-        </label>
-        <input
-          type='text'
-          id='name'
-          name='name'
-          ref={nameRef}
-          defaultValue={selectedEmployee?.name}
-        />
+      <div className='center-display-space'>
+        <form className='form-wrapper employee__edit-form'>
+          <h2 className='title form-title'>
+            Edit {selectedEmployee!.name}
+          </h2>
 
-        {currentEmployee!.admin && (
-          <>
-            <label
-              htmlFor='rank'
-              className='form-input-label'
-            >
-              Rank:
-            </label>
-            <select
-              id='rank'
-              name='rank'
-              ref={rankRef}
-              defaultValue={selectedEmployee?.rank}
-            >
-              {ranks.map((rank) => (
-                <option key={rank.id} value={rank.rank}>
-                  {rank.name}
-                </option>
-              ))}
-            </select>
-          </>
-        )}
-
-        <label
-          htmlFor='birthday'
-          className='form-input-label'
-        >
-          Birthday:
-        </label>
-        <input
-          type='date'
-          id='birthday'
-          name='birthday'
-          className='date-input'
-          ref={bdayRef}
-          defaultValue={birthdayString}
-        />
-
-        <label
-          htmlFor='description'
-          className='form-input-label'
-        >
-          Description:
-        </label>
-        <textarea
-          id='description'
-          name='description'
-          ref={descriptionRef}
-          maxLength={101}
-          onChange={(e) => setCountData(e.currentTarget.value.length)}
-          defaultValue={selectedEmployee?.description}
-        />
-
-        <div className='parameter-text'>{countData} of 100</div>
-
-        <div className='form__control-wrapper'>
-          <button
-            className='button form__control'
-            type='submit'
-            onClick={(e) => submitHandler(e)}
+          <label
+            htmlFor='name'
+            className='form-input-label'
           >
-            Submit
-          </button>
-          <button
-            className='button form__control'
-            onClick={() => navigate('/employees')}
-          >
-            Cancel
-          </button>
-        </div>
+            Name:
+          </label>
+          <input
+            type='text'
+            id='name'
+            name='name'
+            ref={nameRef}
+            defaultValue={selectedEmployee?.name}
+          />
 
-      </form>
-    </div>
+          {currentEmployee!.admin && (
+            <>
+              <label
+                htmlFor='rank'
+                className='form-input-label'
+              >
+                Rank:
+              </label>
+              <select
+                id='rank'
+                name='rank'
+                ref={rankRef}
+                defaultValue={selectedEmployee?.rank}
+              >
+                {ranks.map((rank) => rank.id !== 1 && (
+                  <option key={rank.id} value={rank.rank}>
+                    {rank.name}
+                  </option>
+                ))}
+              </select>
+            </>
+          )}
+
+          <label
+            htmlFor='birthday'
+            className='form-input-label'
+          >
+            Birthday:
+          </label>
+          <input
+            type='date'
+            id='birthday'
+            name='birthday'
+            className='date-input'
+            ref={bdayRef}
+            defaultValue={birthdayString}
+          />
+
+          <label
+            htmlFor='description'
+            className='form-input-label'
+          >
+            Description:
+          </label>
+          <textarea
+            id='description'
+            name='description'
+            ref={descriptionRef}
+            maxLength={101}
+            onChange={(e) => setCountData(e.currentTarget.value.length)}
+            defaultValue={selectedEmployee?.description}
+          />
+
+          <div className='parameter-text'>{countData} of 100</div>
+
+          <div className='form__control-wrapper'>
+            <button
+              className='button form__control'
+              type='submit'
+              onClick={(e) => submitHandler(e)}
+            >
+              Submit
+            </button>
+            <button
+              className='button form__control'
+              onClick={() => navigate('/employees')}
+            >
+              Cancel
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { deleteRankThunk, editRankThunk } from '../../../redux/slices/ranksSlice';
 import { setUiError } from '../../../redux/slices/controlsSlice';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import RankType from '../../../types/rankType';
 import EmployeeType from '../../../types/employeeType';
@@ -21,6 +22,11 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
 
   const editSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
+
+    if(titleRef.current!.value.length < 1) {
+      dispatch(setUiError('Please enter a name for the rank.'));
+      return;
+    };
 
     const updatedRank: RankType = {
       id: rankData!.id,
@@ -47,36 +53,50 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
   if (editMode) return (
     <div className='rank edit'>
       <form className='rank__form'>
-        <label htmlFor='title rank__title'>
-          Title:
-        </label>
-        <input
-          type='text'
-          id='title'
-          name='title'
-          ref={titleRef}
-          defaultValue={rankData!.name}
-        />
 
-        <label htmlFor='color'>
-          Color:
-        </label>
-        <input
-          type='color'
-          id='color'
-          name='color'
-          ref={colorRef}
-          className='rank-color-selector'
-          defaultValue={rankData!.color}
-        />
+        <section className='rank__edit-form--input-section'>
+          <label htmlFor='title'>
+            Title :
+          </label>
+          <input
+            type='text'
+            id='title'
+            name='title'
+            ref={titleRef}
+            className='rank__edit-form--input'
+            defaultValue={rankData!.name}
+          />
 
-        <button
-          type='submit'
-          className='button rank__submit'
-          onClick={(e) => editSubmit(e)}
-        >
-          <FontAwesomeIcon icon={faEdit} />
-        </button>
+          <label htmlFor='color'>
+            Color :
+          </label>
+          <input
+            type='color'
+            id='color'
+            name='color'
+            ref={colorRef}
+            className='rank__edit-form--color-selector'
+            defaultValue={rankData!.color}
+          />
+        </section>
+
+        <section className='rank__buttons-wrapper'>
+          <button
+            type='submit'
+            className='button rank__submit'
+            onClick={(e) => editSubmit(e)}
+          >
+            <FontAwesomeIcon icon={faCheck} />
+          </button>
+
+          <button
+            type='button'
+            className='button delete'
+            onClick={() => setEditMode(false)}
+          >
+            <FontAwesomeIcon icon={faX} />
+          </button>
+        </section>
 
       </form>
     </div>

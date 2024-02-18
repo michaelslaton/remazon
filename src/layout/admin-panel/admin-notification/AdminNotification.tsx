@@ -45,20 +45,16 @@ const AdminNotification: React.FC = () => {
 
   const handleClickUnlisted = (employee: EmployeeType): void => {
     let currentClickedUnlisted = [...listState.clickedUnlisted];
-
     if (currentClickedUnlisted.includes(employee.uid)) currentClickedUnlisted = currentClickedUnlisted.filter((uid)=> uid !== employee.uid);
     else currentClickedUnlisted = [...currentClickedUnlisted, employee.uid];
-
     setListState({...listState, clickedUnlisted: currentClickedUnlisted});
     return;
   };
 
   const handleClickListed = (employee: EmployeeType): void => {
     let currentClickedListed = [...listState.clickedListed];
-
     if (currentClickedListed.includes(employee.uid)) currentClickedListed = currentClickedListed.filter((uid)=> uid !== employee.uid);
     else currentClickedListed = [...currentClickedListed, employee.uid];
-
     setListState({...listState, clickedListed: currentClickedListed});
     return;
   };
@@ -66,13 +62,10 @@ const AdminNotification: React.FC = () => {
   const handleMoveRight = (): void => {
     let currentListed = [...listState.listed];
     let currentUnlisted = [...listState.unlisted];
-
     currentUnlisted.forEach((employee) => {
       if (listState.clickedUnlisted.includes(employee.uid)) currentListed.push(employee);
     });
-
     currentUnlisted = currentUnlisted.filter((employee)=> !listState.clickedUnlisted.includes(employee.uid));
-
     setListState({
       ...listState,
       listed: currentListed,
@@ -86,13 +79,10 @@ const AdminNotification: React.FC = () => {
   const handleMoveLeft = (): void => {
     let currentListed = [...listState.listed];
     let currentUnlisted = [...listState.unlisted];
-
     currentListed.forEach((employee) => {
       if (listState.clickedListed.includes(employee.uid)) currentUnlisted.push(employee);
     });
-
     currentListed = currentListed.filter((employee)=> !listState.clickedListed.includes(employee.uid));
-
     setListState({
       ...listState,
       listed: currentListed,
@@ -106,7 +96,6 @@ const AdminNotification: React.FC = () => {
   const handleMoveAll = (): void => {
     let newListed = [...listState.unlisted];
     let newUnlisted = [...listState.listed];
-
     setListState({
       ...listState,
       unlisted: newUnlisted,
@@ -153,7 +142,7 @@ const AdminNotification: React.FC = () => {
       type: 'admin',
       message: messageRef.current!.value,
     };
-
+    
     dispatch(createNotificationThunk(newNotification))
       .then(()=> dispatch(fetchNotificationsThunk(currentEmployeeUid!)))
       .then(()=> {

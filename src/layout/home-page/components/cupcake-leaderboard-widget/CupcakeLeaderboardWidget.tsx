@@ -6,28 +6,7 @@ import './cupcakeLeaderboard.css';
 const CupcakeLeaderboardWidget: React.FC = () => {
   let employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
 
-  const leaderboardList = (): JSX.Element => {
-    const results = [...employeesList]
-      .sort((a,b)=>{
-        if (a.cupcakes < b.cupcakes) return 1;
-        if (a.cupcakes > b.cupcakes) return -1;
-        return 0;
-      })
-    return (
-      <div>
-        { results.map((employee)=>(
-          <div key={employee.id} className='leaderboard__entry'>
-            <div className='leaderboard__entry-name'>
-              {employee.name}
-            </div>
-            <div className='leaderboard__entry-cupcakes'>
-              {employee.cupcakes}
-            </div>
-          </div>
-        )).splice(0,3) }
-      </div>
-    )
-  };
+  if (employeesList.length < 1) return <></>;
 
   return (
     <div className='leaderboard__wrapper'>
@@ -49,7 +28,25 @@ const CupcakeLeaderboardWidget: React.FC = () => {
           className='leaderboard-cupcake'
         />
       </div>
-      {leaderboardList()}
+      <div>
+        {
+          [...employeesList]
+            .sort((a, b) => {
+              if (a.cupcakes < b.cupcakes) return 1;
+              if (a.cupcakes > b.cupcakes) return -1;
+              return 0;
+            })
+            .map((employee) => (
+              <div key={employee.id} className="leaderboard__entry">
+                <div className="leaderboard__entry-name">{employee.name}</div>
+                <div className="leaderboard__entry-cupcakes">
+                  {employee.cupcakes}
+                </div>
+              </div>
+            ))
+            .splice(0, 3)
+        }
+      </div>
     </div>
   );
 };

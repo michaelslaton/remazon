@@ -44,20 +44,14 @@ const EmployeesDisplay: React.FC = () => {
     return (
       <>
         {results.map((employee) =>
-          employee.rank !== 0 ? (
+          employee.rank !== 0 && (
             <Employee key={employee.id} data={employee} />
-          ) : (
-            ''
-          )
-        )}
+        ))}
         {showDeactivated &&
           results.map((employee) =>
-            employee.rank === 0 ? (
+            employee.rank === 0 && (
               <Employee key={employee.id} data={employee} />
-            ) : (
-              ''
-            )
-          )}
+        ))}
       </>
     );
   };
