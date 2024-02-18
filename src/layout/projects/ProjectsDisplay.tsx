@@ -81,7 +81,7 @@ const Projects: React.FC = () => {
             onChange={(e)=> setShowDeactivated(e.target.checked)}
           />
         </div>
-        { currentEmployee?.uid && currentEmployee.rank < 5 &&
+        {currentEmployee?.uid && currentEmployee.rank < 5 &&
           <button
             className='button card-button'
             onClick={()=> navigate('/projects/create')}
@@ -96,10 +96,8 @@ const Projects: React.FC = () => {
           <h2 className='projects__section-title'>Special Events...</h2>
           <div className='projects__cards-wrapper'>
             {projects.map((project) =>
-              project.status && project.regularity === 'special' ? (
+              project.status && project.regularity === 'special' && (
                 <Project key={project.id} data={project}/>
-              ) : (
-                ''
               )
             )}
           </div>
@@ -109,10 +107,8 @@ const Projects: React.FC = () => {
           <h2 className='projects__section-title'>Recurring...</h2>
           <div className='projects__cards-wrapper'>
             {projects.map((project) =>
-              project.status && project.regularity === 'recurring' ? (
+              project.status && project.regularity === 'recurring' && (
                 <Project key={project.id} data={project}/>
-              ) : (
-                ''
               )
             )}
           </div>
@@ -124,10 +120,8 @@ const Projects: React.FC = () => {
             <div className='projects__cards-wrapper'>
               {showDeactivated &&
                 projects.map((project) =>
-                  !project.status ? (
+                  !project.status && (
                     <Project key={project.id} data={project}/>
-                  ) : (
-                    ''
                   )
               )}
             </div>
