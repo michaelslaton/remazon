@@ -4,6 +4,7 @@ import { createRankThunk, fetchRanksThunk } from '../../../redux/slices/ranksSli
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { RankPostType } from '../../../types/rankType';
+import { setUiError } from '../../../redux/slices/controlsSlice';
 import '../ranks.css';
 
 type NewRankProps = {
@@ -26,12 +27,13 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
     };
 
     dispatch(createRankThunk(newRank))
-    .then(()=> dispatch(fetchRanksThunk()))
-    .then(()=> setNewRankDisplay(false))
-    .catch((error) => {
-      console.error(error.code);
-      console.error(error.message);
-    });
+      .then(()=> dispatch(fetchRanksThunk()))
+      .then(()=> setNewRankDisplay(false))
+      .catch((error) => {
+        dispatch(setUiError(`Error: ${error.code}`));
+        console.error(error.code);
+        console.error(error.message);
+      });
 
     return;
   };
@@ -40,33 +42,31 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
     <div className='rank edit'>
       <form className='rank__form'>
 
-        <label
-          htmlFor='title'
-        >
-          Title:
-        </label>
-        <input
-          type='text'
-          id='title'
-          name='title'
-          ref={titleRef}
-        />
+        <section className='rank__edit-form--input-section'>
+          <label htmlFor='title'>
+            Title:
+          </label>
+          <input
+            type='text'
+            id='title'
+            name='title'
+            ref={titleRef}
+          />
 
-        <label
-          htmlFor='color'
-        >
-          Color:
-        </label>
-        <input
-          type='color'
-          id='color'
-          name='color'
-          ref={colorRef}
-          className='rank-color-selector'
-          defaultValue={'#ffa500'}
-        />
+          <label htmlFor='color'>
+            Color:
+          </label>
+          <input
+            type='color'
+            id='color'
+            name='color'
+            ref={colorRef}
+            className='rank__edit-form--color-selector'
+            defaultValue={'#ffa500'}
+          />
+        </section>
         
-        <div>
+        <section className='rank__buttons-wrapper'>
           <button
             type='submit'
             className='button rank__submit create'
@@ -76,12 +76,13 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
           </button>
 
           <button
+            type='button'
             className='button rank_submit delete'
             onClick={() => setNewRankDisplay(false)}
           >
             <FontAwesomeIcon icon={faX} />
           </button>
-        </div>
+        </section>
 
       </form>
     </div>

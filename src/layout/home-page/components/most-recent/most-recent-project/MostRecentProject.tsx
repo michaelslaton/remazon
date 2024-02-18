@@ -11,7 +11,6 @@ const MostRecentProject: React.FC = () => {
   });
   const projectDate: Date = new Date(mostRecentProject.date);
 
-
   if (!projectList.length) return <></>;
 
   return (
@@ -39,7 +38,7 @@ const MostRecentProject: React.FC = () => {
         </ul>
       </div>
     </div>
-  )
+  );
 };
 
 export default MostRecentProject;
