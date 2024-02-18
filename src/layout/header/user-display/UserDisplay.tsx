@@ -24,24 +24,26 @@ const UserDisplay: React.FC = () => {
     if (currentEmployee) dispatch(fetchNotificationsThunk(currentEmployee.uid));
   },[]);
 
-  if (auth.currentUser || currentEmployee) return (
+  return (
     <div className='user-display__wrapper'>
-      {currentEmployee && (
-        <div className='user-display__user-wrapper'>
-          <div
-            className='user-display__employee-name'
-            style={{ color: currentEmployeesRank?.color }}
-          >
-            {currentEmployee?.name}
-          </div>
-            <button
-              className={`notification-button ${notifications.length ? 'active' : ''}`}
-              onClick={() => navigate('/notifications')}
+      { auth.currentUser &&
+        currentEmployee && (
+          <div className='user-display__user-wrapper'>
+            <div
+              className='user-display__employee-name'
+              style={{ color: currentEmployeesRank?.color }}
             >
-              <FontAwesomeIcon icon={faNewspaper} />
-            </button>
-        </div>
-      )}
+              {currentEmployee?.name}
+            </div>
+              <button
+                className={`notification-button ${notifications.length ? 'active' : ''}`}
+                onClick={() => navigate('/notifications')}
+              >
+                <FontAwesomeIcon icon={faNewspaper} />
+              </button>
+          </div>
+        )
+      }
     </div>
   );
 };

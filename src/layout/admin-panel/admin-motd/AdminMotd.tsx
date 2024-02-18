@@ -14,21 +14,17 @@ const AdminMotd: React.FC = () => {
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
-
     if (motdRef.current!.value.length > 100) {
       dispatch(setUiError('Please shorten your Message of the Day length to 100 characters or less.'));
       return;
     };
-
     if (motdRef.current!.value === currentMotd) {
       dispatch(setUiError('No changes have been made.'));
       return;
     };
-
     dispatch(updateMotdThunk({
       motd: motdRef.current!.value
     }));
-
     navigate('/');
     return;
   };
