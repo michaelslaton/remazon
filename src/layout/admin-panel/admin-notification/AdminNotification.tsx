@@ -39,10 +39,12 @@ const AdminNotification: React.FC = () => {
       if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       else return 0;
     });
-
     return sorted;
   };
 
+  // handleClickUnlisted and handleClickListed
+  // these functions handle clicking and selecting items in the sent to user lists
+  // moving them between the list of currently clicked names or un clicked names of each list, depending on it's current clicked state
   const handleClickUnlisted = (employee: EmployeeType): void => {
     let currentClickedUnlisted = [...listState.clickedUnlisted];
     if (currentClickedUnlisted.includes(employee.uid)) currentClickedUnlisted = currentClickedUnlisted.filter((uid)=> uid !== employee.uid);
@@ -104,6 +106,8 @@ const AdminNotification: React.FC = () => {
     return;
   };
 
+  // handleReset resets the state of the send to user lists
+  // handleFullReset resets the state of the entire form to it's initial state
   const handleReset = (): void=> {
     setListState({
       ...initialState,
@@ -278,7 +282,6 @@ const AdminNotification: React.FC = () => {
           Send
         </button>
       </div>
-
     </form>
   );
 };

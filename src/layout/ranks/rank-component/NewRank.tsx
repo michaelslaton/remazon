@@ -42,7 +42,7 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
     <div className='rank edit'>
       <form className='rank__form'>
 
-        <section className='rank__edit-form--input-section'>
+        <div className='rank__edit-form--input-section'>
           <label htmlFor='title'>
             Title:
           </label>
@@ -64,9 +64,9 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
             className='rank__edit-form--color-selector'
             defaultValue={'#ffa500'}
           />
-        </section>
+        </div>
         
-        <section className='rank__buttons-wrapper'>
+        <div className='rank__buttons-wrapper'>
           <button
             type='submit'
             className='button rank__submit create'
@@ -82,7 +82,7 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
           >
             <FontAwesomeIcon icon={faX} />
           </button>
-        </section>
+        </div>
 
       </form>
     </div>

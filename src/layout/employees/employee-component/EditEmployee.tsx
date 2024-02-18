@@ -35,6 +35,8 @@ const EditEmployee: React.FC = () => {
 
   useEffect(()=> setCountData(selectedEmployee!.description.length),[]);
 
+  // checkForVariance performs a series of checks to see if the intial state manages the current values of the form
+  // checkForVariance returns false if no changes have been made, otherwise it returns true
   const checkForVariance = (): boolean => {
     let updatedRank = selectedEmployee!.rank;
     let birthdayCheck: boolean = false;

@@ -20,27 +20,22 @@ const EmployeesDisplay: React.FC = () => {
     dispatch(fetchRanksThunk());
   },[]);
 
-  if (loadingEmployees || loadingRanks) return ( <Loading/> );
-
   // applySort checks the current sortType state
   // returning a properly sorted and mapped array of JSX employee elements.
   const applySort = (): JSX.Element => {
     let results = [...employees];
-
     if (sortType === 'alphabetical')
       results = [...employees].sort((a, b) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
         if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
         return 0;
       });
-
     if (sortType === 'rank')
       results = [...employees].sort((a, b) => {
         if (a.rank < b.rank) return -1;
         if (a.rank > b.rank) return 1;
         return 0;
       });
-
     return (
       <>
         {results.map((employee) =>
@@ -56,7 +51,7 @@ const EmployeesDisplay: React.FC = () => {
     );
   };
 
-  if(!employees.length) return ( <Loading/> );
+  if (loadingEmployees || loadingRanks || !employees.length) return ( <Loading/> );
 
   return (
     <>
