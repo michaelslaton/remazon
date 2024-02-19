@@ -153,6 +153,7 @@ const AdminNotification: React.FC = () => {
         handleFullReset();
       })
       .catch((error) => {
+        dispatch(setUiError(error.message));
         console.error(error.code);
         console.error(error.message);
       });

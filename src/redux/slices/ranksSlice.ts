@@ -4,7 +4,7 @@ import RankType, { RankPostType } from '../../types/rankType';
 type InitialState = {
     loading: boolean,
     ranks: RankType[];
-    error: any,
+    error: string | undefined;
 };
 
 const initialState: InitialState = {
@@ -71,7 +71,7 @@ const ranksslice = createSlice({
     },
     clearRankError: (state) => {
       state.error = '';
-    }
+    },
   },
   extraReducers: (builder) => {
     // fetchRanks ------------------------------------------------------------->
@@ -109,8 +109,8 @@ const ranksslice = createSlice({
     builder.addCase(editRankThunk.fulfilled, (state, action)=>{
       state.loading = false;
       const index = state.ranks.findIndex((rank)=> rank.id === action.payload.data.id);
-      state.ranks[index] = action.payload.data
       state.error = '';
+      state.ranks[index] = action.payload.data
     });
     builder.addCase(editRankThunk.pending, (state)=>{
       state.loading = true;
@@ -123,8 +123,8 @@ const ranksslice = createSlice({
 
     // deleteRank ---------------------------------------------------------------->
     builder.addCase(deleteRankThunk.fulfilled, (state)=>{
-      state.loading = false;
       state.error = '';
+      state.loading = false;
     });
     builder.addCase(deleteRankThunk.pending, (state)=>{
       state.loading = true;
@@ -140,5 +140,5 @@ const ranksslice = createSlice({
 export default ranksslice.reducer;
 export const {
   setRanksList,
-  clearRankError
+  clearRankError,
 } = ranksslice.actions;
