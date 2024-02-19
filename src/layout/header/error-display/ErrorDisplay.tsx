@@ -1,105 +1,107 @@
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
+import { clearAwardError } from '../../../redux/slices/awardsSlice';
 import { clearEmployeeError } from '../../../redux/slices/employeesSlice';
-import { clearControlError, clearUiError } from '../../../redux/slices/controlsSlice';
+import { clearNotificationsError } from '../../../redux/slices/notificationsSlice';
 import { clearProjectError } from '../../../redux/slices/projectsSlice';
 import { clearRankError } from '../../../redux/slices/ranksSlice';
+import { clearControlError, clearUiError } from '../../../redux/slices/controlsSlice';
 import './errorDisplay.css';
-import { clearNotificationsError } from '../../../redux/slices/notificationsSlice';
 
 const ErrorDisplay: React.FC = () => {
-  const controlError: string = useAppSelector((state)=> state.mainControl.error);
-  const employeeError: string = useAppSelector((state)=> state.employeesControl.error);
-  const projectError: string = useAppSelector((state)=> state.projectsControl.error);
-  const rankError: string = useAppSelector((state)=> state.ranksControl.error);
-  const notificationsError: string = useAppSelector((state)=> state.notificationsControl.error);
-  const uiError: string = useAppSelector((state)=> state.mainControl.uiError);
+  const controlError: string | undefined = useAppSelector((state)=> state.mainControl.error);
+  const uiError: string | undefined = useAppSelector((state)=> state.mainControl.uiError);
+  const awardsError: string | undefined = useAppSelector((state)=> state.awardsControl.error);
+  const employeesError: string | undefined = useAppSelector((state)=> state.employeesControl.error);
+  const notificationsError: string | undefined = useAppSelector((state)=> state.notificationsControl.error);
+  const projectsError: string | undefined = useAppSelector((state)=> state.projectsControl.error);
+  const ranksError: string | undefined = useAppSelector((state)=> state.ranksControl.error);
   const dispatch = useAppDispatch();
-
-  const generateError = (type: string, error: string): JSX.Element => {
     
-    const generateCloseButton = (): JSX.Element => {
-      if (type === 'control') return (
-        <button className='button close-button' onClick={()=> dispatch(clearControlError())}>
-          <div className='button-text'>
-            X
-          </div>
-        </button>
-      );
-      else if (type === 'employee') return (
-        <button className='button close-button' onClick={()=> dispatch(clearEmployeeError())}>
-          <div className='button-text'>
-            X
-          </div>
-        </button>
-      );
-      else if (type === 'project') return (
-        <button className='button close-button' onClick={()=> dispatch(clearProjectError())}>
-          <div className='button-text'>
-            X
-          </div>
-        </button>
-      );
-      else if (type === 'rank') return (
-        <button className='button close-button' onClick={()=> dispatch(clearRankError())}>
-          <div className='button-text'>
-            X
-          </div>
-        </button>
-      );
-      else if (type === 'notifications') return (
-        <button className='button close-button' onClick={()=> dispatch(clearNotificationsError())}>
-          <div className='button-text'>
-            X
-          </div>
-        </button>
-      );
-      else return (
-        <button className='button close-button' onClick={()=> dispatch(clearUiError())}>
-          <div className='button-text'>
-            X
-          </div>
-        </button>
-      );
-    };
-
-    return (
-      <>
-        {error} {generateCloseButton()}
-      </>
-    )
-  }
-
   return (
-    <div className={`error-display ${ controlError.length || employeeError.length || projectError.length || rankError.length || uiError.length || notificationsError.length ? '' : 'inactive' }`}>
-      { uiError.length ?
-        <>{generateError('ui', uiError)}</>
+    <div>
+      { uiError!.length ?
+        <div className={`error`}>
+          Awards Error: {uiError}
+          <button 
+            className='close-button'
+            onClick={()=> dispatch(clearUiError())}>
+              <div className='button-text'>X</div>
+          </button>
+        </div>
         :
-        ''
+        <></>
       }
-      { controlError.length ?
-        <>{generateError('control', controlError)}</>
+      { controlError!.length ?
+        <div className={`error`}>
+          Awards Error: {controlError}
+          <button 
+            className='close-button'
+            onClick={()=> dispatch(clearControlError())}>
+              <div className='button-text'>X</div>
+          </button>
+        </div>
         :
-        ''
+        <></>
       }
-      { employeeError.length ?
-        <>{generateError('employee', employeeError)}</>
+      { awardsError!.length ?
+        <div className={`error`}>
+          Awards Error: {awardsError}
+          <button 
+            className='close-button'
+            onClick={()=> dispatch(clearAwardError())}>
+              <div className='button-text'>X</div>
+          </button>
+        </div>
         :
-        ''
+        <></>
       }
-      { projectError.length ?
-        <>{generateError('project', projectError)}</>
+      { employeesError!.length ?
+        <div className={`error`}>
+          Employees Error: {employeesError}
+          <button 
+            className='close-button'
+            onClick={()=> dispatch(clearEmployeeError())}>
+              <div className='button-text'>X</div>
+          </button>
+        </div>
         :
-        ''
+        <></>
       }
-      { projectError.length ?
-        <>{generateError('notifications', notificationsError)}</>
+      { notificationsError!.length ?
+        <div className={`error`}>
+          Notifications Error: {notificationsError}
+          <button 
+            className='close-button'
+            onClick={()=> dispatch(clearNotificationsError())}>
+              <div className='button-text'>X</div>
+          </button>
+        </div>
         :
-        ''
+        <></>
       }
-      { rankError.length ?
-        <>{generateError('rank', rankError)}</>
+      { projectsError!.length ?
+        <div className={`error`}>
+          Projects Error: {projectsError}
+          <button 
+            className='close-button'
+            onClick={()=> dispatch(clearProjectError())}>
+              <div className='button-text'>X</div>
+          </button>
+        </div>
         :
-        ''
+        <></>
+      }
+      { ranksError!.length ?
+        <div className={`error`}>
+          Ranks Error: {ranksError}
+          <button 
+            className='close-button'
+            onClick={()=> dispatch(clearRankError())}>
+              <div className='button-text'>X</div>
+          </button>
+        </div>
+        :
+        <></>
       }
     </div>
   );

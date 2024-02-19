@@ -4,7 +4,7 @@ import NotificationType, { NotificationPostType } from '../../types/notification
 type InitialState = {
   loading: boolean,
   notifications: NotificationType[];
-  error: any,
+  error: string | undefined;
 };
 
 const initialState: InitialState = {
@@ -57,7 +57,7 @@ const notificationsSlice = createSlice({
   reducers: {
     clearNotificationsError: (state) => {
       state.error = '';
-    }
+    },
   },
   extraReducers: (builder) => {
 
