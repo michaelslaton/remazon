@@ -5,7 +5,7 @@ type InitialState = {
   loading: boolean;
   employees: EmployeeType[];
   currentEmployee: EmployeeType | null;
-  error: any,
+  error: string | undefined;
 };
 
 const initialState: InitialState = {
@@ -74,14 +74,14 @@ const employeesSlice = createSlice({
     },
     clearEmployeeError: (state) => {
       state.error = '';
-    }
+    },
   },
   extraReducers: (builder) => {
     // fetchUser ------------------------------------------------------------->
     builder.addCase(fetchCurrentEmployeeThunk.fulfilled, (state, action)=>{
       state.loading = false;
-      state.currentEmployee = action.payload.data;
       state.error = '';
+      state.currentEmployee = action.payload.data;
     });
     builder.addCase(fetchCurrentEmployeeThunk.pending, (state)=>{
       state.loading = true;

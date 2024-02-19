@@ -9,7 +9,7 @@ type InitialState = {
   loading: boolean;
   motd: string;
   uiError: string;
-  error: any;
+  error: string | undefined;
 };
 
 const initialState: InitialState = {
@@ -78,15 +78,15 @@ const mainControl = createSlice({
     },
     clearControlError: (state) => {
       state.error = '';
-    }
+    },
   },
   extraReducers: (builder) => {
 
 // initialLoad ------------------------------------------------------------------------------->
     builder.addCase(initialLoadThunk.fulfilled, (state,action)=>{
       state.loading = false;
-      state.motd = action.payload.data.motd;
       state.error = '';
+      state.motd = action.payload.data.motd;
     });
     builder.addCase(initialLoadThunk.pending, (state)=>{
       state.loading = true;
@@ -99,8 +99,8 @@ const mainControl = createSlice({
 // fetchMotd -------------------------------------------------------------------------------->
     builder.addCase(fetchMotdThunk.fulfilled, (state, action)=>{
       state.loading = false;
-      state.motd = action.payload.data;
       state.error = '';
+      state.motd = action.payload.data;
     });
     builder.addCase(fetchMotdThunk.pending, (state)=>{
       state.loading = true;
@@ -113,8 +113,8 @@ const mainControl = createSlice({
 // updateMotd ------------------------------------------------------------------------------->
     builder.addCase(updateMotdThunk.fulfilled, (state, action)=>{
       state.loading = false;
-      state.motd = action.payload.data;
       state.error = '';
+      state.motd = action.payload.data;
     });
     builder.addCase(updateMotdThunk.pending, (state)=>{
       state.loading = true;
@@ -131,5 +131,5 @@ export const {
   navToggle,
   setUiError,
   clearUiError,
-  clearControlError
+  clearControlError,
 } = mainControl.actions;

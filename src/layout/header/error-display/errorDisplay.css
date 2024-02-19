@@ -1,5 +1,5 @@
-.error-display {
-  background-color: rgb(184, 0, 0);
+.error {
+  background-color: #b80000;
   border-radius: var(--border-radius);
   text-align: center;
   width: 99%;
@@ -8,36 +8,25 @@
   margin-bottom: .2rem;
   padding: .1rem;
   height: 1.3rem;
-  opacity: 1;
-  transition: all 80ms ease-in-out;
-}
-.error-display.inactive {
-  opacity: 0;
-  height: 0rem;
-  margin: 0;
-  padding: 0;
-  transition: all 80ms ease-in-out;
-}
-
-.button.close-button {
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  border-color: var(--font-white);
-  border-width: .15rem;
-  position: relative !important;
-  display: inline-block;
-  font-size: .8rem;
-  color: var(--font-white);
-  text-align: center;
-  line-height: 0%;
-  min-width: auto;
-  width: 1.1rem;
-  padding: .2rem;
-  transform: translate(.3rem, -.25rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .close-button {
-  position: relative !important;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--font-white);
+  font-size: .8rem;
+  color: black;
+  line-height: 0%;
+  width: 1.1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  transform: translate(0, -0.1rem);
 }
 .close-button:hover {
   border-color: var(--remazon-prime)
