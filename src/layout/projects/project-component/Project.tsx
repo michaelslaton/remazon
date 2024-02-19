@@ -33,6 +33,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
       .then(() => dispatch(fetchProjectsThunk()))
       .then(() => setShowConfirm(!showConfirm))
       .catch((error) => {
+        dispatch(setUiError(error.message));
         console.error(error.code);
         console.error(error.message);
       });
@@ -62,6 +63,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
       .then(() => dispatch(fetchProjectsThunk()))
       .then(() => setShowConfirm(!showConfirm))
       .catch((error) => {
+        dispatch(setUiError(error.message));
         console.error(error.code);
         console.error(error.message);
       });

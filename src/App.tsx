@@ -21,7 +21,7 @@ import { initializeApp } from 'firebase/app';
 import RouteError from './utils/errors/route-error/RouteError';
 import { useState, useEffect } from 'react';
 import { useAppDispatch } from './redux/hooks';
-import { initialLoadThunk } from './redux/slices/controlsSlice';
+import { initialLoadThunk, setUiError } from './redux/slices/controlsSlice';
 import SignIn from './layout/authentication/components/SignIn';
 
 initializeApp(firebaseConfig);
@@ -136,6 +136,7 @@ const App: React.FC = () => {
     dispatch(initialLoadThunk())
       .then(()=> setLoading(false))
       .catch((error) => {
+        dispatch(setUiError(error.message));
         console.error(error.code);
         console.error(error.message);
       });;

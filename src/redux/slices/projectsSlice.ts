@@ -4,7 +4,7 @@ import ProjectType, { ProjectPostType } from '../../types/projectType';
 type InitialState = {
   loading: boolean;
   projects: ProjectType[];
-  error: any,
+  error: string | undefined;
 };
 
 const initialState: InitialState = {
@@ -69,7 +69,7 @@ const projectsSlice = createSlice({
     },
     clearProjectError: (state) => {
       state.error = '';
-    }
+    },
   },
   extraReducers: (builder) => {
     // fetchProjects ------------------------------------------------------------->
@@ -118,8 +118,8 @@ const projectsSlice = createSlice({
 
     // editEmployee ---------------------------------------------------------------->
     builder.addCase(editProjectThunk.fulfilled, (state)=>{
-      state.error = '';
       fetchProjectsThunk();
+      state.error = '';
       state.loading = false;
     });
     builder.addCase(editProjectThunk.pending, (state)=>{
@@ -136,5 +136,5 @@ const projectsSlice = createSlice({
 export default projectsSlice.reducer;
 export const {
   setProjectsList,
-  clearProjectError
+  clearProjectError,
 } = projectsSlice.actions;

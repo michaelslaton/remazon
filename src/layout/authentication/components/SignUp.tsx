@@ -62,7 +62,8 @@ const SignUp: React.FC = () => {
       .then(()=> { dispatch(fetchCurrentEmployeeThunk(auth.currentUser!.uid)) })
       .then(()=> { navigate('/') })
       .catch((error) => {
-        dispatch(setUiError(`Error: ${error.code}`));
+        dispatch(setUiError(error.message));
+        console.error(error.code);
         console.error(error.message);
       });
   };

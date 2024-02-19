@@ -4,7 +4,7 @@ import AwardType from '../../types/awardType';
 type InitialState = {
   loading: boolean;
   awards: AwardType[];
-  error: any;
+  error: string | undefined;
 };
 
 const initialState: InitialState = {
@@ -36,7 +36,7 @@ const awardsSlice = createSlice({
     },
     clearAwardError: (state) => {
       state.error = '';
-    }
+    },
   },
   extraReducers: (builder) => {
     // fetchawards ------------------------------------------------------------->
