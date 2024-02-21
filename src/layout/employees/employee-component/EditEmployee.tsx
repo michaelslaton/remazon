@@ -33,7 +33,10 @@ const EditEmployee: React.FC = () => {
   };
   // --- >
 
-  useEffect(()=> setCountData(selectedEmployee!.description.length),[]);
+  useEffect(()=> {
+    // if(!currentEmployee?.uid) navigate('/signin');
+    setCountData(selectedEmployee!.description.length)
+  },[]);
 
   // checkForVariance performs a series of checks to see if the intial state manages the current values of the form
   // checkForVariance returns false if no changes have been made, otherwise it returns true
@@ -107,74 +110,75 @@ const EditEmployee: React.FC = () => {
             Edit {selectedEmployee!.name}
           </h2>
 
-          <label
-            htmlFor='name'
-            className='form-input-label'
-          >
-            Name:
-          </label>
-          <input
-            type='text'
-            id='name'
-            name='name'
-            ref={nameRef}
-            defaultValue={selectedEmployee?.name}
-          />
+          <div className='form__inputs'>
+            <label
+              htmlFor='name'
+              className='form-input-label'
+            >
+              Name:
+            </label>
+            <input
+              type='text'
+              id='name'
+              name='name'
+              ref={nameRef}
+              defaultValue={selectedEmployee?.name}
+            />
 
-          {currentEmployee!.admin && (
-            <>
-              <label
-                htmlFor='rank'
-                className='form-input-label'
-              >
-                Rank:
-              </label>
-              <select
-                id='rank'
-                name='rank'
-                ref={rankRef}
-                defaultValue={selectedEmployee?.rank}
-              >
-                {ranks.map((rank) => rank.id !== 1 && (
-                  <option key={rank.id} value={rank.rank}>
-                    {rank.name}
-                  </option>
-                ))}
-              </select>
-            </>
-          )}
+            {currentEmployee?.admin && (
+              <>
+                <label
+                  htmlFor='rank'
+                  className='form-input-label'
+                >
+                  Rank:
+                </label>
+                <select
+                  id='rank'
+                  name='rank'
+                  ref={rankRef}
+                  defaultValue={selectedEmployee?.rank}
+                >
+                  {ranks.map((rank) => rank.id !== 1 && (
+                    <option key={rank.id} value={rank.rank}>
+                      {rank.name}
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
 
-          <label
-            htmlFor='birthday'
-            className='form-input-label'
-          >
-            Birthday:
-          </label>
-          <input
-            type='date'
-            id='birthday'
-            name='birthday'
-            className='date-input'
-            ref={bdayRef}
-            defaultValue={birthdayString}
-          />
+            <label
+              htmlFor='birthday'
+              className='form-input-label'
+            >
+              Birthday:
+            </label>
+            <input
+              type='date'
+              id='birthday'
+              name='birthday'
+              className='date-input'
+              ref={bdayRef}
+              defaultValue={birthdayString}
+            />
 
-          <label
-            htmlFor='description'
-            className='form-input-label'
-          >
-            Description:
-          </label>
-          <textarea
-            id='description'
-            name='description'
-            ref={descriptionRef}
-            maxLength={101}
-            onChange={(e) => setCountData(e.currentTarget.value.length)}
-            defaultValue={selectedEmployee?.description}
-          />
-
-          <div className='parameter-text'>{countData} of 100</div>
+            <label
+              htmlFor='description'
+              className='form-input-label'
+            >
+              Description:
+            </label>
+            <textarea
+              id='description'
+              name='description'
+              ref={descriptionRef}
+              maxLength={101}
+              onChange={(e) => setCountData(e.currentTarget.value.length)}
+              defaultValue={selectedEmployee?.description}
+            />
+            <div className='parameter-text'>{countData} of 100</div>
+          </div>
 
           <div className='form__control-wrapper'>
             <button

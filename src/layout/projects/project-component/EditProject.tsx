@@ -99,108 +99,110 @@ const EditProject: React.FC = () => {
             Edit {selectedProject!.name}
           </h2>
           
-          <label
-            htmlFor='name'
-            className='form-input-label'
-          >
-            Name:
-          </label>
-          <input
-            type='text'
-            id='name'
-            name='name'
-            ref={nameRef}
-            defaultValue={selectedProject?.name}
-          />
-
-          { currentEmployee!.admin &&
-            <>
-              <label
-                htmlFor='host'
-                className='form-input-label'
-              >
-                Host:
-              </label>
-              <select
-                id='host'
-                name='host'
-                ref={hostRef}
-                defaultValue={selectedProject?.host}
-              >
-                {employeesList?.map((employee)=> (
-                  <option key={employee.id} value={employee.id}>{employee.name}</option>
-                ))}
-              </select>
-            </>
-          }
-
-          <label
-            htmlFor='date'
-            className='form-input-label'
-          >
-            Date:
-          </label>
-          <input
-            type='date'
-            id='date'
-            name='date'
-            className='date-input'
-            ref={dateRef}
-            defaultValue={dateString}
-          />
-
-          <label
-            htmlFor='type'
-            className='form-input-label'
-          >
-            Type:
-          </label>
-          <select
-            id='type'
-            name='type'
-            ref={typeRef}
-            defaultValue={selectedProject?.type}
-          >
-            {
-              projectTypes.map((type)=> (
-                <option key={type.id} value={type.name}>{type.name}</option>
-              ))
-            }
-          </select>
-
-          <label
-            htmlFor='description'
-            className='form-input-label'
-          >
-            Description:
-          </label>
-          <textarea
-            id='description'
-            name='description'
-            ref={descriptionRef}
-            maxLength={200}
-            onChange={(e)=> setCountData(e.currentTarget.value.length)}
-            defaultValue={selectedProject?.description}
-          />
-          <div className='parameter-text'>
-            {countData} of 200
-          </div>
-
-          <div>
+          <div className='form__inputs'>
             <label
-              htmlFor='status'
+              htmlFor='name'
               className='form-input-label'
             >
-              Active:
+              Name:
             </label>
             <input
-              className='checkbox'
-              type='checkbox'
-              id='status'
-              name='status'
-              ref={statusRef}
-              defaultChecked={selectedProject?.status}
+              type='text'
+              id='name'
+              name='name'
+              ref={nameRef}
+              defaultValue={selectedProject?.name}
             />
+
+            { currentEmployee!.admin &&
+              <>
+                <label
+                  htmlFor='host'
+                  className='form-input-label'
+                >
+                  Host:
+                </label>
+                <select
+                  id='host'
+                  name='host'
+                  ref={hostRef}
+                  defaultValue={selectedProject?.host}
+                >
+                  {employeesList?.map((employee)=> (
+                    <option key={employee.id} value={employee.id}>{employee.name}</option>
+                  ))}
+                </select>
+              </>
+            }
+
+            <label
+              htmlFor='date'
+              className='form-input-label'
+            >
+              Date:
+            </label>
+            <input
+              type='date'
+              id='date'
+              name='date'
+              className='date-input'
+              ref={dateRef}
+              defaultValue={dateString}
+            />
+
+            <label
+              htmlFor='type'
+              className='form-input-label'
+            >
+              Type:
+            </label>
+            <select
+              id='type'
+              name='type'
+              ref={typeRef}
+              defaultValue={selectedProject?.type}
+            >
+              {
+                projectTypes.map((type)=> (
+                  <option key={type.id} value={type.name}>{type.name}</option>
+                ))
+              }
+            </select>
+
+            <label
+              htmlFor='description'
+              className='form-input-label'
+            >
+              Description:
+            </label>
+            <textarea
+              id='description'
+              name='description'
+              ref={descriptionRef}
+              maxLength={200}
+              onChange={(e)=> setCountData(e.currentTarget.value.length)}
+              defaultValue={selectedProject?.description}
+            />
+            <div className='parameter-text'>
+              {countData} of 200
+            </div>
+
+            <div>
+              <label
+                htmlFor='status'
+                className='form-input-label'
+              >
+                Active:
+              </label>
+              <input
+                className='checkbox'
+                type='checkbox'
+                id='status'
+                name='status'
+                ref={statusRef}
+                defaultChecked={selectedProject?.status}
+              />
+            </div>
           </div>
 
           <div className='form__control-wrapper'>

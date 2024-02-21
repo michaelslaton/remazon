@@ -53,29 +53,31 @@ const SignIn: React.FC = () => {
       <form className='form-wrapper'>
         <h2 className='title form-title'>Sign In</h2>
 
-        <label
-          htmlFor='email'
-          className='form-input-label'
-        >
-          E-Mail:
-        </label>
-        <input
-          type='email'
-          ref={emailRef}
-          required
-        />
+        <div className='form__inputs'>
+          <label
+            htmlFor='email'
+            className='form-input-label'
+          >
+            E-Mail:
+          </label>
+          <input
+            type='email'
+            ref={emailRef}
+            required
+          />
 
-        <label
-          htmlFor='password'
-          className='form-input-label'
-        >
-          Password: 
-        </label>
-        <input
-          type='password'
-          ref={passwordRef}
-          required
-        />
+          <label
+            htmlFor='password'
+            className='form-input-label'
+          >
+            Password: 
+          </label>
+          <input
+            type='password'
+            ref={passwordRef}
+            required
+          />
+        </div>
 
         <div className='form__control-wrapper'>
           <button
