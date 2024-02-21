@@ -166,105 +166,103 @@ const AdminNotification: React.FC = () => {
         <h2 className='title form-title'>Admin Notification</h2>
       </div>
 
-      <label className='form-input-label'>
-        Send To:
-      </label>
-      <div className='admin__send-to-grid'>
-        <ul className='admin__send-to__list'>
-          {alphabetizeEmployees(listState.unlisted).map((employee) => (
-            <li
-              className={`admin__send-to__listing ${
-                listState.clickedUnlisted.includes(employee.uid) ? 'selected' : ''
-              }`}
-              onClick={() => handleClickUnlisted(employee)}
-              key={employee.id}
-            >
-              {employee.name}
-            </li>
-          ))}
-        </ul>
-        
-        <div className='admin__send-to--buttons-wrapper'>
-          <button
-            type='button'
-            className='admin__send-to-button'
-            onClick={() => handleMoveRight()}
-          >
-            {`>`}
-          </button>
-
-          <button
-            type='button'
-            className='admin__send-to-button'
-            onClick={() => handleMoveAll()}
-          >
-            {`>>`}
-          </button>
-
-          <button
-            type='button'
-            className='admin__send-to-button'
-            onClick={()=> handleReset()}
-          >
-            {`<<`}
-          </button>
-
-          <button
-            type='button'
-            className='admin__send-to-button'
-            onClick={() => handleMoveLeft()}
-          >
-            {`<`}
-          </button>
-        </div>
-
-        <div>
+      <div className='form__inputs'>
+        <label className='form-input-label'>
+          Send To:
+        </label>
+        <div className='admin__send-to-grid'>
           <ul className='admin__send-to__list'>
-            {alphabetizeEmployees(listState.listed).map((employee) => (
+            {alphabetizeEmployees(listState.unlisted).map((employee) => (
               <li
-                className={`admin__send-to__listing ${
-                  listState.clickedListed.includes(employee.uid) ? 'selected' : ''
-                }`}
-                onClick={() => handleClickListed(employee)}
+                className={`admin__send-to__listing ${listState.clickedUnlisted.includes(employee.uid) && 'selected'}`}
+                onClick={() => handleClickUnlisted(employee)}
                 key={employee.id}
               >
                 {employee.name}
               </li>
             ))}
           </ul>
+          
+          <div className='admin__send-to--buttons-wrapper'>
+            <button
+              type='button'
+              className='admin__send-to-button'
+              onClick={() => handleMoveRight()}
+            >
+              {`>`}
+            </button>
+
+            <button
+              type='button'
+              className='admin__send-to-button'
+              onClick={() => handleMoveAll()}
+            >
+              {`>>`}
+            </button>
+
+            <button
+              type='button'
+              className='admin__send-to-button'
+              onClick={()=> handleReset()}
+            >
+              {`<<`}
+            </button>
+
+            <button
+              type='button'
+              className='admin__send-to-button'
+              onClick={() => handleMoveLeft()}
+            >
+              {`<`}
+            </button>
+          </div>
+
+          <div>
+            <ul className='admin__send-to__list'>
+              {alphabetizeEmployees(listState.listed).map((employee) => (
+                <li
+                  className={`admin__send-to__listing ${listState.clickedListed.includes(employee.uid) && 'selected'}`}
+                  onClick={() => handleClickListed(employee)}
+                  key={employee.id}
+                >
+                  {employee.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </div>
 
-      </div>
+        <label
+          htmlFor='title'
+          className='form-input-label'
+        >
+          Title:
+        </label>
+        <textarea
+          id='title'
+          name='title'
+          rows={1}
+          ref={titleRef}
+        />
 
-      <label
-        htmlFor='title'
-        className='form-input-label'
-      >
-        Title:
-      </label>
-      <textarea
-        id='title'
-        name='title'
-        rows={1}
-        ref={titleRef}
-      />
-
-      <label
-        htmlFor='message'
-        className='form-input-label'
-      >
-        Message:
-      </label>
-      <textarea
-        id='message'
-        name='message'
-        rows={6}
-        ref={messageRef}
-        maxLength={200}
-        onChange={(e)=> setCountData(e.currentTarget.value.length)}
-      />
-      <div className='parameter-text'>
-        {countData} of 200
+        <label
+          htmlFor='message'
+          className='form-input-label'
+        >
+          Message:
+        </label>
+        <textarea
+          id='message'
+          name='message'
+          rows={6}
+          ref={messageRef}
+          maxLength={200}
+          onChange={(e)=> setCountData(e.currentTarget.value.length)}
+        />
+        <div className='parameter-text'>
+          {countData} of 200
+        </div>
       </div>
 
       <div className='form__control-wrapper'>

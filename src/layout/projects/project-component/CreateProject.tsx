@@ -44,8 +44,8 @@ const CreateProject: React.FC = () => {
       description: descriptionRef.current!.value,
     };
     
-    dispatch(createProjectThunk(newProject));
-    navigate(-1);
+    dispatch(createProjectThunk(newProject))
+    .then(()=> navigate(-1))
     return;
   };
 
@@ -56,65 +56,67 @@ const CreateProject: React.FC = () => {
           Create Project
         </h2>
 
-        <label
-          htmlFor='name'
-          className='form-input-label'
-        >
-          Name:
-        </label>
-        <input
-          type='text'
-          id='name'
-          name='name'
-          ref={nameRef}
-        />
+        <div className='form__inputs'>
+          <label
+            htmlFor='name'
+            className='form-input-label'
+          >
+            Name:
+          </label>
+          <input
+            type='text'
+            id='name'
+            name='name'
+            ref={nameRef}
+          />
 
-        <label
-          htmlFor='date'
-          className='form-input-label'
-        >
-          Date:
-        </label>
-        <input
-          type='date'
-          id='date'
-          className='date-input'
-          ref={dateRef}
-          name='date'
-        />
+          <label
+            htmlFor='date'
+            className='form-input-label'
+          >
+            Date:
+          </label>
+          <input
+            type='date'
+            id='date'
+            className='date-input'
+            ref={dateRef}
+            name='date'
+          />
 
-        <label
-          htmlFor='type'
-          className='form-input-label'
-        >
-          Type:
-        </label>
-        <select
-          id='type'
-          name='type'
-          ref={typeRef}
-        >
-          {projectTypes.map((type) => (
-            <option
-              key={type.id}
-              value={type.name}
-            >
-              {type.name}
-            </option>
-          ))}
-        </select>
+          <label
+            htmlFor='type'
+            className='form-input-label'
+          >
+            Type:
+          </label>
+          <select
+            id='type'
+            name='type'
+            ref={typeRef}
+          >
+            {projectTypes.map((type) => (
+              <option
+                key={type.id}
+                value={type.name}
+              >
+                {type.name}
+              </option>
+            ))}
+          </select>
 
-        <label
-          htmlFor='description'
-          className='form-input-label'
-        >
-          Description:
-        </label>
-        <textarea
-          id='description'
-          name='description'
-          ref={descriptionRef}
-        />
+          <label
+            htmlFor='description'
+            className='form-input-label'
+          >
+            Description:
+          </label>
+          <textarea
+            id='description'
+            name='description'
+            ref={descriptionRef}
+          />
+        </div>
 
         <div className='form__control-wrapper'>
           <button
