@@ -45,7 +45,7 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
 
   return (
     <div
-      className={`employee__wrapper ${data.rank === 0 ? 'deactivated' : ''}`}
+      className={`employee__wrapper ${data.rank === 0 && 'deactivated'}`}
       style={{borderColor: currentEmployeesRank?.color}}
       // onClick={()=> onClickHandler()}
     >
@@ -60,26 +60,19 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
         </div>
       </div>
       <div
-        className={`employee__rank ${data.rank === 0 ? 'deactivated' : ''}`}
+        className={`employee__rank ${data.rank === 0 && 'deactivated'}`}
         style={{backgroundColor: currentEmployeesRank?.color}}
       >
         {currentEmployeesRank!.name}
       </div>
 
       <ul className='employee__info'>
-        { birthday ?
+        { birthday &&
           <li>
             <div className='employee__info-key'>
               Birthday{`: `}
             </div>
             {birthday.getDate()} - {months[birthday.getMonth()]}
-          </li>
-          : 
-          <li>
-            <div className='employee__info-key'>
-              Birthday{`: `}
-            </div>
-              N/A
           </li>
         }
 

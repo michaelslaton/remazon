@@ -73,83 +73,85 @@ const SignUp: React.FC = () => {
         <form className='form-wrapper signup'>
           <h2 className='title form-title'>Sign Up</h2>
 
-          <label
-            htmlFor='name'
-            className='form-input-label'
-          >
-            Username:
-          </label>
-          <input
-            type='text'
-            name='name'
-            id='id'
-            ref={nameRef}
-            required
-          />
+          <div className='form__inputs'>
+            <label
+              htmlFor='name'
+              className='form-input-label'
+            >
+              Username:
+            </label>
+            <input
+              type='text'
+              name='name'
+              id='id'
+              ref={nameRef}
+              required
+            />
 
-          <label
-            htmlFor='email'
-            className='form-input-label'
-          >
-            Email:
-          </label>
-          <input
-            type='email'
-            ref={emailRef}
-            required
-          />
+            <label
+              htmlFor='email'
+              className='form-input-label'
+            >
+              Email:
+            </label>
+            <input
+              type='email'
+              ref={emailRef}
+              required
+            />
 
-          <label
-            htmlFor='password'
-            className='form-input-label'
-          >
-            Password:
-          </label>
-          <input
-            id='password'
-            type='password'
-            ref={passwordRef}
-            required
-          />
+            <label
+              htmlFor='password'
+              className='form-input-label'
+            >
+              Password:
+            </label>
+            <input
+              id='password'
+              type='password'
+              ref={passwordRef}
+              required
+            />
 
-          <label
-            htmlFor='password repeat'
-            className='form-input-label'
-          >
-            Re-Enter Password:
-          </label>
-          <input
-            id='password repeat'
-            type='password'
-            ref={passwordRepeatRef}
-            required
-          />
+            <label
+              htmlFor='password repeat'
+              className='form-input-label'
+            >
+              Re-Enter Password:
+            </label>
+            <input
+              id='password repeat'
+              type='password'
+              ref={passwordRepeatRef}
+              required
+            />
 
-          <label
-            htmlFor='birthday'
-            className='form-input-label'
-          >
-            Birthday:
-          </label>
-          <input
-            type='date'
-            id='birthday'
-            name='birthday'
-            className='date-input'
-            ref={bdayRef}
-          />
+            <label
+              htmlFor='birthday'
+              className='form-input-label'
+            >
+              Birthday:
+            </label>
+            <input
+              type='date'
+              id='birthday'
+              name='birthday'
+              className='date-input'
+              ref={bdayRef}
+            />
 
-          <label
-            htmlFor='description'
-            className='form-input-label'
-          >
-            Description:
-          </label>
-          <textarea
-            id='description'
-            name='description'
-            ref={descriptionRef}
-          />
+            <label
+              htmlFor='description'
+              className='form-input-label'
+            >
+              Description:
+            </label>
+            <textarea
+              id='description'
+              name='description'
+              ref={descriptionRef}
+            />
+          </div>
 
           <div className='form__control-wrapper'>
             <button

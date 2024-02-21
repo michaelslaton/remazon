@@ -24,7 +24,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
 
   return (
     <button
-      className={`link-button ${ navActive ? 'active' : '' } ${ data.styling ? `${data.styling}` : ''}`}
+      className={`link-button ${ navActive && 'active'} ${ data.styling && `${data.styling}`}`}
       onClick={()=> {
         if (data.callback) data.callback(); 
         else onClickHandler();
@@ -35,7 +35,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
       { navActive ?
         <>
           <FontAwesomeIcon icon={data.icon}/>
-          <div className={`button__text ${hovering ? 'hovering' : ''}`}>
+          <div className={`button__text ${hovering && 'hovering'}`}>
             {` ${data.name}`}
           </div>
         </>

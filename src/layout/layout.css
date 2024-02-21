@@ -198,21 +198,21 @@ textarea {
   box-sizing: border-box;
   background-color: var(--charcoal);
   box-shadow: .5rem .5rem .2rem black;
-  border-radius: var(--border-radius);
   min-width: 100%;
   margin: auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: .8rem;
 }
 
-.form-wrapper > input, 
-.form-wrapper > textarea, 
-.form-wrapper > select {
+.form__inputs > input, 
+.form__inputs > textarea, 
+.form__inputs > select {
   box-sizing: border-box;
   width: 100%;
 }
 
-.form-wrapper > label {
+.form__inputs > label {
   display: inline-block;
   margin-top: .7rem;
 }
@@ -243,6 +243,11 @@ option {
 .form__control-wrapper {
   width: 100%;
   text-align: end;
+}
+
+.form__inputs {
+  width: 97%;
+  margin: 0 auto;
 }
 
 .checkbox {
@@ -283,8 +288,11 @@ option {
   }
 
   .form-wrapper {
+    border-radius: var(--border-radius);
     min-width: fit-content;
     max-width: 50%;
+    margin-top: 2rem;
+    margin-bottom: auto;
   }
 }
 

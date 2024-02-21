@@ -9,8 +9,8 @@ const CollapseButton: React.FC = () => {
   const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
 
   return (
-    <div className={`collapse-button__wrapper ${ navActive ? 'active' : '' }`}>
-      <button className={`collapse-button ${ navActive ? 'active' : '' }`} onClick={()=>dispatch(navToggle())}>
+    <div className={`collapse-button__wrapper ${ navActive && 'active'}`}>
+      <button className={`collapse-button ${ navActive && 'active'}`} onClick={()=>dispatch(navToggle())}>
         { navActive ? <FontAwesomeIcon icon={faX}/> : <FontAwesomeIcon icon={faBars}/> }
       </button>
     </div>
