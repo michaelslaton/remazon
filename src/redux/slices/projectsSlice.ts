@@ -25,7 +25,7 @@ export const fetchProjectsThunk = createAsyncThunk('projects/fetch', async (_thu
   return data;
 });
 
-export const createProjectThunk = createAsyncThunk('projects/create', async (newProject: ProjectPostType, _thunkApi)=> {
+export const createProjectThunk = createAsyncThunk('projects/create', async (newProject: ProjectPostType, thunkApi)=> {
   const response = await fetch(projectsUrl, {
     method: 'POST',
     headers: {
@@ -34,6 +34,8 @@ export const createProjectThunk = createAsyncThunk('projects/create', async (new
     body:JSON.stringify(newProject)
   });
   const data = response.json();
+
+  thunkApi.dispatch(fetchProjectsThunk());
   return data;
 });
 

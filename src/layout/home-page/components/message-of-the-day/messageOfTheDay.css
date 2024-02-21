@@ -8,6 +8,7 @@
   box-sizing: border-box;
   position: relative;
   width: 100%;
+  padding: 2rem 0;
 }
 
 .motd__message-wrapper {
@@ -20,17 +21,15 @@
 
 .motd__message-from-the-boss {
   position: relative;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: var(--remazon-prime);
   margin: 0;
   font-weight: normal;
-  right: 10rem;
-  top: -1rem;
 }
 
 .motd {
   position: relative;
-  font-size: 3.5rem;
+  font-size: 2rem;
   font-family: 'gvd-italic';
   margin: 0;
   margin-top: .5rem;
@@ -41,16 +40,16 @@
 .rembo {
   position: relative;
   font-family: 'gvd';
-  font-size: 2.2em;
+  font-size: 1.5em;
   margin: 0;
   font-weight: normal;
-  right: -15rem;
+  right: -5rem;
 }
 
 .motd__banner-wrapper {
   aspect-ratio: 2.10/1;
   box-sizing: border-box;
-  display: flex;
+  display: none;
   position: relative;
   overflow: hidden;
   width: 85rem;
@@ -72,6 +71,24 @@
 }
 
 @media (min-width: 1280px){
+  .motd__message-container {
+    padding: 0;
+  }
+  .motd__message-from-the-boss {
+    font-size: 2.5rem;
+    right: 10rem;
+    top: -1rem;
+  }
+  .motd {
+    font-size: 3.5rem;
+  }
+  .rembo {
+    font-size: 2.2em;
+    right: -15rem;
+  }
+  .motd__banner-wrapper {
+    display: flex;
+  }
 }
 
 @media (min-width: 1366px){

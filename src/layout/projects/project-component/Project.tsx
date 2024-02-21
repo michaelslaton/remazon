@@ -78,7 +78,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
       !currentEmployee?.admin && data.host !== currentEmployee?.id
     ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
-      <button className={`button card-button ${data.regularity === 'recurring' ? 'dark' : ''}`} onClick={()=> navigate(`/projects/edit/${data.id}`)}>
+      <button className={`button card-button ${data.regularity === 'recurring' && 'dark'}`} onClick={()=> navigate(`/projects/edit/${data.id}`)}>
         <FontAwesomeIcon icon={faEdit}/>
       </button>
     );
@@ -92,7 +92,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
       !currentEmployee?.admin && data.host !== currentEmployee?.id
     ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
-      <button className={`button delete card-button ${data.regularity === 'recurring' ? 'dark' : ''}`} onClick={()=> deleteButtonHandler()}>
+      <button className={`button delete card-button ${data.regularity === 'recurring' && 'dark'}`} onClick={()=> deleteButtonHandler()}>
         <FontAwesomeIcon icon={faTrashCan}/>
       </button>
     );
@@ -103,20 +103,20 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   const attendButtonRender = (): ReactNode | null => {
     if ( !currentEmployee ) return;
     if (data.attending?.includes(currentEmployee!.uid)) return (
-      <button className={`button card-button ${data.regularity === 'recurring' ? 'dark' : ''}`} onClick={()=> attendButtonHandler('remove')}>
+      <button className={`button card-button ${data.regularity === 'recurring' && 'dark'}`} onClick={()=> attendButtonHandler('remove')}>
         <FontAwesomeIcon icon={faMinus}/>
       </button>
     );
     else return (
-      <button className={`button card-button ${data.regularity === 'recurring' ? 'dark' : ''}`} onClick={()=> attendButtonHandler('add')}>
+      <button className={`button card-button ${data.regularity === 'recurring' && 'dark'}`} onClick={()=> attendButtonHandler('add')}>
         <FontAwesomeIcon icon={faPlus}/>
       </button>
     );
   };
 
   return (
-    <div className={`project__wrapper ${data.regularity === 'recurring' ? 'dark' : ''} ${ !data.status ? 'deactivated' : '' }`}>
-      <h2 className={`title project-title ${ !data.status ? 'deactivated' : '' }`}>
+    <div className={`project__wrapper ${data.regularity === 'recurring' && 'dark'} ${ !data.status && 'deactivated'}`}>
+      <h2 className={`title project-title ${ !data.status && 'deactivated'}`}>
         {data.name}
       </h2>
       <div className='project__info-wrapper'>

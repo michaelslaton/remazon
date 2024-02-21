@@ -25,6 +25,7 @@
   margin: .5rem 0;
   padding: .3rem 1rem;
   cursor: pointer;
+  font-size: .8rem;
 }
 .admin__send-to__listing.selected {
   border: .15rem solid var(--remazon-prime);
@@ -68,6 +69,9 @@
 }
 
 @media (min-width: 768px){
+  .admin__send-to__listing {
+    font-size: 1rem;
+  }
 }
 
 @media (min-width: 810px){ 

@@ -11,8 +11,8 @@
   border-radius: var(--border-radius);
   background-color: var(--off-black);
   color: var(--remazon-prime);
-  /* top: .5rem; */
-  /* left: .5rem; */
+  top: .5rem;
+  left: .5rem;
   font-size: 1rem !important;
   padding: .1rem .5rem;
   z-index: 10;
@@ -44,6 +44,8 @@
   
   .collapse-button {
     position: relative !important;
+    top: auto;
+    left: auto;
   }  
   .collapse-button.active {
     margin-right: .4rem;

@@ -35,7 +35,7 @@ const NotificationsDisplay: React.FC = () => {
                 <div
                   key={notification.id}
                   className={
-                    `notification__list-item ${selectedNotification?.id === notification.id ? 'active' : '' } ${notification.type === 'admin' ? 'rembo-notification' : ''} `}
+                    `notification__list-item ${selectedNotification?.id === notification.id && 'active'} ${notification.type === 'admin' && 'rembo-notification'} `}
                   onClick={()=> setSelectedNotification(notification)}
                 >
                   {notification.title}

@@ -35,23 +35,25 @@ const AdminMotd: React.FC = () => {
         <h2 className='title form-title'>Message of the Day</h2>
       </div>
       
-      <label
-        htmlFor='description'
-        className='form-input-label'
-      >
-        Message:
-      </label>
-      <textarea
-        id='message'
-        name='message'
-        rows={4}
-        ref={motdRef}
-        maxLength={100}
-        onChange={(e)=> setCountData(e.currentTarget.value.length)}
-        placeholder={currentMotd}
-      />
-      <div className='parameter-text'>
-        {countData} of 100
+      <div className='form__inputs'>
+        <label
+          htmlFor='description'
+          className='form-input-label'
+        >
+          Message:
+        </label>
+        <textarea
+          id='message'
+          name='message'
+          rows={4}
+          ref={motdRef}
+          maxLength={100}
+          onChange={(e)=> setCountData(e.currentTarget.value.length)}
+          placeholder={currentMotd}
+        />
+        <div className='parameter-text'>
+          {countData} of 100
+        </div>
       </div>
 
       <div className='form__control-wrapper'>

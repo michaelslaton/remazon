@@ -10,7 +10,7 @@ const Layout: React.FC = () => {
   return (
     <>
       <Navbar/>
-      <div className={`main-screen ${ navActive ? 'active' : ''}`}>
+      <div className={`main-screen ${ navActive && 'active'}`}>
         <Header/>
         <Outlet/>
       </div>

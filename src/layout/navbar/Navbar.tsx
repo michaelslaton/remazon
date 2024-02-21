@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div className={`navbar__wrapper ${ navActive ? 'active' : ''}`}>
+    <div className={`navbar__wrapper ${ navActive && 'active'}`}>
       <CollapseButton/>
 
       <div className='navbar__link-buttons-wrapper'>

@@ -1,11 +1,9 @@
 .leaderboard__wrapper {
-  aspect-ratio: 1/.8;
   box-sizing: border-box;
   background-color: #1aaec2;
-  border-radius: var(--border-radius);
-  margin: 1rem;
+  margin: 1rem 0 3rem;
   padding: 1rem;
-  width: 20rem;
+  width: 100%;
 }
 
 .leaderboard-cupcake {
@@ -72,6 +70,12 @@
 }
 
 @media (min-width: 768px){
+  .leaderboard__wrapper {
+    aspect-ratio: 1/.8;
+    border-radius: var(--border-radius);
+    margin: 1rem;
+    width: 20rem;
+  }
 }
 
 @media (min-width: 810px){ 
