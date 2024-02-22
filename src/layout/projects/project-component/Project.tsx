@@ -47,7 +47,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     let updatedProject: ProjectType = {...data};
     let attendingList: string[] = [];
     if (data.attending?.length) attendingList = [...data.attending.split(',')];
-
+    
     if (type === 'add') {
       attendingList = [ ...attendingList, currentEmployee!.uid ];
     } else if (type === 'remove') {
@@ -137,6 +137,15 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
             </div> 
             <div className='project-data__value'>
               {months[projectDate.getMonth()]} {projectDate.getDate()}
+            </div>
+          </li>
+
+          <li>
+            <div className='project-data__key'>
+              Time:
+            </div> 
+            <div className='project-data__value'>
+              {projectDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
             </div>
           </li>
 
