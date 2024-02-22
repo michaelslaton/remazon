@@ -39,7 +39,7 @@ export const createProjectThunk = createAsyncThunk('projects/create', async (new
   return data;
 });
 
-export const editProjectThunk = createAsyncThunk('projects/edit', async (updatedProject: ProjectType, _thunkApi)=> {
+export const editProjectThunk = createAsyncThunk('projects/edit', async (updatedProject: ProjectType, thunkApi)=> {
   const response = await fetch(projectsUrl, {
     method: 'PUT',
     headers: {
@@ -48,6 +48,7 @@ export const editProjectThunk = createAsyncThunk('projects/edit', async (updated
     body:JSON.stringify(updatedProject)
   });
   const data = response.json();
+  thunkApi.dispatch(fetchProjectsThunk());
   return data;
 });
 

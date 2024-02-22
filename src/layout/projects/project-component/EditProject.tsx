@@ -26,7 +26,11 @@ const EditProject: React.FC = () => {
 
   // Date formatting ---->
   let projectDate: Date = new Date(selectedProject!.date);
-  let dateString: string = projectDate.toISOString().split('T')[0];
+  const year = projectDate.getFullYear();
+  const month = (projectDate.getMonth() + 1).toString().padStart(2, "0");
+  const day = projectDate.getDate().toString().padStart(2, "0");
+  const hours = projectDate.getHours().toString().padStart(2, "0");
+  const minutes = projectDate.getMinutes().toString().padStart(2, "0");
   // -->
 
   useEffect(()=> setCountData(selectedProject!.description.length),[]);
@@ -34,9 +38,9 @@ const EditProject: React.FC = () => {
   const checkForVariance = (): boolean => {
     let dateCheck: boolean = false;
     let updatedDate: Date | null = null;
-    const dateRefValue = dateRef.current?.value.split('-');
+    const dateRefValue = new Date(dateRef.current!.value);
 
-    if (dateRefValue) updatedDate = new Date(`${dateRefValue[1]}-${dateRefValue[2]}-${dateRefValue[0]}`);
+    if (dateRefValue) updatedDate = new Date(dateRefValue);
     if (projectDate!.getTime() !== updatedDate!.getTime()) {
       dateCheck = true;
       projectDate = updatedDate!;
@@ -55,9 +59,10 @@ const EditProject: React.FC = () => {
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
+
     let inputHost = selectedProject!.host;
     if (currentEmployee!.admin) inputHost = Number(hostRef.current!.value);
-
+    
     if (nameRef.current!.value.length < 1) {
       dispatch(setUiError('Please enter a name for the project.'));
       return;
@@ -142,12 +147,12 @@ const EditProject: React.FC = () => {
               Date:
             </label>
             <input
-              type='date'
+              type='datetime-local'
               id='date'
               name='date'
               className='date-input'
               ref={dateRef}
-              defaultValue={dateString}
+              defaultValue={`${year}-${month}-${day}T${hours}:${minutes}`}
             />
 
             <label
