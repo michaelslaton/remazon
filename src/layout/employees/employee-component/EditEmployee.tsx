@@ -13,10 +13,10 @@ const EditEmployee: React.FC = () => {
   const dispatch = useAppDispatch();
   // States ------------------------------------------------------------------ >
   const [ countData, setCountData ] = useState<number>(0);
-  const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
-  const selectedEmployee: EmployeeType | undefined = employees.find((dude)=> dude.id === Number(paramId));
+  const selectedEmployee: EmployeeType | undefined = employeesList.find((dude)=> dude.id === Number(paramId));
   // Refs -------------------------------------------------------------------- >
   const nameRef = useRef<HTMLInputElement>(null);
   const rankRef = useRef<HTMLSelectElement>(null);
@@ -76,6 +76,7 @@ const EditEmployee: React.FC = () => {
       dispatch(setUiError('Please enter a name for the employee.'));
       return;
     }
+
     if (descriptionRef.current!.value.length > 100) {
       dispatch(setUiError('Please shorten your description to 100 characters or less.'));
       return;
@@ -139,7 +140,7 @@ const EditEmployee: React.FC = () => {
                   ref={rankRef}
                   defaultValue={selectedEmployee?.rank}
                 >
-                  {ranks.map((rank) => rank.id !== 1 && (
+                  {ranks.map((rank) => (
                     <option key={rank.id} value={rank.rank}>
                       {rank.name}
                     </option>
