@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { createEmployeeThunk, fetchEmployeesListThunk, fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice';
-import { EmployeePostType } from '../../../types/employeeType';
+import EmployeeType, { EmployeePostType } from '../../../types/employeeType';
 import { setUiError } from '../../../redux/slices/controlsSlice';
 import '../authentication.css';
 
@@ -17,6 +17,7 @@ const SignUp: React.FC = () => {
   const passwordRepeatRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const bdayRef = useRef<HTMLInputElement>(null);
+  const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
 
   const submitHandler = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -28,6 +29,16 @@ const SignUp: React.FC = () => {
     if (emailRef.current!.value.length < 1) { 
       dispatch(setUiError('Please enter an E-Mail address.'));
       return;
+    };
+    for(let i=0; i<employeesList.length;i++){
+      if(employeesList[i].name.toLocaleLowerCase() === nameRef.current!.value.toLocaleLowerCase()){
+        dispatch(setUiError('That username is taken.'));
+        return;
+      };
+      // if(auth.currentUser!.email === emailRef.current!.value){
+      //   dispatch(setUiError('That e-mail is already attached to an account.'));
+      //   return;
+      // }
     };
     if (!emailRef.current!.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) { 
       dispatch(setUiError('E-mail address format is invalid.'));
