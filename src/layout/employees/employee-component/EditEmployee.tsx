@@ -15,7 +15,7 @@ const EditEmployee: React.FC = () => {
   const [ countData, setCountData ] = useState<number>(0);
   const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const ranks: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
+  const ranksList: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
   const selectedEmployee: EmployeeType | undefined = employeesList.find((dude)=> dude.id === Number(paramId));
   // Refs -------------------------------------------------------------------- >
   const nameRef = useRef<HTMLInputElement>(null);
@@ -72,18 +72,38 @@ const EditEmployee: React.FC = () => {
       dispatch(setUiError('No changes have been made.'));
       return;
     };
+    // Name > 1 character and exists
     if (nameRef.current!.value.length < 1) {
       dispatch(setUiError('Please enter a name for the employee.'));
       return;
     }
-
+    // Name is not already in use
+    for(let i=0; i<employeesList.length;i++){
+      if(employeesList[i].name.toLocaleLowerCase() === nameRef.current!.value.toLocaleLowerCase() &&
+      selectedEmployee!.id !== employeesList[i].id){
+        dispatch(setUiError('That username is taken.'));
+        return;
+      };
+    };
+    let spaceCount = 0;
+    for(let i=0; i<nameRef.current!.value.length; i++){
+      if(nameRef.current!.value[i] === ' '){
+        if(spaceCount === 1){
+          dispatch(setUiError(`Name can only be in the format of 'First Last'`));
+          return;
+        }
+        spaceCount++
+      };
+    };
+    // Description <= 100 characters
     if (descriptionRef.current!.value.length > 100) {
       dispatch(setUiError('Please shorten your description to 100 characters or less.'));
       return;
     };
 
-    if (updatedBirthday) employeeBirthday = updatedBirthday; 
-    if (currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
+    if (updatedBirthday) employeeBirthday = updatedBirthday;
+    if (selectedEmployee!.rank === 1) updatedRank = 1;
+    else if (currentEmployee!.admin && selectedEmployee!.rank !== 1) updatedRank = Number(rankRef.current!.value);
 
     const updatedEmployee: EmployeeType = {
       ...selectedEmployee!,
@@ -126,7 +146,8 @@ const EditEmployee: React.FC = () => {
               defaultValue={selectedEmployee?.name}
             />
 
-            {currentEmployee?.admin && (
+            {currentEmployee?.admin && 
+              selectedEmployee?.rank !== 1 && (
               <>
                 <label
                   htmlFor='rank'
@@ -140,7 +161,7 @@ const EditEmployee: React.FC = () => {
                   ref={rankRef}
                   defaultValue={selectedEmployee?.rank}
                 >
-                  {ranks.map((rank) => (
+                  {ranksList.map((rank) => rank.id !== 1 && (
                     <option key={rank.id} value={rank.rank}>
                       {rank.name}
                     </option>
