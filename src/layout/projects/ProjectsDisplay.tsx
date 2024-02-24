@@ -12,12 +12,12 @@ import ProjectType from '../../types/projectType';
 import EmployeeType from '../../types/employeeType';
 import './projects.css';
 
-const Projects: React.FC = () => {
+const ProjectsDisplay: React.FC = () => {
   const [ sortType, setSortType ] = useState<string>('');
   const [ showDeactivated, setShowDeactivated ] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
-  let projects: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
+  let projectsList: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
   const loadingProjects: boolean = useAppSelector((state) => state.projectsControl.loading);
   const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
@@ -31,20 +31,20 @@ const Projects: React.FC = () => {
   if (loadingProjects || loadingEmployees) return ( <Loading/> );
 
   if (sortType === 'alphabetical')
-   projects = [...projects].sort((a, b) => {
+   projectsList = [...projectsList].sort((a, b) => {
       if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
       if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       return 0;
   });
 
   if (sortType === 'host')
-  projects = [...projects].sort((a, b) => {
+  projectsList = [...projectsList].sort((a, b) => {
      if (a.host < b.host) return -1;
      if (a.host > b.host) return 1;
      return 0;
  });
 
-  if(!projects.length) return ( <>No projects to show.</> )
+  if(!projectsList.length) return ( <>No projects to show.</> )
 
   return (
     <>
@@ -95,7 +95,7 @@ const Projects: React.FC = () => {
         <div className='projects__section dark'>
           <h2 className='projects__section-title'>Special Events...</h2>
           <div className='projects__cards-wrapper'>
-            {projects.map((project) =>
+            {projectsList.map((project) =>
               project.status && project.regularity === 'special' && (
                 <Project key={project.id} data={project}/>
               )
@@ -106,7 +106,7 @@ const Projects: React.FC = () => {
         <div className='projects__section light'>
           <h2 className='projects__section-title'>Recurring...</h2>
           <div className='projects__cards-wrapper'>
-            {projects.map((project) =>
+            {projectsList.map((project) =>
               project.status && project.regularity === 'recurring' && (
                 <Project key={project.id} data={project}/>
               )
@@ -119,7 +119,7 @@ const Projects: React.FC = () => {
             <h2 className='projects__section-title'>Deactivated</h2>
             <div className='projects__cards-wrapper'>
               {showDeactivated &&
-                projects.map((project) =>
+                projectsList.map((project) =>
                   !project.status && (
                     <Project key={project.id} data={project}/>
                   )
@@ -132,4 +132,4 @@ const Projects: React.FC = () => {
   );
 };
 
-export default Projects;
+export default ProjectsDisplay;

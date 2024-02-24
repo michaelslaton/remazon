@@ -21,10 +21,10 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
   const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const employees: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
-  const host: EmployeeType | undefined = employees.find((employee)=> employee.id === data.host);
-  const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
-  const currentHostsRank: RankType | undefined = ranks.find((rank)=> rank.id === host?.rank);
+  const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  const host: EmployeeType | undefined = employeesList.find((employee)=> employee.id === data.host);
+  const ranksList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
+  const currentHostsRank: RankType | undefined = ranksList.find((rank)=> rank.id === host?.rank);
   const projectDate: Date = new Date(data.date);
 
   const deleteButtonHandler = (): void => {

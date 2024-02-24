@@ -13,7 +13,7 @@ const EditProject: React.FC = () => {
   const [ countData, setCountData ] = useState<number>(0);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const projects: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects);
+  const projectsList: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const employeesList = useAppSelector((state)=> state.employeesControl.employees);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
@@ -22,7 +22,7 @@ const EditProject: React.FC = () => {
   const hostRef = useRef<HTMLSelectElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
-  const selectedProject: ProjectType | undefined = projects.find((project)=> project.id === Number(paramId));
+  const selectedProject: ProjectType | undefined = projectsList.find((project)=> project.id === Number(paramId));
 
   // Date formatting ---->
   let projectDate: Date = new Date(selectedProject!.date);
