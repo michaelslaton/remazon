@@ -14,13 +14,13 @@ const RanksDisplay: React.FC = () => {
   const [ newRankDisplay, setNewRankDisplay ] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
+  const ranksList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   
   useEffect(()=>{
     dispatch(fetchRanksThunk());
   },[]);
 
-  if (!ranks.length) return ( <Loading/> );
+  if (!ranksList.length) return ( <Loading/> );
 
   return (
     <>
@@ -33,7 +33,7 @@ const RanksDisplay: React.FC = () => {
         <div className='form-wrapper ranks-wrapper'>
           <h2 className='title form-title'>Rank List</h2>
           <div className='ranks-list'>
-            {[...ranks].sort((a,b)=> a.id - b.id).map((rank)=> rank.id !== 0 ?
+            {[...ranksList].sort((a,b)=> a.id - b.id).map((rank)=> rank.id !== 0 ?
               <Rank key={rank.id} rankData={rank}/>
               :
               ''

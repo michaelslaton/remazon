@@ -15,9 +15,9 @@ type EmployeeProps = {
 
 const Employee: React.FC<EmployeeProps> = ({ data }) => {
   const navigate: NavigateFunction = useNavigate();
-  const ranks: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
+  const ranksList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const currentEmployeesRank: RankType | undefined = ranks.find((rank)=> rank.id === data.rank);
+  const currentEmployeesRank: RankType | undefined = ranksList.find((rank)=> rank.id === data.rank);
   
   let birthday: Date | null = null;
   if (data.birthday) birthday = new Date(data.birthday); 

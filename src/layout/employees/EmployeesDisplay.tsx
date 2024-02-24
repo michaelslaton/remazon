@@ -11,7 +11,7 @@ const EmployeesDisplay: React.FC = () => {
   const [ sortType, setSortType ] = useState<string>('');
   const [ showDeactivated, setShowDeactivated ] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const employees: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
+  const employeesList: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
   const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
   const loadingRanks: boolean = useAppSelector((state) => state.ranksControl.loading);
 
@@ -23,15 +23,15 @@ const EmployeesDisplay: React.FC = () => {
   // applySort checks the current sortType state
   // returning a properly sorted and mapped array of JSX employee elements.
   const applySort = (): JSX.Element => {
-    let results = [...employees];
+    let results = [...employeesList];
     if (sortType === 'alphabetical')
-      results = [...employees].sort((a, b) => {
+      results = [...employeesList].sort((a, b) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
         if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
         return 0;
       });
     if (sortType === 'rank')
-      results = [...employees].sort((a, b) => {
+      results = [...employeesList].sort((a, b) => {
         if (a.rank < b.rank) return -1;
         if (a.rank > b.rank) return 1;
         return 0;
@@ -51,7 +51,7 @@ const EmployeesDisplay: React.FC = () => {
     );
   };
 
-  if (loadingEmployees || loadingRanks || !employees.length) return ( <Loading/> );
+  if (loadingEmployees || loadingRanks || !employeesList.length) return ( <Loading/> );
 
   return (
     <>
