@@ -18,11 +18,10 @@ const EditEmployee: React.FC = () => {
   const ranksList: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
   const selectedEmployee: EmployeeType | undefined = employeesList.find((dude)=> dude.id === Number(paramId));
   // Refs -------------------------------------------------------------------- >
-  const nameRef = useRef<HTMLInputElement>(null);
-  const rankRef = useRef<HTMLSelectElement>(null);
   const bdayRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-
+  const nameRef = useRef<HTMLInputElement>(null);
+  const rankRef = useRef<HTMLSelectElement>(null);
   // Birthday formatting ------------------------------------------------------ >
   let employeeBirthday: Date | null = null;
   let updatedBirthday: Date | null = null;
@@ -67,6 +66,7 @@ const EditEmployee: React.FC = () => {
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
     let updatedRank = selectedEmployee!.rank;
+    let spaceCount = 0;
 
     if (!checkForVariance()) {
       dispatch(setUiError('No changes have been made.'));
@@ -83,9 +83,9 @@ const EditEmployee: React.FC = () => {
       selectedEmployee!.id !== employeesList[i].id){
         dispatch(setUiError('That username is taken.'));
         return;
-      };
+      }
     };
-    let spaceCount = 0;
+    // If name is a maximum of two words
     for(let i=0; i<nameRef.current!.value.length; i++){
       if(nameRef.current!.value[i] === ' '){
         if(spaceCount === 1){
@@ -93,7 +93,7 @@ const EditEmployee: React.FC = () => {
           return;
         }
         spaceCount++
-      };
+      }
     };
     // Description <= 100 characters
     if (descriptionRef.current!.value.length > 100) {

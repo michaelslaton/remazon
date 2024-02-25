@@ -17,7 +17,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
   const navActive: boolean = useAppSelector((state)=> state.mainControl.navOpen);
 
   const onClickHandler = (): void => {
-    const windowWidth = document.documentElement.clientWidth;
+    const windowWidth: number = document.documentElement.clientWidth;
     navigate(data.url)
     if ( windowWidth <= 1280 && navActive) dispatch(navToggle());
   };

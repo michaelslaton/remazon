@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { createRankThunk, fetchRanksThunk } from '../../../redux/slices/ranksSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { RankPostType } from '../../../types/rankType';
+import RankType, { RankPostType } from '../../../types/rankType';
 import { setUiError } from '../../../redux/slices/controlsSlice';
 import '../ranks.css';
 
@@ -13,7 +13,7 @@ type NewRankProps = {
 
 const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
   const dispatch = useAppDispatch();
-  const rankList = useAppSelector((state)=> state.ranksControl.ranks);
+  const rankList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const titleRef = useRef<HTMLInputElement>(null);
   const colorRef = useRef<HTMLInputElement>(null)
 

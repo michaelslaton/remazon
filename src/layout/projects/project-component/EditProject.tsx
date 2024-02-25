@@ -10,27 +10,28 @@ import '../projects.css';
 
 const EditProject: React.FC = () => {
   const { paramId } = useParams<string>();
-  const [ countData, setCountData ] = useState<number>(0);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  // States ------------------------------------------------------------------ >
+  const [ countData, setCountData ] = useState<number>(0);
   const projectsList: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
-  const employeesList = useAppSelector((state)=> state.employeesControl.employees);
+  const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  const selectedProject: ProjectType | undefined = projectsList.find((project)=> project.id === Number(paramId));
+  // Refs -------------------------------------------------------------------- >
+  const dateRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const hostRef = useRef<HTMLSelectElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const statusRef = useRef<HTMLInputElement>(null);
-  const hostRef = useRef<HTMLSelectElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
-  const dateRef = useRef<HTMLInputElement>(null);
-  const selectedProject: ProjectType | undefined = projectsList.find((project)=> project.id === Number(paramId));
-
-  // Date formatting ---->
+  // Date formatting --------------------------------------------------------- >
   let projectDate: Date = new Date(selectedProject!.date);
-  const year = projectDate.getFullYear();
-  const month = (projectDate.getMonth() + 1).toString().padStart(2, "0");
-  const day = projectDate.getDate().toString().padStart(2, "0");
-  const hours = projectDate.getHours().toString().padStart(2, "0");
-  const minutes = projectDate.getMinutes().toString().padStart(2, "0");
+  const year: number = projectDate.getFullYear();
+  const month: string = (projectDate.getMonth() + 1).toString().padStart(2, "0");
+  const day: string = projectDate.getDate().toString().padStart(2, "0");
+  const hours: string = projectDate.getHours().toString().padStart(2, "0");
+  const minutes: string = projectDate.getMinutes().toString().padStart(2, "0");
   // -->
 
   useEffect(()=> setCountData(selectedProject!.description.length),[]);
@@ -60,19 +61,28 @@ const EditProject: React.FC = () => {
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
 
-    let inputHost = selectedProject!.host;
+    let inputHost: number = selectedProject!.host;
     if (currentEmployee!.admin) inputHost = Number(hostRef.current!.value);
     
+    if (!checkForVariance()) {
+      dispatch(setUiError('No changes have been made.'));
+      return;
+    };
+    // Name > 1 character and exists
     if (nameRef.current!.value.length < 1) {
       dispatch(setUiError('Please enter a name for the project.'));
       return;
     };
+    // If the description is greater than the allowed length of 200
     if (descriptionRef.current!.value.length > 200) {
       dispatch(setUiError('Please shorten your description to 200 characters or less.'));
       return;
     };
-    if (!checkForVariance()) {
-      dispatch(setUiError('No changes have been made.'));
+    // If the set date is in the past
+    const currentDate: Date = new Date();
+    const inputDate: Date = new Date(dateRef.current!.value);
+    if(currentDate.getTime() > inputDate.getTime()) {
+      dispatch(setUiError('Please pick an upcoming Date and time.'));
       return;
     };
 
