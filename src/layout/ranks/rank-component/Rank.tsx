@@ -14,8 +14,8 @@ type RankProps = {
 };
 
 const Rank: React.FC<RankProps> = ({ rankData }) => {
-  const [editMode, setEditMode] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const [editMode, setEditMode] = useState<boolean>(false);
   const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const titleRef = useRef<HTMLInputElement>(null);
   const colorRef = useRef<HTMLInputElement>(null);

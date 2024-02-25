@@ -6,11 +6,12 @@ import { setUiError } from '../../../redux/slices/controlsSlice';
 import { ProjectPostType } from '../../../types/projectType';
 import { projectTypes } from '../../../data/projectTypes';
 import '../projects.css';
+import EmployeeType from '../../../types/employeeType';
 
 const CreateProject: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const nameRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);

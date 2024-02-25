@@ -8,14 +8,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import EmployeeType from '../../../types/employeeType';
 import RankType from '../../../types/rankType';
+import NotificationType from '../../../types/notificationType';
 import './userDisplay.css';
 
 const UserDisplay: React.FC = () => {
   const auth = getAuth();
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
-  const ranksList = useAppSelector((state)=> state.ranksControl.ranks);
-  const notifications = useAppSelector((state)=> state.notificationsControl.notifications);
+  const ranksList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
+  const notifications: NotificationType[] = useAppSelector((state)=> state.notificationsControl.notifications);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const currentEmployeesRank: RankType | undefined = ranksList?.find((rank)=> rank.id === currentEmployee?.rank);
 

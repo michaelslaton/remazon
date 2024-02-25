@@ -11,8 +11,8 @@ import './ranks.css';
 import Loading from '../../utils/loading/Loading';
 
 const RanksDisplay: React.FC = () => {
-  const [ newRankDisplay, setNewRankDisplay ] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const [ newRankDisplay, setNewRankDisplay ] = useState<boolean>(false);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const ranksList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   
