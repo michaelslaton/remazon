@@ -5,7 +5,7 @@ import { fetchMotdThunk } from '../../../../redux/slices/controlsSlice';
 import banner from '../../../../assets/imgs/motdBanner.jpg'
 
 const MessageOfTheDay: React.FC = () => {
-  const motd = useAppSelector((state)=> state.mainControl.motd);
+  const motd: string = useAppSelector((state)=> state.mainControl.motd);
   const dispatch = useAppDispatch();
 
   useEffect(()=>{

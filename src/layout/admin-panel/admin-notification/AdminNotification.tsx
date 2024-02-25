@@ -21,14 +21,16 @@ const initialState: InitialStateType = {
 };
 
 const AdminNotification: React.FC = () => {
+  const dispatch = useAppDispatch();
+  // States ------------------------------------------------------------------ >
   const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const [ countData, setCountData ] = useState<number>(0);
   const [ listState, setListState ] = useState<InitialStateType>({
     ...initialState,
     unlisted: employeeList,
   });
-  const dispatch = useAppDispatch();
   const currentEmployeeUid: string | undefined = useAppSelector((state)=> state.employeesControl.currentEmployee?.uid);
+  // Refs -------------------------------------------------------------------- >
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -46,7 +48,7 @@ const AdminNotification: React.FC = () => {
   // these functions handle clicking and selecting items in the sent to user lists
   // moving them between the list of currently clicked names or un clicked names of each list, depending on it's current clicked state
   const handleClickUnlisted = (employee: EmployeeType): void => {
-    let currentClickedUnlisted = [...listState.clickedUnlisted];
+    let currentClickedUnlisted: string[] = [...listState.clickedUnlisted];
     if (currentClickedUnlisted.includes(employee.uid)) currentClickedUnlisted = currentClickedUnlisted.filter((uid)=> uid !== employee.uid);
     else currentClickedUnlisted = [...currentClickedUnlisted, employee.uid];
     setListState({...listState, clickedUnlisted: currentClickedUnlisted});
@@ -54,7 +56,7 @@ const AdminNotification: React.FC = () => {
   };
 
   const handleClickListed = (employee: EmployeeType): void => {
-    let currentClickedListed = [...listState.clickedListed];
+    let currentClickedListed: string[] = [...listState.clickedListed];
     if (currentClickedListed.includes(employee.uid)) currentClickedListed = currentClickedListed.filter((uid)=> uid !== employee.uid);
     else currentClickedListed = [...currentClickedListed, employee.uid];
     setListState({...listState, clickedListed: currentClickedListed});
@@ -62,8 +64,8 @@ const AdminNotification: React.FC = () => {
   };
 
   const handleMoveRight = (): void => {
-    let currentListed = [...listState.listed];
-    let currentUnlisted = [...listState.unlisted];
+    let currentListed: EmployeeType[] = [...listState.listed];
+    let currentUnlisted: EmployeeType[] = [...listState.unlisted];
     currentUnlisted.forEach((employee) => {
       if (listState.clickedUnlisted.includes(employee.uid)) currentListed.push(employee);
     });
@@ -79,8 +81,8 @@ const AdminNotification: React.FC = () => {
   };
 
   const handleMoveLeft = (): void => {
-    let currentListed = [...listState.listed];
-    let currentUnlisted = [...listState.unlisted];
+    let currentListed: EmployeeType[] = [...listState.listed];
+    let currentUnlisted: EmployeeType[] = [...listState.unlisted];
     currentListed.forEach((employee) => {
       if (listState.clickedListed.includes(employee.uid)) currentUnlisted.push(employee);
     });
@@ -96,8 +98,8 @@ const AdminNotification: React.FC = () => {
   };
 
   const handleMoveAll = (): void => {
-    let newListed = [...listState.unlisted];
-    let newUnlisted = [...listState.listed];
+    let newListed: EmployeeType[] = [...listState.unlisted];
+    let newUnlisted: EmployeeType[] = [...listState.listed];
     setListState({
       ...listState,
       unlisted: newUnlisted,
@@ -139,7 +141,7 @@ const AdminNotification: React.FC = () => {
       return;
     };
 
-    const attendingList = listState.listed.map((employee)=> employee.uid).toString();
+    const attendingList: string = listState.listed.map((employee)=> employee.uid).toString();
     const newNotification: NotificationPostType = {
       title: titleRef.current!.value,
       users: attendingList,

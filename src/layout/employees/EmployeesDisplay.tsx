@@ -23,7 +23,7 @@ const EmployeesDisplay: React.FC = () => {
   // applySort checks the current sortType state
   // returning a properly sorted and mapped array of JSX employee elements.
   const applySort = (): JSX.Element => {
-    let results = [...employeesList];
+    let results: EmployeeType[] = [...employeesList];
     if (sortType === 'alphabetical')
       results = [...employeesList].sort((a, b) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;

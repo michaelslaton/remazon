@@ -13,10 +13,10 @@ import EmployeeType from '../../types/employeeType';
 import './projects.css';
 
 const ProjectsDisplay: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate: NavigateFunction = useNavigate();
   const [ sortType, setSortType ] = useState<string>('');
   const [ showDeactivated, setShowDeactivated ] = useState<boolean>(false);
-  const navigate: NavigateFunction = useNavigate();
-  const dispatch = useAppDispatch();
   let projectsList: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
   const loadingProjects: boolean = useAppSelector((state) => state.projectsControl.loading);
   const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);

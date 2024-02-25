@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
 import { deleteProjectThunk, editProjectThunk, fetchProjectsThunk } from '../../../redux/slices/projectsSlice';
@@ -17,10 +17,9 @@ type ProjectProps = {
 };
 
 const Project: React.FC<ProjectProps> = ({ data }) => {
-  const [ showConfirm, setShowConfirm ] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
-  const currentEmployee = useAppSelector((state)=> state.employeesControl.currentEmployee);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const host: EmployeeType | undefined = employeesList.find((employee)=> employee.id === data.host);
   const ranksList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
@@ -31,7 +30,6 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     if (window.confirm(`Are you sure you want to delete the project ${data.name} ?`)) {
     dispatch(deleteProjectThunk(data.id))
       .then(() => dispatch(fetchProjectsThunk()))
-      .then(() => setShowConfirm(!showConfirm))
       .catch((error) => {
         dispatch(setUiError(error.message));
         console.error(error.code);
@@ -61,7 +59,6 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     updatedProject.attending = attendingList.toString();
     dispatch(editProjectThunk(updatedProject))
       .then(() => dispatch(fetchProjectsThunk()))
-      .then(() => setShowConfirm(!showConfirm))
       .catch((error) => {
         dispatch(setUiError(error.message));
         console.error(error.code);
