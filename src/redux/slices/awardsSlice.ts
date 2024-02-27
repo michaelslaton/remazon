@@ -13,7 +13,8 @@ const initialState: InitialState = {
   error: '',
 };
 
-const awardsUrl: URL= new URL('http://localhost:5000/remazon/awards');
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const awardsUrl: URL= new URL(`${API_URL}/remazon/awards`);
 
 // Api Calls --------------------------------------------------------------------------------->
 
@@ -39,7 +40,7 @@ const awardsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // fetchawards ------------------------------------------------------------->
+    // fetchawards ---------------------------------------------------------------------------->
     builder.addCase(fetchAwardsThunk.fulfilled, (state, action)=>{
       state.awards = []
       state.awards = action.payload.data;

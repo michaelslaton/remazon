@@ -13,7 +13,8 @@ const initialState: InitialState = {
   error: '',
 };
 
-const notificationsUrl: URL= new URL('http://localhost:5000/remazon/notifications');
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const notificationsUrl: URL= new URL(`${API_URL}/remazon/notifications`);
 
 // Api Calls --------------------------------------------------------------------------------->
 
