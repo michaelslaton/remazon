@@ -13,7 +13,8 @@ const initialState: InitialState = {
   error: '',
 };
 
-const ranksUrl: URL= new URL('http://localhost:5000/remazon/ranks');
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const ranksUrl: URL= new URL(`${API_URL}/remazon/ranks`);
 
 // Api Calls --------------------------------------------------------------------------------->
 

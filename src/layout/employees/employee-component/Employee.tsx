@@ -38,11 +38,6 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
     );
   };
 
-  // const onClickHandler = (): void => {
-  //   console.log('clicked')
-  //   return;
-  // }
-
   return (
     <div
       className={`employee__wrapper ${data.rank === 0 && 'deactivated'}`}
