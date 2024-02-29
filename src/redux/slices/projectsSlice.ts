@@ -13,7 +13,7 @@ const initialState: InitialState = {
   error: '',
 };
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_REMAZON_API_URL || "http://localhost:5000";
 const projectsUrl: URL= new URL(`${API_URL}/remazon/projects`);
 
 // Api Calls --------------------------------------------------------------------------------->
@@ -107,7 +107,6 @@ const projectsSlice = createSlice({
 
     // createProject ------------------------------------------------------------->
     builder.addCase(createProjectThunk.fulfilled, (state)=>{
-      fetchProjectsThunk();
       state.error = '';
       state.loading = false;
     });

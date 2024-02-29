@@ -5,8 +5,8 @@ import { createProjectThunk } from '../../../redux/slices/projectsSlice';
 import { setUiError } from '../../../redux/slices/controlsSlice';
 import { ProjectPostType } from '../../../types/projectType';
 import { projectTypes } from '../../../data/projectTypes';
-import '../projects.css';
 import EmployeeType from '../../../types/employeeType';
+import '../projects.css';
 
 const CreateProject: React.FC = () => {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const CreateProject: React.FC = () => {
     };
     
     dispatch(createProjectThunk(newProject))
-    .then(()=> navigate(-1))
+    .then(()=> navigate(-1));
     return;
   };
 
@@ -123,7 +123,6 @@ const CreateProject: React.FC = () => {
           <button
             className='button form__control'
             type='submit'
-            value='send'
             onClick={(e) => submitHandler(e)}
           >
             Submit

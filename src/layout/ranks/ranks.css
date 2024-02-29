@@ -80,15 +80,15 @@
 }
 
 @media (min-width: 768px){
+  .ranks-wrapper {
+    margin: auto;
+  }
 }
 
 @media (min-width: 810px){ 
 }
 
 @media (min-width: 1280px){
-  .ranks-wrapper {
-    margin: auto;
-  }
 }
 
 @media (min-width: 1366px){
