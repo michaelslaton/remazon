@@ -9,7 +9,7 @@ type AwardType = {
 export type AwardPostType = {
   name: string;
   type?: string;
-  holder?: number;
+  holder?: number | null;
   retired?: boolean;
 };
 

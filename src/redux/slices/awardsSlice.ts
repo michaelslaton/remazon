@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import AwardType from '../../types/awardType';
+import AwardType, { AwardPostType } from '../../types/awardType';
 
 type InitialState = {
   loading: boolean;
@@ -13,7 +13,7 @@ const initialState: InitialState = {
   error: '',
 };
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_REMAZON_API_URL || "http://localhost:5000";
 const awardsUrl: URL= new URL(`${API_URL}/remazon/awards`);
 
 // Api Calls --------------------------------------------------------------------------------->
@@ -23,6 +23,20 @@ export const fetchAwardsThunk = createAsyncThunk('awards/fetch', async (_thunkAp
     method: 'GET',
   });
   const data = response.json();
+  return data;
+});
+
+export const createAwardThunk = createAsyncThunk('awards/create', async (newAward: AwardPostType, thunkApi)=> {
+  const response = await fetch(awardsUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify(newAward)
+  });
+  const data = response.json();
+
+  thunkApi.dispatch(fetchAwardsThunk());
   return data;
 });
 
@@ -51,6 +65,20 @@ const awardsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchAwardsThunk.rejected, (state, action)=>{
+      state.awards = [...state.awards];
+      state.error = action.error.message;
+      state.loading = false;
+    });
+
+    // createAward ------------------------------------------------------------->
+    builder.addCase(createAwardThunk.fulfilled, (state)=>{
+      state.error = '';
+      state.loading = false;
+    });
+    builder.addCase(createAwardThunk.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(createAwardThunk.rejected, (state, action)=>{
       state.awards = [...state.awards];
       state.error = action.error.message;
       state.loading = false;

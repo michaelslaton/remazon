@@ -23,6 +23,7 @@ import { useState, useEffect } from 'react';
 import { useAppDispatch } from './redux/hooks';
 import { initialLoadThunk, setUiError } from './redux/slices/controlsSlice';
 import SignIn from './layout/authentication/components/SignIn';
+import CreateAward from './layout/awards/award-component/CreateAward';
 
 initializeApp(firebaseConfig);
 
@@ -117,6 +118,14 @@ const router = createBrowserRouter([
       {
         path: '/awards',
         element: <AwardsDisplay/>,
+        errorElement: <RouteError/>,
+      },
+      {
+        path: '/awards/create',
+        element: 
+          <AuthRoute>
+            <CreateAward/>
+          </AuthRoute>,
         errorElement: <RouteError/>,
       },
       {

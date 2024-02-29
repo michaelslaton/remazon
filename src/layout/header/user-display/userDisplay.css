@@ -59,9 +59,17 @@
     top: auto;
     right: auto;
   }
-
+  
   .notification-button {
     transform: translateY(.2rem);
+  }
+  .user-display__wrapper {
+    position: static;
+  }
+  
+  .user-display__user-wrapper {
+    display: flex;
+    font-size: 1.5rem;
   }
 }
 
@@ -69,14 +77,6 @@
 }
 
 @media (min-width: 1280px){
-  .user-display__wrapper {
-    position: static;
-  }
-
-  .user-display__user-wrapper {
-    display: flex;
-    font-size: 1.5rem;
-  }
 }
 
 @media (min-width: 1366px){

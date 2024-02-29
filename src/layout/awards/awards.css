@@ -8,10 +8,10 @@
 }
 
 .award__wrapper {
-  aspect-ratio: 1/1.1;
+  aspect-ratio: 1/1;
   box-sizing: border-box;
-  background-color: var(--dark-brown);
-  border: .15rem solid var(--remazon-prime);
+  background: linear-gradient(115deg, rgba(90,44,5,1) 0%, rgba(218,150,25,1) 35%, rgba(49,21,8,1) 100%);
+  border: .2rem solid var(--remazon-prime);
   border-radius: var(--border-radius);
   box-shadow: .5rem .5rem .2rem black;
   min-width: 13rem;
@@ -45,23 +45,17 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  background-color: var(--remazon-prime);
-  border: .15rem solid var(--remazon-prime);
+  /* background-color: var(--remazon-prime); */
+  background: linear-gradient(115deg, rgba(160,111,32,1) 0%, rgba(243,219,126,1) 35%, rgba(142,79,7,1) 100%);
   border-radius: 50%;
   width: 6rem;
   z-index: 11;
-}
-.belt__plaque {
-  background-color: #7c5708;
-  position: absolute;
-  height: 1.5rem;
-  width: 102%;
 }
 .belt__top-plate {
   aspect-ratio: 1/1;
   box-sizing: border-box;
   position: absolute;
-  border: .15rem solid var(--brown);
+  border: .15rem solid #311508;
   border-radius: 50%;
   width: 5.6rem;
   z-index: 11;
@@ -69,11 +63,12 @@
 .belt__strap {
   position: absolute;
   background-color: #412604;
-  border-top: .15rem solid var(--remazon-prime);
-  border-bottom: .15rem solid var(--remazon-prime);
+  border-top: .15rem solid white;
+  border-bottom: .15rem solid white;
   width: 100%;
   height: 1.5rem;
-  z-index: 10;
+  z-index: 12;
+  opacity: .7;
 }
 
 .trophy__plate {
@@ -83,8 +78,7 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  background-color: var(--remazon-prime);
-  border: .15rem solid var(--remazon-prime);
+  background: linear-gradient(115deg, rgba(160,111,32,1) 0%, rgba(243,219,126,1) 35%, rgba(142,79,7,1) 100%);
   border-radius: 5%;
   width: 10rem;
   z-index: 11;
@@ -93,15 +87,14 @@
   aspect-ratio: 2/1;
   box-sizing: border-box;
   position: absolute;
-  border: .15rem solid var(--brown);
+  border: .15rem solid #311508;
   border-radius: 5%;
   width: 9.5rem;
   z-index: 11;
 }
 
 .award__info-wrapper {
-  margin: .5rem;
-  margin-top: -.8rem;
+  margin: .5rem 1rem;
 }
 .award__info-list {
   all: unset;
@@ -113,12 +106,14 @@
 }
 .award__info-key {
   display: inline;
-  color: var(--remazon-prime);
+  color: #5A2C05;
+  font-family: 'gvd-bold';
 }
 .award__info-value {
   display: inline;
   margin-left: .4em;
   text-transform: capitalize;
+  color: white;
 }
 
 @media (min-width: 375px){

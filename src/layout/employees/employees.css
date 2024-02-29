@@ -118,7 +118,7 @@
 
 @media (min-width: 1280px){
   .employee__cards-wrapper {
-    gap: 1rem;
+    gap: 1.5rem;
     padding: .8rem 2rem;
   }
 }

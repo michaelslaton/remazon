@@ -19,17 +19,15 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
         </div>
         { awardData.type === 'belt' ?
             <>
+              <div className='belt__strap'/>
               <div className='belt__buckle'>
                 <div className='belt__top-plate'/>
-                <div className='belt__plaque'/>
               </div>
-              <div className='belt__strap'/>
             </>
             :
             <>
               <div className='trophy__plate'>
                 <div className='trophy__top-plate'/>
-                <div className='belt__plaque'/>
               </div>
               <div className='belt__strap'/>
             </>

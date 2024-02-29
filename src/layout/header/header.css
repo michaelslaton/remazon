@@ -44,15 +44,6 @@
 }
 
 @media (min-width: 768px){
-  .header__wrapper {
-    flex-direction: row;
-    border-bottom: .3rem solid var(--remazon-prime);
-    padding: 0 .4rem;
-    padding-bottom: .3rem;
-    align-items: start;
-    padding-top: auto;
-  }
-
   .header__title {
     margin-top: .3rem;
   }
@@ -65,7 +56,16 @@
     display: inline;
     margin-top: auto;
   }
-
+  .header__wrapper {
+    flex-direction: row;
+    border-bottom: .3rem solid var(--remazon-prime);
+    padding: 0 .4rem;
+    padding-bottom: .3rem;
+    align-items: start;
+    padding-top: auto;
+  }
+  
+  
   .header__items {
     margin: auto 0;
     align-self: auto;

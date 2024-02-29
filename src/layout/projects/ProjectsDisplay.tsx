@@ -81,7 +81,8 @@ const ProjectsDisplay: React.FC = () => {
             onChange={(e)=> setShowDeactivated(e.target.checked)}
           />
         </div>
-        {currentEmployee?.uid && currentEmployee.rank < 5 &&
+        {currentEmployee?.uid && 
+          currentEmployee.rank < 5 &&
           <button
             className='button card-button'
             onClick={()=> navigate('/projects/create')}
