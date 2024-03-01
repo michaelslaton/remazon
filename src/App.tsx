@@ -24,6 +24,7 @@ import { useAppDispatch } from './redux/hooks';
 import { initialLoadThunk, setUiError } from './redux/slices/controlsSlice';
 import SignIn from './layout/authentication/components/SignIn';
 import CreateAward from './layout/awards/award-component/CreateAward';
+import EditAward from './layout/awards/award-component/EditAward';
 
 initializeApp(firebaseConfig);
 
@@ -125,6 +126,14 @@ const router = createBrowserRouter([
         element: 
           <AuthRoute>
             <CreateAward/>
+          </AuthRoute>,
+        errorElement: <RouteError/>,
+      },
+      {
+        path: '/awards/edit/:paramId',
+        element: 
+          <AuthRoute>
+            <EditAward/>
           </AuthRoute>,
         errorElement: <RouteError/>,
       },

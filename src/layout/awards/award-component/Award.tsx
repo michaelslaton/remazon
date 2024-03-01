@@ -1,7 +1,11 @@
 import { useAppSelector } from '../../../redux/hooks';
 import AwardType from '../../../types/awardType';
 import EmployeeType from '../../../types/employeeType';
+import months from '../../../data/months';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../awards.css';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 type AwardProps = {
   awardData: AwardType;
@@ -9,7 +13,10 @@ type AwardProps = {
 
 const Award: React.FC<AwardProps> = ({ awardData }) => {
   const employeeList = useAppSelector((state)=> state.employeesControl.employees);
+  const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const currentHolder: EmployeeType | undefined = employeeList.find((employee)=> employee.id === awardData.holder);
+  const navigate: NavigateFunction = useNavigate();
+  const awardDate: Date = new Date(awardData.date);
 
   return (
     <div className='award__wrapper'>
@@ -44,18 +51,56 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
               {awardData.type}
             </div>
           </li>
-          { awardData.holder &&
+
+          <li>
+            <div className='award__info-key'>
+              Awarded to:
+            </div>
+            <div className='award__info-value'>
+              {
+                currentHolder?.name ?
+                  <>
+                    {currentHolder.name}
+                  </>
+                :
+                  <>
+                    Unawarded
+                  </>
+              }
+            </div>
+          </li>
+          { awardData.date &&
             <li>
               <div className='award__info-key'>
-                Holder:
+                Date:
               </div>
               <div className='award__info-value'>
-                {currentHolder?.name}
+                {months[awardDate.getMonth()]} {awardDate.getDate()}
+              </div>
+            </li>
+          }
+
+          { awardData.awardedFor &&
+            <li>
+              <div className='award__info-key'>
+                Awarded for:
+              </div>
+              <div className='award__info-value'>
+                {awardData.awardedFor}
               </div>
             </li>
           }
         </ul>
       </div>
+      
+      { currentEmployee?.rank === 1 &&
+        <button
+          className='award__edit-button'
+          onClick={()=> navigate(`/awards/edit/${awardData.id}`)}
+        >
+          <FontAwesomeIcon icon={faEdit}/>
+        </button>
+      }
       
     </div>
   );
