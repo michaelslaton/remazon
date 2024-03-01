@@ -75,7 +75,10 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
       !currentEmployee?.admin && data.host !== currentEmployee?.id
     ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
-      <button className={`button card-button ${data.regularity === 'recurring' && 'dark'}`} onClick={()=> navigate(`/projects/edit/${data.id}`)}>
+      <button
+        className={`button card-button ${data.regularity === 'recurring' && 'dark'}`}
+        onClick={()=> navigate(`/projects/edit/${data.id}`)}
+      >
         <FontAwesomeIcon icon={faEdit}/>
       </button>
     );
@@ -89,7 +92,10 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
       !currentEmployee?.admin && data.host !== currentEmployee?.id
     ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
-      <button className={`button delete card-button ${data.regularity === 'recurring' && 'dark'}`} onClick={()=> deleteButtonHandler()}>
+      <button
+        className={`button delete card-button ${data.regularity === 'recurring' && 'dark'}`}
+        onClick={()=> deleteButtonHandler()}
+      >
         <FontAwesomeIcon icon={faTrashCan}/>
       </button>
     );

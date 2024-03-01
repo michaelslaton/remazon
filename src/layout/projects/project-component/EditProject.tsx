@@ -126,7 +126,7 @@ const EditProject: React.FC = () => {
               id='name'
               name='name'
               ref={nameRef}
-              defaultValue={selectedProject?.name}
+              defaultValue={selectedProject!.name}
             />
 
             { currentEmployee!.admin &&
