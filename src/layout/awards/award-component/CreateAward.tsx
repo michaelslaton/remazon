@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import EmployeeType from "../../../types/employeeType";
 import { AwardPostType } from "../../../types/awardType";
 import { createAwardThunk } from "../../../redux/slices/awardsSlice";
+import { setUiError } from "../../../redux/slices/controlsSlice";
 
 const CreateAward: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -15,20 +16,37 @@ const CreateAward: React.FC = () => {
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
+    let awardDate = new Date();
     let awardHolder: number | null = 0;
     if(Number(holderRef.current?.value) > 0) awardHolder = Number(holderRef.current!.value);
     else awardHolder = null;
 
+    if (nameRef.current!.value.length < 1) {
+      dispatch(setUiError('Name length is too short.'));
+      return;
+    };
+
+    if (nameRef.current!.value.length > 21) {
+      dispatch(setUiError('Please shorten then name length to less than 22 characters.'));
+      return;
+    };
+
     const newAward: AwardPostType = {
       name: nameRef.current!.value,
       type: typeRef.current!.value,
+      date: awardDate,
       holder: awardHolder,
-    }
+    };
 
     dispatch(createAwardThunk(newAward))
-      .then(()=> navigate('/awards'));
+      .then(()=> navigate('/awards'))
+      .catch((error) => {
+        dispatch(setUiError(error.message));
+        console.error(error.code);
+        console.error(error.message);
+      });
     return;
-  }
+  };
 
   return (
     <div className='center-display-space'>
