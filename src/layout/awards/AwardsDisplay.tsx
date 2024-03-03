@@ -20,19 +20,51 @@ const AwardsDisplay: React.FC = () => {
     dispatch(fetchAwardsThunk);
   },[])
 
-  if (sortType === 'alphabetical')
-  awardsList = [...awardsList].sort((a, b) => {
-    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-    return 0;
-  });
+  if (sortType === 'alphabetical'){
+    awardsList = [...awardsList].sort((a, b) => {
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+      return 0;
+  })};
 
-  if (sortType === 'type')
-  awardsList = [...awardsList].sort((a, b) => {
-    if (a.type < b.type) return -1;
-    if (a.type > b.type) return 1;
-    return 0;
-  });
+  if (sortType === 'alphabeticalR'){
+    awardsList = [...awardsList].sort((a, b) => {
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
+      return 0;
+  })};
+
+  if (sortType === 'date'){
+    awardsList = [...awardsList].sort((a, b) => {
+      const aDate = new Date(a.date);
+      const bDate = new Date(b.date);
+      if (aDate.getTime() < bDate.getTime()) return -1;
+      if (aDate.getTime() > bDate.getTime()) return 1;
+      return 0;
+  })};
+
+  if (sortType === 'dateR'){
+    awardsList = [...awardsList].sort((a, b) => {
+      const aDate = new Date(a.date);
+      const bDate = new Date(b.date);
+      if (aDate.getTime() > bDate.getTime()) return -1;
+      if (aDate.getTime() < bDate.getTime()) return 1;
+      return 0;
+  })};
+
+  if (sortType === 'belt'){
+    awardsList = [...awardsList].sort((a, b) => {
+      if (a.type < b.type) return -1;
+      if (a.type > b.type) return 1;
+      return 0;
+  })};
+
+  if (sortType === 'award'){
+    awardsList = [...awardsList].sort((a, b) => {
+      if (a.type > b.type) return -1;
+      if (a.type < b.type) return 1;
+      return 0;
+  })};
 
   if(!awardsList.length) return ( <>No awards to display</> );
 
@@ -58,8 +90,20 @@ const AwardsDisplay: React.FC = () => {
           <option value='alphabetical'>
             Alphabetical
           </option>
-          <option value='type'>
-            Type
+          <option value='alphabeticalR'>
+            Alphabetical {'(R)'}
+          </option>
+          <option value='date'>
+            Award Date
+          </option>
+          <option value='dateR'>
+            Award Date {'(R)'}
+          </option>
+          <option value='belt'>
+            belt
+          </option>
+          <option value='award'>
+            award
           </option>
         </select>
 

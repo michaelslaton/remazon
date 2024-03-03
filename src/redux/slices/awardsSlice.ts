@@ -40,6 +40,19 @@ export const createAwardThunk = createAsyncThunk('awards/create', async (newAwar
   return data;
 });
 
+export const editAwardThunk = createAsyncThunk('awards/edit', async (updatedAward: AwardType, thunkApi)=> {
+  const response = await fetch(awardsUrl, {
+    method: 'PUT',
+    headers: {
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify(updatedAward)
+  });
+  const data = response.json();
+  thunkApi.dispatch(fetchAwardsThunk());
+  return data;
+});
+
 // -------------------------------------------------------------------------------------------->
 
 const awardsSlice = createSlice({
@@ -79,6 +92,20 @@ const awardsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(createAwardThunk.rejected, (state, action)=>{
+      state.awards = [...state.awards];
+      state.error = action.error.message;
+      state.loading = false;
+    });
+
+    // editAward ---------------------------------------------------------------->
+    builder.addCase(editAwardThunk.fulfilled, (state)=>{
+      state.error = '';
+      state.loading = false;
+    });
+    builder.addCase(editAwardThunk.pending, (state)=>{
+      state.loading = true;
+    });
+    builder.addCase(editAwardThunk.rejected, (state, action)=>{
       state.awards = [...state.awards];
       state.error = action.error.message;
       state.loading = false;

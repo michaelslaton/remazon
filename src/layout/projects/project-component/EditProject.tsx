@@ -97,7 +97,7 @@ const EditProject: React.FC = () => {
       status: statusRef.current!.checked,
     };
     dispatch(editProjectThunk(updatedProject));
-    navigate(-1);
+    navigate('/projects');
     return;
   };
 

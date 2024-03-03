@@ -119,9 +119,8 @@ const projectsSlice = createSlice({
       state.loading = false;
     });
 
-    // editEmployee ---------------------------------------------------------------->
+    // editProject ---------------------------------------------------------------->
     builder.addCase(editProjectThunk.fulfilled, (state)=>{
-      fetchProjectsThunk();
       state.error = '';
       state.loading = false;
     });

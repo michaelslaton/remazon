@@ -46,7 +46,12 @@ const CreateProject: React.FC = () => {
     };
     
     dispatch(createProjectThunk(newProject))
-    .then(()=> navigate(-1));
+      .then(()=> navigate('/projects'))
+      .catch((error) => {
+        dispatch(setUiError(error.message));
+        console.error(error.code);
+        console.error(error.message);
+      });
     return;
   };
 
