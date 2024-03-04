@@ -75,7 +75,7 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
                 Date:
               </div>
               <div className='award__info-value'>
-                {months[awardDate.getMonth()]} {awardDate.getDate()}
+                {months[awardDate.getMonth()]} {awardDate.getDate()}, {awardDate.getFullYear()}
               </div>
             </li>
           }
