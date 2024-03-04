@@ -8,6 +8,7 @@ const MostRecentProject: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
   let projectList: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
   projectList = [...projectList].filter((project) => project.status === true);
+  
   const mostRecentProject: ProjectType = projectList.reduce((prev, current) => {
     return prev.id > current.id ? prev : current;
   });

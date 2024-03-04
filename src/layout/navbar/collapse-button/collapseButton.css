@@ -17,6 +17,7 @@
   padding: .1rem .5rem;
   z-index: 10;
   width: 2rem !important;
+  cursor: pointer;
 }
 .collapse-button:hover {
   border: 1px solid var(--remazon-prime);
