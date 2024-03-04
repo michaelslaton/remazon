@@ -38,8 +38,8 @@ const AwardsDisplay: React.FC = () => {
     awardsList = [...awardsList].sort((a, b) => {
       const aDate = new Date(a.date);
       const bDate = new Date(b.date);
-      if (aDate.getTime() < bDate.getTime()) return -1;
-      if (aDate.getTime() > bDate.getTime()) return 1;
+      if (aDate.getTime() > bDate.getTime()) return -1;
+      if (aDate.getTime() < bDate.getTime()) return 1;
       return 0;
   })};
 
@@ -47,8 +47,8 @@ const AwardsDisplay: React.FC = () => {
     awardsList = [...awardsList].sort((a, b) => {
       const aDate = new Date(a.date);
       const bDate = new Date(b.date);
-      if (aDate.getTime() > bDate.getTime()) return -1;
-      if (aDate.getTime() < bDate.getTime()) return 1;
+      if (aDate.getTime() < bDate.getTime()) return -1;
+      if (aDate.getTime() > bDate.getTime()) return 1;
       return 0;
   })};
 

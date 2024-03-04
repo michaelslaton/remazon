@@ -32,13 +32,9 @@ const SignUp: React.FC = () => {
     };
     for(let i=0; i<employeesList.length;i++){
       if(employeesList[i].name.toLocaleLowerCase() === nameRef.current!.value.toLocaleLowerCase()){
-        dispatch(setUiError('That username is taken.'));
+        dispatch(setUiError('That name is taken.'));
         return;
       };
-      // if(auth.currentUser!.email === emailRef.current!.value){
-      //   dispatch(setUiError('That e-mail is already attached to an account.'));
-      //   return;
-      // }
     };
     if (!emailRef.current!.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) { 
       dispatch(setUiError('E-mail address format is invalid.'));

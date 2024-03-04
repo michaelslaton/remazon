@@ -46,7 +46,7 @@ const MostRecentAward: React.FC = () => {
           <li>
             Date:
             <div className='most-recent__info-value award'>
-              {` ${months[awardDate.getMonth()]} ${awardDate.getDate()}`}
+              {` ${months[awardDate.getMonth()]} ${awardDate.getDate()}, ${awardDate.getFullYear()}`}
             </div>
           </li>
         </ul>

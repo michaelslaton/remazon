@@ -28,10 +28,25 @@ const EditAward:React.FC = () => {
     setNameCountData(selectedAward!.name.length);
   },[]);
 
+  const checkForVariance = (): boolean => {
+    if (
+      nameRef.current!.value === selectedAward!.name &&
+      typeRef.current!.value === selectedAward!.type &&
+      Number(holderRef.current!.value) === selectedAward!.holder &&
+      awardedForRef.current!.value === selectedAward!.awardedFor &&
+      retiredRef.current!.checked === selectedAward!.retired
+    ) return false;
+    return true
+  }
+
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
     let awardDate = new Date(selectedAward!.date);
-
+    
+    if (!checkForVariance()) {
+      dispatch(setUiError('No changes have been made.'));
+      return;
+    };
     // Name > 1 character and exists
     if (nameRef.current!.value.length < 1) {
       dispatch(setUiError('Please enter a name for the Award.'));
@@ -41,6 +56,16 @@ const EditAward:React.FC = () => {
     if (nameRef.current!.value.length > 21) {
       dispatch(setUiError('Please shorten then name length to less than 22 characters.'));
       return;
+    };
+    // If the name is already taken
+    for(let i=0;i<awardList.length;i++){
+      if(
+          awardList[i].name.toLocaleLowerCase() === nameRef.current!.value.toLocaleLowerCase() &&
+          awardList[i].id !== selectedAward!.id
+        ){
+        dispatch(setUiError('That name is taken.'));
+        return;
+      };
     };
     // If the description is greater than the allowed length of 200
     if (awardedForRef.current!.value.length > 200) {
