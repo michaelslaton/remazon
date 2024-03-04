@@ -17,6 +17,12 @@
   box-shadow: .5rem .5rem .2rem black;
   min-width: 13rem;
   max-width: 20rem;
+  scale: 1;
+  transition: scale 100ms ease-in-out;
+}
+.award__wrapper:hover {
+  scale: 1.03;
+  transition: scale 100ms ease-in-out;
 }
 
 .award__plate {

@@ -24,6 +24,12 @@
   width: 20rem;
   margin-bottom: .5rem;
   cursor: pointer;
+  scale: 1;
+  transition: scale 100ms ease-in-out;
+}
+.employee__wrapper:hover {
+  scale: 1.03;
+  transition: scale 100ms ease-in-out;
 }
 .employee__wrapper.deactivated {
   background-color: black;
