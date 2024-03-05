@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../../redux/hooks';
-import AwardType from '../../../types/awardType';
-import EmployeeType from '../../../types/employeeType';
+import AwardType from '../../../types/award.type';
+import EmployeeType from '../../../types/employee.type';
 import months from '../../../data/months';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -82,7 +82,7 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
 
           { awardData.awardedFor &&
             <li>
-              <div className='award__info-key'>
+              <div className='award__info-key awarded-for'>
                 Awarded for:
               </div>
               <div className='award__info-value'>

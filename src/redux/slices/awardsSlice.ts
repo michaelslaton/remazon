@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import AwardType, { AwardPostType } from '../../types/awardType';
+import AwardType, { AwardPostType } from '../../types/award.type';
 
 type InitialState = {
   loading: boolean;

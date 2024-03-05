@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import EmployeeType, { EmployeePostType } from '../../types/employeeType';
+import EmployeeType, { EmployeePostType } from '../../types/employee.type';
 
 type InitialState = {
   loading: boolean;

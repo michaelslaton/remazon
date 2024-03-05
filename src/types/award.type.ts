@@ -2,7 +2,7 @@ type AwardType = {
   id: number;
   name: string;
   type: string;
-  holder: number;
+  holder: number | null;
   date: Date;
   awardedFor?: string;
   retired: boolean;

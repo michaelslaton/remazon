@@ -1,13 +1,16 @@
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../redux/hooks';
+import Loading from '../../../../../utils/loading/Loading';
+import AwardType from '../../../../../types/award.type';
+import EmployeeType from '../../../../../types/employee.type';
 import months from '../../../../../data/months';
 import '../mostRecent.css';
-import AwardType from '../../../../../types/awardType';
 
 const MostRecentAward: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
+  const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   let awardsList: AwardType[] = useAppSelector((state) => state.awardsControl.awards);
-  awardsList = [...awardsList].filter((project) => project.retired === false);
+  awardsList = [...awardsList].filter((award) => award.retired === false && award.holder !== null);
   
   const mostRecentAward: AwardType = awardsList.reduce((prev, current) => {
     const previousDate = new Date(prev.date);
@@ -15,8 +18,9 @@ const MostRecentAward: React.FC = () => {
     return previousDate.getTime() > currentDate.getTime() ? prev : current;
   });
   const awardDate: Date = new Date(mostRecentAward.date);
+  const currentHolder: EmployeeType | undefined = employeesList.find((employee)=> employee.id === mostRecentAward.holder);
 
-  if (!awardsList.length) return <></>;
+  if (!awardsList.length) return <><Loading/></>;
 
   return (
     <div className='most-recent__cel'>
@@ -34,7 +38,15 @@ const MostRecentAward: React.FC = () => {
           <li>
             Awarded To:
             <div className='most-recent__info-value award'>
-              {` ${mostRecentAward.holder}`}
+              { currentHolder ?
+                  <>
+                    {` ${currentHolder?.name}`}
+                  </>
+                :
+                  <>
+                    {` Unawarded`}
+                  </>
+              }
             </div>
           </li>
           <li>

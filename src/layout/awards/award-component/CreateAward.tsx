@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import EmployeeType from "../../../types/employeeType";
-import AwardType, { AwardPostType } from "../../../types/awardType";
+import EmployeeType from "../../../types/employee.type";
+import AwardType, { AwardPostType } from "../../../types/award.type";
 import { createAwardThunk } from "../../../redux/slices/awardsSlice";
 import { setUiError } from "../../../redux/slices/controlsSlice";
 
@@ -24,24 +24,20 @@ const CreateAward: React.FC = () => {
     if(Number(holderRef.current?.value) > 0) awardHolder = Number(holderRef.current!.value);
     else awardHolder = null;
 
-    // Name > 1 character and exists
-    if (nameRef.current!.value.length < 1) {
+    if (nameRef.current!.value.length <= 1) {
       dispatch(setUiError('Name length is too short.'));
       return;
     };
-    // If the name is greater than the allowed length of 21
     if (nameRef.current!.value.length > 21) {
       dispatch(setUiError('Please shorten then name length to less than 22 characters.'));
       return;
     };
-    // If the name is already taken
     for(let i=0;i<awardList.length;i++){
       if(awardList[i].name.toLocaleLowerCase() === nameRef.current!.value.toLocaleLowerCase()){
         dispatch(setUiError('That name is taken.'));
         return;
       };
     };
-    // If the Awarded For description is greater than the allowed length of 200
     if (awardedForRef.current!.value.length > 200) {
       dispatch(setUiError('Please shorten your awarded for description to 200 characters or less.'));
       return;
@@ -146,7 +142,7 @@ const CreateAward: React.FC = () => {
             rows={3}
             onChange={(e)=> setAwardedForCountData(e.currentTarget.value.length)}
           />
-          <div className='parameter-text'>
+          <div className='parameter-text parameter-gap'>
             {awardedForCountData} of 200
           </div>
         </div>

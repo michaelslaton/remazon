@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../../redux/hooks';
 import { removeNotificationThunk } from '../../../redux/slices/notificationsSlice';
-import NotificationType from '../../../types/notificationType';
+import NotificationType from '../../../types/notification.type';
 import '../notifications.css';
 
 type NotificationProps = {

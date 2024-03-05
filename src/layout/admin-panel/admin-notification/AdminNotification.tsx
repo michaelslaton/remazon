@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { NotificationPostType } from '../../../types/notificationType';
+import { NotificationPostType } from '../../../types/notification.type';
 import { createNotificationThunk, fetchNotificationsThunk } from '../../../redux/slices/notificationsSlice';
 import { setUiError } from '../../../redux/slices/controlsSlice';
-import EmployeeType from '../../../types/employeeType';
+import EmployeeType from '../../../types/employee.type';
 import './adminNotification.css';
 
 type InitialStateType = {
