@@ -11,7 +11,7 @@ const EditAward:React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
   // States ------------------------------------------------------------------ >
-  const [ awardedForcountData, setAwardedForCountData ] = useState<number>(0);
+  const [ awardedForCountData, setAwardedForCountData ] = useState<number>(0);
   const [ nameCountData, setNameCountData ] = useState<number>(0);
   const awardList: AwardType[] = useAppSelector((state)=> state.awardsControl.awards);
   const employeeList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
@@ -173,18 +173,19 @@ const EditAward:React.FC = () => {
               htmlFor='awarded for'
               className='form-input-label'
             >
-              Description:
+              Awarded For:
             </label>
             <textarea
               id='awarded for'
               name='awarded for'
               ref={awardedForRef}
               maxLength={200}
+              rows={3}
               onChange={(e)=> setAwardedForCountData(e.currentTarget.value.length)}
               defaultValue={selectedAward?.awardedFor}
             />
             <div className='parameter-text'>
-              {awardedForcountData} of 200
+              {awardedForCountData} of 200
             </div>
 
             <div>
