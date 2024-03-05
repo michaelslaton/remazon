@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import NotificationType, { NotificationPostType } from '../../types/notificationType';
+import NotificationType, { NotificationPostType } from '../../types/notification.type';
 
 type InitialState = {
   loading: boolean,

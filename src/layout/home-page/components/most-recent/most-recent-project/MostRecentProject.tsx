@@ -1,6 +1,6 @@
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../redux/hooks';
-import ProjectType from '../../../../../types/projectType';
+import ProjectType from '../../../../../types/project.type';
 import months from '../../../../../data/months';
 import '../mostRecent.css';
 

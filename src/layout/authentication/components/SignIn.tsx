@@ -3,8 +3,6 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from '../../../redux/hooks';
 import { fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignIn } from '@fortawesome/free-solid-svg-icons';
 import { fetchNotificationsThunk } from '../../../redux/slices/notificationsSlice';
 import { setUiError } from '../../../redux/slices/controlsSlice';
 import '../authentication.css';
@@ -85,7 +83,7 @@ const SignIn: React.FC = () => {
             type='submit'
             onClick={(e)=> loginHandler(e)}
           >
-            <FontAwesomeIcon icon={faSignIn}/>
+            Sign In
           </button>
 
           <button
@@ -93,7 +91,7 @@ const SignIn: React.FC = () => {
             type='button'
             onClick={()=> navigate('/signup')}
           >
-            Sign Up
+            Go to Sign Up
           </button>
         </div>
         

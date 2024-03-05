@@ -1,8 +1,8 @@
 import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import AwardType from "../../../types/awardType";
+import AwardType from "../../../types/award.type";
 import { useEffect, useRef, useState } from "react";
-import EmployeeType from "../../../types/employeeType";
+import EmployeeType from "../../../types/employee.type";
 import { setUiError } from "../../../redux/slices/controlsSlice";
 import { editAwardThunk } from "../../../redux/slices/awardsSlice";
 
@@ -42,6 +42,8 @@ const EditAward:React.FC = () => {
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
     let awardDate = new Date(selectedAward!.date);
+    let awardHolder = null;
+    if(Number(holderRef.current!.value) > 0) awardHolder = Number(holderRef.current!.value);
     
     if (!checkForVariance()) {
       dispatch(setUiError('No changes have been made.'));
@@ -73,18 +75,22 @@ const EditAward:React.FC = () => {
       return;
     };
 
-    if(Number(selectedAward!.holder) !== Number(holderRef.current!.value)) awardDate = new Date();
+    if(holderRef.current?.value !== selectedAward?.holder){
+      if(!window.confirm('Are you sure you wish to change the holder?\n This will adjust the date on the award and is an irreversible change.')) return;
+    };
 
+    if(Number(selectedAward!.holder) !== Number(holderRef.current!.value)) awardDate = new Date();
     const updatedAward: AwardType = {
       ...selectedAward!,
       name: nameRef.current!.value,
       type: typeRef.current!.value,
-      holder: Number(holderRef.current!.value),
+      holder: awardHolder,
       awardedFor: awardedForRef.current!.value,
       date: awardDate,
       retired: retiredRef.current!.checked,
     };
-
+    
+    console.log(updatedAward)
     dispatch(editAwardThunk(updatedAward))
     .then(()=> navigate('/awards'))
     .catch((error) => {
@@ -151,7 +157,7 @@ const EditAward:React.FC = () => {
               id='holder'
               name='holder'
               ref={holderRef}
-              defaultValue={selectedAward?.holder}
+              defaultValue={Number(selectedAward?.holder)}
             >
               <option
                 key={0}

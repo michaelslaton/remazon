@@ -6,9 +6,9 @@ import { fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice'
 import { fetchNotificationsThunk } from '../../../redux/slices/notificationsSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
-import EmployeeType from '../../../types/employeeType';
-import RankType from '../../../types/rankType';
-import NotificationType from '../../../types/notificationType';
+import EmployeeType from '../../../types/employee.type';
+import RankType from '../../../types/rank.type';
+import NotificationType from '../../../types/notification.type';
 import './userDisplay.css';
 
 const UserDisplay: React.FC = () => {

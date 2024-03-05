@@ -138,6 +138,10 @@
   color: white;
 }
 
+.award__info-key.awarded-for {
+  display: block;
+}
+
 @media (min-width: 375px){
 }
 

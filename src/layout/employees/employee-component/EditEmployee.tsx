@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { editEmployeeThunk } from '../../../redux/slices/employeesSlice';
-import EmployeeType from '../../../types/employeeType';
-import Rank from '../../../types/rankType';
+import EmployeeType from '../../../types/employee.type';
+import Rank from '../../../types/rank.type';
 import '../employees.css';
 import { setUiError } from '../../../redux/slices/controlsSlice';
 
@@ -18,9 +18,9 @@ const EditEmployee: React.FC = () => {
   const ranksList: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
   const selectedEmployee: EmployeeType | undefined = employeesList.find((dude)=> dude.id === Number(paramId));
   // Refs -------------------------------------------------------------------- >
+  const nameRef = useRef<HTMLInputElement>(null);
   const bdayRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
   const rankRef = useRef<HTMLSelectElement>(null);
   // Birthday formatting ------------------------------------------------------ >
   let employeeBirthday: Date | null = null;
@@ -42,7 +42,7 @@ const EditEmployee: React.FC = () => {
   const checkForVariance = (): boolean => {
     let updatedRank = selectedEmployee!.rank;
     let birthdayCheck: boolean = false;
-    if (currentEmployee!.admin) updatedRank = Number(rankRef.current!.value);
+    if (currentEmployee!.admin) updatedRank = Number(rankRef.current?.value);
 
     if (bdayRef.current!.value) {
       const newBirthday = bdayRef.current!.value.split('-');
@@ -55,7 +55,7 @@ const EditEmployee: React.FC = () => {
     else if (employeeBirthday === null && updatedBirthday) birthdayCheck = true;
 
     if (
-      nameRef.current!.value === selectedEmployee?.name &&
+      nameRef.current?.value === selectedEmployee?.name &&
       descriptionRef.current!.value === selectedEmployee?.description &&
       updatedRank === selectedEmployee?.rank &&
       !birthdayCheck
@@ -66,18 +66,16 @@ const EditEmployee: React.FC = () => {
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
     let updatedRank = selectedEmployee!.rank;
-    let spaceCount = 0;
+    let nameSpacesCount = 0;
 
     if (!checkForVariance()) {
       dispatch(setUiError('No changes have been made.'));
       return;
     };
-    // Name > 1 character and exists
     if (nameRef.current!.value.length < 1) {
       dispatch(setUiError('Please enter a name for the employee.'));
       return;
     }
-    // Name is not already in use
     for(let i=0; i<employeesList.length;i++){
       if(employeesList[i].name.toLocaleLowerCase() === nameRef.current!.value.toLocaleLowerCase() &&
       selectedEmployee!.id !== employeesList[i].id){
@@ -85,17 +83,15 @@ const EditEmployee: React.FC = () => {
         return;
       }
     };
-    // If name is a maximum of two words
     for(let i=0; i<nameRef.current!.value.length; i++){
       if(nameRef.current!.value[i] === ' '){
-        if(spaceCount === 1){
+        if(nameSpacesCount === 1){
           dispatch(setUiError(`Name can only be in the format of 'First Last'`));
           return;
         }
-        spaceCount++
+        nameSpacesCount++
       }
     };
-    // Description <= 100 characters
     if (descriptionRef.current!.value.length > 100) {
       dispatch(setUiError('Please shorten your description to 100 characters or less.'));
       return;
@@ -126,7 +122,7 @@ const EditEmployee: React.FC = () => {
       <div className='display__controls'/>
 
       <div className='center-display-space'>
-        <form className='form-wrapper employee__edit-form'>
+        <form className='form-wrapper'>
           <h2 className='title form-title'>
             Edit {selectedEmployee!.name}
           </h2>
@@ -195,11 +191,13 @@ const EditEmployee: React.FC = () => {
               id='description'
               name='description'
               ref={descriptionRef}
-              maxLength={101}
+              maxLength={100}
               onChange={(e) => setCountData(e.currentTarget.value.length)}
               defaultValue={selectedEmployee?.description}
             />
-            <div className='parameter-text'>{countData} of 100</div>
+            <div className='parameter-text parameter-gap'>
+              {countData} of 100
+            </div>
           </div>
 
           <div className='form__control-wrapper'>

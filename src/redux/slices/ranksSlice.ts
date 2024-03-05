@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import RankType, { RankPostType } from '../../types/rankType';
+import RankType, { RankPostType } from '../../types/rank.type';
 
 type InitialState = {
     loading: boolean,

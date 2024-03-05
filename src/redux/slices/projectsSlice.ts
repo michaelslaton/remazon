@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import ProjectType, { ProjectPostType } from '../../types/projectType';
+import ProjectType, { ProjectPostType } from '../../types/project.type';
 
 type InitialState = {
   loading: boolean;

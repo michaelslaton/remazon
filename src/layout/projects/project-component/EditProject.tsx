@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { editProjectThunk } from '../../../redux/slices/projectsSlice';
 import { setUiError } from '../../../redux/slices/controlsSlice';
 import { projectTypes } from '../../../data/projectTypes';
-import ProjectType from '../../../types/projectType';
-import EmployeeType from '../../../types/employeeType';
+import ProjectType from '../../../types/project.type';
+import EmployeeType from '../../../types/employee.type';
 import '../projects.css';
 
 const EditProject: React.FC = () => {
@@ -13,7 +13,7 @@ const EditProject: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   // States ------------------------------------------------------------------ >
-  const [ countData, setCountData ] = useState<number>(0);
+  const [ descriptionCountData, setDescriptionCountData ] = useState<number>(0);
   const projectsList: ProjectType[] = useAppSelector((state)=> state.projectsControl.projects);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
@@ -34,7 +34,7 @@ const EditProject: React.FC = () => {
   const minutes: string = projectDate.getMinutes().toString().padStart(2, "0");
   // -->
 
-  useEffect(()=> setCountData(selectedProject!.description.length),[]);
+  useEffect(()=> setDescriptionCountData(selectedProject!.description.length),[]);
 
   const checkForVariance = (): boolean => {
     let dateCheck: boolean = false;
@@ -60,6 +60,8 @@ const EditProject: React.FC = () => {
 
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
+    const currentDate: Date = new Date();
+    const inputDate: Date = new Date(dateRef.current!.value);
 
     let inputHost: number = selectedProject!.host;
     if (currentEmployee!.admin) inputHost = Number(hostRef.current!.value);
@@ -68,19 +70,14 @@ const EditProject: React.FC = () => {
       dispatch(setUiError('No changes have been made.'));
       return;
     };
-    // Name > 1 character and exists
     if (nameRef.current!.value.length < 1) {
       dispatch(setUiError('Please enter a name for the project.'));
       return;
     };
-    // If the description is greater than the allowed length of 200
     if (descriptionRef.current!.value.length > 200) {
       dispatch(setUiError('Please shorten your description to 200 characters or less.'));
       return;
     };
-    // If the set date is in the past
-    const currentDate: Date = new Date();
-    const inputDate: Date = new Date(dateRef.current!.value);
     if(currentDate.getTime() > inputDate.getTime()) {
       dispatch(setUiError('Please pick an upcoming Date and time.'));
       return;
@@ -195,11 +192,11 @@ const EditProject: React.FC = () => {
               name='description'
               ref={descriptionRef}
               maxLength={200}
-              onChange={(e)=> setCountData(e.currentTarget.value.length)}
+              onChange={(e)=> setDescriptionCountData(e.currentTarget.value.length)}
               defaultValue={selectedProject?.description}
             />
             <div className='parameter-text'>
-              {countData} of 200
+              {descriptionCountData} of 200
             </div>
 
             <div>

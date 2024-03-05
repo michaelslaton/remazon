@@ -6,9 +6,9 @@ import { setUiError } from '../../../redux/slices/controlsSlice';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import RankType from '../../../types/rankType';
-import ProjectType from '../../../types/projectType';
-import EmployeeType from '../../../types/employeeType';
+import RankType from '../../../types/rank.type';
+import ProjectType from '../../../types/project.type';
+import EmployeeType from '../../../types/employee.type';
 import months from '../../../data/months';
 import '../projects.css';
 
@@ -105,6 +105,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
   // if so, it renders the appropriate button (add or remove) depending on whether the current user is already attending or not.
   const attendButtonRender = (): ReactNode | null => {
     if ( !currentEmployee ) return;
+    if ( currentEmployee.id === data.host ) return;
     if (data.attending?.includes(currentEmployee!.uid)) return (
       <button className={`button card-button ${data.regularity === 'recurring' && 'dark'}`} onClick={()=> attendButtonHandler('remove')}>
         <FontAwesomeIcon icon={faMinus}/>

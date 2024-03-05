@@ -1,9 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { createEmployeeThunk, fetchEmployeesListThunk, fetchCurrentEmployeeThunk } from '../../../redux/slices/employeesSlice';
-import EmployeeType, { EmployeePostType } from '../../../types/employeeType';
+import EmployeeType, { EmployeePostType } from '../../../types/employee.type';
 import { setUiError } from '../../../redux/slices/controlsSlice';
 import '../authentication.css';
 
@@ -11,6 +11,7 @@ const SignUp: React.FC = () => {
   const auth = getAuth();
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
+  const [ descriptionCountData, setDescriptionCountData ] = useState<number>(0);
   const emailRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -46,6 +47,10 @@ const SignUp: React.FC = () => {
     };
     if (passwordRef.current?.value !== passwordRepeatRef.current?.value) { 
       dispatch(setUiError('Passwords do not macth.'));
+      return;
+    };
+    if (descriptionRef.current!.value.length > 100) {
+      dispatch(setUiError('Please shorten your description to 100 characters or less.'));
       return;
     };
 
@@ -157,7 +162,12 @@ const SignUp: React.FC = () => {
               id='description'
               name='description'
               ref={descriptionRef}
+              maxLength={100}
+              onChange={(e) => setDescriptionCountData(e.currentTarget.value.length)}
             />
+            <div className='parameter-text parameter-gap'>
+              {descriptionCountData} of 100
+            </div>
           </div>
 
           <div className='form__control-wrapper'>

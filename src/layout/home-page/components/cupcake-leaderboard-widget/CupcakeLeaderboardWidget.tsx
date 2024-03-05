@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../../../redux/hooks';
-import EmployeeType from '../../../../types/employeeType';
+import EmployeeType from '../../../../types/employee.type';
 import colorCupcake from '../../../../assets/imgs/cupcakeColor.png';
 import './cupcakeLeaderboard.css';
 

@@ -6,7 +6,7 @@ import { faHouse, faProjectDiagram, faRankingStar, faStar, faTrophy, faSignIn, f
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import CollapseButton from './collapse-button/CollapseButton';
 import LinkButton from './link-button/LinkButton';
-import EmployeeType from '../../types/employeeType';
+import EmployeeType from '../../types/employee.type';
 import './navbar.css';
 
 export type LinkButtonData = {
@@ -53,6 +53,7 @@ const Navbar: React.FC = () => {
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
 
   const logoutHandler = (): void => {
+    if(!window.confirm('Are you sure you wish to Sign Out?')) return;
     signOut(auth);
     dispatch(clearCurrentEmployee());
     navigate(0);

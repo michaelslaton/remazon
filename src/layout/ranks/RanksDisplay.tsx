@@ -4,9 +4,9 @@ import { fetchRanksThunk } from '../../redux/slices/ranksSlice';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NewRank from './rank-component/NewRank';
-import EmployeeType from '../../types/employeeType';
+import EmployeeType from '../../types/employee.type';
 import Rank from './rank-component/Rank';
-import RankType from '../../types/rankType';
+import RankType from '../../types/rank.type';
 import './ranks.css';
 import Loading from '../../utils/loading/Loading';
 
