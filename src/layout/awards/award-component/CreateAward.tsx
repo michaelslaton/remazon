@@ -1,17 +1,20 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import EmployeeType from "../../../types/employeeType";
-import { AwardPostType } from "../../../types/awardType";
+import AwardType, { AwardPostType } from "../../../types/awardType";
 import { createAwardThunk } from "../../../redux/slices/awardsSlice";
 import { setUiError } from "../../../redux/slices/controlsSlice";
 
 const CreateAward: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
+  const [ awardedForCountData, setAwardedForCountData ] = useState<number>(0);
   const nameRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
   const holderRef = useRef<HTMLSelectElement>(null);
+  const awardedForRef = useRef<HTMLTextAreaElement>(null);
+  const awardList: AwardType[] = useAppSelector((state)=> state.awardsControl.awards);
   const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
 
   const submitHandler: Function = (e: React.FormEvent): void => {
@@ -21,13 +24,26 @@ const CreateAward: React.FC = () => {
     if(Number(holderRef.current?.value) > 0) awardHolder = Number(holderRef.current!.value);
     else awardHolder = null;
 
+    // Name > 1 character and exists
     if (nameRef.current!.value.length < 1) {
       dispatch(setUiError('Name length is too short.'));
       return;
     };
-
+    // If the name is greater than the allowed length of 21
     if (nameRef.current!.value.length > 21) {
       dispatch(setUiError('Please shorten then name length to less than 22 characters.'));
+      return;
+    };
+    // If the name is already taken
+    for(let i=0;i<awardList.length;i++){
+      if(awardList[i].name.toLocaleLowerCase() === nameRef.current!.value.toLocaleLowerCase()){
+        dispatch(setUiError('That name is taken.'));
+        return;
+      };
+    };
+    // If the Awarded For description is greater than the allowed length of 200
+    if (awardedForRef.current!.value.length > 200) {
+      dispatch(setUiError('Please shorten your awarded for description to 200 characters or less.'));
       return;
     };
 
@@ -36,6 +52,7 @@ const CreateAward: React.FC = () => {
       type: typeRef.current!.value,
       date: awardDate,
       holder: awardHolder,
+      awardedFor: awardedForRef.current!.value,
     };
 
     dispatch(createAwardThunk(newAward))
@@ -114,6 +131,24 @@ const CreateAward: React.FC = () => {
             ))}
 
           </select>
+
+          <label
+            htmlFor='awarded for'
+            className='form-input-label'
+          >
+            Awarded For:
+          </label>
+          <textarea
+            id='awarded for'
+            name='awarded for'
+            ref={awardedForRef}
+            maxLength={200}
+            rows={3}
+            onChange={(e)=> setAwardedForCountData(e.currentTarget.value.length)}
+          />
+          <div className='parameter-text'>
+            {awardedForCountData} of 200
+          </div>
         </div>
 
         <div className='form__control-wrapper'>

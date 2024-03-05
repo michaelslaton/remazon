@@ -252,6 +252,7 @@ option {
 .form__inputs {
   width: 97%;
   margin: 0 auto;
+  margin-bottom: .5rem;
 }
 
 .checkbox {
