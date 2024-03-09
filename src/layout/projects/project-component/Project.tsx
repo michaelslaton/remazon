@@ -67,6 +67,38 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
       return;
   };
 
+  // renderAttending returns a list of employees attending the current project.
+  // If the attending employee has a rank color that is not default, their name will be displayed in that rank's color, otherwise it will be set for font-white.
+  // If it is the last in the list of attending, it will not have a comma after it's listing.
+  const renderAttending = (): JSX.Element[] => {
+    let results: JSX.Element[] = [];
+    const attendingList: string[] | undefined = data.attending?.split(',');
+    const sortedEmployeesList: EmployeeType[] = [...employeesList].sort((a,b)=>{
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+      return 0;
+    });
+    if(attendingList){
+      sortedEmployeesList.forEach((employee)=>{
+        if(attendingList.includes(employee.uid)){
+          const employeesRank = ranksList.find((rank)=> rank.id === employee.rank);
+          results.push(
+            <>
+              <div
+                onClick={()=> navigate('/employees')}
+                style={{color: `${employeesRank?.color !== '#ffa500'? `${employeesRank?.color}` : '#DCE1DE' }`, display: 'inline', cursor: 'pointer'}}
+              >
+                {employee.name}
+              </div>
+              {results.length < attendingList.length - 1 ? ', ' : ''}
+            </>
+          );
+        };
+      });
+    };
+    return results;
+  };
+
   // editButtonRender checks all the conditions to see if access is permitted to edit a project.
   // An Admin may always edit, otherwise employees can only edit their hosted projects if an admin has not locked it.
   const editButtonRender = (): ReactNode | null => {
@@ -130,7 +162,11 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
             <div className='project-data__key'>
               Host:
             </div> 
-            <div className='project-data__value' style={{display: 'inline', color: currentHostsRank?.color}}>
+            <div
+              onClick={()=> navigate('/employees')}
+              className='project-data__value'
+              style={{display: 'inline', color: currentHostsRank?.color, cursor: 'pointer'}}
+            >
               {host!.name}
             </div>
           </li>
@@ -168,7 +204,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
                 Confirmed Attending:
               </div>
               <div className='project-data__value'>
-                {data.attending.split(',').length}
+                {renderAttending()}
               </div>
             </li>
           }
