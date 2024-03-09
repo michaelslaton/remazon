@@ -16,6 +16,7 @@ const MostRecentEmployee: React.FC = () => {
   const employeeRank: RankType | undefined = rankList.find(
     (rank) => rank.id === mostRecentEmployee.rank
   );
+  const aliasList: string[] = mostRecentEmployee.aliases.split(',');
 
   if (!employeeList.length) return <Loading/>;
 
@@ -33,23 +34,30 @@ const MostRecentEmployee: React.FC = () => {
         </div>
         <ul className='most-recent__info-list'>
           <li>
-            Rank:
+            {`Rank: `}
             <div
               className='most-recent__info-value'
               style={{color: employeeRank?.color}}
             >
-                {` ${employeeRank?.name}`}
+                {`${employeeRank?.name}`}
             </div>
           </li>
 
           {
             mostRecentEmployee.birthday &&
             <li>
-              Birthday:
-              <div
-                className='most-recent__info-value'
-              >
-                {` ${mostRecentEmployee.birthday}`}
+              {`Birthday: `}
+              <div className='most-recent__info-value'>
+                {`${mostRecentEmployee.birthday}`}
+              </div>
+            </li>
+          }
+
+          { aliasList[0] !== '' &&
+            <li>
+              {`Aliases: `}
+              <div className='most-recent__info-value'>
+                { aliasList.map((alias, i)=> i < aliasList.length - 1 ? `${alias}, ` : `${alias}`)}
               </div>
             </li>
           }

@@ -18,6 +18,7 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
   const ranksList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const currentEmployeesRank: RankType | undefined = ranksList.find((rank)=> rank.id === data.rank);
+  const aliasList: string[] = data.aliases?.split(',');
   
   let birthday: Date | null = null;
   if (data.birthday) birthday = new Date(data.birthday); 
@@ -42,7 +43,6 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
     <div
       className={`employee__wrapper ${data.rank === 0 && 'deactivated'}`}
       style={{borderColor: currentEmployeesRank?.color}}
-      // onClick={()=> onClickHandler()}
     >
       <div className='employee__header'>
         <h2 className='employee__name'>{data.name}</h2>
@@ -65,7 +65,7 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
         { birthday &&
           <li>
             <div className='employee__info-key'>
-              Birthday{`: `}
+              {`Birthday: `}
             </div>
             {birthday.getDate()} - {months[birthday.getMonth()]}
           </li>
@@ -73,10 +73,19 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
 
         <li>
           <div className='employee__info-key'>
-            Bio{`: `}
+            {`Bio: `}
           </div>
             {data.description}
         </li>
+
+        { data.aliases &&
+          <li>
+            <div className='employee__info-key'>
+              {`Aliases: `}
+            </div>
+              { aliasList.map((alias, i)=> i < aliasList.length - 1 ? `${alias}, ` : `${alias}`)}
+          </li>
+        }
 
       </ul>
       
