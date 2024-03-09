@@ -13,6 +13,7 @@ const EditEmployee: React.FC = () => {
   const dispatch = useAppDispatch();
   // States ------------------------------------------------------------------ >
   const [ countData, setCountData ] = useState<number>(0);
+  const [ aliasData, setAliasData ] = useState<string[]>([]);
   const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const ranksList: Rank[] = useAppSelector((state)=> state.ranksControl.ranks);
@@ -22,6 +23,7 @@ const EditEmployee: React.FC = () => {
   const bdayRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const rankRef = useRef<HTMLSelectElement>(null);
+  const aliasRef = useRef<HTMLInputElement>(null);
   // Birthday formatting ------------------------------------------------------ >
   let employeeBirthday: Date | null = null;
   let updatedBirthday: Date | null = null;
@@ -35,6 +37,7 @@ const EditEmployee: React.FC = () => {
   useEffect(()=> {
     // if(!currentEmployee?.uid) navigate('/signin');
     setCountData(selectedEmployee!.description.length)
+    if(selectedEmployee!.aliases) setAliasData(selectedEmployee!.aliases.split(","));
   },[]);
 
   // checkForVariance performs a series of checks to see if the intial state manages the current values of the form
@@ -57,10 +60,26 @@ const EditEmployee: React.FC = () => {
     if (
       nameRef.current?.value === selectedEmployee?.name &&
       descriptionRef.current!.value === selectedEmployee?.description &&
+      aliasData.join(',') === selectedEmployee!.aliases &&
       updatedRank === selectedEmployee?.rank &&
       !birthdayCheck
       ) return false;
     else return true;
+  };
+
+  const handleAliasInput = (): void => {
+    if(aliasRef.current?.value === '') return;
+    const newAliasList: string[] = [...aliasData, aliasRef.current!.value ];
+    setAliasData(newAliasList);
+    aliasRef.current!.value = '';
+    return;
+  };
+
+  const removeAlias = (aliasIndex: number): void => {
+    const newAliasList: string[] = [...aliasData];
+    newAliasList.splice(aliasIndex, 1);
+    setAliasData(newAliasList);
+    return;
   };
 
   const submitHandler: Function = (e: React.FormEvent): void => {
@@ -107,7 +126,8 @@ const EditEmployee: React.FC = () => {
       birthday: employeeBirthday,
       rank: updatedRank,
       description: descriptionRef.current!.value,
-      admin: selectedEmployee!.admin
+      admin: selectedEmployee!.admin,
+      aliases: aliasData.join(','),
     };
     dispatch(editEmployeeThunk(updatedEmployee));
     navigate(-1);
@@ -180,6 +200,43 @@ const EditEmployee: React.FC = () => {
               ref={bdayRef}
               defaultValue={birthdayString}
             />
+
+            <label>
+              Aliases:
+            </label>
+            <div className='alias-display'>
+              {aliasData.map((alias,i)=>(
+                <div
+                  key={i}
+                  className='alias'
+                >
+                  {alias}
+                  <button
+                    type='button'
+                    className='alias-button'
+                    onClick={()=> removeAlias(i)}
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className='alias-input-wrapper'>
+              <input
+                type='text'
+                id='aliases'
+                name='aliases'
+                className='alias-input'
+                ref={aliasRef}
+              />
+              <button
+              type='button'
+              className='button alias-input-button'
+              onClick={()=> handleAliasInput()}
+              >
+                +
+              </button>
+            </div>
 
             <label
               htmlFor='description'
