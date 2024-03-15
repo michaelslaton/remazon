@@ -6,7 +6,7 @@ import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import { fetchRanksThunk } from '../../redux/slices/ranksSlice';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Loading from '../../utils/loading/Loading';
+import Loading from '../components/loading/Loading';
 import Project from './project-component/Project';
 import ProjectType from '../../types/project.type';
 import EmployeeType from '../../types/employee.type';

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import { fetchRanksThunk } from '../../redux/slices/ranksSlice';
-import Loading from '../../utils/loading/Loading';
+import Loading from '../components/loading/Loading';
 import Employee from './employee-component/Employee';
 import EmployeeType from '../../types/employee.type';
 import './employees.css';

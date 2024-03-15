@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
-import Loading from '../loading/Loading';
+import Loading from '../../layout/components/loading/Loading';
 
 type AuthProps = {
   children: JSX.Element;

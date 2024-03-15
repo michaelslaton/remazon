@@ -1,6 +1,6 @@
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../redux/hooks';
-import Loading from '../../../../../utils/loading/Loading';
+import Loading from '../../../../components/loading/Loading';
 import AwardType from '../../../../../types/award.type';
 import EmployeeType from '../../../../../types/employee.type';
 import months from '../../../../../data/months';
