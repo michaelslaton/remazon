@@ -2,7 +2,7 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../redux/hooks';
 import EmployeeType from '../../../../../types/employee.type';
 import RankType from '../../../../../types/rank.type';
-import Loading from '../../../../../utils/loading/Loading';
+import Loading from '../../../../components/loading/Loading';
 import '../mostRecent.css';
 
 const MostRecentEmployee: React.FC = () => {

@@ -8,7 +8,7 @@ import EmployeeType from '../../types/employee.type';
 import Rank from './rank-component/Rank';
 import RankType from '../../types/rank.type';
 import './ranks.css';
-import Loading from '../../utils/loading/Loading';
+import Loading from '../components/loading/Loading';
 
 const RanksDisplay: React.FC = () => {
   const dispatch = useAppDispatch();
