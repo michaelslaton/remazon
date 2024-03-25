@@ -1,9 +1,4 @@
-import { cleanup, render } from '@testing-library/react'
-import { afterEach } from 'vitest'
-
-afterEach(() => {
-  cleanup()
-})
+import { render } from '@testing-library/react'
 
 function customRender(ui: React.ReactElement, options = {}) {
   return render(ui, {
