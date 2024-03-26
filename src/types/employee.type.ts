@@ -4,8 +4,8 @@ type EmployeeType = {
   birthday?: Date | null;
   rank: number;
   description: string;
-  status: boolean;
   cupcakes: number;
+  quote: null | string;
   aliases: string;
   locked: boolean;
   uid: string;
