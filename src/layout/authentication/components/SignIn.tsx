@@ -59,6 +59,9 @@ const SignIn: React.FC = () => {
             E-Mail:
           </label>
           <input
+            id='email'
+            name='email'
+            data-testid='email'
             type='email'
             ref={emailRef}
             required
@@ -71,6 +74,9 @@ const SignIn: React.FC = () => {
             Password: 
           </label>
           <input
+            id='password'
+            name='password'
+            data-testid='password'
             type='password'
             ref={passwordRef}
             required

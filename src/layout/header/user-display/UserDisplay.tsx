@@ -25,8 +25,8 @@ const UserDisplay: React.FC = () => {
     if (currentEmployee) dispatch(fetchNotificationsThunk(currentEmployee.uid));
   },[]);
 
-  if (auth.currentUser || currentEmployee) return (
-    <div className='user-display__wrapper'>
+  if (currentEmployee) return (
+    <div data-testid='user-display' className='user-display__wrapper'>
       <div className='user-display__user-wrapper'>
         <div
           className='user-display__employee-name'
@@ -35,7 +35,7 @@ const UserDisplay: React.FC = () => {
           {currentEmployee?.name}
         </div>
           <button
-            className={`notification-button ${notifications.length && 'active'}`}
+            className={`notification-button ${notifications?.length && 'active'}`}
             onClick={() => navigate('/notifications')}
           >
             <FontAwesomeIcon icon={faNewspaper} />
@@ -43,6 +43,10 @@ const UserDisplay: React.FC = () => {
       </div>
     </div>
   );
+  else return (
+    <>
+    </>
+  )
 };
 
 export default UserDisplay;
