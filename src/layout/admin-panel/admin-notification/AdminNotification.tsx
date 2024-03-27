@@ -173,9 +173,10 @@ const AdminNotification: React.FC = () => {
           Send To:
         </label>
         <div className='admin__send-to-grid'>
-          <ul className='admin__send-to__list'>
+          <ul data-testid='not included' className='admin__send-to__list'>
             {alphabetizeEmployees(listState.unlisted).map((employee) => (
               <li
+                data-testid='not included listing'
                 className={`admin__send-to__listing ${listState.clickedUnlisted.includes(employee.uid) && 'selected'}`}
                 onClick={() => handleClickUnlisted(employee)}
                 key={employee.id}
@@ -220,9 +221,10 @@ const AdminNotification: React.FC = () => {
           </div>
 
           <div>
-            <ul className='admin__send-to__list'>
+            <ul data-testid='included' className='admin__send-to__list'>
               {alphabetizeEmployees(listState.listed).map((employee) => (
                 <li
+                  data-testid='included listing'
                   className={`admin__send-to__listing ${listState.clickedListed.includes(employee.uid) && 'selected'}`}
                   onClick={() => handleClickListed(employee)}
                   key={employee.id}

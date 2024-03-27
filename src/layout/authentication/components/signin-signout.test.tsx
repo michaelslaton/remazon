@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import { act, render, screen, userEvent } from "../../../utils/testUtils/test-utils"
-import SignIn from "./SignIn"
+import { act, render, screen, userEvent } from "../../../utils/testUtils/test-utils";
+import SignIn from "./SignIn";
 
 const mockedUseNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -71,7 +71,7 @@ describe('Sign In, Sign Out', ()=>{
     });
     
     expect(signinButton).toBeInTheDocument();
-    await act(()=> user.click(signinButton));
+    await user.click(signinButton);
     expect(mockedUseNavigate).not.toHaveBeenCalled();
   });
 
