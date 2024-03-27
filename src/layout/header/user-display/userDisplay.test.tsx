@@ -1,13 +1,15 @@
 import { fetchCurrentEmployeeThunk, clearCurrentEmployee } from "../../../redux/slices/employeesSlice";
 import store from "../../../redux/store";
-import { render, screen } from "../../../utils/testUtils/test-utils";
+import { render, screen, act } from "../../../utils/testUtils/test-utils";
 import UserDisplay from "./UserDisplay";
 import { BrowserRouter } from "react-router-dom";
 
 describe('User Display', ()=>{
 
   it('renders names properly', async ()=>{
-    await store.dispatch(fetchCurrentEmployeeThunk('1'));
+    await act(async ()=>{
+      await store.dispatch(fetchCurrentEmployeeThunk('1'))
+    });
     render(
       <BrowserRouter>
         <UserDisplay/>

@@ -28,8 +28,8 @@ const NotificationsDisplay: React.FC = () => {
       <div className='display__controls'/>
 
       <div className='notifications-container'>
-        <div className='notification__list'>
-          { notificationsList.length ?
+        <div data-testid='notifications list' className='notification__list'>
+          { notificationsList?.length ?
             <>
               {notificationsList.map((notification)=>(
                 <div
@@ -49,7 +49,7 @@ const NotificationsDisplay: React.FC = () => {
           }
         </div>
 
-        <div className='notification__list'>
+        <div data-testid='notification display' className='notification__list'>
           { selectedNotification &&
             <Notification data={selectedNotification} uid={currentEmployee!.uid} action={setSelectedNotification}/>
           }
