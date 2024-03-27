@@ -1,14 +1,9 @@
-import { HttpHandler, HttpResponse, http } from 'msw'
-import RankType from '../../types/rank.type';
+import { HttpHandler, HttpResponse, http } from 'msw';
 import EmployeeType from '../../types/employee.type';
 
 const API_URL = import.meta.env.VITE_REMAZON_API_URL || "http://localhost:5000";
 
-type RanksDummyData = {
-  data: RankType[]
-}
-
-const ranks: RanksDummyData = {
+const ranks = {
   data: [
       {
           id: 0,
@@ -63,6 +58,25 @@ const userDummyData = {
   }
 };
 
+const notificationsDummyData = {
+  data: [
+    {
+        id: 1,
+        type: "admin",
+        users: "2",
+        title: "A Notification",
+        message: "This is a notification"
+    },
+    {
+        id: 2,
+        type: "project",
+        users: "2",
+        title: "New Project",
+        message: "This is a project notification"
+    }
+  ]
+};
+
 const employeesDummyData: { data: EmployeeType[] } = {
   data: [
     {
@@ -96,12 +110,12 @@ const employeesDummyData: { data: EmployeeType[] } = {
 
 // Define handlers that catch the corresponding requests and returns the mock data.
 export const handlers: HttpHandler[] = [
-  // Ranks Handlers ------------------------------------------->
+  // Ranks Handlers -------------------------------------------------->
   http.get(`${API_URL}/remazon/ranks`, ()=>{
     return HttpResponse.json(ranks, {status: 200})
   }),
 
-  // Employees Handlers ------------------------------------------->
+  // Employees Handlers ---------------------------------------------->
   http.get(`${API_URL}/remazon/employees`, ()=>{
     return HttpResponse.json(employeesDummyData, {status: 200})
   }),
@@ -117,11 +131,11 @@ export const handlers: HttpHandler[] = [
   // Notifications Handlers ------------------------------------------->
   // -- Admin -- >
   http.get(`${API_URL}/remazon/notifications/1`, ()=>{
-    return HttpResponse.json({}, {status: 200})
+    return HttpResponse.json([], {status: 200})
   }),
   // -- User -- >
   http.get(`${API_URL}/remazon/notifications/2`, ()=>{
-    return HttpResponse.json({}, {status: 200})
+    return HttpResponse.json(notificationsDummyData, {status: 200})
   }),
 
 ];
