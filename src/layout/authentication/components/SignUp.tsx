@@ -95,7 +95,7 @@ const SignUp: React.FC = () => {
             <input
               type='text'
               name='name'
-              id='id'
+              id='name'
               ref={nameRef}
               required
             />
@@ -107,7 +107,9 @@ const SignUp: React.FC = () => {
               Email:
             </label>
             <input
+              data-testid='email'
               type='email'
+              id='email'
               ref={emailRef}
               required
             />
@@ -119,6 +121,7 @@ const SignUp: React.FC = () => {
               Password:
             </label>
             <input
+              data-testid='password'
               id='password'
               type='password'
               ref={passwordRef}
@@ -132,6 +135,7 @@ const SignUp: React.FC = () => {
               Re-Enter Password:
             </label>
             <input
+              data-testid='password repeat'
               id='password repeat'
               type='password'
               ref={passwordRepeatRef}
@@ -145,6 +149,7 @@ const SignUp: React.FC = () => {
               Birthday:
             </label>
             <input
+              data-testid='birthday'
               type='date'
               id='birthday'
               name='birthday'
