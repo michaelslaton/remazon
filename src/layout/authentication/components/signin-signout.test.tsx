@@ -139,6 +139,22 @@ describe('Sign In / Sign Up', ()=>{
       expect(mockedUseNavigate).toHaveBeenCalled();
     });
 
+    it('leaves the page when return to sign in is clicked', async ()=>{
+      render(
+        <BrowserRouter>
+          <SignUp/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+
+      const returnToSignInButton = screen.getByRole('button', {name:'Return to Sign In'});
+      expect(returnToSignInButton).toBeVisible();
+
+      await user.click(returnToSignInButton);
+      expect(mockedUseNavigate).toHaveBeenCalled();
+    });
+
   });
 
 });

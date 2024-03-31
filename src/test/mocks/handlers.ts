@@ -1,9 +1,12 @@
 import { HttpHandler, HttpResponse, http } from 'msw';
 import EmployeeType from '../../types/employee.type';
+import AwardType from '../../types/award.type';
+import NotificationType from '../../types/notification.type';
+import RankType from '../../types/rank.type';
 
 const API_URL = import.meta.env.VITE_REMAZON_API_URL || "http://localhost:5000";
 
-const ranks = {
+const ranks: { data: RankType[] } = {
   data: [
       {
           id: 0,
@@ -26,7 +29,7 @@ const ranks = {
   ]
 };
 
-const adminDummyData = {
+const adminDummyData: { data: EmployeeType } = {
   data: {
       id: 1,
       name: "Rembo",
@@ -42,7 +45,7 @@ const adminDummyData = {
   }
 };
 
-const userDummyData = {
+const userDummyData: { data: EmployeeType } = {
   data: {
       id: 2,
       name: "Bueno",
@@ -58,7 +61,7 @@ const userDummyData = {
   }
 };
 
-const notificationsDummyData = {
+const notificationsDummyData: { data: NotificationType[]} = {
   data: [
     {
         id: 1,
@@ -108,6 +111,38 @@ const employeesDummyData: { data: EmployeeType[] } = {
   ]
 }
 
+const awardsDummyData: { data: AwardType[] } = {
+  data: [
+      {
+          id: 1,
+          name: 'Drift Belt',
+          type: 'belt',
+          holder: 3,
+          date: '2024-03-04T02:48:28.149Z',
+          awardedFor: 'The perfect driiiiift! Yeeeh',
+          retired: false,
+      },
+      {
+          id: 2,
+          name: 'Employee of the Month',
+          type: 'trophy',
+          holder: null,
+          date: '2021-03-02T23:57:15.016Z',
+          awardedFor: 'Notable excellence!',
+          retired: false,
+      },
+      {
+          id: 3,
+          name: 'Face of the Business',
+          type: 'belt',
+          holder: 1,
+          date: '2024-03-05T22:55:29.988Z',
+          awardedFor: 'Its the face... of the business!!',
+          retired: false,
+      }
+  ]
+}
+
 // Define handlers that catch the corresponding requests and returns the mock data.
 export const handlers: HttpHandler[] = [
   // Ranks Handlers -------------------------------------------------->
@@ -136,6 +171,11 @@ export const handlers: HttpHandler[] = [
   // -- User -- >
   http.get(`${API_URL}/remazon/notifications/2`, ()=>{
     return HttpResponse.json(notificationsDummyData, {status: 200})
+  }),
+
+  // Awards Handlers ------------------------------------------------->
+  http.get(`${API_URL}/remazon/awards`, ()=>{
+    return HttpResponse.json(awardsDummyData, {status: 200})
   }),
 
 ];
