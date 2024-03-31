@@ -118,7 +118,7 @@ const AwardsDisplay: React.FC = () => {
         }
       </div>
       
-      <div className='award__cards-wrapper'>
+      <div data-testid='award cards wrapper' className='award__cards-wrapper'>
         {awardsList.map((award)=> (
           <Award key={award.id} awardData={award}/>
         ))}

@@ -3,7 +3,7 @@ type AwardType = {
   name: string;
   type: string;
   holder: number | null;
-  date: Date;
+  date: string;
   awardedFor?: string;
   retired: boolean;
 };
