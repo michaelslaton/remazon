@@ -60,6 +60,7 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
             type='color'
             id='color'
             name='color'
+            data-testid='color-box'
             ref={colorRef}
             className='rank__edit-form--color-selector'
             defaultValue={'#ffa500'}
@@ -69,6 +70,7 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
         <div className='rank__buttons-wrapper'>
           <button
             type='submit'
+            data-testid='new-rank-save'
             className='button rank__submit create'
             onClick={(e) => submitHandler(e)}
           >
@@ -77,6 +79,7 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
 
           <button
             type='button'
+            data-testid='new-rank-cancel'
             className='button rank_submit delete'
             onClick={() => setNewRankDisplay(false)}
           >

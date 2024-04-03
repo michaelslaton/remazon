@@ -78,6 +78,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
         <div className='rank__buttons-wrapper'>
           <button
             type='submit'
+            data-testid='rank-save-button'
             className='button rank__submit'
             onClick={(e) => editSubmit(e)}
           >
@@ -86,6 +87,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
 
           <button
             type='button'
+            data-testid='rank-cancel-button'
             className='button delete'
             onClick={() => setEditMode(false)}
           >
@@ -109,6 +111,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
       
       <div className='rank__buttons-wrapper'>
         <button
+          data-testid='rank-edit-button'
           className='button rank__submit'
           onClick={() => setEditMode(true)}
         >
@@ -118,6 +121,7 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
         {/* Conditional : Can't delete the Ceo or Deactivated rank*/}
         { rankData.id > 1 &&
           <button
+            data-testid='rank-delete-button'
             className='button delete'
             onClick={() => deleteButtonHandler()}
           >

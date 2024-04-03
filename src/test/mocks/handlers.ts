@@ -6,7 +6,7 @@ import RankType from '../../types/rank.type';
 
 const API_URL = import.meta.env.VITE_REMAZON_API_URL || "http://localhost:5000";
 
-const ranks: { data: RankType[] } = {
+export const ranksDummyData: { data: RankType[] } = {
   data: [
       {
           id: 0,
@@ -147,7 +147,7 @@ const awardsDummyData: { data: AwardType[] } = {
 export const handlers: HttpHandler[] = [
   // Ranks Handlers -------------------------------------------------->
   http.get(`${API_URL}/remazon/ranks`, ()=>{
-    return HttpResponse.json(ranks, {status: 200})
+    return HttpResponse.json(ranksDummyData, {status: 200})
   }),
 
   // Employees Handlers ---------------------------------------------->
