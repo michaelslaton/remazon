@@ -44,7 +44,7 @@ const RanksDisplay: React.FC = () => {
                   { newRankDisplay ? 
                     <NewRank setNewRankDisplay={setNewRankDisplay}/>
                     :
-                    <button className='button form__control' onClick={()=> setNewRankDisplay(true)}>
+                    <button data-testid='add rank' className='button form__control' onClick={()=> setNewRankDisplay(true)}>
                       <FontAwesomeIcon icon={faPlus}/>
                     </button>
                   }
