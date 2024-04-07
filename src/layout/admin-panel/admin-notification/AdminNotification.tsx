@@ -264,7 +264,7 @@ const AdminNotification: React.FC = () => {
           maxLength={200}
           onChange={(e)=> setCountData(e.currentTarget.value.length)}
         />
-        <div className='parameter-text'>
+        <div className='parameter-text parameter-gap'>
           {countData} of 200
         </div>
       </div>
