@@ -51,7 +51,7 @@ const AdminMotd: React.FC = () => {
           onChange={(e)=> setCountData(e.currentTarget.value.length)}
           placeholder={currentMotd}
         />
-        <div className='parameter-text'>
+        <div className='parameter-text parameter-gap'>
           {countData} of 100
         </div>
       </div>
