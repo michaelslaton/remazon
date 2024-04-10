@@ -3,6 +3,7 @@ import EmployeeType from '../../types/employee.type';
 import AwardType from '../../types/award.type';
 import NotificationType from '../../types/notification.type';
 import RankType from '../../types/rank.type';
+import ProjectType from '../../types/project.type';
 
 const API_URL = import.meta.env.VITE_REMAZON_API_URL || "http://localhost:5000";
 
@@ -141,6 +142,55 @@ const awardsDummyData: { data: AwardType[] } = {
           retired: false,
       }
   ]
+};
+
+export const projectsDummyData: { data: ProjectType[] } = {
+  data: [
+    {
+      id: 1,
+      name: 'Movie Night',
+      type: 'Watch Night',
+      date: '2026-01-25T08:00:00.000Z',
+      host: 1,
+      attending: '1',
+      regularity: 'special',
+      description: 'Movie watch nights',
+      status: true
+    },
+    {
+        id: 2,
+        name: 'Hunt Event',
+        type: 'Game Night',
+        date: '2026-03-25T08:00:00.000Z',
+        host: 2,
+        attending: '1,2',
+        regularity: 'recurring',
+        description: 'Lets do the current hunt event',
+        status: true
+    },
+    {
+      id: 3,
+      name: 'Wrassles',
+      type: 'RWF',
+      date: '2026-06-25T08:00:00.000Z',
+      host: 1,
+      attending: '1',
+      regularity: 'recurring',
+      description: 'RWF NIGHT',
+      status: true
+    },
+    {
+      id: 4,
+      name: 'Something Courtney Night',
+      type: 'Social Gathering',
+      date: '2026-10-25T08:00:00.000Z',
+      host: 1,
+      attending: '1,2',
+      regularity: 'special',
+      description: 'RWF NIGHT',
+      status: false
+    },
+  ]
 }
 
 // Define handlers that catch the corresponding requests and returns the mock data.
@@ -176,6 +226,11 @@ export const handlers: HttpHandler[] = [
   // Awards Handlers ------------------------------------------------->
   http.get(`${API_URL}/remazon/awards`, ()=>{
     return HttpResponse.json(awardsDummyData, {status: 200})
+  }),
+
+  // Awards Handlers ------------------------------------------------->
+  http.get(`${API_URL}/remazon/projects`, ()=>{
+    return HttpResponse.json(projectsDummyData, {status: 200})
   }),
 
 ];

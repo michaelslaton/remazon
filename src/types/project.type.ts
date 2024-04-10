@@ -3,11 +3,11 @@ type ProjectType = {
   name: string;
   host: number;
   attending?: string;
-  date: Date;
+  date: Date | string;
   type: string;
   description: string;
   regularity: string;
-  locked: boolean;
+  locked?: boolean;
   status: boolean;
 };
 

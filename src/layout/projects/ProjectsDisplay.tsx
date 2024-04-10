@@ -44,7 +44,62 @@ const ProjectsDisplay: React.FC = () => {
      return 0;
  });
 
-  if(!projectsList.length) return ( <>No projects to show.</> )
+  if(!projectsList.length) return ( 
+    <>
+      <div className='display__header'>
+        <h2>Projects</h2>
+      </div>
+
+      <div className='display__controls'>
+        <select
+          data-testid='projects sort'
+          id='projects sort'
+          name='projects sort'
+          defaultValue=''
+          onChange={(e)=> setSortType(e.target.value)}
+        >
+          <option
+            disabled={true}
+            value=''
+          >
+              Sort By
+          </option>
+          <option value='alphabetical'>
+            Alphabetical
+          </option>
+          <option value='host'>
+            Host
+          </option>
+        </select>
+        
+        <div className='display__controls--deactivated'>
+          Show deactivated ? 
+          <input
+            id='deactivated'
+            name='deactivated'
+            data-testid='deactivated checkbox'
+            type='checkbox'
+            defaultChecked={false}
+            onChange={(e)=> setShowDeactivated(e.target.checked)}
+          />
+        </div>
+        {currentEmployee?.uid && 
+          currentEmployee.rank < 5 &&
+          <button
+            className='button card-button'
+            data-testid='add new'
+            onClick={()=> navigate('/projects/create')}
+          >
+            <FontAwesomeIcon icon={faPlus}/>
+          </button>
+        }
+      </div>
+
+      No projects to show.
+    </>
+  )
+
+  console.log(showDeactivated)
 
   return (
     <>
@@ -85,6 +140,7 @@ const ProjectsDisplay: React.FC = () => {
           currentEmployee.rank < 5 &&
           <button
             className='button card-button'
+            data-testid='new event button'
             onClick={()=> navigate('/projects/create')}
           >
             <FontAwesomeIcon icon={faPlus}/>
@@ -95,7 +151,7 @@ const ProjectsDisplay: React.FC = () => {
       <div className='projects__section-wrapper'>
         <div className='projects__section dark'>
           <h2 className='projects__section-title'>Special Events...</h2>
-          <div className='projects__cards-wrapper'>
+          <div data-testid='special event list' className='projects__cards-wrapper'>
             {projectsList.map((project) =>
               project.status && project.regularity === 'special' && (
                 <Project key={project.id} data={project}/>
@@ -105,8 +161,8 @@ const ProjectsDisplay: React.FC = () => {
         </div>
 
         <div className='projects__section light'>
-          <h2 className='projects__section-title'>Recurring...</h2>
-          <div className='projects__cards-wrapper'>
+          <h2 className='projects__section-title'>Recurring Events...</h2>
+          <div data-testid='recurring event list' className='projects__cards-wrapper'>
             {projectsList.map((project) =>
               project.status && project.regularity === 'recurring' && (
                 <Project key={project.id} data={project}/>
@@ -118,7 +174,7 @@ const ProjectsDisplay: React.FC = () => {
         { showDeactivated &&
           <div className='projects__section dark'>
             <h2 className='projects__section-title'>Deactivated</h2>
-            <div className='projects__cards-wrapper'>
+            <div data-testid='deactivated event list' className='projects__cards-wrapper'>
               {showDeactivated &&
                 projectsList.map((project) =>
                   !project.status && (

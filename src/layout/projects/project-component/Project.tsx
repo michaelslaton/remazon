@@ -108,6 +108,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
       <button
+        data-testid='edit button'
         className={`button card-button ${data.regularity === 'recurring' && 'dark'}`}
         onClick={()=> navigate(`/projects/edit/${data.id}`)}
       >
@@ -125,6 +126,7 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     ) return;
     else if (currentEmployee?.admin || currentEmployee?.id === data.host) return (
       <button
+        data-testid='delete button'
         className={`button delete card-button ${data.regularity === 'recurring' && 'dark'}`}
         onClick={()=> deleteButtonHandler()}
       >
@@ -139,12 +141,18 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
     if ( !currentEmployee ) return;
     if ( currentEmployee.id === data.host ) return;
     if (data.attending?.includes(currentEmployee!.uid)) return (
-      <button className={`button card-button ${data.regularity === 'recurring' && 'dark'}`} onClick={()=> attendButtonHandler('remove')}>
+      <button
+        data-testid='attend button minus'
+        className={`button card-button ${data.regularity === 'recurring' && 'dark'}`}
+        onClick={()=> attendButtonHandler('remove')}>
         <FontAwesomeIcon icon={faMinus}/>
       </button>
     );
     else return (
-      <button className={`button card-button ${data.regularity === 'recurring' && 'dark'}`} onClick={()=> attendButtonHandler('add')}>
+      <button
+        data-testid='attend button plus'
+        className={`button card-button ${data.regularity === 'recurring' && 'dark'}`}
+        onClick={()=> attendButtonHandler('add')}>
         <FontAwesomeIcon icon={faPlus}/>
       </button>
     );
