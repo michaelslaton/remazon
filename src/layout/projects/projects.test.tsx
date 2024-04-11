@@ -67,7 +67,7 @@ describe("Projects", ()=>{
   describe("Project", ()=>{
     const projects: ProjectType[] = projectsDummyData.data;
 
-    it('renders all elements correctly', async ()=>{
+    it('renders all elements correctly (admin viewing project)', async ()=>{
       await act( async ()=>{
         await store.dispatch(fetchProjectsThunk());
         await store.dispatch(fetchCurrentEmployeeThunk('1'));
@@ -75,24 +75,27 @@ describe("Projects", ()=>{
 
       render(
         <BrowserRouter>
-          <Project data={projects[0]}/>
+          <Project data={projects[1]}/>
         </BrowserRouter>
       );
 
-      const title = screen.getByRole('heading', { name: "Movie Night" });
+      const title = screen.getByRole('heading', { name: "Hunt Event" });
       const host = screen.getByText('Host:');
-      const hostName = screen.queryAllByText('Rembo');
+      const hostName = screen.queryAllByText('Bueno');
+      const secondAttending = screen.getByText('Rembo');
       const date = screen.getByText('Date:');
-      const dateValue = screen.getByText('January 25');
+      const dateValue = screen.getByText('March 25');
       const time = screen.getByText('Time:');
-      const timeValue = screen.getByText('12:00 AM');
+      const timeValue = screen.getByText('1:00 AM');
       const type = screen.getByText('Type:');
-      const typeValue = screen.getByText('Watch Night');
+      const typeValue = screen.getByText('Game Night');
       const confirmed = screen.getByText('Confirmed Attending:');
       const description = screen.getByText('Description:');
-      const descriptionValue = screen.getByText('Movie watch nights');
+      const descriptionValue = screen.getByText('Lets do the current hunt event');
       const minusButton = screen.queryByTestId('attend button minus');
       const plusButton = screen.queryByTestId('attend button plus');
+      const deleteButton = screen.getByTestId('delete button');
+      const editButton = screen.getByTestId('edit button');
 
       expect(title).toBeVisible();
       expect(host).toBeVisible();
@@ -104,10 +107,38 @@ describe("Projects", ()=>{
       expect(type).toBeVisible();
       expect(typeValue).toBeVisible();
       expect(confirmed).toBeVisible();
+      expect(secondAttending).toBeVisible();
       expect(description).toBeVisible();
       expect(descriptionValue).toBeVisible();
+      expect(minusButton).toBeVisible();
+      expect(plusButton).not.toBeInTheDocument();
+      expect(deleteButton).toBeVisible();
+      expect(editButton).toBeVisible();
+    });
+
+    it("renders all elements correctly (admin viewing self made project)", async ()=>{
+      await act( async ()=>{
+        await store.dispatch(fetchProjectsThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+
+      render(
+        <BrowserRouter>
+          <Project data={projects[0]}/>
+        </BrowserRouter>
+      );
+
+      const minusButton = screen.queryByTestId('attend button minus');
+      const plusButton = screen.queryByTestId('attend button plus');
+      const deleteButton = screen.getByTestId('delete button');
+      const editButton = screen.getByTestId('edit button');
+      
       expect(minusButton).not.toBeInTheDocument();
       expect(plusButton).not.toBeInTheDocument();
-    })
-  })
+      expect(deleteButton).toBeVisible();
+      expect(editButton).toBeVisible();
+    });
+
+  });
+
 });
