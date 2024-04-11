@@ -163,7 +163,7 @@ export const projectsDummyData: { data: ProjectType[] } = {
         type: 'Game Night',
         date: '2026-03-25T08:00:00.000Z',
         host: 2,
-        attending: '1,2',
+        attending: '2,1',
         regularity: 'recurring',
         description: 'Lets do the current hunt event',
         status: true
