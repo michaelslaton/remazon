@@ -112,13 +112,13 @@ const employeesDummyData: { data: EmployeeType[] } = {
   ]
 }
 
-const awardsDummyData: { data: AwardType[] } = {
+export const awardsDummyData: { data: AwardType[] } = {
   data: [
       {
           id: 1,
           name: 'Drift Belt',
           type: 'belt',
-          holder: 3,
+          holder: 2,
           date: '2024-03-04T02:48:28.149Z',
           awardedFor: 'The perfect driiiiift! Yeeeh',
           retired: false,
