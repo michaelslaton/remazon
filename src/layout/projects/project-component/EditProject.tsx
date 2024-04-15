@@ -154,6 +154,7 @@ const EditProject: React.FC = () => {
               Date:
             </label>
             <input
+              data-testid='dateTime'
               type='datetime-local'
               id='date'
               name='date'

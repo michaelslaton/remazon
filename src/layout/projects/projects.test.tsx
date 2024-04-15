@@ -1,12 +1,25 @@
 import { BrowserRouter } from "react-router-dom";
-import { act, cleanup, render, screen } from "../../utils/testUtils/test-utils";
+import { act, cleanup, render, screen, userEvent } from "../../utils/testUtils/test-utils";
 import ProjectsDisplay from "./ProjectsDisplay";
 import store from "../../redux/store";
 import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
-import { fetchCurrentEmployeeThunk } from "../../redux/slices/employeesSlice";
+import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from "../../redux/slices/employeesSlice";
 import { projectsDummyData } from "../../test/mocks/handlers";
 import ProjectType from "../../types/project.type";
 import Project from "./project-component/Project";
+import EditProject from "./project-component/EditProject";
+
+const mockedUseNavigate = vi.fn();
+vi.mock("react-router-dom", async () => {
+  const mod = await vi.importActual<typeof import("react-router-dom")>(
+    "react-router-dom"
+  );
+  return {
+    ...mod,
+    useNavigate: () => mockedUseNavigate,
+    useParams: () => ({ paramId: '1' }),
+  };
+});
 
 describe("Projects", ()=>{
   describe("Projects Display",()=>{
@@ -139,6 +152,72 @@ describe("Projects", ()=>{
       expect(editButton).toBeVisible();
     });
 
+    it("calls useNavigate when edit button is clicked", async ()=>{
+      await act( async ()=>{
+        await store.dispatch(fetchProjectsThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+
+      render(
+        <BrowserRouter>
+          <Project data={projects[0]}/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const editButton = screen.getByTestId('edit button');
+
+      await user.click(editButton);
+
+      expect(mockedUseNavigate).toHaveBeenCalled();
+    });
+
+  });
+
+  describe("Edit Project", ()=>{
+    it("renders all elements correctly", async ()=>{
+      await act( async ()=>{
+        await store.dispatch(fetchProjectsThunk());
+        await store.dispatch(fetchEmployeesListThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+      
+      render(
+        <BrowserRouter>
+          <EditProject/>
+        </BrowserRouter>
+      );
+
+      const title = screen.getByRole('heading', { name: 'Edit Movie Night' });
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const typeBox = screen.getByRole('combobox', { name: 'Type:' });
+      const hostBox = screen.getByRole('combobox', { name: 'Host:' });
+      const rembo = screen.getByText('Rembo');
+      const dateBox = screen.getByTestId('dateTime');
+      const descriptionBox = screen.getByRole('textbox', { name: 'Description:' });
+      const checkbox = screen.getByRole('checkbox', { name: 'Active:' });
+      const descCharCount = screen.getByText('18 of 200');
+      const submitButton = screen.getByRole('button', { name: "Submit" });
+      const cancelButton = screen.getByRole('button', { name: "Cancel" });
+
+      expect(title).toBeVisible();
+      expect(nameBox).toBeVisible();
+      expect(nameBox).toHaveValue('Movie Night');
+      expect(typeBox).toBeVisible();
+      expect(typeBox).toHaveValue('Watch Night');
+      expect(hostBox).toBeVisible();
+      expect(hostBox).toHaveValue('1');
+      expect(hostBox.childElementCount).toBe(2);
+      expect(rembo).toBeVisible();
+      expect(dateBox).toBeVisible();
+      expect(dateBox).toHaveValue('2026-01-25T00:00');
+      expect(descriptionBox).toBeVisible();
+      expect(descriptionBox).toHaveValue('Movie watch nights');
+      expect(checkbox).toBeVisible();
+      expect(descCharCount).toBeVisible();
+      expect(submitButton).toBeVisible();
+      expect(cancelButton).toBeVisible();
+    });
   });
 
 });
