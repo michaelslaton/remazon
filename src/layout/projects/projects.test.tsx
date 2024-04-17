@@ -1,18 +1,25 @@
-import { BrowserRouter } from "react-router-dom";
-import { act, cleanup, render, screen, userEvent } from "../../utils/testUtils/test-utils";
-import ProjectsDisplay from "./ProjectsDisplay";
-import store from "../../redux/store";
-import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
-import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from "../../redux/slices/employeesSlice";
-import { projectsDummyData } from "../../test/mocks/handlers";
-import ProjectType from "../../types/project.type";
-import Project from "./project-component/Project";
-import EditProject from "./project-component/EditProject";
+import { BrowserRouter } from 'react-router-dom';
+import { act, cleanup, render, screen, userEvent } from '../../utils/testUtils/test-utils';
+import { projectsDummyData } from '../../test/mocks/handlers';
+import ProjectType from '../../types/project.type';
+import ProjectsDisplay from './ProjectsDisplay';
+import Project from './project-component/Project';
+import EditProject from './project-component/EditProject';
+import store from '../../redux/store';
+import { fetchProjectsThunk } from '../../redux/slices/projectsSlice';
+import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
+import * as projectActions from '../../redux/slices/projectsSlice';
+import * as controlActions from '../../redux/slices/controlsSlice';
+
+const editProjectThunkSpy = vi.spyOn(projectActions, 'editProjectThunk');
+const deleteProjectThunkSpy = vi.spyOn(projectActions, 'deleteProjectThunk');
+const setUiErrorSpy = vi.spyOn(controlActions, 'setUiError');
+const windowConfirmSpy = vi.spyOn(window, 'confirm');
 
 const mockedUseNavigate = vi.fn();
-vi.mock("react-router-dom", async () => {
-  const mod = await vi.importActual<typeof import("react-router-dom")>(
-    "react-router-dom"
+vi.mock('react-router-dom', async () => {
+  const mod = await vi.importActual<typeof import('react-router-dom')>(
+    'react-router-dom'
   );
   return {
     ...mod,
@@ -21,21 +28,21 @@ vi.mock("react-router-dom", async () => {
   };
 });
 
-describe("Projects", ()=>{
-  describe("Projects Display",()=>{
-    it("renders all elements correctly", async ()=>{
+describe('Projects', ()=>{
+  describe('Projects Display',()=>{
+    it('renders all elements correctly', async ()=>{
       render(
         <BrowserRouter>
           <ProjectsDisplay/>
         </BrowserRouter>
       );
 
-      const title = screen.getByRole("heading", { name: "Projects" });
-      const sortBy = screen.getByTestId("projects sort");
-      const sortOptionAlphabetical = screen.getByRole("option", { name: "Alphabetical" });
-      const sortOptionPlaceHolder = screen.getByRole("option", { name: "Sort By" });
-      const sortOptionHost = screen.getByRole("option", { name: "Host" });
-      const deactivatedBox = screen.getByTestId("deactivated checkbox");
+      const title = screen.getByRole('heading', { name: 'Projects' });
+      const sortBy = screen.getByTestId('projects sort');
+      const sortOptionAlphabetical = screen.getByRole('option', { name: 'Alphabetical' });
+      const sortOptionPlaceHolder = screen.getByRole('option', { name: 'Sort By' });
+      const sortOptionHost = screen.getByRole('option', { name: 'Host' });
+      const deactivatedBox = screen.getByTestId('deactivated checkbox');
       const noProjects = screen.getByText('No projects to show.')
 
       expect(title).toBeVisible();
@@ -61,12 +68,12 @@ describe("Projects", ()=>{
       const specialEventList = screen.getByTestId('special event list');
       const reoccuringEventList = screen.getByTestId('recurring event list');
       const deactivatedList = screen.queryByTestId('deactivated event list');
-      const newEventButton = screen.getByTestId('new event button');
+      const newProjectButton = screen.getByTestId('new event button');
       const specialEventsTitle = screen.getByRole('heading', { name: 'Special Events...'});
       const recurringEventsTitle = screen.getByRole('heading', { name: 'Recurring Events...'});
       
       expect(noProjects).not.toBeVisible();
-      expect(newEventButton).toBeVisible();
+      expect(newProjectButton).toBeVisible();
       expect(specialEventsTitle).toBeVisible();
       expect(recurringEventsTitle).toBeVisible();
       expect(specialEventList).toBeVisible();
@@ -75,9 +82,30 @@ describe("Projects", ()=>{
       expect(specialEventList.childElementCount).toBe(1);
       expect(reoccuringEventList.childElementCount).toBe(2);
     });
+
+    it('useNavigate is called when new project button is clicked', async ()=>{
+      await act( async ()=>{
+        await store.dispatch(fetchProjectsThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+
+      render(
+        <BrowserRouter>
+          <ProjectsDisplay/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const newProjectButton = screen.getByTestId('new event button');
+
+      expect(newProjectButton).toBeVisible();
+
+      await user.click(newProjectButton);
+      expect(mockedUseNavigate).toHaveBeenCalled();
+    })
   });
 
-  describe("Project", ()=>{
+  describe('Project', ()=>{
     const projects: ProjectType[] = projectsDummyData.data;
 
     it('renders all elements correctly (admin viewing project)', async ()=>{
@@ -92,7 +120,7 @@ describe("Projects", ()=>{
         </BrowserRouter>
       );
 
-      const title = screen.getByRole('heading', { name: "Hunt Event" });
+      const title = screen.getByRole('heading', { name: 'Hunt Event' });
       const host = screen.getByText('Host:');
       const hostName = screen.queryAllByText('Bueno');
       const secondAttending = screen.getByText('Rembo');
@@ -129,7 +157,7 @@ describe("Projects", ()=>{
       expect(editButton).toBeVisible();
     });
 
-    it("renders all elements correctly (admin viewing self made project)", async ()=>{
+    it('renders all elements correctly (admin viewing self made project)', async ()=>{
       await act( async ()=>{
         await store.dispatch(fetchProjectsThunk());
         await store.dispatch(fetchCurrentEmployeeThunk('1'));
@@ -152,7 +180,7 @@ describe("Projects", ()=>{
       expect(editButton).toBeVisible();
     });
 
-    it("calls useNavigate when edit button is clicked", async ()=>{
+    it('calls useNavigate when edit button is clicked', async ()=>{
       await act( async ()=>{
         await store.dispatch(fetchProjectsThunk());
         await store.dispatch(fetchCurrentEmployeeThunk('1'));
@@ -172,10 +200,53 @@ describe("Projects", ()=>{
       expect(mockedUseNavigate).toHaveBeenCalled();
     });
 
+    it('populates a confirm window on deleteButton click', async ()=>{
+      await act( async ()=>{
+        await store.dispatch(fetchProjectsThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+
+      render(
+        <BrowserRouter>
+          <Project data={projects[0]}/>
+        </BrowserRouter>
+      );
+
+      const deleteButton = screen.getByTestId('delete button');
+      const user = userEvent.setup();
+
+      expect(deleteButton).toBeVisible();
+      await user.click(deleteButton);
+      expect(windowConfirmSpy).toHaveBeenCalled();
+    });
+
+    it('deletePRojectTunk is called when confirm is clicked', async ()=>{
+      vi.spyOn(global, 'confirm' as any).mockReturnValueOnce(true);
+
+      await act( async ()=>{
+        await store.dispatch(fetchProjectsThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+
+      render(
+        <BrowserRouter>
+          <Project data={projects[0]}/>
+        </BrowserRouter>
+      );
+
+      const deleteButton = screen.getByTestId('delete button');
+      const user = userEvent.setup();
+
+      expect(deleteButton).toBeVisible();
+
+      await user.click(deleteButton);
+      expect(deleteProjectThunkSpy).toHaveBeenCalled();
+    });
+
   });
 
-  describe("Edit Project", ()=>{
-    it("renders all elements correctly", async ()=>{
+  describe('Edit Project', ()=>{
+    it('renders all elements correctly', async ()=>{
       await act( async ()=>{
         await store.dispatch(fetchProjectsThunk());
         await store.dispatch(fetchEmployeesListThunk());
@@ -197,8 +268,8 @@ describe("Projects", ()=>{
       const descriptionBox = screen.getByRole('textbox', { name: 'Description:' });
       const checkbox = screen.getByRole('checkbox', { name: 'Active:' });
       const descCharCount = screen.getByText('18 of 200');
-      const submitButton = screen.getByRole('button', { name: "Submit" });
-      const cancelButton = screen.getByRole('button', { name: "Cancel" });
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
 
       expect(title).toBeVisible();
       expect(nameBox).toBeVisible();
@@ -218,6 +289,94 @@ describe("Projects", ()=>{
       expect(submitButton).toBeVisible();
       expect(cancelButton).toBeVisible();
     });
+
+    it('editProjectThunk to be called when info is edited and entered properly', async ()=>{
+      await act( async ()=>{
+        await store.dispatch(fetchProjectsThunk());
+        await store.dispatch(fetchEmployeesListThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+      
+      render(
+        <BrowserRouter>
+          <EditProject/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      expect(nameBox).toBeVisible();
+      expect(nameBox).toHaveValue('Movie Night');
+      expect(submitButton).toBeVisible();
+
+      vi.clearAllMocks();
+
+      nameBox.focus();
+      user.clear(nameBox);
+      await user.keyboard('Godzilla V Kong');
+      expect(nameBox).toHaveValue('Godzilla V Kong');
+
+      expect(editProjectThunkSpy).toHaveBeenCalledTimes(0);
+      await user.click(submitButton);
+      expect(editProjectThunkSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('setUiError to have been called when info is edited or entered wrong', async ()=>{
+      await act( async ()=>{
+        await store.dispatch(fetchProjectsThunk());
+        await store.dispatch(fetchEmployeesListThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+      
+      render(
+        <BrowserRouter>
+          <EditProject/>
+        </BrowserRouter>
+      );
+
+      vi.clearAllMocks();
+
+      const user = userEvent.setup();
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const descriptionBox = screen.getByRole('textbox', { name: 'Description:' });
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      expect(submitButton).toBeVisible();
+      expect(nameBox).toBeVisible();
+      expect(descriptionBox).toBeVisible();
+
+      expect(setUiErrorSpy).toHaveBeenCalledTimes(0);
+      await user.click(submitButton);
+      expect(setUiErrorSpy).toHaveBeenCalledTimes(1);
+
+      user.clear(nameBox);
+      await user.click(submitButton);
+      expect(setUiErrorSpy).toHaveBeenCalledTimes(2);
+    });
+
+    it('useNavigate to be called when cancel is clicked', async ()=>{
+      await act( async ()=>{
+        await store.dispatch(fetchProjectsThunk());
+        await store.dispatch(fetchEmployeesListThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+      
+      render(
+        <BrowserRouter>
+          <EditProject/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+
+      expect(cancelButton).toBeVisible();
+
+      await user.click(cancelButton);
+      expect(mockedUseNavigate).toHaveBeenCalled();
+    })
   });
 
 });
