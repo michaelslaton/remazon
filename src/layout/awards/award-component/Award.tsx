@@ -95,6 +95,7 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
       
       { currentEmployee?.rank === 1 &&
         <button
+          data-testid='edit award button'
           className='award__edit-button'
           onClick={()=> navigate(`/awards/edit/${awardData.id}`)}
         >
