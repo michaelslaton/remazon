@@ -107,9 +107,9 @@ const AwardsDisplay: React.FC = () => {
           </option>
         </select>
 
-        {currentEmployee?.uid && 
-          currentEmployee.rank < 5 &&
+        { currentEmployee?.rank === 1 &&
           <button
+            data-testid='create award button'
             className='button card-button'
             onClick={()=> navigate('/awards/create')}
           >

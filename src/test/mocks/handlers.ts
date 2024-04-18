@@ -48,17 +48,17 @@ const adminDummyData: { data: EmployeeType } = {
 
 const userDummyData: { data: EmployeeType } = {
   data: {
-      id: 2,
-      name: "Bueno",
-      birthday: null,
-      uid: "2",
-      rank: 1,
-      cupcakes: 0,
-      aliases: "Egg",
-      admin: false,
-      quote: null,
-      description: "Egg!!!",
-      locked: false
+    id: 2,
+    name: "Bueno",
+    birthday: null,
+    uid: "2",
+    rank: 2,
+    cupcakes: 0,
+    aliases: "Egg",
+    admin: false,
+    quote: null,
+    description: "Egg!!!",
+    locked: false
   }
 };
 
@@ -101,7 +101,7 @@ const employeesDummyData: { data: EmployeeType[] } = {
       name: "Bueno",
       birthday: null,
       uid: "2",
-      rank: 1,
+      rank: 2,
       cupcakes: 0,
       aliases: "Egg",
       admin: false,
