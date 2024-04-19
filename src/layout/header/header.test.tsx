@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 
 describe('Header', ()=>{
   describe('User Display', ()=>{
-    it('renders names properly', async ()=>{
+    it('renders all elements properly', async ()=>{
       await act(async ()=>{
         await store.dispatch(fetchCurrentEmployeeThunk('1'))
       });
@@ -16,12 +16,16 @@ describe('Header', ()=>{
         </BrowserRouter>
       );
       const rembo = screen.getByText('Rembo');
-      expect(rembo).toBeInTheDocument();
-  
+      const notificationsButton = screen.getByTestId('notifications button');
+
+      expect(rembo).toBeVisible();
+      expect(notificationsButton).toBeVisible();
       store.dispatch(clearCurrentEmployee());
       await store.dispatch(fetchCurrentEmployeeThunk('2'));
   
       const bueno = screen.getByText('Bueno');
+
+      expect(rembo).not.toBeVisible();
       expect(bueno).toBeInTheDocument();
     });
   
@@ -32,8 +36,9 @@ describe('Header', ()=>{
           <UserDisplay/>
         </BrowserRouter>
       );
-      const button = screen.queryByRole('button');
-      expect(button).not.toBeInTheDocument();
+      
+      const notificationsButton = screen.queryByTestId('notifications button');
+      expect(notificationsButton).not.toBeInTheDocument();
     });
   
   });

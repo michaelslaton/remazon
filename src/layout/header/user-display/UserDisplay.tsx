@@ -35,6 +35,7 @@ const UserDisplay: React.FC = () => {
           {currentEmployee?.name}
         </div>
           <button
+            data-testid='notifications button'
             className={`notification-button ${notifications?.length && 'active'}`}
             onClick={() => navigate('/notifications')}
           >
