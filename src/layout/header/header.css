@@ -20,6 +20,7 @@
   padding: 0 0 .5rem .5rem;
 }
 .header__title > .remazon {
+  all: unset;
   display: block;
 }
 .header__title > .prime {
