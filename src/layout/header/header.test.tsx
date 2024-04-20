@@ -1,10 +1,27 @@
 import { fetchCurrentEmployeeThunk, clearCurrentEmployee } from "../../redux/slices/employeesSlice";
 import store from "../../redux/store";
 import { render, screen, act } from "../../utils/testUtils/test-utils";
+import Header from "./Header";
 import UserDisplay from "./user-display/UserDisplay";
 import { BrowserRouter } from "react-router-dom";
 
 describe('Header', ()=>{
+  describe('Title', ()=>{
+    it('renders all elements properly', ()=>{
+      render(
+        <BrowserRouter>
+          <Header/>
+        </BrowserRouter>
+      );
+
+      const remazon = screen.getByRole('heading', { name: 'Remazon' });
+      const prime = screen.getByRole('heading', { name: 'Prime' });
+
+      expect(remazon).toBeVisible();
+      expect(prime).toBeVisible();
+    });
+  });
+
   describe('User Display', ()=>{
     it('renders all elements properly', async ()=>{
       await act(async ()=>{

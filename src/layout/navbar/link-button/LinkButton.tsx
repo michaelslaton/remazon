@@ -24,6 +24,9 @@ const LinkButton: React.FC<LinkButtonProps> = ({ data }) => {
 
   return (
     <button
+      aria-label={data.name}
+      id={data.name}
+      name={data.name}
       className={`link-button ${ navActive && 'active'} ${ data.styling && `${data.styling}`}`}
       onClick={()=> {
         if (data.callback) data.callback(); 

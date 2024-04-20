@@ -10,7 +10,7 @@ const CollapseButton: React.FC = () => {
 
   return (
     <div className={`collapse-button__wrapper ${ navActive && 'active'}`}>
-      <button className={`collapse-button ${ navActive && 'active'}`} onClick={()=>dispatch(navToggle())}>
+      <button aria-label='collapse button' className={`collapse-button ${ navActive && 'active'}`} onClick={()=>dispatch(navToggle())}>
         { navActive ? <FontAwesomeIcon icon={faX}/> : <FontAwesomeIcon icon={faBars}/> }
       </button>
     </div>
