@@ -81,7 +81,7 @@ const notificationsDummyData: { data: NotificationType[]} = {
   ]
 };
 
-const employeesDummyData: { data: EmployeeType[] } = {
+export const employeesDummyData: { data: EmployeeType[] } = {
   data: [
     {
       id: 1,
@@ -223,14 +223,38 @@ export const handlers: HttpHandler[] = [
     return HttpResponse.json(notificationsDummyData, {status: 200})
   }),
 
-  // Awards Handlers ------------------------------------------------->
+  http.put(`${API_URL}/remazon/notifications/2/1`, ()=>{
+    return HttpResponse.json('', {status: 200})
+  }),
+
+  http.post(`${API_URL}/remazon/notifications`, ()=>{
+    return HttpResponse.json('', {status: 200})
+  }),
+
+  // Awards Handlers -------------------------------------------------->
   http.get(`${API_URL}/remazon/awards`, ()=>{
     return HttpResponse.json(awardsDummyData, {status: 200})
   }),
 
-  // Awards Handlers ------------------------------------------------->
+  // Projects Handlers ------------------------------------------------->
   http.get(`${API_URL}/remazon/projects`, ()=>{
     return HttpResponse.json(projectsDummyData, {status: 200})
   }),
 
+  http.delete(`${API_URL}/remazon/projects/1`, ()=>{
+    return HttpResponse.json('', {status: 200})
+  }),
+
+  http.put(`${API_URL}/remazon/projects`, ()=>{
+    return HttpResponse.json('', {status: 200})
+  }),
+
+  // MOTD Handler ------------------------------------------------->
+  http.get(`${API_URL}/remazon/motd`, ()=>{
+    return HttpResponse.json({ data: 'This is a MOTD' }, {status: 200})
+  }),
+
+  http.put(`${API_URL}/remazon/motd`, ()=>{
+    return HttpResponse.json({ data: '' }, {status: 200})
+  }),
 ];

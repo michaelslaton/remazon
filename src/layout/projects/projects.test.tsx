@@ -38,7 +38,6 @@ describe('Projects', ()=>{
       );
 
       const title = screen.getByRole('heading', { name: 'Projects' });
-      const sortBy = screen.getByTestId('projects sort');
       const sortOptionAlphabetical = screen.getByRole('option', { name: 'Alphabetical' });
       const sortOptionPlaceHolder = screen.getByRole('option', { name: 'Sort By' });
       const sortOptionHost = screen.getByRole('option', { name: 'Host' });
@@ -46,7 +45,6 @@ describe('Projects', ()=>{
       const noProjects = screen.getByText('No projects to show.')
 
       expect(title).toBeVisible();
-      expect(sortBy).toBeVisible();
       expect(sortOptionAlphabetical).toBeVisible();
       expect(sortOptionPlaceHolder).toBeVisible();
       expect(sortOptionHost).toBeVisible();
@@ -65,6 +63,7 @@ describe('Projects', ()=>{
           <ProjectsDisplay/>
         </BrowserRouter>
       );
+      const sortBy = screen.getByTestId('projects sort');
       const specialEventList = screen.getByTestId('special event list');
       const reoccuringEventList = screen.getByTestId('recurring event list');
       const deactivatedList = screen.queryByTestId('deactivated event list');
@@ -73,6 +72,7 @@ describe('Projects', ()=>{
       const recurringEventsTitle = screen.getByRole('heading', { name: 'Recurring Events...'});
       
       expect(noProjects).not.toBeVisible();
+      expect(sortBy).toBeVisible();
       expect(newProjectButton).toBeVisible();
       expect(specialEventsTitle).toBeVisible();
       expect(recurringEventsTitle).toBeVisible();

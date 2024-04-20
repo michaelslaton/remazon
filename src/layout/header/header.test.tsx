@@ -1,6 +1,6 @@
 import { fetchCurrentEmployeeThunk, clearCurrentEmployee } from "../../redux/slices/employeesSlice";
 import store from "../../redux/store";
-import { render, screen, act } from "../../utils/testUtils/test-utils";
+import { render, screen, act, cleanup } from "../../utils/testUtils/test-utils";
 import Header from "./Header";
 import UserDisplay from "./user-display/UserDisplay";
 import { BrowserRouter } from "react-router-dom";
@@ -14,8 +14,8 @@ describe('Header', ()=>{
         </BrowserRouter>
       );
 
-      const remazon = screen.getByRole('heading', { name: 'Remazon' });
-      const prime = screen.getByRole('heading', { name: 'Prime' });
+      const remazon = screen.getByText('Remazon');
+      const prime = screen.getByText('Prime');
 
       expect(remazon).toBeVisible();
       expect(prime).toBeVisible();
@@ -37,9 +37,20 @@ describe('Header', ()=>{
 
       expect(rembo).toBeVisible();
       expect(notificationsButton).toBeVisible();
-      store.dispatch(clearCurrentEmployee());
-      await store.dispatch(fetchCurrentEmployeeThunk('2'));
+
+      cleanup()
+      
+      await act( async ()=>{
+        await store.dispatch(clearCurrentEmployee());
+        await store.dispatch(fetchCurrentEmployeeThunk('2'));
+      });
   
+      render(
+        <BrowserRouter>
+          <UserDisplay/>
+        </BrowserRouter>
+      );
+
       const bueno = screen.getByText('Bueno');
 
       expect(rembo).not.toBeVisible();
@@ -47,7 +58,9 @@ describe('Header', ()=>{
     });
   
     it('invisible if not logged in', async ()=>{
-      store.dispatch(clearCurrentEmployee());
+      act(()=>{
+        store.dispatch(clearCurrentEmployee());
+      });
       render(
         <BrowserRouter>
           <UserDisplay/>

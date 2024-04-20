@@ -6,14 +6,14 @@ import Loading from '../components/loading/Loading';
 import Employee from './employee-component/Employee';
 import EmployeeType from '../../types/employee.type';
 import './employees.css';
+import RankType from '../../types/rank.type';
 
 const EmployeesDisplay: React.FC = () => {
   const [ sortType, setSortType ] = useState<string>('');
   const [ showDeactivated, setShowDeactivated ] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const employeesList: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
-  const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
-  const loadingRanks: boolean = useAppSelector((state) => state.ranksControl.loading);
+  const ranksList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
 
   useEffect(()=>{
     dispatch(fetchEmployeesListThunk());
@@ -51,7 +51,7 @@ const EmployeesDisplay: React.FC = () => {
     );
   };
 
-  if (loadingEmployees || loadingRanks || !employeesList.length) return ( <Loading/> );
+  if (!employeesList.length || !ranksList.length) return ( <Loading/> );
 
   return (
     <>
