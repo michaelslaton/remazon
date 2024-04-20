@@ -97,9 +97,7 @@ const ProjectsDisplay: React.FC = () => {
 
       No projects to show.
     </>
-  )
-
-  console.log(showDeactivated)
+  );
 
   return (
     <>
@@ -108,7 +106,8 @@ const ProjectsDisplay: React.FC = () => {
       </div>
 
       <div className='display__controls'>
-        <select
+      <select
+          data-testid='projects sort'
           id='projects sort'
           name='projects sort'
           defaultValue=''

@@ -29,6 +29,7 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
     if ( data.locked && !currentEmployee?.admin ) return;
     else if (currentEmployee?.admin || currentEmployee?.uid === data.uid) return (
       <button
+        data-testid='edit employee button'
         className='button card-button'
         onClick={(e)=> {
           e.stopPropagation();
@@ -54,12 +55,12 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
           }          
         </div>
       </div>
-      <div
+      <h2
         className={`employee__rank ${data.rank === 0 && 'deactivated'}`}
         style={{backgroundColor: currentEmployeesRank?.color}}
       >
         {currentEmployeesRank!.name}
-      </div>
+      </h2>
 
       <ul className='employee__info'>
         { birthday &&
@@ -83,7 +84,7 @@ const Employee: React.FC<EmployeeProps> = ({ data }) => {
             <div className='employee__info-key'>
               {`Aliases: `}
             </div>
-              { aliasList.map((alias, i)=> i < aliasList.length - 1 ? `${alias}, ` : `${alias}`)}
+            { aliasList.map((alias, i)=> i < aliasList.length - 1 ? `${alias}, ` : `${alias}`)}
           </li>
         }
 

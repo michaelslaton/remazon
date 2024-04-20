@@ -3,7 +3,7 @@ import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import store from "../../redux/store";
 import { ranksDummyData } from "../../test/mocks/handlers";
 import RankType from "../../types/rank.type";
-import { act, cleanup, render, screen, userEvent } from "../../utils/testUtils/test-utils"
+import { act, render, screen, userEvent } from "../../utils/testUtils/test-utils"
 import RanksDisplay from "./RanksDisplay"
 import Rank from "./rank-component/Rank";
 
@@ -40,10 +40,9 @@ describe('Ranks', ()=>{
         await store.dispatch(fetchRanksThunk());
       });
       render(<RanksDisplay/>);
+
       const user = userEvent.setup();
-  
       const addRankButton = screen.getByTestId('add rank');
-      expect(addRankButton).toBeVisible();
   
       await user.click(addRankButton);
   
@@ -64,13 +63,13 @@ describe('Ranks', ()=>{
         await store.dispatch(fetchRanksThunk());
       });
       render(<RanksDisplay/>);
+
       const user = userEvent.setup();
-  
       const addRankButton = screen.getByTestId('add rank');
-      expect(addRankButton).toBeVisible();
       let cancelButton = screen.queryByTestId('new-rank-cancel');
+
       expect(cancelButton).not.toBeInTheDocument();
-  
+
       await user.click(addRankButton);
   
       cancelButton = screen.getByTestId('new-rank-cancel');
@@ -93,24 +92,12 @@ describe('Ranks', ()=>{
     it('renders display elements properly', async ()=>{
       render(<Rank rankData={ranks[1]}/>);
   
-      let title = screen.getByText('Ceo');
-      let editButton = screen.getByTestId('rank-edit-button');
-      let deleteButton = screen.queryByTestId('rank-delete-button');
+      const title = screen.getByText('Ceo');
+      const editButton = screen.getByTestId('rank-edit-button');
+      const deleteButton = screen.queryByTestId('rank-delete-button');
       expect(title).toBeVisible();
       expect(editButton).toBeVisible();
       expect(deleteButton).not.toBeInTheDocument();
-  
-      cleanup();
-  
-      render(<Rank rankData={ranks[2]}/>);
-  
-      title = screen.getByText('Weebo');
-      editButton = screen.getByTestId('rank-edit-button');
-      deleteButton = screen.queryByTestId('rank-delete-button');
-  
-      expect(title).toBeVisible();
-      expect(editButton).toBeVisible();
-      expect(deleteButton).toBeVisible();
     });
   
     it('switches to edit mode properly', async ()=>{

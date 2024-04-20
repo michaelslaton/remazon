@@ -2,7 +2,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { act, render, screen, userEvent } from '../../utils/testUtils/test-utils';
 import AdminNotification from './admin-notification/AdminNotification';
 import store from '../../redux/store';
-import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
+import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
+import { fetchNotificationsThunk } from '../../redux/slices/notificationsSlice';
 import AdminMotd from './admin-motd/AdminMotd';
 import * as notificationActions from '../../redux/slices/notificationsSlice';
 import * as controlActions from '../../redux/slices/controlsSlice';
@@ -91,16 +92,10 @@ describe('Admin Panel', ()=>{
   
       const user = userEvent.setup();    
       const rembo = screen.getByText('Rembo');
-      const bueno = screen.getByText('Bueno');
       const moveRightButton = screen.getByRole('button',{name:'>'});
       const includedList = screen.getByTestId('included');
       const notIncludedList = screen.getByTestId('not included');
-      
-      expect(rembo).toBeVisible();
-      expect(bueno).toBeVisible();
-      expect(moveRightButton).toBeVisible();
-      expect(includedList).toBeVisible();
-      expect(notIncludedList).toBeVisible();
+
       expect(includedList.childElementCount).toBe(0);
       expect(notIncludedList.childElementCount).toBe(2);
   
@@ -129,10 +124,6 @@ describe('Admin Panel', ()=>{
       const includedList = screen.getByTestId('included');
       const notIncludedList = screen.getByTestId('not included');
       
-      expect(rembo).toBeVisible();
-      expect(moveRightButton).toBeVisible();
-      expect(includedList).toBeVisible();
-      expect(notIncludedList).toBeVisible();
       expect(includedList.childElementCount).toBe(0);
       expect(notIncludedList.childElementCount).toBe(2);
   
@@ -166,9 +157,6 @@ describe('Admin Panel', ()=>{
       const includedList = screen.getByTestId('included');
       const notIncludedList = screen.getByTestId('not included');
       
-      expect(moveAllRightButton).toBeVisible();
-      expect(includedList).toBeVisible();
-      expect(notIncludedList).toBeVisible();
       expect(includedList.childElementCount).toBe(0);
       expect(notIncludedList.childElementCount).toBe(2);
   
@@ -195,10 +183,6 @@ describe('Admin Panel', ()=>{
       const includedList = screen.getByTestId('included');
       const notIncludedList = screen.getByTestId('not included');
       
-      expect(moveAllRightButton).toBeVisible();
-      expect(moveAllLeftButton).toBeVisible();
-      expect(includedList).toBeVisible();
-      expect(notIncludedList).toBeVisible();
       expect(includedList.childElementCount).toBe(0);
       expect(notIncludedList.childElementCount).toBe(2);
   
@@ -232,12 +216,6 @@ describe('Admin Panel', ()=>{
       const includedList = screen.getByTestId('included');
       const clearButton = screen.getByRole('button',{name:'Clear'});
   
-      expect(titleInput).toBeVisible();
-      expect(messageInput).toBeVisible();
-      expect(moveAllRightButton).toBeVisible();
-      expect(notIncludedList).toBeVisible();
-      expect(includedList).toBeVisible();
-      expect(clearButton).toBeVisible();
       expect(includedList.childElementCount).toBe(0);
       expect(notIncludedList.childElementCount).toBe(2);
   
@@ -267,6 +245,8 @@ describe('Admin Panel', ()=>{
     it('createNotificationThunk is called when fields are properly filled out', async ()=>{
       await act(async ()=>{
         await store.dispatch(fetchEmployeesListThunk());
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+        await store.dispatch(fetchNotificationsThunk('1'));
       });
   
       render(

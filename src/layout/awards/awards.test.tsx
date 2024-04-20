@@ -1,4 +1,4 @@
-import { act, cleanup, render, screen, userEvent } from '../../utils/testUtils/test-utils';
+import { act, render, screen, userEvent } from '../../utils/testUtils/test-utils';
 import AwardsDisplay from './AwardsDisplay';
 import store from '../../redux/store';
 import { fetchAwardsThunk } from '../../redux/slices/awardsSlice';
@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import { awardsDummyData } from '../../test/mocks/handlers';
 import Award from './award-component/Award';
-import { fetchRanksThunk } from '../../redux/slices/ranksSlice';
 
 const awardData = awardsDummyData.data;
 
@@ -18,7 +17,6 @@ vi.mock('react-router-dom', async () => {
   return {
     ...mod,
     useNavigate: () => mockedUseNavigate,
-    useParams: () => ({ paramId: '1' }),
   };
 });
 
