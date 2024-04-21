@@ -193,6 +193,7 @@ const EditEmployee: React.FC = () => {
               Birthday:
             </label>
             <input
+              data-testid='employee birthday box'
               type='date'
               id='birthday'
               name='birthday'
@@ -204,7 +205,10 @@ const EditEmployee: React.FC = () => {
             <label>
               Aliases:
             </label>
-            <div className='alias-display'>
+            <div
+              data-testid='alias display'
+              className='alias-display'
+            >
               {aliasData.map((alias,i)=>(
                 <div
                   key={i}
@@ -212,6 +216,7 @@ const EditEmployee: React.FC = () => {
                 >
                   {alias}
                   <button
+                    data-testid='alias delete button'
                     type='button'
                     className='alias-button'
                     onClick={()=> removeAlias(i)}
@@ -224,12 +229,14 @@ const EditEmployee: React.FC = () => {
             <div className='alias-input-wrapper'>
               <input
                 type='text'
+                aria-label='aliases'
                 id='aliases'
                 name='aliases'
                 className='alias-input'
                 ref={aliasRef}
               />
               <button
+              data-testid='add alias button'
               type='button'
               className='button alias-input-button'
               onClick={()=> handleAliasInput()}
