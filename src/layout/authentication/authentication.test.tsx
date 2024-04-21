@@ -14,17 +14,6 @@ vi.mock("react-router-dom", async () => {
   };
 });
 
-const mockedcreateUserWithEmailAndPassword = vi.fn();
-vi.mock("firebase/auth", async () => {
-  const mod = await vi.importActual<typeof import("firebase/auth")>(
-    "firebase/auth"
-  );
-  return {
-    ...mod,
-    createUserWithEmailAndPassword: () => mockedcreateUserWithEmailAndPassword,
-  };
-});
-
 describe('Sign In', ()=>{
 
   it('renders all sign in elements', ()=>{
