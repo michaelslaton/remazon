@@ -30,7 +30,7 @@ vi.mock('react-router-dom', async () => {
 
 describe('Projects', ()=>{
   describe('Projects Display',()=>{
-    it('renders all elements correctly', async ()=>{
+    it('renders all elements properly', async ()=>{
       render(
         <BrowserRouter>
           <ProjectsDisplay/>
@@ -108,7 +108,7 @@ describe('Projects', ()=>{
   describe('Project', ()=>{
     const projects: ProjectType[] = projectsDummyData.data;
 
-    it('renders all elements correctly (admin viewing project)', async ()=>{
+    it('renders all elements properly (admin viewing project)', async ()=>{
       await act( async ()=>{
         await store.dispatch(fetchProjectsThunk());
         await store.dispatch(fetchCurrentEmployeeThunk('1'));
@@ -157,7 +157,7 @@ describe('Projects', ()=>{
       expect(editButton).toBeVisible();
     });
 
-    it('renders all elements correctly (admin viewing self made project)', async ()=>{
+    it('renders all elements properly (admin viewing self made project)', async ()=>{
       await act( async ()=>{
         await store.dispatch(fetchProjectsThunk());
         await store.dispatch(fetchCurrentEmployeeThunk('1'));
@@ -246,7 +246,7 @@ describe('Projects', ()=>{
   });
 
   describe('Edit Project', ()=>{
-    it('renders all elements correctly', async ()=>{
+    it('renders all elements properly', async ()=>{
       await act( async ()=>{
         await store.dispatch(fetchProjectsThunk());
         await store.dispatch(fetchEmployeesListThunk());

@@ -17,13 +17,14 @@ vi.mock('react-router-dom', async () => {
   return {
     ...mod,
     useNavigate: () => mockedUseNavigate,
+    useParams: () => ({ paramId: '1' }),
   };
 });
 
 
 describe('Awards', ()=>{
   describe('Awards Display', ()=>{
-    it('renders all elements correctly', async ()=>{
+    it('renders all elements properly', async ()=>{
       await act(async ()=> {
         await store.dispatch(fetchEmployeesListThunk());
         await store.dispatch(fetchAwardsThunk());
@@ -89,7 +90,7 @@ describe('Awards', ()=>{
   });
 
   describe('Award', ()=>{
-    it('renders all elements correctly', async ()=>{
+    it('renders all elements properly', async ()=>{
       await act(async ()=> {
         await store.dispatch(fetchCurrentEmployeeThunk('2'));
       });
@@ -151,6 +152,12 @@ describe('Awards', ()=>{
       await user.click(editAwardButton);
 
       expect(mockedUseNavigate).toHaveBeenCalled();
+    });
+  });
+
+  describe('Edit award', ()=>{
+    it('renders all elements properly', ()=>{
+
     });
   });
 });
