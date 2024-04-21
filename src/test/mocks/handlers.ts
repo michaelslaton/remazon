@@ -213,6 +213,10 @@ export const handlers: HttpHandler[] = [
     return HttpResponse.json(userDummyData, {status: 200})
   }),
 
+  http.put(`${API_URL}/remazon/employees`, ()=>{
+    return HttpResponse.json('', {status: 200})
+  }),
+
   // Notifications Handlers ------------------------------------------->
   // -- Admin -- >
   http.get(`${API_URL}/remazon/notifications/1`, ()=>{
