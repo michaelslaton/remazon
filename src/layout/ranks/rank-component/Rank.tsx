@@ -32,7 +32,12 @@ const Rank: React.FC<RankProps> = ({ rankData }) => {
       rank: rankData!.rank,
       color: colorRef.current!.value,
     };
-    dispatch(editRankThunk(updatedRank));
+    dispatch(editRankThunk(updatedRank))
+    .catch((error) => {
+      dispatch(setUiError(`Error: ${error.code}`));
+      console.error(error.code);
+      console.error(error.message);
+    });
     setEditMode(false);
     return;
   };
