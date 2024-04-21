@@ -19,6 +19,11 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
 
   const submitHandler = (e: React.FormEvent): void => {
     e.preventDefault();
+    
+    if (titleRef.current!.value.length < 1) {
+      dispatch(setUiError("Please enter a name for the rank."));
+      return;
+    };
 
     const newRank: RankPostType = {
       name: titleRef.current!.value,
@@ -70,7 +75,7 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
         <div className='rank__buttons-wrapper'>
           <button
             type='submit'
-            data-testid='new-rank-save'
+            data-testid='submit rank button'
             className='button rank__submit create'
             onClick={(e) => submitHandler(e)}
           >
@@ -79,7 +84,7 @@ const NewRank: React.FC<NewRankProps> = ({ setNewRankDisplay }) => {
 
           <button
             type='button'
-            data-testid='new-rank-cancel'
+            data-testid='cancel new rank'
             className='button rank_submit delete'
             onClick={() => setNewRankDisplay(false)}
           >

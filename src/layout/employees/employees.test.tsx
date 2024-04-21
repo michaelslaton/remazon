@@ -152,7 +152,7 @@ describe('Employees', ()=>{
 
   describe('Edit Employee', ()=>{
 
-    it('renders all elements correctly when user is logged in', async ()=>{
+    it('renders all elements properly when user is logged in', async ()=>{
       await act(async ()=>{
         await store.dispatch(fetchCurrentEmployeeThunk('2'));
       });

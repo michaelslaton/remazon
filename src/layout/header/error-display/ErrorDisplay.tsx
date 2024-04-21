@@ -21,7 +21,7 @@ const ErrorDisplay: React.FC = () => {
     <div>
       { uiError!.length ?
         <div className={`error`}>
-          Awards Error: {uiError}
+          Error: {uiError}
           <button 
             className='close-button'
             onClick={()=> dispatch(clearUiError())}>
@@ -33,7 +33,7 @@ const ErrorDisplay: React.FC = () => {
       }
       { controlError!.length ?
         <div className={`error`}>
-          Awards Error: {controlError}
+          Control Error: {controlError}
           <button 
             className='close-button'
             onClick={()=> dispatch(clearControlError())}>
