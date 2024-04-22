@@ -137,6 +137,7 @@ const EditAward:React.FC = () => {
               Type: 
             </label>
             <select
+              aria-label='type selector'
               id='type'
               name='type'
               ref={typeRef}
@@ -154,6 +155,7 @@ const EditAward:React.FC = () => {
               Awarded To: 
             </label>
             <select
+              aria-label='holder selector'
               id='holder'
               name='holder'
               ref={holderRef}

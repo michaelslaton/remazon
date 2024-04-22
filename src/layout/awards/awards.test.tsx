@@ -6,6 +6,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import { awardsDummyData } from '../../test/mocks/handlers';
 import Award from './award-component/Award';
+import EditAward from './award-component/EditAward';
+import * as controlActions from '../../redux/slices/controlsSlice';
+import * as awardActions from '../../redux/slices/awardsSlice';
+
+const setUiErrorSpy = vi.spyOn(controlActions, 'setUiError');
+const editAwardThunkSpy = vi.spyOn(awardActions, 'editAwardThunk');
+const windowConfirmSpy = vi.spyOn(window, 'confirm');
 
 const awardData = awardsDummyData.data;
 
@@ -156,8 +163,153 @@ describe('Awards', ()=>{
   });
 
   describe('Edit award', ()=>{
-    it('renders all elements properly', ()=>{
+    it('renders all elements properly', async ()=>{
+      await act(async ()=> {
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
 
+      render(
+        <BrowserRouter>
+          <EditAward/>
+        </BrowserRouter>
+      );
+
+      const header = screen.getByRole('heading', { name: 'Edit Award' });
+      const title = screen.getByRole('heading', { name: 'Edit Drift Belt' });
+      const titleCountText = screen.getByText('10 of 21');
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const typeSelecter = screen.getByRole('combobox', { name: 'type selector' });
+      const beltOption = screen.getByRole('option', { name: 'Belt' });
+      const trophyOption = screen.getByRole('option', { name: 'Trophy' });
+      const awardedToSelecter = screen.getByRole('combobox', { name: 'holder selector' });
+      const awardedForBox = screen.getByRole('textbox', { name: 'Awarded For:' });
+      const retiredCheckBox = screen.getByRole('checkbox', { name: 'Retired Status:' });
+      const AwardedForCharCountText = screen.getByText('28 of 200');
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+
+      expect(header).toBeVisible();
+      expect(title).toBeVisible();
+      expect(titleCountText).toBeVisible();
+      expect(nameBox).toBeVisible();
+      expect(typeSelecter).toBeVisible();
+      expect(beltOption).toBeVisible();
+      expect(trophyOption).toBeVisible();
+      expect(awardedToSelecter).toBeVisible();
+      expect(awardedToSelecter.childElementCount).toBe(3);
+      expect(awardedForBox).toBeVisible();
+      expect(retiredCheckBox).toBeVisible();
+      expect(AwardedForCharCountText).toBeVisible();
+      expect(submitButton).toBeVisible();
+      expect(cancelButton).toBeVisible();
+    });
+    
+    it('useNavigate to be called when cancel is clicked', async ()=>{
+      await act(async ()=> {
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+      
+      render(
+        <BrowserRouter>
+          <EditAward/>
+        </BrowserRouter>
+      );
+      
+      const user = userEvent.setup();
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+      
+      await user.click(cancelButton);
+      
+      expect(mockedUseNavigate).toHaveBeenCalled();
+    });
+
+    it('setUiError is called when no changes are made and submit is clicked', async ()=>{
+      await act(async ()=> {
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+
+      render(
+        <BrowserRouter>
+          <EditAward/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      await user.click(submitButton);
+
+      expect(setUiErrorSpy).toHaveBeenCalled();
+    });
+    
+    it('setUiError is called if fields are filled improperly', async ()=>{
+      await act(async ()=> {
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+
+      render(
+        <BrowserRouter>
+          <EditAward/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      nameBox.focus();
+      user.clear;
+
+      await user.click(submitButton);
+
+      expect(setUiErrorSpy).toHaveBeenCalled();
+    });
+
+    it('window confirm is called when fields are properly altered and submit is clicked', async ()=>{
+      await act(async ()=> {
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+
+      render(
+        <BrowserRouter>
+          <EditAward/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      nameBox.focus();
+      user.clear;
+      await user.keyboard('WWE Title');
+      await user.click(submitButton);
+
+      expect(windowConfirmSpy).toHaveBeenCalled();
+    });
+
+    it('editAwardThunk is called if fields are properly altered and confirm is clicked', async ()=>{
+      vi.spyOn(global, 'confirm' as any).mockReturnValueOnce(true);
+      await act(async ()=> {
+        await store.dispatch(fetchCurrentEmployeeThunk('1'));
+      });
+
+      render(
+        <BrowserRouter>
+          <EditAward/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      nameBox.focus();
+      user.clear;
+      await user.keyboard('WWE Title');
+      await user.click(submitButton);
+
+      expect(editAwardThunkSpy).toHaveBeenCalled();
     });
   });
 });
