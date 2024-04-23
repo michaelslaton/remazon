@@ -5,8 +5,20 @@ import store from "../../redux/store";
 import { clearCurrentEmployee, fetchCurrentEmployeeThunk } from "../../redux/slices/employeesSlice";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../../utils/firebase/firebase";
+import * as firebaseAuth from 'firebase/auth';
 
 const windowConfirmSpy = vi.spyOn(window, 'confirm');
+const signoutSpy = vi.spyOn(firebaseAuth, "signOut");
+
+type FakeAuth = { signOut(this: void): void }
+vi.mock("firebase/auth", async (getModule) => {
+  const original: FakeAuth = await getModule();
+
+  return {
+    ...original,
+    signOut: vi.fn().mockImplementation(original.signOut),
+  };
+});
 
 const mockedUseNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
@@ -135,7 +147,7 @@ describe('Navbar', ()=>{
     expect(mockedUseNavigate).toHaveBeenCalled();
   });
 
-  it('window confirm and called when sign out is clicked, then signout when window confirm is clicked', async ()=>{
+  it('window confirm is called when sign out is clicked', async ()=>{
 
     await act( async ()=>{
       await store.dispatch(fetchCurrentEmployeeThunk('1'));
@@ -154,5 +166,26 @@ describe('Navbar', ()=>{
 
     await user.click(signOutButton);
     expect(windowConfirmSpy).toHaveBeenCalled();
+  });
+
+  it('signOut is called when sign out is clicked and window is confirmed', async ()=>{
+    vi.spyOn(global, 'confirm' as any).mockReturnValueOnce(true);
+    await act( async ()=>{
+      await store.dispatch(fetchCurrentEmployeeThunk('1'));
+    });
+    
+    initializeApp(firebaseConfig);
+
+    render(
+      <BrowserRouter>
+        <Navbar/>
+      </BrowserRouter>
+    );
+
+    const user = userEvent.setup();
+    const signOutButton = screen.getByRole('button', { name: 'Sign Out' });
+
+    await user.click(signOutButton);
+    expect(signoutSpy).toHaveBeenCalled();
   });
 });

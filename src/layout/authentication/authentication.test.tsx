@@ -2,6 +2,18 @@ import { BrowserRouter } from "react-router-dom";
 import { act, render, screen, userEvent } from "../../utils/testUtils/test-utils";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import * as firebaseAuth from 'firebase/auth';
+
+type FakeAuth = { signInWithEmailAndPassword(this: void): void, createUserWithEmailAndPassword(this: void): void }
+vi.mock("firebase/auth", async (getModule) => {
+  const original: FakeAuth = await getModule();
+
+  return {
+    ...original,
+    signInWithEmailAndPassword: vi.fn().mockImplementation(original.signInWithEmailAndPassword),
+    createUserWithEmailAndPassword: vi.fn().mockImplementation(original.createUserWithEmailAndPassword),
+  };
+});
 
 const mockedUseNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -13,6 +25,9 @@ vi.mock("react-router-dom", async () => {
     useNavigate: () => mockedUseNavigate,
   };
 });
+
+const signInSpy = vi.spyOn(firebaseAuth, "signInWithEmailAndPassword");
+const createUserAuthSpy = vi.spyOn(firebaseAuth, "createUserWithEmailAndPassword");
 
 describe('Sign In', ()=>{
 
@@ -27,12 +42,8 @@ describe('Sign In', ()=>{
     });
     const email = screen.getByTestId('email');
     const password = screen.getByTestId('password');
-    const signinButton = screen.getByRole('button', {
-      name: 'Sign In'
-    })
-    const signupButton = screen.getByRole('button', {
-      name: 'Go to Sign Up'
-    })
+    const signinButton = screen.getByRole('button', { name: 'Sign In' });
+    const signupButton = screen.getByRole('button', { name: 'Go to Sign Up' });
 
     expect(title).toBeInTheDocument();
     expect(email).toBeInTheDocument();
@@ -41,7 +52,7 @@ describe('Sign In', ()=>{
     expect(signupButton).toBeInTheDocument();
   });
 
-  it('goes to the signup page', async ()=>{
+  it('goes to the signup page when sign up is clicked', async ()=>{
     render(
       <BrowserRouter>
         <SignIn/>
@@ -65,15 +76,34 @@ describe('Sign In', ()=>{
         <SignIn/>
       </BrowserRouter>
     );
-    const user = userEvent.setup();
 
-    const signinButton = screen.getByRole('button', {
-      name: 'Sign In'
-    });
+    const user = userEvent.setup();
+    const signinButton = screen.getByRole('button', { name: 'Sign In' });
     
     expect(signinButton).toBeInTheDocument();
     await user.click(signinButton);
     expect(mockedUseNavigate).not.toHaveBeenCalled();
+  });
+
+  it('signInWithEmailAndPassword is called when sign in is clicked and fields are entered properly', async ()=>{
+    render(
+      <BrowserRouter>
+        <SignIn/>
+      </BrowserRouter>
+    );
+
+    const user = userEvent.setup();
+    const email = screen.getByTestId('email');
+    const password = screen.getByTestId('password');
+    const signinButton = screen.getByRole('button', { name: 'Sign In' });
+
+    email.focus();
+    await user.keyboard('fake@fakies.com');
+    password.focus();
+    await user.keyboard('fakies');
+    await user.click(signinButton);
+
+    expect(signInSpy).toHaveBeenCalled();
   });
 
 });
@@ -140,6 +170,36 @@ describe('Sign Up', ()=>{
 
     await user.click(returnToSignInButton);
     expect(mockedUseNavigate).toHaveBeenCalled();
+  });
+
+  it('createUserWithEmailAndPassword is called when fields are entered properly and Create Account is clicked', async ()=>{
+    render(
+      <BrowserRouter>
+        <SignUp/>
+      </BrowserRouter>
+    );
+
+    const user = userEvent.setup();
+    const password = screen.getByTestId('password');
+    const repeatPassword = screen.getByTestId('password repeat');
+    const description = screen.getByRole('textbox', {name: 'Description:'});
+    const username = screen.getByRole('textbox', {name: 'Username:'});
+    const email = screen.getByRole('textbox', {name: 'Email:'});
+    const createAccountButton = screen.getByRole('button', {name:'Create Account'});
+
+    username.focus();
+    await user.keyboard('fakeName');
+    password.focus();
+    await user.keyboard('fakies');
+    repeatPassword.focus();
+    await user.keyboard('fakies');
+    description.focus();
+    await user.keyboard('fakies');
+    email.focus();
+    await user.keyboard('fakies@fakies.com');
+    await user.click(createAccountButton);
+
+    expect(createUserAuthSpy).toHaveBeenCalled();
   });
 
 });
