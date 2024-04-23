@@ -9,6 +9,7 @@
   align-items: center;
 }
 .error404__title {
+  all: unset;
   display: inline;
   position: relative;
   right: -4rem;
@@ -20,6 +21,7 @@
 }
 
 .error404__text {
+  all: unset;
   position: relative;
   left: -2.75rem;
   top: 3.3rem;

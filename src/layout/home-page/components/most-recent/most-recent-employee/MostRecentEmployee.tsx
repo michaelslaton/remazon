@@ -16,7 +16,8 @@ const MostRecentEmployee: React.FC = () => {
   const employeeRank: RankType | undefined = rankList.find(
     (rank) => rank.id === mostRecentEmployee.rank
   );
-  const aliasList: string[] = mostRecentEmployee.aliases.split(',');
+  const aliasList: string[] = [''];
+  if(mostRecentEmployee.aliases) mostRecentEmployee?.aliases.split(',');
 
   if (!employeeList.length) return <Loading/>;
 
