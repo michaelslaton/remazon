@@ -7,8 +7,8 @@ const Error404: React.FC = () => {
   return (
     <div className='error404__wrapper'>
       <div className='error404__title--wrapper'>
-        <div className='error404__title'>404</div>
-        <div className='error404__text'>Not Found</div>
+        <h1 className='error404__title'>404</h1>
+        <h2 className='error404__text'>Not Found</h2>
       </div>
       <div className='error404__links'>
         <button className='error404-link' onClick={()=> navigate('/')}>Go Home</button>

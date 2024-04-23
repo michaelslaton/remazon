@@ -9,9 +9,11 @@ import Award from './award-component/Award';
 import EditAward from './award-component/EditAward';
 import * as controlActions from '../../redux/slices/controlsSlice';
 import * as awardActions from '../../redux/slices/awardsSlice';
+import CreateAward from './award-component/CreateAward';
 
 const setUiErrorSpy = vi.spyOn(controlActions, 'setUiError');
 const editAwardThunkSpy = vi.spyOn(awardActions, 'editAwardThunk');
+const createAwardThunkSpy = vi.spyOn(awardActions, 'createAwardThunk');
 const windowConfirmSpy = vi.spyOn(window, 'confirm');
 
 const awardData = awardsDummyData.data;
@@ -310,6 +312,97 @@ describe('Awards', ()=>{
       await user.click(submitButton);
 
       expect(editAwardThunkSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('Create Award', ()=>{
+    it('renders all elements properly', ()=>{
+      render(
+        <BrowserRouter>
+          <CreateAward/>
+        </BrowserRouter>
+      );
+
+      const title = screen.getByRole('heading', { name: 'Create Award' });
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const typeBox = screen.getByRole('combobox', { name: 'Type:' });
+      const beltOption = screen.getByRole('option', { name: 'Belt' });
+      const trophyOption = screen.getByRole('option', { name: 'Trophy' });
+      const awardHolderBox = screen.getByRole('combobox', { name: 'Current Award Holder:' });
+      const unawardedOption = screen.getByRole('option', { name: 'Unawarded' });
+      const rembo = screen.getByRole('option', { name: 'Rembo' });
+      const bueno = screen.getByRole('option', { name: 'Bueno' });
+      const awardedFor = screen.getByRole('textbox', { name: 'Awarded For:' });
+      const charCount = screen.getByText('0 of 200');
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+
+      expect(title).toBeVisible();
+      expect(nameBox).toBeVisible();
+      expect(typeBox).toBeVisible();
+      expect(typeBox.childElementCount).toBe(2);
+      expect(beltOption).toBeVisible();
+      expect(trophyOption).toBeVisible();
+      expect(awardHolderBox).toBeVisible();
+      expect(unawardedOption).toBeVisible();
+      expect(rembo).toBeVisible();
+      expect(bueno).toBeVisible();
+      expect(awardHolderBox.childElementCount).toBe(3);
+      expect(awardedFor).toBeVisible();
+      expect(charCount).toBeVisible();
+      expect(submitButton).toBeVisible();
+      expect(cancelButton).toBeVisible();
+    });
+
+    it('setUiError is called if fields are not filled properly and submit is clicked', async ()=>{
+      render(
+        <BrowserRouter>
+          <CreateAward/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      await user.click(submitButton);
+
+      expect(setUiErrorSpy).toHaveBeenCalled();
+    });
+
+    it('useNavigate is called if cancel is clicked', async ()=>{
+      render(
+        <BrowserRouter>
+          <CreateAward/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+
+      await user.click(cancelButton);
+
+      expect(mockedUseNavigate).toHaveBeenCalled();
+    });
+
+    it('createAwardThunk is called if fields are entered correctly', async ()=>{
+      render(
+        <BrowserRouter>
+          <CreateAward/>
+        </BrowserRouter>
+      );
+
+      const user = userEvent.setup();
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const awardedFor = screen.getByRole('textbox', { name: 'Awarded For:' });
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      nameBox.focus();
+      await user.keyboard('Weebo Belt');
+      awardedFor.focus();
+      await user.keyboard('Egg Belt');
+      await user.click(submitButton);
+
+      expect(createAwardThunkSpy).toHaveBeenCalled();
     });
   });
 });

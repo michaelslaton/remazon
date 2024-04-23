@@ -7,6 +7,7 @@ import { fetchNotificationsThunk } from '../../redux/slices/notificationsSlice';
 import AdminMotd from './admin-motd/AdminMotd';
 import * as notificationActions from '../../redux/slices/notificationsSlice';
 import * as controlActions from '../../redux/slices/controlsSlice';
+import AdminPanel from './AdminPanel';
 
 const sendNotificationSpy = vi.spyOn(notificationActions, 'createNotificationThunk');
 const setUiErrorSpy = vi.spyOn(controlActions, 'setUiError');
@@ -24,6 +25,18 @@ vi.mock('react-router-dom', async () => {
 });
 
 describe('Admin Panel', ()=>{
+  describe('Admin Panel', ()=>{
+    it('renders all elements properly', ()=>{
+      render(
+        <AdminPanel/>
+      );
+
+      const header = screen.getByRole('heading', { name: 'Admin Control Panel' });
+
+      expect(header).toBeVisible();
+    });
+  });
+
   describe('Admin Notification', ()=>{
     it('all elements render correctly', ()=>{
       render(

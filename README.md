@@ -8,6 +8,7 @@ Employee / Business management full-stack web-application for Remazon Prime.
 * TypeScript  
 * React ( Vite )  
   - React-Router  
+  - Vitest  
 * Redux  
   - Redux-Persist  
 * Firebase ( Authentication )  
