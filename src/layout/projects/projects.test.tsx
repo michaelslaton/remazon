@@ -10,8 +10,10 @@ import { fetchProjectsThunk } from '../../redux/slices/projectsSlice';
 import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import * as projectActions from '../../redux/slices/projectsSlice';
 import * as controlActions from '../../redux/slices/controlsSlice';
+import CreateProject from './project-component/CreateProject';
 
 const editProjectThunkSpy = vi.spyOn(projectActions, 'editProjectThunk');
+const createProjectThunkSpy = vi.spyOn(projectActions, 'createProjectThunk');
 const deleteProjectThunkSpy = vi.spyOn(projectActions, 'deleteProjectThunk');
 const setUiErrorSpy = vi.spyOn(controlActions, 'setUiError');
 const windowConfirmSpy = vi.spyOn(window, 'confirm');
@@ -377,6 +379,91 @@ describe('Projects', ()=>{
       await user.click(cancelButton);
       expect(mockedUseNavigate).toHaveBeenCalled();
     })
+  });
+
+  describe('Create Project', ()=>{
+    it('renders all elements properly',()=>{
+      render(
+        <CreateProject/>
+      );
+
+      const title = screen.getByRole('heading', { name: 'Create Project' });
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const dateBox = screen.getByLabelText(/date:/i);
+      const typeBox = screen.getByRole('combobox', { name: 'Type:' });
+      const gameNightOption = screen.getByRole('option', { name: 'Game Night' });
+      const watchNightOption = screen.getByRole('option', { name: 'Watch Night' });
+      const socialOption = screen.getByRole('option', { name: 'Social Gathering' });
+      const rwfOption = screen.getByRole('option', { name: 'RWF' });
+      const otherOption = screen.getByRole('option', { name: 'Other' });
+      const descriptionBox = screen.getByRole('textbox', { name: 'Description:' });
+      const charCount = screen.getByText('0 of 200');
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+
+      expect(title).toBeVisible();
+      expect(nameBox).toBeVisible();
+      expect(dateBox).toBeVisible();
+      expect(typeBox).toBeVisible();
+      expect(typeBox.childElementCount).toBe(5);
+      expect(gameNightOption).toBeVisible();
+      expect(watchNightOption).toBeVisible();
+      expect(socialOption).toBeVisible();
+      expect(rwfOption).toBeVisible();
+      expect(otherOption).toBeVisible();
+      expect(descriptionBox).toBeVisible();
+      expect(charCount).toBeVisible();
+      expect(submitButton).toBeVisible();
+      expect(cancelButton).toBeVisible();
+    });
+
+    it('setUiError is called if all fields are not filled properly and submit is clicked', async ()=>{
+      render(
+        <CreateProject/>
+      );
+
+      const user = userEvent.setup();
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      await user.click(submitButton);
+
+      expect(setUiErrorSpy).toHaveBeenCalled();
+    });
+
+    it('useNavigate to be called if cancel is clicked', async ()=>{
+      render(
+        <CreateProject/>
+      );
+
+      const user = userEvent.setup();
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+
+      await user.click(cancelButton);
+
+      expect(mockedUseNavigate).toHaveBeenCalledWith('/projects');
+    });
+
+    it('createProjectThunk is called when fields are entered correctly', async ()=>{
+      render(
+        <CreateProject/>
+      );
+
+      const user = userEvent.setup();
+      const nameBox = screen.getByRole('textbox', { name: 'Name:' });
+      const dateBox = screen.getByLabelText(/date:/i);
+      const descriptionBox = screen.getByRole('textbox', { name: 'Description:' });
+      const submitButton = screen.getByRole('button', { name: 'Submit' });
+
+      nameBox.focus();
+      await user.keyboard('Lets Play Lethal Company');
+      dateBox.focus();
+      await user.keyboard('2500-02-01');
+      descriptionBox.focus();
+      await user.keyboard('Watch out for the Braken!');
+      await user.click(submitButton);
+
+      expect(createProjectThunkSpy).toHaveBeenCalled();
+    });
   });
 
 });
