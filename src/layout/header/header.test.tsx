@@ -1,7 +1,9 @@
+import { setUiError } from "../../redux/slices/controlsSlice";
 import { fetchCurrentEmployeeThunk, clearCurrentEmployee } from "../../redux/slices/employeesSlice";
 import store from "../../redux/store";
 import { render, screen, act, cleanup, userEvent } from "../../utils/testUtils/test-utils";
 import Header from "./Header";
+import ErrorDisplay from "./error-display/ErrorDisplay";
 import UserDisplay from "./user-display/UserDisplay";
 import { BrowserRouter } from "react-router-dom";
 
@@ -101,5 +103,46 @@ describe('Header', ()=>{
       expect(mockedUseNavigate).toHaveBeenCalled();
     });
   
+  });
+
+  describe('Error Display', ()=>{
+    it('renders all elements properly', async ()=>{
+      render(
+        <ErrorDisplay/>
+      );
+
+      let closeButton = screen.queryByTestId('error close button');
+
+      expect(closeButton).not.toBeInTheDocument();
+
+      await act( async ()=>{
+        store.dispatch(setUiError('This is an Error'));
+      });
+
+      closeButton = screen.getByTestId('error close button')
+      const errorMessage = screen.getByText('Error: This is an Error')
+
+      expect(closeButton).toBeVisible();
+      expect(errorMessage).toBeVisible();
+    });
+
+    it('clears the error when the close button is clicked', async ()=>{
+      await act( async ()=>{
+        store.dispatch(setUiError('This is an Error'));
+      });
+
+      render(
+        <ErrorDisplay/>
+      );
+
+      const user = userEvent.setup();
+      const closeButton = screen.getByTestId('error close button');
+
+      expect(closeButton).toBeVisible();
+
+      await user.click(closeButton);
+
+      expect(closeButton).not.toBeInTheDocument();
+    });
   });
 });

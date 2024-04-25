@@ -16,92 +16,61 @@ const ErrorDisplay: React.FC = () => {
   const projectsError: string | undefined = useAppSelector((state)=> state.projectsControl.error);
   const ranksError: string | undefined = useAppSelector((state)=> state.ranksControl.error);
   const dispatch = useAppDispatch();
+
+  const errorButton = (clearFunction: Function) => {
+    return (
+      <button 
+        data-testid='error close button'
+        className='close-button'
+        onClick={()=> dispatch(clearFunction())}
+      >
+        <div className='button-text'>X</div>
+      </button>
+    )};
     
   return (
     <div>
-      { uiError!.length ?
-        <div className={`error`}>
+      { !!uiError?.length &&
+        <div className="error">
           Error: {uiError}
-          <button 
-            className='close-button'
-            onClick={()=> dispatch(clearUiError())}>
-              <div className='button-text'>X</div>
-          </button>
+          {errorButton(clearUiError)}
         </div>
-        :
-        <></>
       }
-      { controlError!.length ?
-        <div className={`error`}>
+      { !!controlError?.length &&
+        <div className="error">
           Control Error: {controlError}
-          <button 
-            className='close-button'
-            onClick={()=> dispatch(clearControlError())}>
-              <div className='button-text'>X</div>
-          </button>
+          {errorButton(clearControlError)}
         </div>
-        :
-        <></>
       }
-      { awardsError!.length ?
-        <div className={`error`}>
+      { !!awardsError?.length &&
+        <div className="error">
           Awards Error: {awardsError}
-          <button 
-            className='close-button'
-            onClick={()=> dispatch(clearAwardError())}>
-              <div className='button-text'>X</div>
-          </button>
+          {errorButton(clearAwardError)}
         </div>
-        :
-        <></>
       }
-      { employeesError!.length ?
-        <div className={`error`}>
+      { !!employeesError?.length &&
+        <div className="error">
           Employees Error: {employeesError}
-          <button 
-            className='close-button'
-            onClick={()=> dispatch(clearEmployeeError())}>
-              <div className='button-text'>X</div>
-          </button>
+          {errorButton(clearEmployeeError)}
         </div>
-        :
-        <></>
       }
-      { notificationsError!.length ?
-        <div className={`error`}>
+      { !!notificationsError?.length &&
+        <div className="error">
           Notifications Error: {notificationsError}
-          <button 
-            className='close-button'
-            onClick={()=> dispatch(clearNotificationsError())}>
-              <div className='button-text'>X</div>
-          </button>
+          {errorButton(clearNotificationsError)}
         </div>
-        :
-        <></>
       }
-      { projectsError!.length ?
-        <div className={`error`}>
+      { !!projectsError?.length &&
+        <div className="error">
           Projects Error: {projectsError}
-          <button 
-            className='close-button'
-            onClick={()=> dispatch(clearProjectError())}>
-              <div className='button-text'>X</div>
-          </button>
+          {errorButton(clearProjectError)}
         </div>
-        :
-        <></>
       }
-      { ranksError!.length ?
-        <div className={`error`}>
+      { !!ranksError?.length &&
+        <div className="error">
           Ranks Error: {ranksError}
-          <button 
-            className='close-button'
-            onClick={()=> dispatch(clearRankError())}>
-              <div className='button-text'>X</div>
-          </button>
+          {errorButton(clearRankError)}
         </div>
-        :
-        <></>
       }
     </div>
   );
