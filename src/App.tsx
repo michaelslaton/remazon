@@ -9,7 +9,6 @@ import EmployeesDisplay from './layout/employees/EmployeesDisplay';
 import Error404 from './utils/errors/error404/Error404';
 import HomePage from './layout/home-page/HomePage';
 import Layout from './layout/Layout';
-import Info from './layout/info/Info';
 import AwardsDisplay from './layout/awards/AwardsDisplay';
 import NotificationsDisplay from './layout/notifications/NotificationsDisplay';
 import ProjectsDisplay from './layout/projects/ProjectsDisplay';
@@ -47,11 +46,6 @@ export const router = createBrowserRouter([
           <AdminAccessRoute>
             <AdminPanel/>
           </AdminAccessRoute>,
-        errorElement: <RouteError/>,
-      },
-      {
-        path: '/info',
-        element: <Info/>,
         errorElement: <RouteError/>,
       },
       {

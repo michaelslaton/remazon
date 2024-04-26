@@ -40,6 +40,7 @@
 }
 
 .most-recent__item-title {
+  all: unset;
   color: var(--remazon-prime);
   font-size: 1.4rem;
   text-transform: capitalize;

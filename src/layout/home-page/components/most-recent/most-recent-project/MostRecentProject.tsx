@@ -25,9 +25,9 @@ const MostRecentProject: React.FC = () => {
         className='most-recent__content-wrapper'
         onClick={()=> navigate('/projects')}
       >
-        <div className='most-recent__item-title'>
+        <h2 className='most-recent__item-title'>
           {mostRecentProject.name}
-        </div>
+        </h2>
         <ul className='most-recent__info-list'>
           <li>
             Type:
