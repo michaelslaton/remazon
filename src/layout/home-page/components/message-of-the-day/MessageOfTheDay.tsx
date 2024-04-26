@@ -13,7 +13,7 @@ const MessageOfTheDay: React.FC = () => {
   },[]);
 
   return (
-    <>
+    <div>
       { motd.length ? 
         <div className='motd__container'>
           <div className='motd__message-container'>
@@ -30,7 +30,7 @@ const MessageOfTheDay: React.FC = () => {
             </div>
           </div>
           <div className='motd__banner-wrapper'>
-            <img src={banner}/>
+            <img alt='hero banner' src={banner}/>
           </div>
         </div>
         :
@@ -41,11 +41,11 @@ const MessageOfTheDay: React.FC = () => {
             </h2>
           </div>
           <div className='motd__banner-wrapper'>
-            <img src={banner}/>
+            <img alt='hero banner' src={banner}/>
           </div>
         </div>
       }
-    </>
+    </div>
   )
 };
 

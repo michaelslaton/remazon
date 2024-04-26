@@ -9,7 +9,7 @@ const HomePage: React.FC = () => {
     <>
       <MessageOfTheDay />
       <MostRecent />
-      <div className='popups'>
+      <div data-testid='widgets display' className='widgets'>
         <CupcakeLeaderboardWidget/>
       </div>
     </>

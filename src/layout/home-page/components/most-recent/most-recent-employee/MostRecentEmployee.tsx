@@ -30,9 +30,9 @@ const MostRecentEmployee: React.FC = () => {
         className='most-recent__content-wrapper'
         onClick={()=> navigate('/employees')}
       >
-        <div className='most-recent__item-title'>
+        <h2 className='most-recent__item-title'>
           {mostRecentEmployee.name}
-        </div>
+        </h2>
         <ul className='most-recent__info-list'>
           <li>
             {`Rank: `}
