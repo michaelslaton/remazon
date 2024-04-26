@@ -28,12 +28,13 @@ const MostRecentAward: React.FC = () => {
         Newest Awarded: 
       </div>
       <div
+        data-testid='most recent wrapper'
         className='most-recent__content-wrapper award'
         onClick={()=> navigate('/awards')}
       >
-        <div className='most-recent__item-title award'>
+        <h2 className='most-recent__item-title award'>
           {mostRecentAward.name}
-        </div>
+        </h2>
         <ul className='most-recent__info-list award'>
           <li>
             Awarded To:
