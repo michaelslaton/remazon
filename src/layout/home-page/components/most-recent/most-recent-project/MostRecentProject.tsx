@@ -8,11 +8,15 @@ const MostRecentProject: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
   let projectList: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
   projectList = [...projectList].filter((project) => project.status === true);
-  
-  const mostRecentProject: ProjectType = projectList.reduce((prev, current) => {
-    return prev.id > current.id ? prev : current;
-  });
-  const projectDate: Date = new Date(mostRecentProject.date);
+  let mostRecentProject: ProjectType | null = null;
+  let projectDate: Date | null = null;
+
+  if(projectList.length){
+    mostRecentProject = projectList.reduce((prev, current) => {
+      return prev.id > current.id ? prev : current;
+    });
+    projectDate = new Date(mostRecentProject.date);
+  }
 
   if (!projectList.length) return <></>;
 
@@ -26,19 +30,19 @@ const MostRecentProject: React.FC = () => {
         onClick={()=> navigate('/projects')}
       >
         <h2 className='most-recent__item-title'>
-          {mostRecentProject.name}
+          {mostRecentProject?.name}
         </h2>
         <ul className='most-recent__info-list'>
           <li>
             Type:
             <div className='most-recent__info-value'>
-              {` ${mostRecentProject.type}`}
+              {` ${mostRecentProject?.type}`}
             </div>
           </li>
           <li>
             Date:
             <div className='most-recent__info-value'>
-              {` ${months[projectDate.getMonth()]} ${projectDate.getDate()}`}
+              {` ${months[projectDate!.getMonth()]} ${projectDate!.getDate()}`}
             </div>
           </li>
         </ul>
