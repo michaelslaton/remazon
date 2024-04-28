@@ -54,6 +54,17 @@ describe('Home Page', ()=>{
   });
 
   describe('Most Recent Award', ()=>{
+    it('renders nothing when there are no awards', ()=>{
+      render(
+        <BrowserRouter>
+          <MostRecentAward/>
+        </BrowserRouter>
+      );
+
+      let mostRecentWrapper = screen.queryByTestId('most recent wrapper');
+      expect(mostRecentWrapper).not.toBeInTheDocument();
+    });
+
     it('renders all elements properly when there are awards', async ()=>{
       await act( async ()=>{
         store.dispatch(fetchAwardsThunk());

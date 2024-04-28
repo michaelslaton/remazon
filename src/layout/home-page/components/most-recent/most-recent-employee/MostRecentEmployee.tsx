@@ -2,24 +2,25 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../redux/hooks';
 import EmployeeType from '../../../../../types/employee.type';
 import RankType from '../../../../../types/rank.type';
-import Loading from '../../../../components/loading/Loading';
 import '../mostRecent.css';
 
 const MostRecentEmployee: React.FC = () => {
   const rankList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const navigate: NavigateFunction = useNavigate();
-  let employeeList: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
-  employeeList = [...employeeList].filter((employee) => employee.rank !== 0);
-  const mostRecentEmployee: EmployeeType = [...employeeList].reduce((prev, current) => {
-    return prev.id > current.id ? prev : current;
-  });
-  const employeeRank: RankType | undefined = rankList.find(
-    (rank) => rank.id === mostRecentEmployee.rank
-  );
-  const aliasList: string[] = [''];
-  if(mostRecentEmployee.aliases) mostRecentEmployee?.aliases.split(',');
+  const employeeList: EmployeeType[] = useAppSelector((state) => state.employeesControl.employees);
+  let mostRecentEmployee: EmployeeType | null = null;
 
-  if (!employeeList.length) return <Loading/>;
+  if(employeeList.length){ 
+    mostRecentEmployee = [...employeeList]
+    .filter((employee) => employee.rank !== 0)
+    .reduce((prev, current) => { return prev.id > current.id ? prev : current });
+  }
+
+  const employeeRank: RankType | undefined = rankList.find((rank) => rank.id === mostRecentEmployee?.rank);
+  const aliasList: string[] = [''];
+  if(mostRecentEmployee?.aliases) mostRecentEmployee?.aliases.split(',');
+
+  if (!employeeList.length) return <></>;
 
   return (
     <div className='most-recent__cel'>
@@ -31,7 +32,7 @@ const MostRecentEmployee: React.FC = () => {
         onClick={()=> navigate('/employees')}
       >
         <h2 className='most-recent__item-title'>
-          {mostRecentEmployee.name}
+          {mostRecentEmployee?.name}
         </h2>
         <ul className='most-recent__info-list'>
           <li>
@@ -45,7 +46,7 @@ const MostRecentEmployee: React.FC = () => {
           </li>
 
           {
-            mostRecentEmployee.birthday &&
+            mostRecentEmployee?.birthday &&
             <li>
               {`Birthday: `}
               <div className='most-recent__info-value'>
