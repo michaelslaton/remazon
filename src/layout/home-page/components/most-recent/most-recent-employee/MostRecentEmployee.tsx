@@ -27,7 +27,8 @@ const MostRecentEmployee: React.FC = () => {
       <div className='most-recent__cel-title'>
         New Hire
       </div>
-      <div 
+      <div
+        data-testid='most recent employee wrapper'
         className='most-recent__content-wrapper'
         onClick={()=> navigate('/employees')}
       >

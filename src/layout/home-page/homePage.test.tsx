@@ -6,6 +6,8 @@ import MessageOfTheDay from "./components/message-of-the-day/MessageOfTheDay";
 import MostRecentAward from "./components/most-recent/most-recent-award/MostRecentAward";
 import { fetchAwardsThunk } from "../../redux/slices/awardsSlice";
 import { fetchEmployeesListThunk } from "../../redux/slices/employeesSlice";
+import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
+import MostRecentEmployee from "./components/most-recent/most-recent-employee/MostRecentEmployee";
 
 const mockedUseNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
@@ -77,7 +79,7 @@ describe('Home Page', ()=>{
         </BrowserRouter>
       );
 
-      const mostRecentWrapper = screen.getByTestId('most recent wrapper');
+      const mostRecentWrapper = screen.getByTestId('most recent award wrapper');
       const title = screen.getByRole('heading', { name: 'Face of the Business' });
       const awardedToKey = screen.getByText('Awarded To:');
       const awardedToValue = screen.getByText('Rembo');
@@ -109,11 +111,38 @@ describe('Home Page', ()=>{
       );
 
       const user = userEvent.setup();
-      const mostRecentWrapper = screen.getByTestId('most recent wrapper');
+      const mostRecentWrapper = screen.getByTestId('most recent award wrapper');
 
       await user.click(mostRecentWrapper);
 
       expect(mockedUseNavigate).toHaveBeenCalledWith('/awards');
+    });
+  });
+  
+  describe('Most Recent Employee', ()=>{
+    it('renders all elements properly', async ()=>{
+      await act( async ()=>{
+        store.dispatch(fetchRanksThunk());
+        store.dispatch(fetchEmployeesListThunk());
+      });
+
+      render(
+        <BrowserRouter>
+          <MostRecentEmployee/>
+        </BrowserRouter>
+      );
+
+      const title = screen.getByText('New Hire');
+      const mostRecentWrapper = screen.getByTestId('most recent employee wrapper');
+      const name = screen.getByRole('heading', { name: 'Bueno' });
+      const rankKey = screen.getByText('Rank:');
+      const rankValue = screen.getByText('Weebo');
+
+      expect(title).toBeVisible();
+      expect(mostRecentWrapper).toBeVisible();
+      expect(name).toBeVisible();
+      expect(rankKey).toBeVisible();
+      expect(rankValue).toBeVisible();
     });
   });
 });
