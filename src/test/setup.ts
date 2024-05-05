@@ -8,4 +8,4 @@ afterEach(() => {
   server.resetHandlers();
   vi.clearAllMocks();
   cleanup();
-})
+});
