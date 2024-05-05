@@ -70,6 +70,9 @@ const employeesSlice = createSlice({
     setEmployeesList: (state,action) => {
       state.employees = action.payload;
     },
+    clearEmployeeList: (state) => { // Added for testing purposes, should not be used
+      state.employees = [];
+    },
     clearCurrentEmployee: (state) => {
       state.currentEmployee = null;
     },
@@ -144,4 +147,5 @@ export const {
   setEmployeesList,
   clearCurrentEmployee,
   clearEmployeeError,
+  clearEmployeeList,
 } = employeesSlice.actions;
