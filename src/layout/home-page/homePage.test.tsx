@@ -8,6 +8,8 @@ import { fetchAwardsThunk } from "../../redux/slices/awardsSlice";
 import { clearEmployeeList, fetchEmployeesListThunk } from "../../redux/slices/employeesSlice";
 import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import MostRecentEmployee from "./components/most-recent/most-recent-employee/MostRecentEmployee";
+import MostRecentProject from "./components/most-recent/most-recent-project/MostRecentProject";
+import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
 
 const mockedUseNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
@@ -178,6 +180,67 @@ describe('Home Page', ()=>{
       await user.click(mostRecentWrapper);
       
       expect(mockedUseNavigate).toHaveBeenCalledWith('/employees');
+    });
+    
+  });
+
+  describe('Most Recent Project', ()=>{
+    it('renders nothing when there are no employees', async ()=>{      
+      render(
+        <BrowserRouter>
+          <MostRecentProject/>
+        </BrowserRouter>
+      );
+
+      const mostRecentWrapper = screen.queryByTestId('most recent project wrapper');
+      expect(mostRecentWrapper).not.toBeInTheDocument();
+    });
+    
+    it('renders all elements properly', async ()=>{
+      await act( async ()=>{
+        store.dispatch(fetchProjectsThunk());
+      });
+      
+      render(
+        <BrowserRouter>
+          <MostRecentProject/>
+        </BrowserRouter>
+      );
+      
+      const title = screen.getByText('New Project');
+      const mostRecentWrapper = screen.getByTestId('most recent project wrapper');
+      const name = screen.getByRole('heading', { name: 'Wrassles' });
+      const typeKey = screen.getByText('Type:');
+      const typeValue = screen.getByText('RWF');
+      const dateKey = screen.getByText('Date:');
+      const dateValue = screen.getByText('June 25');
+      
+      expect(title).toBeVisible();
+      expect(mostRecentWrapper).toBeVisible();
+      expect(name).toBeVisible();
+      expect(typeKey).toBeVisible();
+      expect(typeValue).toBeVisible();
+      expect(dateKey).toBeVisible();
+      expect(dateValue).toBeVisible();
+    });
+
+    it('useNavigate is called to /employees when clicked', async ()=>{
+      await act( async ()=>{
+        store.dispatch(fetchProjectsThunk());
+      });
+
+      render(
+        <BrowserRouter>
+          <MostRecentProject/>
+        </BrowserRouter>
+      );
+      
+      const user = userEvent.setup();
+      const mostRecentWrapper = screen.getByTestId('most recent project wrapper');
+      
+      await user.click(mostRecentWrapper);
+      
+      expect(mockedUseNavigate).toHaveBeenCalledWith('/projects');
     });
     
   });
