@@ -26,6 +26,7 @@ const MostRecentProject: React.FC = () => {
         New Project
       </div>
       <div
+        data-testid='most recent project wrapper'
         className='most-recent__content-wrapper'
         onClick={()=> navigate('/projects')}
       >
