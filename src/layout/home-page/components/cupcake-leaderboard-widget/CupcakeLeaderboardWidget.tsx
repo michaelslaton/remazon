@@ -12,18 +12,20 @@ const CupcakeLeaderboardWidget: React.FC = () => {
     <div className='leaderboard__wrapper'>
       <div className='leaderboard__header'>
         <img
+          data-testid='cupcake image'
           src={colorCupcake}
           className='leaderboard-cupcake'
         />
         <div className='leaderboard__header-text'>
-          <div>
+          <h3>
             Cupcake
-          </div>
-          <div>
+          </h3>
+          <h3>
             Leaderboard
-          </div>
+          </h3>
         </div>
         <img
+          data-testid='cupcake image'
           src={colorCupcake}
           className='leaderboard-cupcake'
         />
