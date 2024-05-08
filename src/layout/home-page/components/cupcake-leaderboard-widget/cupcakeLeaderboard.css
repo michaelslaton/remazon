@@ -26,6 +26,10 @@
   margin: 0 .3em;
   margin-top: .5rem;
 }
+.leaderboard__header-text > h3 {
+  all: unset;
+  display: block;
+}
 
 .leaderboard__entry {
   width: 90%;

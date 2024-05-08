@@ -10,6 +10,7 @@ import { fetchRanksThunk } from "../../redux/slices/ranksSlice";
 import MostRecentEmployee from "./components/most-recent/most-recent-employee/MostRecentEmployee";
 import MostRecentProject from "./components/most-recent/most-recent-project/MostRecentProject";
 import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
+import CupcakeLeaderboardWidget from "./components/cupcake-leaderboard-widget/CupcakeLeaderboardWidget";
 
 const mockedUseNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
@@ -243,5 +244,47 @@ describe('Home Page', ()=>{
       expect(mockedUseNavigate).toHaveBeenCalledWith('/projects');
     });
     
+  });
+
+  describe('Cupcake Leader Board', ()=>{
+    it('renders nothing if there are no employees', async ()=>{
+      await act(async ()=>{
+        store.dispatch(clearEmployeeList());
+      });
+
+      render(
+        <CupcakeLeaderboardWidget/>
+      );
+
+      const cupcake = screen.queryByRole('heading', { name: 'Cupcake' });
+
+      expect(cupcake).not.toBeInTheDocument();
+    });
+
+    it('renders all elemets properly', async ()=>{
+      await act(async ()=>{
+        store.dispatch(fetchEmployeesListThunk());
+      });
+
+      render(
+        <CupcakeLeaderboardWidget/>
+      );
+
+      const cupcake = screen.getByRole('heading', { name: 'Cupcake' });
+      const leaderboard = screen.getByRole('heading', { name: 'Leaderboard' });
+      const cupcakeImage = screen.queryAllByTestId('cupcake image');
+      const rembo = screen.getByText('Rembo');
+      const remboCupcakes = screen.getByText('9');
+      const bueno = screen.getByText('Rembo');
+      const buenoCupcakes = screen.getByText('2');
+
+      expect(cupcake).toBeVisible();
+      expect(leaderboard).toBeVisible();
+      expect(cupcakeImage).toHaveLength(2);
+      expect(rembo).toBeVisible();
+      expect(remboCupcakes).toBeVisible();
+      expect(bueno).toBeVisible();
+      expect(buenoCupcakes).toBeVisible();
+    });
   });
 });
