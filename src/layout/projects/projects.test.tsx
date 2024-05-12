@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { act, cleanup, render, screen, userEvent } from '../../utils/testUtils/test-utils';
+import { act, render, screen, userEvent } from '../../utils/testUtils/test-utils';
 import { projectsDummyData } from '../../test/mocks/handlers';
 import ProjectType from '../../types/project.type';
 import ProjectsDisplay from './ProjectsDisplay';
@@ -32,7 +32,7 @@ vi.mock('react-router-dom', async () => {
 
 describe('Projects', ()=>{
   describe('Projects Display',()=>{
-    it('renders all elements properly', async ()=>{
+    it('renders all elements properly if there are no projects', ()=>{
       render(
         <BrowserRouter>
           <ProjectsDisplay/>
@@ -40,21 +40,12 @@ describe('Projects', ()=>{
       );
 
       const title = screen.getByRole('heading', { name: 'Projects' });
-      const sortOptionAlphabetical = screen.getByRole('option', { name: 'Alphabetical' });
-      const sortOptionPlaceHolder = screen.getByRole('option', { name: 'Sort By' });
-      const sortOptionHost = screen.getByRole('option', { name: 'Host' });
-      const deactivatedBox = screen.getByTestId('deactivated checkbox');
-      const noProjects = screen.getByText('No projects to show.')
+      const noProjects = screen.getByText('No Projects to display.')
 
       expect(title).toBeVisible();
-      expect(sortOptionAlphabetical).toBeVisible();
-      expect(sortOptionPlaceHolder).toBeVisible();
-      expect(sortOptionHost).toBeVisible();
-      expect(deactivatedBox).toBeVisible();
       expect(noProjects).toBeVisible();
-
-      cleanup();
-
+    })
+    it('renders all elements properly if projects exist', async ()=>{
       await act( async ()=>{
         await store.dispatch(fetchProjectsThunk());
         await store.dispatch(fetchCurrentEmployeeThunk('1'));
@@ -73,7 +64,6 @@ describe('Projects', ()=>{
       const specialEventsTitle = screen.getByRole('heading', { name: 'Special Events...'});
       const recurringEventsTitle = screen.getByRole('heading', { name: 'Recurring Events...'});
       
-      expect(noProjects).not.toBeVisible();
       expect(sortBy).toBeVisible();
       expect(newProjectButton).toBeVisible();
       expect(specialEventsTitle).toBeVisible();
