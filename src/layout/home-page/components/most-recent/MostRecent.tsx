@@ -5,7 +5,10 @@ import './mostRecent.css';
 
 const MostRecent: React.FC = () => {
   return (
-    <div className='most-recent__wrapper'>
+    <div 
+      data-testid='most recent wrapper'
+      className='most-recent__wrapper'
+    >
       <MostRecentEmployee />
       <MostRecentAward />
       <MostRecentProject />

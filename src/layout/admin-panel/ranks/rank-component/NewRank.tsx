@@ -1,10 +1,10 @@
 import { useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { createRankThunk, fetchRanksThunk } from '../../../redux/slices/ranksSlice';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { createRankThunk, fetchRanksThunk } from '../../../../redux/slices/ranksSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX, faCheck } from '@fortawesome/free-solid-svg-icons';
-import RankType, { RankPostType } from '../../../types/rank.type';
-import { setUiError } from '../../../redux/slices/controlsSlice';
+import RankType, { RankPostType } from '../../../../types/rank.type';
+import { setUiError } from '../../../../redux/slices/controlsSlice';
 import '../ranks.css';
 
 type NewRankProps = {

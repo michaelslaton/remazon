@@ -74,7 +74,7 @@ describe('Navbar', ()=>{
     expect(signOutButton).toBeVisible();
   });
 
-  it('renders admin and ranks buttons if logged in as an admin', async ()=>{
+  it('renders admin button if logged in as an admin', async ()=>{
     await act( async ()=>{
       await store.dispatch(fetchCurrentEmployeeThunk('1'));
     });
@@ -85,10 +85,8 @@ describe('Navbar', ()=>{
       </BrowserRouter>
     );
 
-    const ranksButton = screen.getByRole('button', { name: 'Ranks' });
     const adminButton = screen.getByRole('button', { name: 'Admin' });
 
-    expect(ranksButton).toBeVisible();
     expect(adminButton).toBeVisible();
 
     act(()=>{
@@ -112,7 +110,6 @@ describe('Navbar', ()=>{
     const employeesButton = screen.getByRole('button', { name: 'Employees' });
     const projectsButton = screen.getByRole('button', { name: 'Projects' });
     const awardsButton = screen.getByRole('button', { name: 'Awards' });
-    const ranksButton = screen.getByRole('button', { name: 'Ranks' });
     const adminButton = screen.getByRole('button', { name: 'Admin' });
 
     await user.click(homeButton);
@@ -123,10 +120,8 @@ describe('Navbar', ()=>{
     expect(mockedUseNavigate).toHaveBeenCalledTimes(3);
     await user.click(awardsButton);
     expect(mockedUseNavigate).toHaveBeenCalledTimes(4);
-    await user.click(ranksButton);
-    expect(mockedUseNavigate).toHaveBeenCalledTimes(5);
     await user.click(adminButton);
-    expect(mockedUseNavigate).toHaveBeenCalledTimes(6);
+    expect(mockedUseNavigate).toHaveBeenCalledTimes(5);
 
     act(()=>{
       store.dispatch(clearCurrentEmployee());
