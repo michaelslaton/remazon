@@ -1,6 +1,7 @@
 import AdminMotd from './admin-motd/AdminMotd';
 import AdminNotification from './admin-notification/AdminNotification';
 import './adminPanel.css';
+import AdminRanks from './ranks/RanksDisplay';
 
 const AdminPanel: React.FC = () => {
 
@@ -13,6 +14,7 @@ const AdminPanel: React.FC = () => {
       <div className='center-display-space'>
         <AdminMotd/>
         <AdminNotification/>
+        <AdminRanks/>
       </div>
     </>
   );

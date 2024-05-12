@@ -11,6 +11,7 @@ import MostRecentEmployee from "./components/most-recent/most-recent-employee/Mo
 import MostRecentProject from "./components/most-recent/most-recent-project/MostRecentProject";
 import { fetchProjectsThunk } from "../../redux/slices/projectsSlice";
 import CupcakeLeaderboardWidget from "./components/cupcake-leaderboard-widget/CupcakeLeaderboardWidget";
+import MostRecent from "./components/most-recent/MostRecent";
 
 const mockedUseNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
@@ -55,6 +56,18 @@ describe('Home Page', ()=>{
       expect(motd).toBeVisible();
       expect(rembo).toBeVisible();
       expect(heroBanner).toBeInTheDocument();
+    });
+  });
+
+  describe('Most Recent', ()=>{
+    it('renders all elements properly', ()=>{
+      render(
+        <MostRecent/>
+      );
+
+      const wrapper = screen.getByTestId('most recent wrapper');
+
+      expect(wrapper).toBeVisible();
     });
   });
   
