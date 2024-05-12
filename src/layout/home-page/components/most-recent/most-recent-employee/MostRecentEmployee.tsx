@@ -3,7 +3,6 @@ import { useAppSelector } from '../../../../../redux/hooks';
 import EmployeeType from '../../../../../types/employee.type';
 import RankType from '../../../../../types/rank.type';
 import '../mostRecent.css';
-import Loading from '../../../../components/loading/Loading';
 
 const MostRecentEmployee: React.FC = () => {
   const rankList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
@@ -21,7 +20,7 @@ const MostRecentEmployee: React.FC = () => {
   const aliasList: string[] = [''];
   if(mostRecentEmployee?.aliases) mostRecentEmployee?.aliases.split(',');
 
-  if (!employeeList.length) return <><Loading/></>;
+  if (!employeeList.length) return <></>;
 
   return (
     <div className='most-recent__cel'>

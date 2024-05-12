@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import { fetchRanksThunk } from '../../redux/slices/ranksSlice';
-import Loading from '../components/loading/Loading';
 import Employee from './employee-component/Employee';
 import EmployeeType from '../../types/employee.type';
 import './employees.css';
@@ -51,7 +50,21 @@ const EmployeesDisplay: React.FC = () => {
     );
   };
 
-  if (!employeesList.length || !ranksList.length) return ( <Loading/> );
+  if (!employeesList.length || !ranksList.length) {    
+    return (
+      <>
+        <div className='display__header'>
+          <h2>Employee Directory</h2>
+        </div>
+
+        <div className='display__controls'></div>
+
+        <div className='employee__cards-wrapper'>
+          No Employees to display.
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
