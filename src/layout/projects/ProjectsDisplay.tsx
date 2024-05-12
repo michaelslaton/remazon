@@ -44,60 +44,21 @@ const ProjectsDisplay: React.FC = () => {
      return 0;
  });
 
-  if(!projectsList.length) return ( 
-    <>
-      <div className='display__header'>
-        <h2>Projects</h2>
-      </div>
-
-      <div className='display__controls'>
-        <select
-          data-testid='projects sort'
-          id='projects sort'
-          name='projects sort'
-          defaultValue=''
-          onChange={(e)=> setSortType(e.target.value)}
-        >
-          <option
-            disabled={true}
-            value=''
-          >
-              Sort By
-          </option>
-          <option value='alphabetical'>
-            Alphabetical
-          </option>
-          <option value='host'>
-            Host
-          </option>
-        </select>
-        
-        <div className='display__controls--deactivated'>
-          Show deactivated ? 
-          <input
-            id='deactivated'
-            name='deactivated'
-            data-testid='deactivated checkbox'
-            type='checkbox'
-            defaultChecked={false}
-            onChange={(e)=> setShowDeactivated(e.target.checked)}
-          />
+  if(!projectsList.length) {
+    return (
+      <>
+        <div className='display__header'>
+          <h2>Projects</h2>
         </div>
-        {currentEmployee?.uid && 
-          currentEmployee.rank < 5 &&
-          <button
-            className='button card-button'
-            data-testid='add new'
-            onClick={()=> navigate('/projects/create')}
-          >
-            <FontAwesomeIcon icon={faPlus}/>
-          </button>
-        }
-      </div>
 
-      No projects to show.
-    </>
-  );
+        <div className='display__controls'></div>
+
+        <div className='employee__cards-wrapper'>
+          No Projects to display.
+        </div>
+      </>
+    );
+  };
 
   return (
     <>

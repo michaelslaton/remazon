@@ -27,7 +27,22 @@ vi.mock('react-router-dom', async () => {
 
 describe('Employees', ()=>{
   describe('Employees Display', ()=>{
-    it('renders all elements properly', async ()=>{
+
+    it('renders all elements properly if no employees exist', async ()=>{
+      render(
+        <BrowserRouter>
+          <EmployeesDisplay/>
+        </BrowserRouter>
+      );
+
+      const header = screen.getByRole('heading', { name:'Employee Directory' });
+      const noEmployees = screen.getByText('No Employees to display.')
+
+      expect(header).toBeVisible();
+      expect(noEmployees).toBeVisible();      
+    });
+
+    it('renders all elements properly if employees exist', async ()=>{
       await act( async ()=>{
         await store.dispatch(fetchEmployeesListThunk());
         await store.dispatch(fetchRanksThunk());

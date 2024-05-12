@@ -33,7 +33,21 @@ vi.mock('react-router-dom', async () => {
 
 describe('Awards', ()=>{
   describe('Awards Display', ()=>{
-    it('renders all elements properly', async ()=>{
+    it('renders all elements properly if no awards exist', async ()=>{
+      render(
+        <BrowserRouter>
+          <AwardsDisplay/>
+        </BrowserRouter>
+      );
+  
+      const header = screen.getByRole('heading', { name: 'Awards' });
+      const noAwards = screen.getByText('No Awards to display.')
+
+      expect(header).toBeVisible();
+      expect(noAwards).toBeVisible();
+    });
+
+    it('renders all elements properly if awards exist', async ()=>{
       await act(async ()=> {
         await store.dispatch(fetchEmployeesListThunk());
         await store.dispatch(fetchAwardsThunk());
