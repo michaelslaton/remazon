@@ -72,24 +72,14 @@ const Navbar: React.FC = () => {
         ))}
 
         { currentEmployee?.admin &&
-          <>
-            <LinkButton
-              data={{
-                id: 8,
-                name: 'Ranks',
-                url: '/ranks',
-                icon: faRankingStar,
-              }}
-            />
-            <LinkButton
-              data={{
-                id: 9,
-                name: 'Admin',
-                url: '/admin',
-                icon: faStar,
-              }}
-            />
-          </>
+          <LinkButton
+            data={{
+              id: 9,
+              name: 'Admin',
+              url: '/admin',
+              icon: faStar,
+            }}
+          />
         }
 
         {/* <LinkButton

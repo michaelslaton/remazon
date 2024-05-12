@@ -1,12 +1,12 @@
 import { useState, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { deleteRankThunk, editRankThunk } from '../../../redux/slices/ranksSlice';
-import { setUiError } from '../../../redux/slices/controlsSlice';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { deleteRankThunk, editRankThunk } from '../../../../redux/slices/ranksSlice';
+import { setUiError } from '../../../../redux/slices/controlsSlice';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import RankType from '../../../types/rank.type';
-import EmployeeType from '../../../types/employee.type';
+import RankType from '../../../../types/rank.type';
+import EmployeeType from '../../../../types/employee.type';
 import '../ranks.css';
 
 type RankProps = {

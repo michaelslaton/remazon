@@ -12,7 +12,6 @@ import Layout from './layout/Layout';
 import AwardsDisplay from './layout/awards/AwardsDisplay';
 import NotificationsDisplay from './layout/notifications/NotificationsDisplay';
 import ProjectsDisplay from './layout/projects/ProjectsDisplay';
-import RanksDisplay from './layout/ranks/RanksDisplay';
 import SignUpForm from './layout/authentication/components/SignUp';
 import Loading from './layout/components/loading/Loading';
 import RouteError from './utils/errors/route-error/RouteError';
@@ -56,14 +55,6 @@ export const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUpForm/>,
-        errorElement: <RouteError/>,
-      },
-      {
-        path: '/ranks',
-        element:  
-          <AdminAccessRoute>
-            <RanksDisplay/>
-          </AdminAccessRoute>,
         errorElement: <RouteError/>,
       },
       {
