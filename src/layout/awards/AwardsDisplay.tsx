@@ -119,6 +119,9 @@ const AwardsDisplay: React.FC = () => {
           <option value='award'>
             award
           </option>
+          <option value=''>
+            class
+          </option>
         </select>
 
         { currentEmployee?.rank === 1 &&
