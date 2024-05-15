@@ -1,3 +1,57 @@
+.award__wrapper.gold {
+  background: linear-gradient(115deg, rgba(90,44,5,1) 0%, rgba(218,150,25,1) 35%, rgba(49,21,8,1) 100%);
+  border-color: var(--remazon-prime);
+}
+.top-plate.gold {
+  border-color: #311508;
+}
+.plate.gold,
+.award__edit-button.gold {
+  background: linear-gradient(115deg, rgba(160,111,32,1) 0%, rgba(243,219,126,1) 35%, rgba(142,79,7,1) 100%);
+}
+.strap.gold {
+  background-color: #412604;
+}
+.font.gold {
+  color: #5A2C05;
+}
+
+.award__wrapper.silver {
+  background: linear-gradient(115deg, rgb(83, 83, 83) 0%, rgb(219, 219, 219) 35%, rgb(43, 43, 43) 100%);
+  border-color: #777777;
+}
+.top-plate.silver {
+  border-color: #333333;
+}
+.plate.silver,
+.award__edit-button.silver {
+  background: linear-gradient(115deg, rgb(83, 83, 83) 0%, rgb(219, 219, 219) 35%, rgb(43, 43, 43) 100%);
+}
+.strap.silver {
+  background-color: #383838;
+}
+.font.silver {
+  color: #4b4b4b;
+}
+
+.award__wrapper.bronze {
+  background: linear-gradient(115deg, rgba(90,44,5,1) 0%, rgb(156, 92, 31) 35%, rgba(49,21,8,1) 100%);
+  border-color: #5f3b23;
+}
+.top-plate.bronze {
+  border-color: #311508;
+}
+.plate.bronze,
+.award__edit-button.bronze {
+  background: linear-gradient(115deg, rgba(90,44,5,1) 0%, rgb(156, 92, 31) 35%, rgba(49,21,8,1) 100%);
+}
+.strap.bronze {
+  background-color: #412604;
+}
+.font.bronze {
+  color: #3d220a;
+}
+
 .award__cards-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -11,8 +65,7 @@
   aspect-ratio: 1/1;
   box-sizing: border-box;
   position: relative;
-  background: linear-gradient(115deg, rgba(90,44,5,1) 0%, rgba(218,150,25,1) 35%, rgba(49,21,8,1) 100%);
-  border: .2rem solid var(--remazon-prime);
+  border: .2rem solid;
   border-radius: var(--border-radius);
   box-shadow: .5rem .5rem .2rem black;
   min-width: 13rem;
@@ -53,7 +106,6 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  background: linear-gradient(115deg, rgba(160,111,32,1) 0%, rgba(243,219,126,1) 35%, rgba(142,79,7,1) 100%);
   border-radius: 50%;
   width: 6rem;
   z-index: 11;
@@ -62,14 +114,13 @@
   aspect-ratio: 1/1;
   box-sizing: border-box;
   position: absolute;
-  border: .15rem solid #311508;
+  border: .15rem solid;
   border-radius: 50%;
   width: 5.6rem;
   z-index: 11;
 }
 .belt__strap {
   position: absolute;
-  background-color: #412604;
   border-top: .15rem solid white;
   border-bottom: .15rem solid white;
   width: 100%;
@@ -85,7 +136,6 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  background: linear-gradient(115deg, rgba(160,111,32,1) 0%, rgba(243,219,126,1) 35%, rgba(142,79,7,1) 100%);
   border-radius: 5%;
   width: 10rem;
   z-index: 11;
@@ -94,7 +144,7 @@
   aspect-ratio: 2/1.05;
   box-sizing: border-box;
   position: absolute;
-  border: .15rem solid #311508;
+  border: .15rem solid;
   border-radius: 5%;
   width: 9.5rem;
   z-index: 11;
@@ -113,7 +163,6 @@
 }
 .award__info-key {
   display: inline;
-  color: #5A2C05;
   font-family: 'gvd-bold';
 }
 .award__info-value {
@@ -130,7 +179,6 @@
   right: .5rem;
   border: 0;
   border-radius: var(--border-radius);
-  background: linear-gradient(115deg, rgba(160,111,32,1) 0%, rgba(243,219,126,1) 35%, rgba(142,79,7,1) 100%);
   font-size: 1rem;
   cursor: pointer;
 }
