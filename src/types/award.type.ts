@@ -2,6 +2,7 @@ type AwardType = {
   id: number;
   name: string;
   type: string;
+  class: string;
   holder: number | null;
   date: string | Date;
   awardedFor?: string;
@@ -11,6 +12,7 @@ type AwardType = {
 export type AwardPostType = {
   name: string;
   type?: string;
+  class?: string;
   holder?: number | null;
   date: Date | string;
   awardedFor?: string;

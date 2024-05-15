@@ -19,24 +19,24 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
   const awardDate: Date = new Date(awardData.date);
 
   return (
-    <div className='award__wrapper'>
+    <div className={`award__wrapper ${awardData.class}`}>
       <div className='award__plate'>
         <div className='belt__title'>
           {awardData.name}
         </div>
         { awardData.type === 'belt' ?
             <>
-              <div className='belt__strap'/>
-              <div className='belt__buckle'>
-                <div className='belt__top-plate'/>
+              <div className={`belt__strap strap ${awardData.class}`}/>
+              <div className={`belt__buckle plate ${awardData.class}`}>
+                <div className={`belt__top-plate top-plate ${awardData.class}`}/>
               </div>
             </>
             :
             <>
-              <div className='trophy__plate'>
-                <div className='trophy__top-plate'/>
+              <div className={`trophy__plate plate ${awardData.class}`}>
+                <div className={`trophy__top-plate top-plate ${awardData.class}`}/>
               </div>
-              <div className='belt__strap'/>
+              <div className={`belt__strap strap ${awardData.class}`}/>
             </>
         }
       </div>
@@ -44,7 +44,7 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
       <div className='award__info-wrapper'>
         <ul className='award__info-list'>
           <li>
-            <div className='award__info-key'>
+            <div className={`award__info-key font ${awardData.class}`}>
               Type:
             </div>
             <div className='award__info-value'>
@@ -53,7 +53,7 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
           </li>
 
           <li>
-            <div className='award__info-key'>
+            <div className={`award__info-key font ${awardData.class}`}>
               Awarded to:
             </div>
             <div className='award__info-value'>
@@ -71,7 +71,7 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
           </li>
           { awardData.date &&
             <li>
-              <div className='award__info-key'>
+              <div className={`award__info-key font ${awardData.class}`}>
                 Date:
               </div>
               <div className='award__info-value'>
@@ -82,7 +82,7 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
 
           { awardData.awardedFor &&
             <li>
-              <div className='award__info-key awarded-for'>
+              <div className={`award__info-key awarded-for font ${awardData.class}`}>
                 Awarded for:
               </div>
               <div className='award__info-value'>
@@ -96,7 +96,7 @@ const Award: React.FC<AwardProps> = ({ awardData }) => {
       { currentEmployee?.rank === 1 &&
         <button
           data-testid='edit award button'
-          className='award__edit-button'
+          className={`award__edit-button ${awardData.class}`}
           onClick={()=> navigate(`/awards/edit/${awardData.id}`)}
         >
           <FontAwesomeIcon icon={faEdit}/>
