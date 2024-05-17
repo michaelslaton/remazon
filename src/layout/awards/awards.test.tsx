@@ -67,7 +67,7 @@ describe('Awards', ()=>{
 
       expect(header).toBeVisible();
       expect(sortSelection).toBeVisible();
-      expect(sortSelection?.childElementCount).toBe(7);
+      expect(sortSelection?.childElementCount).toBe(8);
       expect(newAwardButton).not.toBeInTheDocument();
       expect(awardsWrapper).toBeVisible();
       expect(awardsWrapper.childElementCount).toBe(3);
