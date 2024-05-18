@@ -23,7 +23,6 @@
   position: relative;
   width: 20rem;
   margin-bottom: .5rem;
-  cursor: pointer;
   scale: 1;
   transition: scale 100ms ease-in-out;
 }
@@ -140,6 +139,10 @@
 /* .alias-input {
 
 } */
+
+.attending-employee {
+  display: inline;
+}
 
 @media (min-width: 375px){
 }
