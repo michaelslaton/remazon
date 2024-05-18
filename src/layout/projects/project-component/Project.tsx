@@ -83,10 +83,10 @@ const Project: React.FC<ProjectProps> = ({ data }) => {
         if(attendingList.includes(employee.uid)){
           const employeesRank = ranksList.find((rank)=> rank.id === employee.rank);
           results.push(
-            <div key={employee.id}>
+            <div className='attending-employee' key={employee.id}>
               <div
                 onClick={()=> navigate('/employees')}
-                style={{color: `${employeesRank?.color !== '#ffa500'? `${employeesRank?.color}` : '#DCE1DE' }`, display: 'inline', cursor: 'pointer'}}
+                style={{color: `${employeesRank?.color !== '#ffa500'? `${employeesRank?.color}` : '#DCE1DE' }`, display: 'inline-block', cursor: 'pointer'}}
               >
                 {employee.name}
               </div>
