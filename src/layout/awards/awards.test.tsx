@@ -67,7 +67,7 @@ describe('Awards', ()=>{
 
       expect(header).toBeVisible();
       expect(sortSelection).toBeVisible();
-      expect(sortSelection?.childElementCount).toBe(8);
+      expect(sortSelection?.childElementCount).toBe(9);
       expect(newAwardButton).not.toBeInTheDocument();
       expect(awardsWrapper).toBeVisible();
       expect(awardsWrapper.childElementCount).toBe(3);
@@ -195,6 +195,10 @@ describe('Awards', ()=>{
       const titleCountText = screen.getByText('10 of 21');
       const nameBox = screen.getByRole('textbox', { name: 'Name:' });
       const typeSelecter = screen.getByRole('combobox', { name: 'type selector' });
+      const classSelecter = screen.getByRole('combobox', { name: 'class selector' });
+      const goldOption = screen.getByRole('option', { name: 'Gold' });
+      const silverOption = screen.getByRole('option', { name: 'Silver' });
+      const bronzeOption = screen.getByRole('option', { name: 'Bronze' });
       const beltOption = screen.getByRole('option', { name: 'Belt' });
       const trophyOption = screen.getByRole('option', { name: 'Trophy' });
       const awardedToSelecter = screen.getByRole('combobox', { name: 'holder selector' });
@@ -209,6 +213,11 @@ describe('Awards', ()=>{
       expect(titleCountText).toBeVisible();
       expect(nameBox).toBeVisible();
       expect(typeSelecter).toBeVisible();
+      expect(classSelecter).toBeVisible();
+      expect(goldOption).toBeVisible();
+      expect(silverOption).toBeVisible();
+      expect(bronzeOption).toBeVisible();
+      expect(classSelecter.childElementCount).toBe(3);
       expect(beltOption).toBeVisible();
       expect(trophyOption).toBeVisible();
       expect(awardedToSelecter).toBeVisible();
