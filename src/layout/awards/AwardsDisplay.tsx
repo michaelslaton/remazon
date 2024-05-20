@@ -66,6 +66,40 @@ const AwardsDisplay: React.FC = () => {
       return 0;
   })};
 
+  if (sortType === 'class'){
+    awardsList = [...awardsList].sort((a, b) => {
+      let aClass: number = 0;
+      let bClass: number = 0;
+
+      if(a.class === 'gold') aClass = 3;
+      if(b.class === 'gold') bClass = 3;
+      if(a.class === 'silver') aClass = 2;
+      if(b.class === 'silver') bClass = 2;
+      if(a.class === 'bronze') aClass = 1;
+      if(b.class === 'bronze') bClass = 1;
+
+      if (aClass > bClass) return -1;
+      if (aClass < bClass) return 1;
+      return 0;
+  })};
+
+  if (sortType === 'classR'){
+    awardsList = [...awardsList].sort((a, b) => {
+      let aClass: number = 0;
+      let bClass: number = 0;
+
+      if(a.class === 'gold') aClass = 3;
+      if(b.class === 'gold') bClass = 3;
+      if(a.class === 'silver') aClass = 2;
+      if(b.class === 'silver') bClass = 2;
+      if(a.class === 'bronze') aClass = 1;
+      if(b.class === 'bronze') bClass = 1;
+
+      if (aClass > bClass) return 1;
+      if (aClass < bClass) return -1;
+      return 0;
+  })};
+
   if(!awardsList.length) {
     return (
       <>
@@ -119,8 +153,11 @@ const AwardsDisplay: React.FC = () => {
           <option value='award'>
             award
           </option>
-          <option value=''>
+          <option value='class'>
             class
+          </option>
+          <option value='classR'>
+            class {'(R)'}
           </option>
         </select>
 
