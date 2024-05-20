@@ -19,6 +19,7 @@ const EditAward:React.FC = () => {
   // Refs -------------------------------------------------------------------- >
   const nameRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
+  const classRef = useRef<HTMLSelectElement>(null);
   const holderRef = useRef<HTMLSelectElement>(null);
   const awardedForRef = useRef<HTMLTextAreaElement>(null);
   const retiredRef = useRef<HTMLInputElement>(null);
@@ -84,6 +85,7 @@ const EditAward:React.FC = () => {
       ...selectedAward!,
       name: nameRef.current!.value,
       type: typeRef.current!.value,
+      class: classRef.current!.value,
       holder: awardHolder,
       awardedFor: awardedForRef.current!.value,
       date: awardDate,
@@ -148,6 +150,27 @@ const EditAward:React.FC = () => {
               </option>
               <option value='trophy'>
                 Trophy
+              </option>
+            </select>
+
+            <label>
+              Class:
+            </label>
+            <select
+              aria-label='class selector'
+              id='class'
+              name='class'
+              ref={classRef}
+              defaultValue={selectedAward!.class}
+            >
+              <option value='gold'>
+                Gold
+              </option>
+              <option value='silver'>
+                Silver
+              </option>
+              <option value='bronze'>
+                Bronze
               </option>
             </select>
             
