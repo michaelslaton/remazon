@@ -1,0 +1,83 @@
+.cal_container {
+  display:flex;
+}
+
+.cal_left {
+  width: 50%;
+  padding: 20px;
+  background-color: #181818;
+}
+
+/* .cal_calendar {
+} */
+
+.month {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  background-color: #363636;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.weekdays {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 0 auto;
+}
+.weekday {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.days {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 0 auto;
+}
+
+.day {
+  aspect-ratio: .9/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #000000;
+  position: relative;
+}
+.day:not(.prev-date, .next-date):hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+.day.prev-date,
+.day.next-date {
+  background-color: #141414;
+  color: #000000;
+}
+.day.today {
+  color: var(--remazon-prime);
+}
+
+.event::after {
+  
+  content: "";
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  width: 75%;
+  height: 6px;
+  border-radius: 30px;
+  transform: translateX(-50%);
+  background-color: purple;
+
+}
