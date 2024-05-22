@@ -21,6 +21,7 @@ import { initialLoadThunk, setUiError } from './redux/slices/controlsSlice';
 import SignIn from './layout/authentication/components/SignIn';
 import CreateAward from './layout/awards/award-component/CreateAward';
 import EditAward from './layout/awards/award-component/EditAward';
+import ProjectCalendar from './layout/projects/ProjectCalendar';
 
 // initializeApp(firebaseConfig);
 
@@ -72,7 +73,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/projects',
-        element: <ProjectsDisplay/>,
+        element: <ProjectCalendar/>,
         errorElement: <RouteError/>,
       },
       {
