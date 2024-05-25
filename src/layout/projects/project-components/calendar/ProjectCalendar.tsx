@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import months from '../../data/months';
-import CalendarDay from './calendar-components/CalendarDay';
-import './projectCalendar.css';
-import { useAppSelector } from '../../redux/hooks';
+import months from '../../../../data/months';
+import CalendarDay from './CalendarDay';
+import { useAppSelector } from '../../../../redux/hooks';
+import '../../projects.css';
 
 type DayType = {
   event: boolean;
@@ -66,6 +66,11 @@ const ProjectCalendar: React.FC = () =>{
     return days;
   };
 
+  const shiftMonth = (amount: number): void => {
+    setMonthOffset(monthOffset + amount);
+    setSelected(null);
+  };
+
   return (
     <>
       <div className='cal_container'>
@@ -76,14 +81,14 @@ const ProjectCalendar: React.FC = () =>{
               <div className='month'>
                 <div
                   className='month-shift-button'
-                  onClick={()=> setMonthOffset(monthOffset - 1)}
+                  onClick={()=> shiftMonth(-1)}
                 >
                   {'<'}
                 </div>
                 <div>{months[month]} {year}</div>
                 <div
                   className='month-shift-button'
-                  onClick={()=> setMonthOffset(monthOffset + 1)}
+                  onClick={()=> shiftMonth(1)}
                 >
                   {'>'}
                 </div>
@@ -118,7 +123,21 @@ const ProjectCalendar: React.FC = () =>{
         </div>
         
         <div className='cal_right'>
-
+          {
+            selected &&
+            projectsList
+              .filter((project)=>{
+                const projectDate = new Date(project.date);
+                if(projectDate.getFullYear() !== selected.year) return;
+                if(projectDate.getMonth() !== selected.month) return;
+                else if(projectDate.getDate() ===  selected.day) return project;
+              })
+              .map((project)=>(
+                <div>
+                  {project.name}
+                </div>
+            ))
+          }
         </div>
       </div>
     </>

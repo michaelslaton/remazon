@@ -1,140 +1,107 @@
-.projects__section-wrapper {
-  box-sizing: border-box;
-}
-.projects__section {
-  padding: 1.5rem 1.5rem 1.5rem;
-}
-.projects__section.light {
-  background-color: var(--charcoal);  
-}
-.projects__section.dark {
-  background-color: var(--off-black);  
-}
-.projects__section-title {
-  font-family: 'gvd-italic';
-  margin: 0;
-  margin-bottom: 1rem;
+.cal_container {
+  display:flex;
 }
 
-.projects__cards-wrapper {
+.cal_left {
+  width: 55%;
+  padding: 1.5rem;
+}
+
+.cal_right {
+  width: 100%;
+  padding: 1.5rem;
+}
+
+/* .cal_calendar {
+} */
+
+.month {
   box-sizing: border-box;
+  width: 100%;
+  height: 2.5rem;
   display: flex;
-  flex-wrap: nowrap;
-  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  background-color: var(--charcoal);
+  width: 100%;
+  margin: 0 auto;
+  border-radius: .5rem;
+}
+.month-shift-button {
+  font-weight: bolder;
+  cursor: pointer;
+  margin: 0 1rem;
+}
+
+.weekdays {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 0 auto;
+}
+.weekday {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
-.project__wrapper {
+.days {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 0 auto;
+}
+
+.day {
   box-sizing: border-box;
-  background-color: var(--charcoal);
-  border-radius: var(--border-radius);
-  box-shadow: .5rem .5rem .2rem black;
-  display: inline-block;
-  position: relative;
-  width: 20rem;
-  padding: .5rem;
-}
-.project__wrapper.dark {
-  background-color: var(--off-black);
-  box-shadow: .5rem .5rem .2rem #272727;
-}
-.project__wrapper.deactivated {
-  background-color: black;
-  border-color: #404040;
-  box-shadow: .5rem .5rem .2rem #111111;
-}
-.project__wrapper > h2 {
-  margin: 0;
-}
-
-.project-title {
-  background-color: var(--vanta-black);
-  border-bottom: .1rem solid var(--remazon-prime);
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
-  font-family: 'gvd-bold';
-  font-size: 2rem !important;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 0 !important;
-  padding-top: .5rem;
-}
-.project-title.deactivated {
-  border-color: #404040;
-}
-
-.project__info-wrapper{
-  position: relative;
-  margin: .2rem;
-}
-.project__info {
-  all: unset;
-  list-style: none;
-}
-
-li > article {
-  display: inline;
-  margin: 0 .3em;
-}
-
-.project__buttons_wrapper {
-  position: absolute;
+  aspect-ratio: .9/1;
   display: flex;
-  gap: .4em;
-  right: 0em;
-  top: .4em;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: .1rem solid #000000;
+  border-radius: .5rem;
+  position: relative;
+  background-color: var(--charcoal);
 }
-
-.project-data__key,
-.project-data__value {
-  display: inline;
+.day:not(.prev-date, .next-date):hover {
+  background-color: #6e6e6e;
+  cursor: pointer;
 }
-
-.project-data__key {
+.day.prev-date,
+.day.next-date {
+  background-color: #1a1a1a;
+  color: #424242;
+}
+.day.today {
   color: var(--remazon-prime);
-  font-size: 1.1em;
+}
+.day.selected {
+  background-color: var(--remazon-prime);
+  color: black;
+  font-weight: bolder;
+  border-color: var(--off-white);
+}
+.day.selected:hover {
+  background-color: white;
+  color: black;
+}
+.day.selected.event::after {
+  background-color: black;
 }
 
-.project-data__value {
-  text-transform: capitalize;
-  margin-left: .3em;
-}
-.project-data__value.deactivated {
-  color: red;
-}
-
-@media (min-width: 375px){
-}
-
-@media (min-width: 390px){
-}
-
-@media (min-width: 414px){
-}
-
-@media (min-width: 768px){
-}
-
-@media (min-width: 810px){ 
-}
-
-@media (min-width: 1280px){
-}
-
-@media (min-width: 1366px){
-}
-
-@media (min-width: 1440px){
-}
-
-@media (min-width: 1536px){
-}
-
-@media (min-width: 1600px){
-}
-
-@media (min-width: 1920px){
-}
-
-@media (min-width: 2560px){
+.event::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  width: 75%;
+  height: 6px;
+  border-radius: 30px;
+  transform: translateX(-50%);
+  background-color: var(--remazon-prime);
 }
