@@ -1,16 +1,14 @@
 import { BrowserRouter } from 'react-router-dom';
 import { act, render, screen, userEvent } from '../../utils/testUtils/test-utils';
 import { projectsDummyData } from '../../test/mocks/handlers';
-import ProjectType from '../../types/project.type';
 import ProjectsDisplay from './ProjectsDisplay';
-import Project from './project-component/Project';
-import EditProject from './project-component/EditProject';
+import EditProject from './project-components/EditProject';
 import store from '../../redux/store';
 import { fetchProjectsThunk } from '../../redux/slices/projectsSlice';
 import { fetchCurrentEmployeeThunk, fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import * as projectActions from '../../redux/slices/projectsSlice';
 import * as controlActions from '../../redux/slices/controlsSlice';
-import CreateProject from './project-component/CreateProject';
+import CreateProject from './project-components/CreateProject';
 
 const editProjectThunkSpy = vi.spyOn(projectActions, 'editProjectThunk');
 const createProjectThunkSpy = vi.spyOn(projectActions, 'createProjectThunk');
@@ -95,146 +93,6 @@ describe('Projects', ()=>{
       await user.click(newProjectButton);
       expect(mockedUseNavigate).toHaveBeenCalled();
     })
-  });
-
-  describe('Project', ()=>{
-    const projects: ProjectType[] = projectsDummyData.data;
-
-    it('renders all elements properly (admin viewing project)', async ()=>{
-      await act( async ()=>{
-        await store.dispatch(fetchProjectsThunk());
-        await store.dispatch(fetchCurrentEmployeeThunk('1'));
-      });
-
-      render(
-        <BrowserRouter>
-          <Project data={projects[1]}/>
-        </BrowserRouter>
-      );
-
-      const title = screen.getByRole('heading', { name: 'Hunt Event' });
-      const host = screen.getByText('Host:');
-      const hostName = screen.queryAllByText('Bueno');
-      const secondAttending = screen.getByText('Rembo');
-      const date = screen.getByText('Date:');
-      const dateValue = screen.getByText('March 25');
-      const time = screen.getByText('Time:');
-      const timeValue = screen.getByText('1:00 AM');
-      const type = screen.getByText('Type:');
-      const typeValue = screen.getByText('Game Night');
-      const confirmed = screen.getByText('Confirmed Attending:');
-      const description = screen.getByText('Description:');
-      const descriptionValue = screen.getByText('Lets do the current hunt event');
-      const minusButton = screen.queryByTestId('attend button minus');
-      const plusButton = screen.queryByTestId('attend button plus');
-      const deleteButton = screen.getByTestId('delete button');
-      const editButton = screen.getByTestId('edit button');
-
-      expect(title).toBeVisible();
-      expect(host).toBeVisible();
-      expect(hostName).toHaveLength(2);
-      expect(date).toBeVisible();
-      expect(dateValue).toBeVisible();
-      expect(time).toBeVisible();
-      expect(timeValue).toBeVisible();
-      expect(type).toBeVisible();
-      expect(typeValue).toBeVisible();
-      expect(confirmed).toBeVisible();
-      expect(secondAttending).toBeVisible();
-      expect(description).toBeVisible();
-      expect(descriptionValue).toBeVisible();
-      expect(minusButton).toBeVisible();
-      expect(plusButton).not.toBeInTheDocument();
-      expect(deleteButton).toBeVisible();
-      expect(editButton).toBeVisible();
-    });
-
-    it('renders all elements properly (admin viewing self made project)', async ()=>{
-      await act( async ()=>{
-        await store.dispatch(fetchProjectsThunk());
-        await store.dispatch(fetchCurrentEmployeeThunk('1'));
-      });
-
-      render(
-        <BrowserRouter>
-          <Project data={projects[0]}/>
-        </BrowserRouter>
-      );
-
-      const minusButton = screen.queryByTestId('attend button minus');
-      const plusButton = screen.queryByTestId('attend button plus');
-      const deleteButton = screen.getByTestId('delete button');
-      const editButton = screen.getByTestId('edit button');
-      
-      expect(minusButton).not.toBeInTheDocument();
-      expect(plusButton).not.toBeInTheDocument();
-      expect(deleteButton).toBeVisible();
-      expect(editButton).toBeVisible();
-    });
-
-    it('calls useNavigate when edit button is clicked', async ()=>{
-      await act( async ()=>{
-        await store.dispatch(fetchProjectsThunk());
-        await store.dispatch(fetchCurrentEmployeeThunk('1'));
-      });
-
-      render(
-        <BrowserRouter>
-          <Project data={projects[0]}/>
-        </BrowserRouter>
-      );
-
-      const user = userEvent.setup();
-      const editButton = screen.getByTestId('edit button');
-
-      await user.click(editButton);
-
-      expect(mockedUseNavigate).toHaveBeenCalled();
-    });
-
-    it('populates a confirm window on deleteButton click', async ()=>{
-      await act( async ()=>{
-        await store.dispatch(fetchProjectsThunk());
-        await store.dispatch(fetchCurrentEmployeeThunk('1'));
-      });
-
-      render(
-        <BrowserRouter>
-          <Project data={projects[0]}/>
-        </BrowserRouter>
-      );
-
-      const deleteButton = screen.getByTestId('delete button');
-      const user = userEvent.setup();
-
-      expect(deleteButton).toBeVisible();
-      await user.click(deleteButton);
-      expect(windowConfirmSpy).toHaveBeenCalled();
-    });
-
-    it('deletePRojectTunk is called when confirm is clicked', async ()=>{
-      vi.spyOn(global, 'confirm' as any).mockReturnValueOnce(true);
-
-      await act( async ()=>{
-        await store.dispatch(fetchProjectsThunk());
-        await store.dispatch(fetchCurrentEmployeeThunk('1'));
-      });
-
-      render(
-        <BrowserRouter>
-          <Project data={projects[0]}/>
-        </BrowserRouter>
-      );
-
-      const deleteButton = screen.getByTestId('delete button');
-      const user = userEvent.setup();
-
-      expect(deleteButton).toBeVisible();
-
-      await user.click(deleteButton);
-      expect(deleteProjectThunkSpy).toHaveBeenCalled();
-    });
-
   });
 
   describe('Edit Project', ()=>{

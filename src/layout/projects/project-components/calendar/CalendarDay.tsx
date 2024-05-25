@@ -1,4 +1,4 @@
-import '../projectCalendar.css';
+import '../../projects.css';
 
 type DayProps = {
   event: boolean;
