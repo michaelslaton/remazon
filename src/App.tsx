@@ -2,9 +2,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AdminAccessRoute from './utils/admin-access-route/AdminAccessRoute';
 import AuthRoute from './utils/firebase/AuthRoute';
 import AdminPanel from './layout/admin-panel/AdminPanel';
-import CreateProject from './layout/projects/project-component/CreateProject';
+import CreateProject from './layout/projects/project-components/CreateProject';
 import EditEmployee from './layout/employees/employee-component/EditEmployee';
-import EditProject from './layout/projects/project-component/EditProject';
+import EditProject from './layout/projects/project-components/EditProject';
 import EmployeesDisplay from './layout/employees/EmployeesDisplay';
 import Error404 from './utils/errors/error404/Error404';
 import HomePage from './layout/home-page/HomePage';
@@ -21,7 +21,6 @@ import { initialLoadThunk, setUiError } from './redux/slices/controlsSlice';
 import SignIn from './layout/authentication/components/SignIn';
 import CreateAward from './layout/awards/award-component/CreateAward';
 import EditAward from './layout/awards/award-component/EditAward';
-import ProjectCalendar from './layout/projects/ProjectCalendar';
 
 // initializeApp(firebaseConfig);
 
@@ -73,7 +72,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/projects',
-        element: <ProjectCalendar/>,
+        element: <ProjectsDisplay/>,
         errorElement: <RouteError/>,
       },
       {
