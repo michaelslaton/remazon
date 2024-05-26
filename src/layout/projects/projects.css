@@ -8,8 +8,10 @@
 }
 
 .cal_right {
+  box-sizing: border-box;
   width: 100%;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
+  position: relative;
 }
 
 /* .cal_calendar {
@@ -28,7 +30,7 @@
   background-color: var(--charcoal);
   width: 100%;
   margin: 0 auto;
-  border-radius: .5rem;
+  border-radius: var(--border-radius);
 }
 .month-shift-button {
   font-weight: bolder;
@@ -64,7 +66,7 @@
   align-items: center;
   width: 100%;
   border: .1rem solid #000000;
-  border-radius: .5rem;
+  border-radius: var(--border-radius);
   position: relative;
   background-color: var(--charcoal);
 }
@@ -90,18 +92,66 @@
   background-color: white;
   color: black;
 }
-.day.selected.event::after {
+.day.selected.projectDay::after {
   background-color: black;
 }
 
-.event::after {
+.projectDay::after {
   content: '';
   position: absolute;
   bottom: 10%;
   left: 50%;
   width: 75%;
   height: 6px;
-  border-radius: 30px;
+  border-radius: var(--border-radius);
   transform: translateX(-50%);
   background-color: var(--remazon-prime);
+}
+
+.project {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(90deg, rgba(26, 26, 26, 1) 0%, var(--off-black) 80%, var(--off-black) 100%);
+  border-radius: var(--border-radius);
+  margin: 1rem 0;
+  color: var(--remazon-prime);
+  border: 1px solid transparent;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+.project:first-child {
+  margin-top: 0;
+}
+.project:hover {
+  background: linear-gradient(90deg, rgb(41, 41, 41) 0%, var(--off-black) 80%, var(--off-black) 100%);
+  border-color: var(--remazon-prime);
+  cursor: pointer;
+}
+
+.project__title {
+  all:unset;
+  font-family: gvd;
+  font-size: 1.5rem;
+}
+
+.project__info {
+  box-sizing: border-box;
+  all: unset;
+  list-style: none;
+  display: none;
+  color: var(--font-white);
+  padding-left: 1rem;
+  padding-top: .5rem;
+}
+.project__info.expanded {
+  display: block;
+}
+
+.project__info-key {
+  color: var(--remazon-prime);
+  display: inline;
+}
+.project__info-value {
+  display: inline;
 }

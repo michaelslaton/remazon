@@ -4,8 +4,8 @@ import { fetchProjectsThunk } from '../../redux/slices/projectsSlice';
 import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import { fetchRanksThunk } from '../../redux/slices/ranksSlice';
 import Loading from '../components/loading/Loading';
-import './projects.css';
 import ProjectCalendar from './project-components/calendar/ProjectCalendar';
+import './projects.css';
 
 const ProjectsDisplay: React.FC = () => {
   const dispatch = useAppDispatch();
