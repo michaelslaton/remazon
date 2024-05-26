@@ -1,7 +1,7 @@
 import '../../projects.css';
 
 type DayProps = {
-  event: boolean;
+  projectDay: boolean;
   date: {
     day: number,
     month: number,
@@ -17,7 +17,7 @@ type DayProps = {
 };
 
 const CalendarDay: React.FC<DayProps> = (dayData) => {
-  const { event, date, position, clickEvent, selected } = dayData;
+  const { projectDay, date, position, clickEvent, selected } = dayData;
 
   const isToday = (): boolean => {
     let results: boolean = false;
@@ -47,7 +47,7 @@ const CalendarDay: React.FC<DayProps> = (dayData) => {
 
   return (
     <div
-      className={`day ${isToday() && 'today'} ${position} ${event ? 'event' : ''} ${isSelected() && 'selected'}`}
+      className={`day ${isToday() && 'today'} ${position} ${projectDay ? 'projectDay' : ''} ${isSelected() && 'selected'}`}
       onClick={()=> clickEvent({day: date.day, month: date.month, year: date.year})}
     >
       {date.day}
