@@ -3,9 +3,10 @@ import months from '../../../../data/months';
 import CalendarDay from './CalendarDay';
 import { useAppSelector } from '../../../../redux/hooks';
 import '../../projects.css';
+import Project from './Project';
 
 type DayType = {
-  event: boolean;
+  projectDay: boolean;
   date: {
     day: number,
     month: number,
@@ -18,6 +19,7 @@ const ProjectCalendar: React.FC = () =>{
   const projectsList = useAppSelector((state)=> state.projectsControl.projects);
   const [ monthOffset, setMonthOffset ] = useState<number>(0);
   const [ selected, setSelected ] = useState<{ day: number, month: number, year: number } | null>(null);
+  const [expanded, setExpanded] = useState<number | null>(null);
 
   let today: Date = new Date();
   let month: number = today.getMonth() + monthOffset;
@@ -36,7 +38,7 @@ const ProjectCalendar: React.FC = () =>{
     return results;
   };
 
-  const eventDays: number[] = getEventDays();
+  const projectDays: number[] = getEventDays();
   
   const initCalendar = (): DayType[] => {
     const firstDay: Date = new Date(year, month, 1);
@@ -50,17 +52,17 @@ const ProjectCalendar: React.FC = () =>{
     let days: DayType[] = [];
 
     for(let x = day; x > 0; x--){
-      days.push({position: 'prev-date', date: {day: Number(prevDays - x + 1), month, year}, event: false});
+      days.push({position: 'prev-date', date: {day: Number(prevDays - x + 1), month, year}, projectDay: false});
     };
 
     for (let i = 1; i <= lastDate; i++) {
-      let event = false;
-      if(eventDays.includes(i)) event = true;
-      days.push({position: '', date: {day: i, month, year}, event: event});
+      let projectDay = false;
+      if(projectDays.includes(i)) projectDay = true;
+      days.push({position: '', date: {day: i, month, year}, projectDay: projectDay});
     };
 
     for (let j = 1; j <= nextDays; j++) {
-      days.push({position: 'next-date', date: {day: j, month, year}, event: false});
+      days.push({position: 'next-date', date: {day: j, month, year}, projectDay: false});
     };
 
     return days;
@@ -112,7 +114,7 @@ const ProjectCalendar: React.FC = () =>{
                     key={i}
                     position={`${day.position}`}
                     date={day.date}
-                    event={day.event}
+                    projectDay={day.projectDay}
                     selected={selected}
                     clickEvent={setSelected}
                   />
@@ -132,10 +134,8 @@ const ProjectCalendar: React.FC = () =>{
                 if(projectDate.getMonth() !== selected.month) return;
                 else if(projectDate.getDate() ===  selected.day) return project;
               })
-              .map((project)=>(
-                <div>
-                  {project.name}
-                </div>
+              .map((project, i)=>(
+                <Project key={i} data={project} expanded={expanded} setExpanded={setExpanded}/>
             ))
           }
         </div>
