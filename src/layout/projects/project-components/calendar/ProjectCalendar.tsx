@@ -4,6 +4,7 @@ import CalendarDay from './CalendarDay';
 import { useAppSelector } from '../../../../redux/hooks';
 import '../../projects.css';
 import Project from './Project';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 type DayType = {
   projectDay: boolean;
@@ -20,6 +21,7 @@ const ProjectCalendar: React.FC = () =>{
   const [ monthOffset, setMonthOffset ] = useState<number>(0);
   const [ selected, setSelected ] = useState<{ day: number, month: number, year: number } | null>(null);
   const [expanded, setExpanded] = useState<number | null>(null);
+  const navigate: NavigateFunction = useNavigate();
 
   let today: Date = new Date();
   let month: number = today.getMonth() + monthOffset;
@@ -138,6 +140,14 @@ const ProjectCalendar: React.FC = () =>{
                 <Project key={i} data={project} expanded={expanded} setExpanded={setExpanded}/>
             ))
           }
+          <div>
+            <button
+              onClick={()=> navigate(`/projects/create?day=${selected?.day}&month=${selected?.month}&year=${selected?.year}`)}
+              className='button project__new-project-button'
+            >
+                +
+            </button>
+          </div>
         </div>
       </div>
     </>
