@@ -98,6 +98,8 @@ const EditProject: React.FC = () => {
     return;
   };
 
+  console.log(`${year}-${month}-${day}T${hours}:${minutes}`)
+
   return (
     <>
       <div className='display__header'>

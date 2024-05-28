@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { createProjectThunk } from '../../../redux/slices/projectsSlice';
 import { setUiError } from '../../../redux/slices/controlsSlice';
@@ -9,7 +9,8 @@ import EmployeeType from '../../../types/employee.type';
 import '../projects.css';
 
 const CreateProject: React.FC = () => {
-  const navigate = useNavigate();
+  let [searchParams ] = useSearchParams();
+  const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
   const [ descriptionCountData, setDescriptionCountData ] = useState<number>(0);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);

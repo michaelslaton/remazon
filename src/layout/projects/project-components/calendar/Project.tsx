@@ -2,8 +2,8 @@ import ProjectType from '../../../../types/project.type';
 import { useAppSelector } from '../../../../redux/hooks';
 import RankType from '../../../../types/rank.type';
 import EmployeeType from '../../../../types/employee.type';
-import '../../projects.css';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+import '../../projects.css';
 
 type ProjectProps = {
   data: ProjectType;
@@ -51,20 +51,20 @@ const Project: React.FC<ProjectProps> = ({data, expanded, setExpanded}) => {
   return (
     <div
       className="project"
-      onClick={()=> setExpanded(data.id)}
-      
+      onClick={()=> {
+        if(expanded !== data.id) setExpanded(data.id);
+        else setExpanded(null);
+      }}
     >
-      <h2 className='project__title'>
-        {data.name}
-      </h2>
+      <div>
+        <h2 className='project__title'>
+          {data.name}
+        </h2>
+        <div className='project__date-time'>
+          {`${projectDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`}
+        </div>
+      </div>
       <ul className={`project__info ${expanded === data.id && 'expanded'}`}>
-        <li>
-          <div className='project__info-key'>{`Time: `}</div>
-          <div className='project__info-value'>
-            {projectDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
-          </div>
-        </li>
-
         <li>
           <div className='project__info-key'>{`Host: `}</div>
           <div className='project__info-value' style={{color: hostRankColor}}>{hostEmployee?.name}</div>

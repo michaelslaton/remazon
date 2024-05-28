@@ -12,6 +12,7 @@
   width: 100%;
   padding: 1.5rem 0;
   position: relative;
+  margin-right: 1.5rem;
 }
 
 /* .cal_calendar {
@@ -43,6 +44,7 @@
   width: 100%;
   grid-template-columns: repeat(7, 1fr);
   margin: 0 auto;
+  padding-top: .5rem;
 }
 .weekday {
   display: flex;
@@ -115,7 +117,6 @@
   background: linear-gradient(90deg, rgba(26, 26, 26, 1) 0%, var(--off-black) 80%, var(--off-black) 100%);
   border-radius: var(--border-radius);
   margin: 1rem 0;
-  color: var(--remazon-prime);
   border: 1px solid transparent;
   border-left-width: 0;
   border-right-width: 0;
@@ -130,10 +131,14 @@
 }
 
 .project__title {
-  all:unset;
+  all: unset;
+  color: var(--remazon-prime);
   font-family: gvd;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
+
+/* .project__date-time {
+} */
 
 .project__info {
   box-sizing: border-box;
@@ -143,6 +148,9 @@
   color: var(--font-white);
   padding-left: 1rem;
   padding-top: .5rem;
+}
+.project__info > li {
+  margin-bottom: .2rem;
 }
 .project__info.expanded {
   display: block;
@@ -154,4 +162,10 @@
 }
 .project__info-value {
   display: inline;
+}
+
+.project__new-project-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
