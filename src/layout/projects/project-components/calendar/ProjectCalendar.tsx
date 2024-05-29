@@ -5,6 +5,8 @@ import { useAppSelector } from '../../../../redux/hooks';
 import '../../projects.css';
 import Project from './Project';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type DayType = {
   projectDay: boolean;
@@ -127,27 +129,38 @@ const ProjectCalendar: React.FC = () =>{
         </div>
         
         <div className='cal_right'>
-          {
-            selected &&
-            projectsList
-              .filter((project)=>{
-                const projectDate = new Date(project.date);
-                if(projectDate.getFullYear() !== selected.year) return;
-                if(projectDate.getMonth() !== selected.month) return;
-                else if(projectDate.getDate() ===  selected.day) return project;
-              })
-              .map((project, i)=>(
-                <Project key={i} data={project} expanded={expanded} setExpanded={setExpanded}/>
-            ))
+          { selected &&
+            <>
+              <div className='project__list-header'>
+                <h2 className='title project__list-title'>
+                  {months[selected!.month]} {selected!.day}, {selected!.year}
+                </h2>
+
+                { selected.day >= today.getDate() &&
+                  <button
+                    onClick={()=> navigate(`/projects/create?day=${selected?.day}&month=${selected?.month}&year=${selected?.year}`)}
+                    className='button card-button project__new-project-button'
+                  >
+                    <FontAwesomeIcon icon={faPlus} />
+                  </button>
+                }
+              </div>
+              {
+                selected &&
+                projectsList
+                  .filter((project)=>{
+                    const projectDate = new Date(project.date);
+                    if(projectDate.getFullYear() !== selected.year) return;
+                    if(projectDate.getMonth() !== selected.month) return;
+                    else if(projectDate.getDate() ===  selected.day) return project;
+                  })
+                  .map((project, i)=>(
+                    <Project key={i} data={project} expanded={expanded} setExpanded={setExpanded}/>
+                ))
+              }
+            </>
           }
-          <div>
-            <button
-              onClick={()=> navigate(`/projects/create?day=${selected?.day}&month=${selected?.month}&year=${selected?.year}`)}
-              className='button project__new-project-button'
-            >
-                +
-            </button>
-          </div>
+
         </div>
       </div>
     </>
