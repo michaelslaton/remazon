@@ -9,23 +9,28 @@ import EmployeeType from '../../../types/employee.type';
 import '../projects.css';
 
 const CreateProject: React.FC = () => {
-  let [searchParams ] = useSearchParams();
+  const [searchParams ] = useSearchParams();
+  const [ descriptionCountData, setDescriptionCountData ] = useState<number>(0);
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
-  const [ descriptionCountData, setDescriptionCountData ] = useState<number>(0);
   const currentEmployee: EmployeeType | null = useAppSelector((state)=> state.employeesControl.currentEmployee);
   const nameRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
+  const dateTime = new Date(Number(searchParams.get('year')), Number(searchParams.get('month')), Number(searchParams.get('day'))).toISOString();
+  const dateString = dateTime.split(".")[0].slice(0, -3);
+
+
+
   const submitHandler: Function = (e: React.FormEvent): void => {
     e.preventDefault();
     const currentDate: Date = new Date();
     const inputDate: Date = new Date(dateRef.current!.value);
 
-    const dateFromRef = dateRef.current!.value.split('-');
-    const projectDate = new Date(`${dateFromRef[1]}-${dateFromRef[2]}-${dateFromRef[0]}`)
+    // const dateFromRef = dateRef.current!.value.split('-');
+    const projectDate = new Date(dateRef.current!.value)
 
     if (nameRef.current!.value.length <= 1) {
       dispatch(setUiError('Name length is too short.'));
@@ -95,11 +100,12 @@ const CreateProject: React.FC = () => {
             Date:
           </label>
           <input
-            type='date'
+            type='datetime-local'
             id='date'
+            name='date'
             className='date-input'
             ref={dateRef}
-            name='date'
+            defaultValue={dateString}
           />
 
           <label

@@ -28,10 +28,12 @@
   font-size: 1.2rem;
   font-weight: 500;
   text-transform: capitalize;
-  background-color: var(--charcoal);
   width: 100%;
   margin: 0 auto;
+  background-color: var(--charcoal);
   border-radius: var(--border-radius);
+  padding: .4rem;
+  min-height: 2.7rem;
 }
 .month-shift-button {
   font-weight: bolder;
@@ -164,8 +166,18 @@
   display: inline;
 }
 
+.project__list-header{
+  background-color: var(--charcoal);
+  border-radius: var(--border-radius);
+  padding: .4rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .project__new-project-button {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  aspect-ratio: 1/1;
+}
+.project__list-title {
+  margin-left: .5rem !important;
 }
