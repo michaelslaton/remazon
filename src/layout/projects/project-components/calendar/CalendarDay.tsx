@@ -26,7 +26,8 @@ const CalendarDay: React.FC<DayProps> = (dayData) => {
     if (
       today.getDate() === date.day &&
       today.getMonth() === date.month &&
-      today.getFullYear() === date.year
+      today.getFullYear() === date.year &&
+      position === ''
     ) results = true;
 
     return results;
@@ -47,8 +48,8 @@ const CalendarDay: React.FC<DayProps> = (dayData) => {
 
   return (
     <div
-      className={`day ${isToday() && 'today'} ${position} ${projectDay ? 'projectDay' : ''} ${isSelected() && 'selected'}`}
-      onClick={()=> clickEvent({day: date.day, month: date.month, year: date.year})}
+      className={ `day ${isToday() && 'today'} ${position} ${projectDay ? 'projectDay' : ''} ${isSelected() && 'selected'}` }
+      onClick={ ()=> clickEvent({day: date.day, month: date.month, year: date.year}) }
     >
       {date.day}
     </div>
