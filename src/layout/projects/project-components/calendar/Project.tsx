@@ -1,11 +1,11 @@
-import ProjectType from '../../../../types/project.type';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import RankType from '../../../../types/rank.type';
-import EmployeeType from '../../../../types/employee.type';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import '../../projects.css';
 import { deleteProjectThunk } from '../../../../redux/slices/projectsSlice';
 import { setUiError } from '../../../../redux/slices/controlsSlice';
+import EmployeeType from '../../../../types/employee.type';
+import ProjectType from '../../../../types/project.type';
+import RankType from '../../../../types/rank.type';
+import '../../projects.css';
 
 type ProjectProps = {
   data: ProjectType;
