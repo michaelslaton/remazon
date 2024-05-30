@@ -1,9 +1,11 @@
 import ProjectType from '../../../../types/project.type';
-import { useAppSelector } from '../../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import RankType from '../../../../types/rank.type';
 import EmployeeType from '../../../../types/employee.type';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import '../../projects.css';
+import { deleteProjectThunk } from '../../../../redux/slices/projectsSlice';
+import { setUiError } from '../../../../redux/slices/controlsSlice';
 
 type ProjectProps = {
   data: ProjectType;
@@ -13,6 +15,7 @@ type ProjectProps = {
 
 const Project: React.FC<ProjectProps> = ({data, expanded, setExpanded}) => {
   const navigate: NavigateFunction = useNavigate();
+  const dispatch = useAppDispatch();
   const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
   const ranksList: RankType[] = useAppSelector((state)=> state.ranksControl.ranks);
   const hostEmployee: EmployeeType | undefined = employeesList.find((employee)=> employee.id === data.host);
@@ -39,13 +42,24 @@ const Project: React.FC<ProjectProps> = ({data, expanded, setExpanded}) => {
               >
                 {employee.name}
               </div>
-              {results.length < attendingList.length - 1 ? ', ' : ''}
+              { results.length < attendingList.length - 1 ? ', ' : '' }
             </div>
           );
         };
       });
     };
     return results;
+  };
+
+  const handleDelete = (): void => {
+    if(window.confirm(`Are you sure you want to delete ${data.name} ?`)){
+      dispatch(deleteProjectThunk(data.id))    
+        .catch((error) => {
+        dispatch(setUiError(`Error: ${error.code}`));
+        console.error(error.code);
+        console.error(error.message);
+      });
+    };
   };
 
   return (
@@ -56,14 +70,33 @@ const Project: React.FC<ProjectProps> = ({data, expanded, setExpanded}) => {
         else setExpanded(null);
       }}
     >
-      <div>
+      <div className='project__header'>
         <h2 className='project__title'>
           {data.name}
         </h2>
+
+        <div className="project__controls">
+          <button
+            className='button'
+          >
+            Attend
+          </button>
+          <button
+            className='button'
+            onClick={(e)=> {
+              e.stopPropagation();
+              handleDelete();
+            }}
+          >
+            Delete
+          </button>
+        </div>
+
         <div className='project__date-time'>
           {`${projectDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`}
         </div>
       </div>
+      
       <ul className={`project__info ${expanded === data.id && 'expanded'}`}>
         <li>
           <div className='project__info-key'>{`Host: `}</div>
