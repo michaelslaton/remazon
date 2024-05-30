@@ -53,13 +53,14 @@ export const editProjectThunk = createAsyncThunk('projects/edit', async (updated
   return data;
 });
 
-export const deleteProjectThunk = createAsyncThunk('projects/delete', async (id: Number, _thunkApi)=> {
+export const deleteProjectThunk = createAsyncThunk('projects/delete', async (id: Number, thunkApi)=> {
   await fetch(`${projectsUrl}/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type':'application/json'
     },
   });
+  thunkApi.dispatch(fetchProjectsThunk());
   return;
 });
 // -------------------------------------------------------------------------------------------->
