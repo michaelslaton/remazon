@@ -132,11 +132,22 @@
   cursor: pointer;
 }
 
+.project__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .project__title {
   all: unset;
   color: var(--remazon-prime);
   font-family: gvd;
   font-size: 2rem;
+}
+
+.project__controls {
+  display: flex;
+  justify-content: end;
+  gap: .5rem;
 }
 
 /* .project__date-time {
