@@ -1,24 +1,19 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch } from '../../redux/hooks';
 import { fetchProjectsThunk } from '../../redux/slices/projectsSlice';
 import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import { fetchRanksThunk } from '../../redux/slices/ranksSlice';
-import Loading from '../components/loading/Loading';
-import ProjectCalendar from './project-components/calendar/ProjectCalendar';
+import Calendar from './project-components/calendar/Calendar';
 import './projects.css';
 
 const ProjectsDisplay: React.FC = () => {
   const dispatch = useAppDispatch();
-  const loadingProjects: boolean = useAppSelector((state) => state.projectsControl.loading);
-  const loadingEmployees: boolean = useAppSelector((state) => state.employeesControl.loading);
 
   useEffect(()=>{
     dispatch(fetchProjectsThunk);
     dispatch(fetchEmployeesListThunk);
     dispatch(fetchRanksThunk);
   },[]);
-
-  if (loadingProjects || loadingEmployees) return ( <Loading/> );
 
   return (
     <>
@@ -28,8 +23,9 @@ const ProjectsDisplay: React.FC = () => {
 
       <div className='display__controls'>
       </div>
+      
       <div>
-        <ProjectCalendar/>
+        <Calendar/>
       </div>
     </>
   );
