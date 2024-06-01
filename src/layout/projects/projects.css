@@ -196,3 +196,10 @@
 .project__list-title {
   margin-left: .5rem !important;
 }
+
+.attend {
+  color: green;
+}
+.unattend {
+  color: red;
+}

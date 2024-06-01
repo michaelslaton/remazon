@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import months from '../../../../data/months';
 import '../../projects.css';
 import { useAppSelector } from '../../../../redux/hooks';
-import Project from './Project';
+import Project from './CalendarProject';
 import { useState } from 'react';
 
 type CalendarListProps = {
