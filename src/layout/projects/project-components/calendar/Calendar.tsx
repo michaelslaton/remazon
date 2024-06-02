@@ -1,9 +1,17 @@
-import { useEffect, useState } from 'react';
 import months from '../../../../data/months';
-import CalendarDay from './CalendarDay';
 import { useAppSelector } from '../../../../redux/hooks';
 import '../../projects.css';
-import CalendarList from './CalendarList';
+
+type CalendarProps = {
+  displayedMonth: { month: number, year: number };
+  setDisplayedMonth: Function;
+  selected: {
+    day: number,
+    month: number,
+    year: number
+  } | null;
+  setSelected: Function;
+}
 
 type DayType = {
   projectDay: boolean;
@@ -15,22 +23,10 @@ type DayType = {
   position: string;
 };
 
-const Calendar: React.FC = () =>{
+const Calendar: React.FC<CalendarProps> = ({ displayedMonth, setDisplayedMonth, selected, setSelected }) => {
+  
   const projectsList = useAppSelector((state)=> state.projectsControl.projects);
-  const [ displayedMonth, setDisplayedMonth ] = useState<{ month: number, year: number }>({month: 0, year: 0});
-  const [ selected, setSelected ] = useState<{ day: number, month: number, year: number } | null>(null);
-  
-  let today: Date = new Date();
 
-  useEffect(()=>{
-    let month: number = today.getMonth();
-    let year: number = today.getFullYear();
-    setDisplayedMonth({
-      month,
-      year
-    })
-  },[])
-  
   const getEventDays = (): number[] => {
     let results: number[] = [];
     
@@ -45,7 +41,7 @@ const Calendar: React.FC = () =>{
   };
 
   const projectDays: number[] = getEventDays();
-  
+
   const initCalendar = (): DayType[] => {
     const firstDay: Date = new Date(displayedMonth.year, displayedMonth.month, 1);
     const lastDay: Date = new Date(displayedMonth.year, displayedMonth.month + 1, 0);
@@ -73,6 +69,7 @@ const Calendar: React.FC = () =>{
 
     return days;
   };
+  
 
   const shiftMonth = (amount: number): void => {
     if(displayedMonth.month === 11 && amount === 1) {
@@ -88,75 +85,78 @@ const Calendar: React.FC = () =>{
     return
   };
 
+  const isToday = (day: DayType): boolean => {
+    let results: boolean = false;
+    const today: Date = new Date();
+
+    if (
+      today.getDate() === day.date.day &&
+      today.getMonth() === day.date.month &&
+      today.getFullYear() === day.date.year &&
+      day.position === ''
+    ) results = true;
+
+    return results;
+  };
+
+  const isSelected = (day: DayType): boolean => {
+    let results = false;
+
+    if (
+      selected?.day === day.date.day &&
+      selected?.month === day.date.month &&
+      selected?.year === day.date.year &&
+      day.position === ""
+    ) results = true;
+
+    return results;
+  };
+
   return (
-    <>
-      <div className='cal_container'>
-        <div className='cal_left'>
-          <div className='cal_calendar'>
-            <div className='month'>
-              <div/>
-              <div className='month'>
-                <div
-                  className='month-shift-button'
-                  onClick={()=> shiftMonth(-1)}
-                >
-                  {'<'}
-                </div>
-                <div>{months[displayedMonth.month]} {displayedMonth.year}</div>
-                <div
-                  className='month-shift-button'
-                  onClick={()=> shiftMonth(1)}
-                >
-                  {'>'}
-                </div>
-              </div>
+    <div className='cal_left'>
+      <div className='cal_calendar'>
+        <div className='month'>
+          <div className='month'>
+            <div
+              className='month-shift-button'
+              onClick={()=> shiftMonth(-1)}
+            >
+              {'<'}
             </div>
-
-            <div className='weekdays'>
-              <div className='weekday'>Sun</div>
-              <div className='weekday'>Mon</div>
-              <div className='weekday'>Tue</div>
-              <div className='weekday'>Wed</div>
-              <div className='weekday'>Thu</div>
-              <div className='weekday'>Fri</div>
-              <div className='weekday'>Sat</div>
+            <div>{months[displayedMonth.month]} {displayedMonth.year}</div>
+            <div
+              className='month-shift-button'
+              onClick={()=> shiftMonth(1)}
+            >
+              {'>'}
             </div>
-
-            <div className='days'>
-              {
-                initCalendar().map((day, i)=>(
-                  <CalendarDay
-                    key={i}
-                    position={`${day.position}`}
-                    date={day.date}
-                    projectDay={day.projectDay}
-                    selected={selected}
-                    clickEvent={setSelected}
-                  />
-              ))}
-            </div>
-
           </div>
         </div>
-        
-        <CalendarList
-          selected={selected}
-        />
+
+        <div className='weekdays'>
+          <div className='weekday'>Sun</div>
+          <div className='weekday'>Mon</div>
+          <div className='weekday'>Tue</div>
+          <div className='weekday'>Wed</div>
+          <div className='weekday'>Thu</div>
+          <div className='weekday'>Fri</div>
+          <div className='weekday'>Sat</div>
+        </div>
+
+        <div className='days'>
+          {
+            initCalendar().map((day)=>(
+            <div
+              className={ `day ${isToday(day) && 'today'} ${day.position} ${day.projectDay ? 'projectDay' : ''} ${isSelected(day) && 'selected'}` }
+              onClick={ ()=> setSelected({day: day.date.day, month: day.date.month, year: day.date.year}) }
+            >
+              {day.date.day}
+            </div>
+          ))}
+        </div>
+
       </div>
-      <section
-        className='calendar__controls'
-      >
-        <button
-          className='button card__button'
-          onClick={()=> {
-            setDisplayedMonth({month: today.getMonth(), year: today.getFullYear()});
-            setSelected({day: today.getDate(), month: today.getMonth(), year: today.getFullYear()});
-          }}
-        >
-          Today
-        </button>
-      </section>
-    </>
+    </div>
   );
 };
 
