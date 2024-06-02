@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../redux/hooks';
 import { fetchProjectsThunk } from '../../redux/slices/projectsSlice';
 import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import { fetchRanksThunk } from '../../redux/slices/ranksSlice';
-import Calendar from './project-components/calendar/Calendar';
+import Calendar from './project-components/calendar/CalendarDisplay';
 import './projects.css';
 
 const ProjectsDisplay: React.FC = () => {
