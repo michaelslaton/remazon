@@ -1,5 +1,5 @@
-import months from '../../../../data/months';
 import { useAppSelector } from '../../../../redux/hooks';
+import months from '../../../../data/months';
 import '../../projects.css';
 
 type CalendarProps = {
