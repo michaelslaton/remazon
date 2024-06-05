@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../../../redux/hooks';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import months from '../../../../data/months';
-import '../../projects.css';
-import { useAppSelector } from '../../../../redux/hooks';
 import Project from './CalendarProject';
-import { useState } from 'react';
+import '../../projects.css';
 
 type CalendarListProps = {
   selected: { day: number, month: number, year: number } | null;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import '../../projects.css';
 import CalendarList from './CalendarList';
 import Calendar from './Calendar';
+import '../../projects.css';
 
 const CalendarDisplay: React.FC = () =>{
   const [ displayedMonth, setDisplayedMonth ] = useState<{ month: number, year: number }>({month: 0, year: 0});
