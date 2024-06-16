@@ -23,7 +23,6 @@ const EditProject: React.FC = () => {
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const hostRef = useRef<HTMLSelectElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
-  const statusRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
   // Date formatting --------------------------------------------------------- >
   let projectDate: Date = new Date(selectedProject!.date);
@@ -50,7 +49,6 @@ const EditProject: React.FC = () => {
     if (
       nameRef.current!.value === selectedProject?.name &&
       descriptionRef.current!.value === selectedProject?.description &&
-      statusRef.current!.checked === selectedProject?.status &&
       Number(hostRef.current!.value) === selectedProject?.host &&
       typeRef.current!.value === selectedProject?.type &&
       !dateCheck
@@ -90,8 +88,7 @@ const EditProject: React.FC = () => {
       host: inputHost,
       date: projectDate,
       type: typeRef.current!.value,
-      description: descriptionRef.current!.value,
-      status: statusRef.current!.checked,
+      description: descriptionRef.current!.value
     };
     dispatch(editProjectThunk(updatedProject));
     navigate('/projects');
@@ -200,23 +197,6 @@ const EditProject: React.FC = () => {
             />
             <div className='parameter-text'>
               {descriptionCountData} of 200
-            </div>
-
-            <div>
-              <label
-                htmlFor='status'
-                className='form-input-label'
-              >
-                Active:
-              </label>
-              <input
-                className='checkbox'
-                type='checkbox'
-                id='status'
-                name='status'
-                ref={statusRef}
-                defaultChecked={selectedProject?.status}
-              />
             </div>
           </div>
 

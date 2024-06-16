@@ -8,7 +8,6 @@ type ProjectType = {
   description: string;
   regularity: string;
   locked?: boolean;
-  status: boolean;
 };
 
 export type ProjectPostType = {
