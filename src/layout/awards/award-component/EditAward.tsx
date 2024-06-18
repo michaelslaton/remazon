@@ -234,11 +234,9 @@ const EditAward:React.FC = () => {
                   ref={retiredRef}
                   defaultChecked={selectedAward?.retired}
                 />
-              </div>
+            </div>
 
-            <div
-              className='form__control-wrapper'
-            >
+            <div className='form__control-wrapper'>
               <button
                 className='button form__control'
                 type='submit'
