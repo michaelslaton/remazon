@@ -24,6 +24,7 @@ const EditProject: React.FC = () => {
   const hostRef = useRef<HTMLSelectElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
+  const lockedRef = useRef<HTMLInputElement>(null);
   // Date formatting --------------------------------------------------------- >
   let projectDate: Date = new Date(selectedProject!.date);
   const year: number = projectDate.getFullYear();
@@ -51,6 +52,7 @@ const EditProject: React.FC = () => {
       descriptionRef.current!.value === selectedProject?.description &&
       Number(hostRef.current!.value) === selectedProject?.host &&
       typeRef.current!.value === selectedProject?.type &&
+      lockedRef.current!.checked === selectedProject!.locked &&
       !dateCheck
       ) return false;
     else return true;
@@ -88,7 +90,8 @@ const EditProject: React.FC = () => {
       host: inputHost,
       date: projectDate,
       type: typeRef.current!.value,
-      description: descriptionRef.current!.value
+      description: descriptionRef.current!.value,
+      locked: lockedRef.current!.checked,
     };
     dispatch(editProjectThunk(updatedProject));
     navigate('/projects');
@@ -198,6 +201,21 @@ const EditProject: React.FC = () => {
             <div className='parameter-text'>
               {descriptionCountData} of 200
             </div>
+
+            <div>
+              <label htmlFor='locked' className='form-input-label'>
+                Locked:
+              </label>
+              <input
+                className='checkbox'
+                type='checkbox'
+                id='locked'
+                name='locked'
+                ref={lockedRef}
+                defaultChecked={selectedProject?.locked}
+              />
+            </div>
+
           </div>
 
           <div className='form__control-wrapper'>
