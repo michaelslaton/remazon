@@ -12,11 +12,6 @@
   display: block;
 }
 
-.ranks-wrapper {
-  margin: 0;
-  margin-top: 2rem;
-}
-
 .ranks-list {
   width: 97%;
   margin: 0 auto;
@@ -80,9 +75,6 @@
 }
 
 @media (min-width: 768px){
-  .ranks-wrapper {
-    margin: auto;
-  }
 }
 
 @media (min-width: 810px){ 

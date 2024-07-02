@@ -23,7 +23,7 @@ const AdminRanks: React.FC = () => {
   if (!ranksList.length) return ( <Loading/> );
 
   return (
-    <div className='form-wrapper ranks-wrapper'>
+    <div className='form-wrapper'>
       <h2 className='title form-title'>Rank List</h2>
       <div className='ranks-list'>
         {[...ranksList].sort((a,b)=> a.id - b.id).map((rank)=> rank.id !== 0 ?
