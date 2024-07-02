@@ -11,10 +11,16 @@ const AdminPanel: React.FC = () => {
         <h2>Admin Control Panel</h2>
       </div>
       <div className='display__controls'/>
-      <div className='center-display-space'>
-        <AdminMotd/>
-        <AdminNotification/>
-        <AdminRanks/>
+      <div className='display-admin-widgets'>
+        <div className="admin-widget">
+          <AdminMotd/>
+        </div>
+        <div className="admin-widget">
+          <AdminRanks/>
+        </div>
+        <div className="admin-widget">
+          <AdminNotification/>
+        </div>
       </div>
     </>
   );

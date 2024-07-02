@@ -297,7 +297,7 @@ option {
   .form-wrapper {
     border-radius: var(--border-radius);
     min-width: fit-content;
-    max-width: 50%;
+    /* max-width: 50%; */
     margin-top: 2rem;
     margin-bottom: auto;
   }
