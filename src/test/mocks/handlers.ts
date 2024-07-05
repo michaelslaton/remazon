@@ -122,6 +122,7 @@ export const awardsDummyData: { data: AwardType[] } = {
           date: '2024-03-04T02:48:28.149Z',
           awardedFor: 'The perfect driiiiift! Yeeeh',
           retired: false,
+          class: "gold",
       },
       {
           id: 2,
@@ -131,6 +132,7 @@ export const awardsDummyData: { data: AwardType[] } = {
           date: '2021-03-02T23:57:15.016Z',
           awardedFor: 'Notable excellence!',
           retired: false,
+          class: "bronze",
       },
       {
           id: 3,
@@ -140,6 +142,7 @@ export const awardsDummyData: { data: AwardType[] } = {
           date: '2024-03-05T22:55:29.988Z',
           awardedFor: 'Its the face... of the business!!',
           retired: false,
+          class: "silver",
       }
   ]
 };
@@ -155,7 +158,7 @@ export const projectsDummyData: { data: ProjectType[] } = {
       attending: '1',
       regularity: 'special',
       description: 'Movie watch nights',
-      status: true
+      locked: true
     },
     {
         id: 2,
@@ -166,7 +169,7 @@ export const projectsDummyData: { data: ProjectType[] } = {
         attending: '2,1',
         regularity: 'recurring',
         description: 'Lets do the current hunt event',
-        status: true
+        locked: true
     },
     {
       id: 3,
@@ -177,7 +180,7 @@ export const projectsDummyData: { data: ProjectType[] } = {
       attending: '1',
       regularity: 'recurring',
       description: 'RWF NIGHT',
-      status: true
+      locked: true
     },
     {
       id: 4,
@@ -188,7 +191,7 @@ export const projectsDummyData: { data: ProjectType[] } = {
       attending: '1,2',
       regularity: 'special',
       description: 'RWF NIGHT',
-      status: false
+      locked: false
     },
   ]
 }

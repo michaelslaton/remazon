@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import { act, render, screen, userEvent } from '../../utils/testUtils/test-utils';
-import { projectsDummyData } from '../../test/mocks/handlers';
+// import { projectsDummyData } from '../../test/mocks/handlers';
 import ProjectsDisplay from './ProjectsDisplay';
 import EditProject from './project-components/EditProject';
 import store from '../../redux/store';
@@ -12,9 +12,9 @@ import CreateProject from './project-components/CreateProject';
 
 const editProjectThunkSpy = vi.spyOn(projectActions, 'editProjectThunk');
 const createProjectThunkSpy = vi.spyOn(projectActions, 'createProjectThunk');
-const deleteProjectThunkSpy = vi.spyOn(projectActions, 'deleteProjectThunk');
+// const deleteProjectThunkSpy = vi.spyOn(projectActions, 'deleteProjectThunk');
 const setUiErrorSpy = vi.spyOn(controlActions, 'setUiError');
-const windowConfirmSpy = vi.spyOn(window, 'confirm');
+// const windowConfirmSpy = vi.spyOn(window, 'confirm');
 
 const mockedUseNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
