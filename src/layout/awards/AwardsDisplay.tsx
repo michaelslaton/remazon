@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import AwardType from '../../types/award.type';
-import Award from './award-component/Award';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './awards.css';
 import { fetchAwardsThunk } from '../../redux/slices/awardsSlice';
+import Award from './award-component/Award';
+import AwardType from '../../types/award.type';
 import EmployeeType from '../../types/employee.type';
+import './awards.css';
 
 const AwardsDisplay: React.FC = () => {
   const [ sortType, setSortType ] = useState<string>('');

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
+import { fetchNotificationsThunk } from '../../redux/slices/notificationsSlice';
 import Notification from './notifications-component/Notification';
 import NotificationType from '../../types/notification.type';
 import EmployeeType from '../../types/employee.type';
-import { fetchNotificationsThunk } from '../../redux/slices/notificationsSlice';
 import './notifications.css';
 
 const NotificationsDisplay: React.FC = () => {
