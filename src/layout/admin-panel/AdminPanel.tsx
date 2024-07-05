@@ -1,7 +1,7 @@
 import AdminMotd from './admin-motd/AdminMotd';
 import AdminNotification from './admin-notification/AdminNotification';
-import './adminPanel.css';
 import AdminRanks from './ranks/RanksDisplay';
+import './adminPanel.css';
 
 const AdminPanel: React.FC = () => {
 

@@ -7,8 +7,8 @@ import NewRank from './rank-component/NewRank';
 import EmployeeType from '../../../types/employee.type';
 import Rank from './rank-component/Rank';
 import RankType from '../../../types/rank.type';
-import './ranks.css';
 import Loading from '../../components/loading/Loading';
+import './ranks.css';
 
 const AdminRanks: React.FC = () => {
   const dispatch = useAppDispatch();

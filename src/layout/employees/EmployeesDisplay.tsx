@@ -4,8 +4,8 @@ import { fetchEmployeesListThunk } from '../../redux/slices/employeesSlice';
 import { fetchRanksThunk } from '../../redux/slices/ranksSlice';
 import Employee from './employee-component/Employee';
 import EmployeeType from '../../types/employee.type';
-import './employees.css';
 import RankType from '../../types/rank.type';
+import './employees.css';
 
 const EmployeesDisplay: React.FC = () => {
   const [ sortType, setSortType ] = useState<string>('');
