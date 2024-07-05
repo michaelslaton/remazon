@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import './messageOfTheDay.css';
 import { fetchMotdThunk } from '../../../../redux/slices/controlsSlice';
 import banner from '../../../../assets/imgs/motdBanner.jpg'
+import './messageOfTheDay.css';
 
 const MessageOfTheDay: React.FC = () => {
   const motd: string = useAppSelector((state)=> state.mainControl.motd);

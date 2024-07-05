@@ -2,10 +2,10 @@ import { useRef, useState, useEffect } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { editEmployeeThunk } from '../../../redux/slices/employeesSlice';
-import EmployeeType from '../../../types/employee.type';
-import Rank from '../../../types/rank.type';
-import '../employees.css';
 import { setUiError } from '../../../redux/slices/controlsSlice';
+import Rank from '../../../types/rank.type';
+import EmployeeType from '../../../types/employee.type';
+import '../employees.css';
 
 const EditEmployee: React.FC = () => {
   const { paramId } = useParams<string>();

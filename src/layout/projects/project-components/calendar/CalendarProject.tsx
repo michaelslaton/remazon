@@ -2,12 +2,12 @@ import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { deleteProjectThunk, editProjectThunk, fetchProjectsThunk } from '../../../../redux/slices/projectsSlice';
 import { setUiError } from '../../../../redux/slices/controlsSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import EmployeeType from '../../../../types/employee.type';
 import ProjectType from '../../../../types/project.type';
 import RankType from '../../../../types/rank.type';
 import '../../projects.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 type ProjectProps = {
   data: ProjectType;
