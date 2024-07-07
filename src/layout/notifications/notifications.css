@@ -1,9 +1,8 @@
 .notifications-container {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 2rem;
-  width: 80%;
   margin: auto;
   margin-top: 2rem;
 }
@@ -111,6 +110,10 @@
 }
 
 @media (min-width: 810px){ 
+  .notifications-container {
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+  }
 }
 
 @media (min-width: 1280px){
