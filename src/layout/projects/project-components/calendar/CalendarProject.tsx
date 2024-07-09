@@ -42,7 +42,7 @@ const Project: React.FC<ProjectProps> = ({data, expanded, setExpanded}) => {
             <div className='attending-employee' key={employee.id}>
               <div
                 onClick={()=> navigate('/employees')}
-                style={{color: `${employeesRank?.color !== '#ffa500'? `${employeesRank?.color}` : '#DCE1DE' }`, display: 'inline-block', cursor: 'pointer'}}
+                style={{color: `${employeesRank?.color !== '#ffa500'? `${employeesRank?.color}` : '#DCE1DE' }`, display: 'inline-block', cursor: 'pointer', textTransform: 'capitalize'}}
               >
                 {employee.name}
               </div>
@@ -124,6 +124,19 @@ const Project: React.FC<ProjectProps> = ({data, expanded, setExpanded}) => {
     );
   };
 
+  const renderEditButton = () => {
+    if(currentEmployee?.admin || currentEmployee?.id === data.host) return (
+      <button
+        className='button'
+        onClick={()=> {
+          navigate(`/projects/edit/${data.id}`)
+        }}
+      >
+        Edit
+      </button>
+    );
+  };
+
   const handleDelete = (): void => {
     if(window.confirm(`Are you sure you want to delete ${data.name} ?`)){
       dispatch(deleteProjectThunk(data.id))    
@@ -169,6 +182,7 @@ const Project: React.FC<ProjectProps> = ({data, expanded, setExpanded}) => {
 
         <div className="project__controls">
           {renderAttendanceButton()}
+          {renderEditButton()}
           {renderDeleteButton()}
         </div>
 

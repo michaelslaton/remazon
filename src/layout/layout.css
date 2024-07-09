@@ -156,8 +156,9 @@ textarea {
 }
 
 .center-display-space {
-  width: 100%;
+  width: 60%;
   margin-bottom: 5rem;
+  margin: 0 auto;
 }
 
 .display__header {
