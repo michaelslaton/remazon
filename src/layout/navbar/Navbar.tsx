@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getAuth, signOut } from 'firebase/auth';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { clearCurrentEmployee } from '../../redux/slices/employeesSlice';
-import { faHouse, faProjectDiagram, faRankingStar, faStar, faTrophy, faSignIn, faSignOut, faAddressCard, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faProjectDiagram, faStar, faTrophy, faSignIn, faSignOut, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import CollapseButton from './collapse-button/CollapseButton';
 import LinkButton from './link-button/LinkButton';
@@ -81,16 +81,6 @@ const Navbar: React.FC = () => {
             }}
           />
         }
-
-        {/* <LinkButton
-          data={{
-            id: 5,
-            name: 'Info',
-            url: '/info',
-            icon: faCircleInfo,
-            styling: 'info-button',
-          }}
-        /> */}
 
         { !currentEmployee &&
           <LinkButton
