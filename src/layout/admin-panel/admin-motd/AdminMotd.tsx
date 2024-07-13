@@ -30,10 +30,8 @@ const AdminMotd: React.FC = () => {
   };
 
   return (
-    <form className='form-wrapper' ref={formRef}>
-      <div className='form__section'>
-        <h2 className='title form-title'>Message of the Day</h2>
-      </div>
+    <form className='admin-widget' ref={formRef}>
+      <h2 className='admin-widget__title'>Message of the Day</h2>
       
       <div className='form__inputs'>
         <label
