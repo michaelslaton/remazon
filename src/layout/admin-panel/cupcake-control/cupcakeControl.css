@@ -1,0 +1,8 @@
+.cupcake__listing {
+  background-color: var(--off-black);
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: .5rem;
+}
