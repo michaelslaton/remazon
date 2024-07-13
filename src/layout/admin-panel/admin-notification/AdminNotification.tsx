@@ -163,10 +163,8 @@ const AdminNotification: React.FC = () => {
   };
 
   return (
-    <form className='form-wrapper' ref={formRef}>
-      <div className='form__section'>
-        <h2 className='title form-title'>Admin Notification</h2>
-      </div>
+    <form className='admin-widget' ref={formRef}>
+      <h2 className='admin-widget__title'>Admin Notification</h2>
 
       <div className='form__inputs'>
         <label className='form-input-label'>
