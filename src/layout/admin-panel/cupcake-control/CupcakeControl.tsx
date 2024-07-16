@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../../redux/hooks';
 import EmployeeType from '../../../types/employee.type';
 import './cupcakeControl.css';
+import CupcakeEmployee from './CupcakeEmployee';
 
 const CupcakeControl: React.FC = () => {
   const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
@@ -10,10 +11,7 @@ const CupcakeControl: React.FC = () => {
       <h2 className='admin-widget__title'>Cupcake Control</h2>
       <div>
         {employeesList.map((employee)=>(
-          <div className='cupcake__listing'>
-            <div className=''>{employee.name}</div>
-            <div>{employee.cupcakes}</div>
-          </div>
+            <CupcakeEmployee data={employee}/>
         ))}
       </div>
     </div>
