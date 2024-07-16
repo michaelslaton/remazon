@@ -3,6 +3,14 @@
   border-radius: var(--border-radius);
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: .6rem;
   padding: .5rem;
+}
+
+.cupcake__name {
+  text-transform: capitalize;
+}
+
+.cupcake__employee-button {
+  
 }
