@@ -5,10 +5,26 @@
   justify-content: space-between;
   margin-top: .6rem;
   padding: .5rem;
+  display: grid;
+  grid-template-columns: 1fr 4rem 3rem;
 }
 
 .cupcake__name {
   text-transform: capitalize;
+  display: flex;
+  align-items: center;
+}
+
+.cupcake__number {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: end;
+}
+
+.cupcake__employee-buttons-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .cupcake__employee-button {
