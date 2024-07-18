@@ -1,10 +1,11 @@
 import { useAppSelector } from '../../../redux/hooks';
+import CupcakeEmployee from './CupcakeEmployee';
 import EmployeeType from '../../../types/employee.type';
 import './cupcakeControl.css';
-import CupcakeEmployee from './CupcakeEmployee';
 
 const CupcakeControl: React.FC = () => {
-  const employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  let employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
+  employeesList = [...employeesList].filter((employee)=> employee.rank !== 1);
 
   return (
     <div className='admin-widget'>
