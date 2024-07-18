@@ -55,7 +55,7 @@ const CupcakeEmployee: React.FC<CupcakeEmployeeProps> = ({ data }) => {
         onClick={()=> handleCupcake('minus')}
       >-</button>
     </div>
-    <div className='cupcake__number'>
+    <div className={`cupcake__number ${data.cupcakes % 2 !== 0 ? 'cupcake__pink' : ''}`}>
       {data.cupcakes}
       <img src={cupcake} className='cupcake'/>
     </div>
