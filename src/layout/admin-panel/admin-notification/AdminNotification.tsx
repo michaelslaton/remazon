@@ -257,9 +257,11 @@ const AdminNotification: React.FC = () => {
         <textarea
           id='message'
           name='message'
-          rows={6}
+          rows={5}
           ref={messageRef}
           maxLength={200}
+          wrap='hard'
+          className=' admin-notification-message'
           onChange={(e)=> setCountData(e.currentTarget.value.length)}
         />
         <div className='parameter-text parameter-gap'>
