@@ -2,6 +2,7 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { setUiError } from '../../../redux/slices/controlsSlice';
 import { editEmployeeThunk, fetchEmployeesListThunk } from '../../../redux/slices/employeesSlice';
 import EmployeeType from '../../../types/employee.type';
+import cupcake from '../../../assets/imgs/cupcake.png';
 import './cupcakeControl.css';
 
 type CupcakeEmployeeProps = {
@@ -44,7 +45,7 @@ const CupcakeEmployee: React.FC<CupcakeEmployeeProps> = ({ data }) => {
     <div className='cupcake__name'>
       {data.name}
     </div>
-    <div>
+    <div className='cupcake__employee-buttons-wrapper'>
       <button
         className='button cupcake__employee-button'
         onClick={()=> handleCupcake('add')}
@@ -54,7 +55,10 @@ const CupcakeEmployee: React.FC<CupcakeEmployeeProps> = ({ data }) => {
         onClick={()=> handleCupcake('minus')}
       >-</button>
     </div>
-    <div>{data.cupcakes}</div>
+    <div className='cupcake__number'>
+      {data.cupcakes}
+      <img src={cupcake} className='cupcake'/>
+    </div>
   </div>
   );
 };
