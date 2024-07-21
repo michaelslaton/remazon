@@ -12,7 +12,7 @@ const CupcakeControl: React.FC = () => {
       <h2 className='admin-widget__title'>Cupcake Control</h2>
       <div>
         {employeesList.map((employee)=>(
-            <CupcakeEmployee data={employee}/>
+            <CupcakeEmployee key={employee.id} data={employee}/>
         ))}
       </div>
     </div>

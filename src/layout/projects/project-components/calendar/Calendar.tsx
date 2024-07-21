@@ -145,8 +145,9 @@ const Calendar: React.FC<CalendarProps> = ({ displayedMonth, setDisplayedMonth, 
 
         <div className='days'>
           {
-            initCalendar().map((day)=>(
+            initCalendar().map((day,i)=>(
             <div
+              key={i}
               className={ `day ${isToday(day) && 'today'} ${day.position} ${day.projectDay ? 'projectDay' : ''} ${isSelected(day) && 'selected'}` }
               onClick={ ()=> setSelected({day: day.date.day, month: day.date.month, year: day.date.year}) }
             >
