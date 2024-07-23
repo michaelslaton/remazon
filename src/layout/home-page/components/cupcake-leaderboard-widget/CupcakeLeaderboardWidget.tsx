@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../../../redux/hooks';
 import EmployeeType from '../../../../types/employee.type';
 import colorCupcake from '../../../../assets/imgs/cupcakeColor.png';
-import './cupcakeLeaderboard.css';
+import '../../../cupcake-leaderboard/cupcakeLeaderboard.css';
 
 const CupcakeLeaderboardWidget: React.FC = () => {
   let employeesList: EmployeeType[] = useAppSelector((state)=> state.employeesControl.employees);
@@ -9,14 +9,14 @@ const CupcakeLeaderboardWidget: React.FC = () => {
   if (employeesList.length < 1) return <></>;
 
   return (
-    <div className='leaderboard__wrapper'>
+    <div className='leaderboard__widget-container'>
       <div className='leaderboard__header'>
         <img
           data-testid='cupcake image'
           src={colorCupcake}
-          className='leaderboard-cupcake'
+          className='leaderboard-cupcake widget'
         />
-        <div className='leaderboard__header-text'>
+        <div className='leaderboard__header-text widget'>
           <h3>
             Cupcake
           </h3>
@@ -27,7 +27,7 @@ const CupcakeLeaderboardWidget: React.FC = () => {
         <img
           data-testid='cupcake image'
           src={colorCupcake}
-          className='leaderboard-cupcake'
+          className='leaderboard-cupcake widget'
         />
       </div>
       <div>
@@ -39,7 +39,7 @@ const CupcakeLeaderboardWidget: React.FC = () => {
               return 0;
             })
             .map((employee) => (
-              <div key={employee.id} className="leaderboard__entry">
+              <div key={employee.id} className="leaderboard__entry widget">
                 <div className="leaderboard__entry-name">{employee.name}</div>
                 <div className="leaderboard__entry-cupcakes">
                   {employee.cupcakes}

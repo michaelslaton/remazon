@@ -1,4 +1,18 @@
 .leaderboard__wrapper {
+  width: 100%;
+  margin-top: 3.5rem;
+}
+
+.leaderboard__container {
+  box-sizing: border-box;
+  background-color: #1aaec2;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 60%;
+  border-radius: var(--border-radius);
+}
+
+.leaderboard__widget-container {
   box-sizing: border-box;
   background-color: #1aaec2;
   margin: 1rem 0 3rem;
@@ -8,6 +22,9 @@
 
 .leaderboard-cupcake {
   aspect-ratio: 1/1;
+  width: 8rem;
+}
+.leaderboard-cupcake.widget {
   width: 3.5rem;
 }
 
@@ -15,6 +32,8 @@
   font-size: 1.6rem;
   color: white;
   text-shadow: 3px 3px 1px #fd6efd;
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .leaderboard__header-text {
@@ -25,6 +44,10 @@
   line-height: 1.3em;
   margin: 0 .3em;
   margin-top: .5rem;
+  font-size: 3rem;
+}
+.leaderboard__header-text.widget {
+  font-size: 1.5rem;
 }
 .leaderboard__header-text > h3 {
   all: unset;
@@ -32,9 +55,8 @@
 }
 
 .leaderboard__entry {
-  width: 90%;
   font-family: 'gvd-italic';
-  font-size: 1.2em;
+  font-size: 2em;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -42,6 +64,9 @@
   color: #ff88ff;
   padding: .45rem;
   text-shadow: 1px 1px 1px #276b6b;
+}
+.leaderboard__entry.widget {
+  font-size: 1.2em;
 }
 .leaderboard__entry:first-child {
   border-top-right-radius: var(--border-radius);
@@ -74,7 +99,7 @@
 }
 
 @media (min-width: 768px){
-  .leaderboard__wrapper {
+  .leaderboard__widget-container {
     aspect-ratio: 1/.8;
     border-radius: var(--border-radius);
     margin: 1rem;
