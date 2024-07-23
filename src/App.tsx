@@ -21,6 +21,7 @@ import { initialLoadThunk, setUiError } from './redux/slices/controlsSlice';
 import SignIn from './layout/authentication/components/SignIn';
 import CreateAward from './layout/awards/award-component/CreateAward';
 import EditAward from './layout/awards/award-component/EditAward';
+import CupcakeLeaderboard from './layout/cupcake-leaderboard/CupcakeLeaderboard';
 
 // initializeApp(firebaseConfig);
 
@@ -118,6 +119,11 @@ export const router = createBrowserRouter([
           <AuthRoute>
             <EditAward/>
           </AuthRoute>,
+        errorElement: <RouteError/>,
+      },
+      {
+        path: '/cupcakes',
+        element: <CupcakeLeaderboard/>,
         errorElement: <RouteError/>,
       },
       {
