@@ -7,7 +7,7 @@ import '../mostRecent.css';
 const MostRecentProject: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
   let projectList: ProjectType[] = useAppSelector((state) => state.projectsControl.projects);
-  projectList = [...projectList].filter((project) => project.locked === true);
+  projectList = [...projectList].filter((project) => project.locked !== true);
   let mostRecentProject: ProjectType | null = null;
   let projectDate: Date | null = null;
 
