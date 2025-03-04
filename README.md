@@ -60,11 +60,6 @@ VITE_REMAZON_API_URL=your-api-url
 
 ---  
 
-### 🤝 Contributing  
-If you'd like to contribute to this project, feel free to fork the repo and submit a pull request.  
-
----  
-
 ### 📩 Contact & Links  
 - **GitHub Repository**: [Remazon GitHub Repo](https://github.com/michaelslaton/remazon)  
 - **Contact Email**: [michael.slaton.dev@gmail.com](mailto:michael.slaton.dev@gmail.com)  
